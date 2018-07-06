@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/05 19:53:07 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/07/06 17:08:30 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -31,13 +31,20 @@ INC_DIR = includes/
 
 LIBFT_DIR = libft/
 
+LIBFT_NAME = libft.a
+
 OBJ_DIR = objects/
+
+LIBFT_ABREV = ft
 
 OBJ = $(patsubst %.c, $(OBJ_DIR)%.o,$(FUNCS))
 
+.PHONY: $(LIBFT_DIR)$(LIBFT_NAME)
+
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
+	$(CC) $(OBJ) -L$(LIBFT_DIR) -l$(LIBFT_ABREV) -I$(INC_DIR) $(CFLAGS) -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
@@ -45,13 +52,18 @@ $(OBJ_DIR)%.o: $(SRCS_DIR)%.c
 	@$(CC) $(CFLAGS) -c $< -I $(INC_DIR) -o $@
 	@printf "\033[92m   [OK]\n\033[0m"
 
+$(LIBFT_DIR)$(LIBFT_NAME):
+	@$(MAKE) -sC $(LIBFT_DIR)
+
 clean:
 	@printf "\033[92m***Cleaning Objects***\033[0m\n"
 	@rm -rf $(OBJ_DIR)
+	@$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
 	@printf "\033[92m***Cleaning Executables & Libraries***\033[0m\n"
 	@rm -f $(NAME)
+	@$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean
 	@make
