@@ -5,9 +5,9 @@
 void 		big_hexa_2_dec(char *str, int size)
 {
 
-	print_memory(str, 4, 4, 1);
+	print_memory(str, size, 4, 1);
 	invert_bytes((void *)str, 4);
-	print_memory(str, 4, 4, 1);
+	print_memory(str, size, 4, 1);
 	ft_printf("El numero es: %d", *((int *)str));
 
 	// i = str[4];
