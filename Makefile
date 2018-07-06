@@ -18,7 +18,8 @@ CFLAGS = #-fsanitize=address #-Wall -Wextra -Werror
 
 CC = gcc
 
-FUNCS =	big_hexa_2_dec.c \
+FUNCS =	main.c \
+		big_hexa_2_dec.c \
 		init_corewar.c \
 		print_memory.c \
 		get_content.c \
@@ -31,19 +32,27 @@ INC_DIR = includes/
 
 LIBFT_DIR = libft/
 
+LIBFT_NAME = libft.a
+
 OBJ_DIR = objects/
 
 OBJ = $(patsubst %.c, $(OBJ_DIR)%.o,$(FUNCS))
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+.PHONY: $(LIBFT_DIR)$(LIBFT_NAME)
+
+$(NAME): $(OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
+	gcc $(OBJ) -L$(LIBFT_DIR) -lft -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
-	@printf "\033[92m--->Compiling $(@F)\033[0m"
+	@printf "\033[92m--->Compiling $(@F)\033[0m\n"
 	@$(CC) $(CFLAGS) -c $< -I $(INC_DIR) -o $@
-	@printf "\033[92m   [OK]\n\033[0m"
+	@printf "\033[92m   [OK]\n\033[0m\n"
+
+$(LIBFT_DIR)$(LIBFT_NAME):
+	$(MAKE) -sC $(LIBFT_DIR)
 
 clean:
 	@printf "\033[92m***Cleaning Objects***\033[0m\n"
