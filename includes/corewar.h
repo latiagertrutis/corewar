@@ -29,5 +29,6 @@ void				print_memory(const void *addr, size_t size, int line, int space);
 void 				take_champions(int ac, char **av, t_player *players);
 void 				big_hexa_2_dec(char *str, int size);
 void				invert_bytes(void *arr, const size_t size);
-	
+int 				init_corewar(t_arena **arena, t_player **players, int ac);
+
 #endif

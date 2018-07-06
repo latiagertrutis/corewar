@@ -37,7 +37,7 @@ int main(int ac, char **av)
 	t_player	*players;
 	
 	if (!init_corewar(&arena, &players, ac))
-		ft_str_error("malloc failed", 1);
+		ft_error("malloc failed");
 	// print_board(arena->board);
 	take_champions(ac, av, players);
 
