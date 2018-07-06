@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 20:48:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/06/27 20:24:58 by mzabalza         ###   ########.fr       */
+/*   Updated: 2018/07/06 17:49:27 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int i;
 	{
 		if (board[i] < 16)
 			ft_putchar('0');
-		ft_putstr(ft_itoa_base((int)board[i], 16));
+		ft_putstr(ft_ltoa_base((int)board[i], 16));
 		if ((i+1) % 64 == 0)
 			ft_putchar('\n');
 		else

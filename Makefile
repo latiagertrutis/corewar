@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/06 17:45:31 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/07/06 17:56:07 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -42,8 +42,8 @@ all: $(NAME)
 
 .PHONY: $(LIBFT_DIR)$(LIBFT_NAME)
 
-$(NAME): $(OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
-	$(CC) $(OBJ) -L$(LIBFT_DIR) -lft -o $(NAME)
+$(NAME): $(OBJ) | $(LIBFT_DIR)$(LIBFT_NAME)
+	@$(CC) $(OBJ) -L$(LIBFT_DIR) -lft -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
@@ -52,7 +52,7 @@ $(OBJ_DIR)%.o: $(SRCS_DIR)%.c
 	@printf "\033[92m   [OK]\n\033[0m"
 
 $(LIBFT_DIR)$(LIBFT_NAME):
-	$(MAKE) -sC $(LIBFT_DIR)
+	@$(MAKE) -sC $(LIBFT_DIR)
 
 clean:
 	@printf "\033[92m***Cleaning Objects***\033[0m\n"
