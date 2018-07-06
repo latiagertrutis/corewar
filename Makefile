@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/06 17:43:12 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/07/06 17:45:31 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -47,9 +47,9 @@ $(NAME): $(OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
 
 $(OBJ_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
-	@printf "\033[92m--->Compiling $(@F)\033[0m\n"
+	@printf "\033[92m--->Compiling $(@F)\033[0m"
 	@$(CC) $(CFLAGS) -c $< -I $(INC_DIR) -o $@
-	@printf "\033[92m   [OK]\n\033[0m\n"
+	@printf "\033[92m   [OK]\n\033[0m"
 
 $(LIBFT_DIR)$(LIBFT_NAME):
 	$(MAKE) -sC $(LIBFT_DIR)
