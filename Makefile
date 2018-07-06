@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/05 19:53:07 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/07/06 17:43:12 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -43,7 +43,7 @@ all: $(NAME)
 .PHONY: $(LIBFT_DIR)$(LIBFT_NAME)
 
 $(NAME): $(OBJ) $(LIBFT_DIR)$(LIBFT_NAME)
-	gcc $(OBJ) -L$(LIBFT_DIR) -lft -o $(NAME)
+	$(CC) $(OBJ) -L$(LIBFT_DIR) -lft -o $(NAME)
 
 $(OBJ_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
@@ -57,10 +57,12 @@ $(LIBFT_DIR)$(LIBFT_NAME):
 clean:
 	@printf "\033[92m***Cleaning Objects***\033[0m\n"
 	@rm -rf $(OBJ_DIR)
+	@$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
 	@printf "\033[92m***Cleaning Executables & Libraries***\033[0m\n"
 	@rm -f $(NAME)
+	@$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean
 	@make
