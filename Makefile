@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/06 17:08:30 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/07/06 17:06:21 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -58,12 +58,10 @@ $(LIBFT_DIR)$(LIBFT_NAME):
 clean:
 	@printf "\033[92m***Cleaning Objects***\033[0m\n"
 	@rm -rf $(OBJ_DIR)
-	@$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
 	@printf "\033[92m***Cleaning Executables & Libraries***\033[0m\n"
 	@rm -f $(NAME)
-	@$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean
 	@make
