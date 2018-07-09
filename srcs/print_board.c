@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 23:21:36 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/09 23:43:09 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/10 00:28:36 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	print_board(t_data *data, t_board *board)
 		j = 0;
 		while (j < 64 && i + j < MEM_SIZE)
 		{
-			if (board[i + j].mem)
-				ft_putstr(data->palete[(int)board[i + j].id]);
+			ft_putstr(data->palete[(int)board[i + j].id]);
 			ft_putchar(hexa[board[i + j].mem / 16]); //%16?
 			ft_putchar(hexa[board[i + j].mem % 16]);
-			ft_putstr("\033[0m ");
+			ft_putchar(' ');
+//			ft_putstr("\033[0m ");
 			j++;
 		}
 		ft_putchar('\n');

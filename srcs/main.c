@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 20:48:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/09 23:53:27 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/10 01:32:32 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,4 @@ int main(int ac, char **av)
 	return (0);
 }
 
-//1 hacer un print board con la nueva estructura de board;
-//2 modifica put champs y adaptarlo a la nueva estructura
-//3 Asegurar 0 leaks tras cambios
 //4 Empezar con las intrucciones: Mateo pares, Mikel impares

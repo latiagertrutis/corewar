@@ -10,7 +10,7 @@
 
 typedef struct 		s_board
 {
-	char 			mem;
+	unsigned char 	mem;
 	char			id;
 }					t_board;
 
