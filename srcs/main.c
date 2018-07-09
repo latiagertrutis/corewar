@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 20:48:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/06 17:49:27 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/09 01:33:48 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,13 @@ int i;
 
 int main(int ac, char **av)
 {
-	t_arena		*arena;
-	t_player	*players;
-	
-	if (!init_corewar(&arena, &players, ac))
+	t_data		data;
+
+	data = (t_data){ac - 1, NULL, NULL};
+	if (!init_corewar(&data))
 		ft_error("malloc failed");
-	// print_board(arena->board);
-	take_champions(ac, av, players);
-
-
-	
-
-	//preguntar mateo operdores binarios
-
+	take_champions(&data, av);
+	put_champs_to_arena(&data);
+	print_memory((void *)(data.arena->board), MEM_SIZE, 64, 1);
 	return (0);
 }

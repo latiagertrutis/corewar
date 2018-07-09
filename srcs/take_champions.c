@@ -23,26 +23,30 @@ static char *read_alloc_size(int fd, int size)
 }
 
 
-void 		take_champions(int ac, char **av, t_player *players)
+void 		take_champions(t_data *data, char **av)
 {
-	int fd;
-	int i;
+	int 			fd;
+	unsigned int	i;
 
 	i = 1;
-	while (i < ac)
+	while (i < data->n_players + 1)
 	{
 		fd = open(av[i], O_RDONLY);
 		check_magic(fd);
-		players->name = read_alloc_size(fd, PROG_NAME_LENGTH + 4);
-		print_memory(players->name, PROG_NAME_LENGTH + 4, 16, 2);
-		ft_putendl(players->name);
-		players->prog_size = read_alloc_size(fd, 5);
-		print_memory(players->prog_size, 4, 16, 2);
-		players->comment = read_alloc_size(fd, COMMENT_LENGTH + 4);
-		// players->prog = read_alloc_size(fd, )
-		big_hexa_2_dec(players->prog_size, 5);
+		ft_printf("{red}NOMBRE:\n{eoc}");
+		data->players[i - 1].name = read_alloc_size(fd, PROG_NAME_LENGTH + 4);
+		print_memory(data->players[i - 1].name, PROG_NAME_LENGTH + 4, 16, 2);
+		ft_putendl(data->players[i - 1].name);
+		ft_printf("{red}PROG SIZE:\n{eoc}");
+		data->players[i - 1].prog_size = *((unsigned int *)read_alloc_size(fd, sizeof(unsigned int)));
+		big_hexa_2_dec((char *)(&(data->players[i - 1].prog_size)), sizeof(unsigned int));
+//		ft_printf("{red}COMMENT:\n{eoc}");
+		data->players[i - 1].comment = read_alloc_size(fd, COMMENT_LENGTH + 4);
+//		print_memory(players->comment, COMMENT_LENGTH + 4, 16, 2);
+		ft_printf("{red}PROG:\n{eoc}");
+		data->players[i - 1].prog = read_alloc_size(fd, data->players[i - 1].prog_size);
+		print_memory(data->players[i - 1].prog, data->players[i - 1].prog_size, 16, 2);
 		i++;
 	}
 
 }
-

@@ -18,10 +18,17 @@ typedef struct 		s_player
 	char			*content;
 	char 			*name;
 	int				player_nb;
-	char			*prog_size;
+	unsigned int	prog_size;
 	char			*prog;
 	char 			*comment;
 }					t_player;
+
+typedef struct		s_data
+{
+	unsigned int	n_players;
+	t_player		*players;
+	t_arena			*arena;
+}					t_data;
 
 typedef struct		s_op
 {
@@ -50,9 +57,10 @@ typedef struct		s_op
 */
 
 void				print_memory(const void *addr, size_t size, int line, int space);
-void 				take_champions(int ac, char **av, t_player *players);
+void 				take_champions(t_data *data, char **av);
 void 				big_hexa_2_dec(char *str, int size);
 void				invert_bytes(void *arr, const size_t size);
-int 				init_corewar(t_arena **arena, t_player **players, int ac);
+int 				init_corewar(t_data *data);
+void				put_champs_to_arena(const t_data *data);
 
 #endif

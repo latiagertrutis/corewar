@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/06 17:56:07 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/07/09 01:13:17 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -24,7 +24,8 @@ FUNCS =	main.c \
 		print_memory.c \
 		get_content.c \
 		invert_bytes.c \
-		take_champions.c
+		take_champions.c \
+		put_champs_to_arena.c
 
 SRCS_DIR = srcs/
 
@@ -38,6 +39,8 @@ OBJ_DIR = objects/
 
 OBJ = $(patsubst %.c, $(OBJ_DIR)%.o,$(FUNCS))
 
+INC = $(wildcard $(INC_DIR)*.h)
+
 all: $(NAME)
 
 .PHONY: $(LIBFT_DIR)$(LIBFT_NAME)
@@ -45,7 +48,7 @@ all: $(NAME)
 $(NAME): $(OBJ) | $(LIBFT_DIR)$(LIBFT_NAME)
 	@$(CC) $(OBJ) -L$(LIBFT_DIR) -lft -o $(NAME)
 
-$(OBJ_DIR)%.o: $(SRCS_DIR)%.c
+$(OBJ_DIR)%.o: $(SRCS_DIR)%.c $(INC)
 	@mkdir -p $(OBJ_DIR)
 	@printf "\033[92m--->Compiling $(@F)\033[0m"
 	@$(CC) $(CFLAGS) -c $< -I $(INC_DIR) -o $@
