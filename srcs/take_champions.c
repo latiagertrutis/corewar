@@ -39,7 +39,7 @@ void 		take_champions(t_data *data, char **av)
 //		print_memory(players->comment, COMMENT_LENGTH + 4, 16, 2);
 		ft_printf("{red}PROG:\n{eoc}");
 		data->players[i].prog = read_alloc_size(fd, data->players[i].prog_size);
-		// print_memory(data->players[i].prog, data->players[i].prog_size, 16, 2);
+		 print_memory(data->players[i].prog, data->players[i].prog_size, 16, 2);
 		i++;
 	}
 

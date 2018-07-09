@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/09 01:13:17 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/07/09 23:44:14 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -29,7 +29,8 @@ FUNCS =	main.c \
 		free_players.c \
 		put_usage.c \
 		get_prog_size.c \
-		read_alloc_size.c
+		read_alloc_size.c \
+		print_board.c
 
 SRCS_DIR = srcs/
 

@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 23:56:45 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/09 01:08:38 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/09 23:21:23 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		fill_region(const t_data *data, const unsigned int i, const unsigne
 	j = 0;
 	while (j < data->players[i].prog_size)
 	{
-		data->arena->board[j + i * inc] = data->players[i].prog[j];
+		data->arena->board[j + i * inc] = (t_board){data->players[i].prog[j], data->players[i].id};
 		j++;
 	}
 }

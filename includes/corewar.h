@@ -12,7 +12,7 @@ typedef struct 		s_board
 {
 	char 			mem;
 	char			id;
-}
+}					t_board;
 
 typedef struct 		s_arena
 {
@@ -75,7 +75,7 @@ void 				free_players(t_player *player, int nb_players);
 void				put_usage();
 int 				get_prog_size(int fd);
 char 				*read_alloc_size(int fd, int size);
-
+void				print_board(t_data *data, t_board *board);
 
 
 
