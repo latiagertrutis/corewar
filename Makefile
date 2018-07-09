@@ -14,7 +14,7 @@
 
 NAME = prueba
 
-CFLAGS = #-fsanitize=address #-Wall -Wextra -Werror
+CFLAGS = #-fsanitize=address #-Wall -Wextra -Werror -g3
 
 CC = gcc
 
@@ -25,7 +25,11 @@ FUNCS =	main.c \
 		get_content.c \
 		invert_bytes.c \
 		take_champions.c \
-		put_champs_to_arena.c
+		put_champs_to_arena.c \
+		free_players.c \
+		put_usage.c \
+		get_prog_size.c \
+		read_alloc_size.c
 
 SRCS_DIR = srcs/
 

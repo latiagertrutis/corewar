@@ -13,33 +13,26 @@
 #include "corewar.h"
 #include <stdio.h> //printf !!
 
-static void print_board(char *board)
-{
-int i;
-
-	i = 0;
-	while(i < MEM_SIZE)
-	{
-		if (board[i] < 16)
-			ft_putchar('0');
-		ft_putstr(ft_ltoa_base((int)board[i], 16));
-		if ((i+1) % 64 == 0)
-			ft_putchar('\n');
-		else
-			ft_putchar(' ');
-		i++;
-	}
-}
-
 int main(int ac, char **av)
 {
 	t_data		data;
 
-	data = (t_data){ac - 1, NULL, NULL};
+	if (ac < 2 || ac > 5)
+		put_usage();
+	data = (t_data){ac - 1, NULL, NULL, {"\033[38;5;1m", "\033[38;5;2m", 
+										"\033[38;5;3m", "\033[38;5;4m", 
+										"\033[0m"};
 	if (!init_corewar(&data))
 		ft_error("malloc failed");
 	take_champions(&data, av);
 	put_champs_to_arena(&data);
 	print_memory((void *)(data.arena->board), MEM_SIZE, 64, 1);
+	free(data.arena);
+	free_players(data.players, data.n_players);
 	return (0);
 }
+
+//1 hacer un print board con la nueva estructura de board;
+//2 modifica put champs y adaptarlo a la nueva estructura
+//3 Asegurar 0 leaks tras cambios
+//4 Empezar con las intrucciones: Mateo pares, Mikel impares
