@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   take_champions.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/10 18:49:00 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/07/10 21:27:49 by mrodrigu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "corewar.h"
 
@@ -13,8 +24,13 @@ static void	check_magic(int fd)
 		ft_putendl("FALSE: magic number incorrect");
 }
 
+static int	check_args(t_data *data, char **av, int i)
+{
+	if (*(av[i + 1]) == '-')
+	{
 
-
+	}
+}
 
 void 		take_champions(t_data *data, char **av)
 {
@@ -24,6 +40,11 @@ void 		take_champions(t_data *data, char **av)
 	i = 0;
 	while (i < data->n_players)
 	{
+		if (check_args(data, av, i))
+		{
+			av += 2;
+			continue ;
+		}
 		data->players[i].id = i;
 		fd = open(av[i + 1], O_RDONLY);
 		check_magic(fd);
