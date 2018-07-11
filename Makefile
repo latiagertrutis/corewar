@@ -31,7 +31,8 @@ FUNCS =	main.c \
 		get_prog_size.c \
 		read_alloc_size.c \
 		print_board.c \
-		exe_players.c
+		exe_players.c \
+		core_live.c
 
 SRCS_DIR = srcs/
 

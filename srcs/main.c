@@ -24,11 +24,12 @@ int main(int ac, char **av)
 	if (!init_corewar(&data))
 		ft_error("malloc failed");
 	take_champions(&data, av);
+	
 	put_champs_to_arena(&data);
-	print_board(&data, data.arena->board);
+	// print_board(&data, data.arena->board);
 //	print_memory((void *)(data.arena->board), MEM_SIZE, 64, 1);
 
-
+	
 	exe_players(&data);
 
 	

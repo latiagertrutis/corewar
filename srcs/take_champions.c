@@ -24,13 +24,13 @@ static void	check_magic(int fd)
 		ft_putendl("FALSE: magic number incorrect");
 }
 
-static int	check_args(t_data *data, char **av, int i)
-{
-	if (*(av[i + 1]) == '-')
-	{
-
-	}
-}
+// static int	check_args(t_data *data, char **av, int i)
+// {
+// 	if (*(av[i + 1]) == '-')
+// 	{
+		
+// 	}
+// }
 
 void 		take_champions(t_data *data, char **av)
 {
@@ -40,11 +40,11 @@ void 		take_champions(t_data *data, char **av)
 	i = 0;
 	while (i < data->n_players)
 	{
-		if (check_args(data, av, i))
-		{
-			av += 2;
-			continue ;
-		}
+		// if (check_args(data, av, i))
+		// {
+		// 	av += 2;
+		// 	continue ;
+		// }
 		data->players[i].id = i;
 		fd = open(av[i + 1], O_RDONLY);
 		check_magic(fd);

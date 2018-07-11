@@ -25,7 +25,10 @@ void	print_board(t_data *data, t_board *board)
 		j = 0;
 		while (j < 64 && i + j < MEM_SIZE)
 		{
-			ft_putstr(data->palete[(int)board[i + j].id]);
+			if (data->players[(int)board[i + j].id - 1].pc == (i + j))
+				ft_putstr("\033[48;5;125m");
+			else
+				ft_putstr(data->palete[(int)board[i + j].id]);
 			ft_putchar(hexa[board[i + j].mem / 16]); //%16?
 			ft_putchar(hexa[board[i + j].mem % 16]);
 			ft_putchar(' ');

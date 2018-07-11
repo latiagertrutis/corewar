@@ -56,8 +56,9 @@ static int init_players(t_data *data)
 	while (i < data->n_players)
 	{
 		data->players[i].id = i + 1;
-		data->players[i].pc = 0;
-		data->players[i].mana = 0;
+		data->players[i].player_nb = i + 1;
+		data->players[i].wait_cycles = 0;
+		data->players[i].live_counter = 0;
 		i++;
 	}
 	return (1);

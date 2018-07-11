@@ -20,6 +20,7 @@ static void		fill_region(const t_data *data, const unsigned int i, const unsigne
 	while (j < data->players[i].prog_size)
 	{
 		data->arena->board[j + i * inc] = (t_board){data->players[i].prog[j], data->players[i].id + 1};
+		data->players[i].pc = j + i * inc;
 		j++;
 	}
 }
