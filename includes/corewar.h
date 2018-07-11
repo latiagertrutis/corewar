@@ -21,7 +21,7 @@ typedef struct 		s_arena
 
 typedef struct 		s_player
 {
-	char 			reg[REG_NUMBER + 1][REG_SIZE]; // +1 por PC
+	char 			reg[REG_NUMBER][REG_SIZE];
 	unsigned int	carry : 1;
 	char			*content;
 	char 			*name;
@@ -30,13 +30,16 @@ typedef struct 		s_player
 	unsigned int	prog_size;
 	char			*prog;
 	char 			*comment;
+	int 			wait_cycles;
+	unsigned short	pc;
+	
 }					t_player;
 
 typedef struct		s_op
 {
 	char			*name;
 	unsigned int	n_args;
-	t_arg_type		*args;
+	t_arg_type		args[3];
 	unsigned int	inst_id;
 	unsigned int	mana;
 	char			*comment;
@@ -50,7 +53,9 @@ typedef struct		s_data
 	t_player		*players;
 	t_arena			*arena;
 	char 			palete[5][10];
+	t_op 			op[17];
 	unsigned int	nbr_cycles;
+	void			(*func[16])(t_player player, t_op op, t_arena *arena);
 }					t_data;
 
 /*
@@ -78,6 +83,7 @@ void				put_usage();
 int 				get_prog_size(int fd);
 char 				*read_alloc_size(int fd, int size);
 void				print_board(t_data *data, t_board *board);
+void 				exe_players(t_data *data);
 
 
 
