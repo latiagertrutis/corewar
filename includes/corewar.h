@@ -56,7 +56,7 @@ typedef struct		s_data
 	char 			palete[5][10];
 	t_op 			op[17];
 	unsigned int	nbr_cycles;
-	void			(*func[16])(t_player *player, t_op op, t_arena *arena);
+	void			(*func[16])(t_player *, t_op, t_arena *);
 }					t_data;
 
 /*
@@ -81,7 +81,7 @@ int 				init_corewar(t_data *data);
 void				put_champs_to_arena(const t_data *data);
 void 				free_players(t_player *player, int nb_players);
 void				put_usage();
-int 				get_prog_size(int fd);
+unsigned int		get_prog_size(int fd);
 char 				*read_alloc_size(int fd, int size);
 void				print_board(t_data *data, t_board *board);
 void 				exe_players(t_data *data);

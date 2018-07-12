@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/01 00:34:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/09 00:09:40 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/12 02:48:01 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 static void 	init_func(t_data *data)
 {
-	
-
+	(data->func)[0] = core_live;
 }
 
 static void 	init_op(t_data *data)
@@ -42,13 +41,13 @@ static void 	init_op(t_data *data)
 		"long load index", 1, 1};
 	data->op[14] = (t_op){"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1};
 	data->op[15] = (t_op){"aff", 1, {T_REG}, 16, 2, "aff", 1, 0};
-	data->op[16] = (t_op){0, 0, 0, 0, 0, 0, 0, 0};
+	data->op[16] = (t_op){0, 0, {0}, 0, 0, 0, 0, 0};
 }
 
 
 static int init_players(t_data *data)
 {
-	int i;
+	unsigned int i;
 
 	if (!(data->players = (t_player *)ft_memalloc(sizeof(t_player) * data->n_players)))
 		return (0);
@@ -59,6 +58,7 @@ static int init_players(t_data *data)
 		data->players[i].player_nb = i + 1;
 		data->players[i].wait_cycles = 0;
 		data->players[i].live_counter = 0;
+		data->players[i].pc = 0;
 		i++;
 	}
 	return (1);
@@ -79,5 +79,7 @@ int 	init_corewar(t_data *data)
 		return (0);
 	if (!init_players(data))
 		return (0);
+	init_op(data);
+	init_func(data);
 	return (1);
 }

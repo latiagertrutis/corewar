@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:49:00 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/10 21:27:49 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/12 01:42:04 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ void 		take_champions(t_data *data, char **av)
 		ft_putendl(data->players[i].name);
 		ft_printf("{red}PROG SIZE:\n{eoc}");
 		data->players[i].prog_size = get_prog_size(fd);
-		big_hexa_2_dec((char *)(&(data->players[i].prog_size)), sizeof(unsigned int));
+		ft_printf("%u\n", data->players[i].prog_size);
 //		ft_printf("{red}COMMENT:\n{eoc}");
 		data->players[i].comment = read_alloc_size(fd, COMMENT_LENGTH + 4);
 //		print_memory(players->comment, COMMENT_LENGTH + 4, 16, 2);
 		ft_printf("{red}PROG:\n{eoc}");
 		data->players[i].prog = read_alloc_size(fd, data->players[i].prog_size);
-		 print_memory(data->players[i].prog, data->players[i].prog_size, 16, 2);
+		print_memory(data->players[i].prog, data->players[i].prog_size, 16, 2);
 		i++;
 	}
 
