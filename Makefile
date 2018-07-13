@@ -6,11 +6,11 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/09 23:44:14 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/07/13 06:37:44 by jagarcia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re check_libft
 
 NAME = prueba
 
@@ -34,9 +34,17 @@ FUNCS =	main.c \
 		exe_players.c \
 		core_live.c \
 		check_live_count.c \
-		fill_r1.c
+		fill_r1.c \
+		flags.c
+
+GRAPH = ft_init.c \
+		ft_quit.c \
+		main_graphics.c \
+		ft_SDL_error.c
 
 SRCS_DIR = srcs/
+
+GRAPH_DIR = srcs_graphics/
 
 INC_DIR = includes/
 
@@ -48,22 +56,32 @@ OBJ_DIR = objects/
 
 OBJ = $(patsubst %.c, $(OBJ_DIR)%.o,$(FUNCS))
 
+OBJ_GRAPH = $(patsubst %.c, $(OBJ_DIR)%.o, $(GRAPH))
+
 INC = $(wildcard $(INC_DIR)*.h)
 
+MODE = 0
+
+ifeq ($(MODE), 1)
 all: $(NAME)
 
-.PHONY: $(LIBFT_DIR)$(LIBFT_NAME)
-
-$(NAME): $(OBJ) | $(LIBFT_DIR)$(LIBFT_NAME)
+$(NAME): $(OBJ)
 	@$(CC) $(OBJ) -L$(LIBFT_DIR) -lft -o $(NAME)
 
-$(OBJ_DIR)%.o: $(SRCS_DIR)%.c $(INC)
+$(OBJ_DIR)%.o: $(SRCS_DIR)%.c $(INC) $(LIBFT_DIR)$(LIBFT_NAME)
 	@mkdir -p $(OBJ_DIR)
 	@printf "\033[92m--->Compiling $(@F)\033[0m"
 	@$(CC) $(CFLAGS) -c $< -I $(INC_DIR) -o $@
 	@printf "\033[92m   [OK]\n\033[0m"
+else
+$(NAME) : |check_lib $(OBJ)
 
-$(LIBFT_DIR)$(LIBFT_NAME):
+$(OBJ_DIR)%.o : $(SRCS_DIR)%.c $(INC) $(LIBFT_DIR)$(LIBFT_NAME)
+	@printf "\033[92mCreating $(NAME)\033[0m\n"
+	@$(MAKE) MODE=1
+	@printf "\033[92mDone $(NAME) [OK]\n\033[0m"
+endif
+check_libft:
 	@$(MAKE) -sC $(LIBFT_DIR)
 
 clean:

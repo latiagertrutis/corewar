@@ -1,10 +1,11 @@
-
 #ifndef COREWAR_H
 # define COREWAR_H
 
 #include "../libft/includes/libft.h"
+#include "graphics.h"
 #include "op.h"
 #include <fcntl.h>
+#include <math.h>
 
 #define HEADER_SIZE 4 + PROG_NAME_LENGTH + 1 + 4 + 4
 
@@ -56,6 +57,7 @@ typedef struct		s_data
 	char 			palete[5][10];
 	t_op 			op[17];
 	unsigned int	nb_cycles;
+	int				flags;
 	void			(*func[16])(t_player *, t_op, t_arena *);
 }					t_data;
 
@@ -89,6 +91,9 @@ void				check_live_count(t_player *players, int nb_players);
 void				fill_r1(t_data *data);
 int					get_opc(t_board *board);
 
+//Anyadidas Jaume
+int					ft_set_flags(int argn, char **argv);
+int					ft_check_flags(int flags, char flag);
 
 /*
 **------------------op_functions-----------------------------------
