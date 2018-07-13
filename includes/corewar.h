@@ -87,7 +87,7 @@ void				print_board(t_data *data, t_board *board);
 void 				exe_players(t_data *data);
 void				check_live_count(t_player *players, int nb_players);
 void				fill_r1(t_data *data);
-int					get_opc(t_board *board);
+unsigned char		*get_mem_board(t_board *board, const unsigned int size);
 
 
 /*
