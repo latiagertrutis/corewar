@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 05:11:58 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/13 06:05:48 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/13 10:17:38 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #define RIGHT_BORDER 0.02
 
 typedef struct s_sdl {
-	int		flags;
+	SDL_bool running;
 	struct {
 		int w;
 		int h;
@@ -39,7 +39,8 @@ typedef struct s_sdl {
 	TTF_Font *font[1];
 } t_sdl;
 
-void	ft_ini_graphics(t_sdl *Game);
-void	ft_quit_graphics(t_sdl *Game);
+void	ft_ini_graphics(t_sdl **Graph, int flags);
+void	ft_quit_graphics(t_sdl *Graph);
 void	ft_SDL_error(char *str, int mode);
+void	ft_ini_board(t_sdl *Graph);
 #endif

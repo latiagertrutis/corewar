@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 20:48:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/13 07:14:35 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/13 10:19:04 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 int main(int ac, char **av)
 {
 	t_data		data;
+	SDL_Event	event;
 
 //	if (ac < 2 || ac > 5)
 //		put_usage();
@@ -26,14 +27,27 @@ int main(int ac, char **av)
 	if (!init_corewar(&data))
 		ft_error("malloc failed");
 	take_champions(&data, av);
+	ft_ini_board(data.arena->Graph);
 //
-	put_champs_to_arena(&data);
+//	put_champs_to_arena(&data);
 
-	
+while (data.arena->Graph->running)
+	{
+		while (SDL_PollEvent(&event))
+		{
+			if (event.type == SDL_QUIT)
+				data.arena->Graph->running = SDL_FALSE;
+			else if (event.type == SDL_KEYDOWN)
+			{
+				if (event.key.keysym.sym == SDLK_ESCAPE)
+					data.arena->Graph->running = SDL_FALSE;
+			}
+		}
+	}
 
 //	exe_players(&data);
 
-	
+	ft_quit_graphics(data.arena->Graph);
 	free(data.arena);
 	free_players(data.players, data.n_players);
 	return (0);

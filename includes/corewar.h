@@ -18,6 +18,7 @@ typedef struct 		s_board
 typedef struct 		s_arena
 {
 	t_board			board[MEM_SIZE];
+	t_sdl			*Graph;
 }					t_arena;
 
 typedef struct 		s_player
