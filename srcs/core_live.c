@@ -30,9 +30,11 @@ void	core_live(t_player *player, t_op op, t_arena *arena)
 
 	pos = player->pc;
 	live_nb = take_live_nb((arena->board) + pos + 1);
+	
 	ft_printf("live: %d", live_nb);
-	if (live_nb == 1) //== content register 1
+	if (live_nb == *((int *)(player->reg[0])))
 	{
+		player->live_counter++;
 		ft_printf("Player %d alive", player->id);
 	}
 	player->pc += 5;

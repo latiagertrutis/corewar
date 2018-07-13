@@ -29,7 +29,7 @@ static void			exe_pc(t_data *data, int j)
 	}
 	else
 	{
-		if(pos == 0)//pos >= 0 && pos <= 15)
+		if (pos == 0)
 			data->players[j].wait_cycles += data->op[pos].mana;
 		else
 			data->players[j].pc++;
@@ -42,9 +42,10 @@ void 				exe_players(t_data *data)
 	unsigned int j;
 
 	i = 0;
-	/* write(1, "\x1b[H\x1b[2J", 7); */
-	/* print_board(data, data->arena->board); */
-	while(i < 50)
+	fill_r1(data);
+
+	print_board(data, data->arena->board);
+	while(i < 5000)
 	{
 		usleep(100000);
 		j = 0;
@@ -53,9 +54,13 @@ void 				exe_players(t_data *data)
 			exe_pc(data, j);
 			j++;
 		}
+		if (!(i % CYCLE_TO_DIE))
+			check_live_count(data->players, data->n_players);
 		i++;
+		data->nb_cycles = i;
 		write(1, "\x1b[H\x1b[2J", 7);
 		print_board(data, data->arena->board);
+
 
 	}
 }

@@ -55,7 +55,7 @@ typedef struct		s_data
 	t_arena			*arena;
 	char 			palete[5][10];
 	t_op 			op[17];
-	unsigned int	nbr_cycles;
+	unsigned int	nb_cycles;
 	void			(*func[16])(t_player *, t_op, t_arena *);
 }					t_data;
 
@@ -85,6 +85,8 @@ unsigned int		get_prog_size(int fd);
 char 				*read_alloc_size(int fd, int size);
 void				print_board(t_data *data, t_board *board);
 void 				exe_players(t_data *data);
+void				check_live_count(t_player *players, int nb_players);
+void				fill_r1(t_data *data);
 
 
 /*

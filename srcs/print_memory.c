@@ -38,4 +38,5 @@ void	print_memory(const void *addr, size_t size, int line, int space)
 		ft_putchar('\n');
 		i += line;
 	}
+
 }

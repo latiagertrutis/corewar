@@ -12,7 +12,22 @@
 
 #include "corewar.h"
 
-void	print_board(t_data *data, t_board *board)
+static void	print_player_status(t_player *players, t_data *data)
+{
+	int i;
+
+	i = 0;
+	while(i < data->n_players)
+	{
+		ft_putstr(data->palete[(int)players[i].id + 1]);
+		ft_printf("Player nb: %d, name:%s, lives: %d\n"
+			, players[i].player_nb, players[i].name, players[i].live_counter);
+		ft_putstr("\033[0m ");
+		i++;
+	}
+}
+
+void		print_board(t_data *data, t_board *board)
 {
 	size_t			i;
 	int 			j;
@@ -36,4 +51,9 @@ void	print_board(t_data *data, t_board *board)
 		ft_putchar('\n');
 		i += 64;
 	}
+
+	ft_putstr("\n\nNumber of cycles: ");
+	ft_putnbr(data->nb_cycles);
+	ft_putchar('\n');
+	print_player_status(data->players, data);
 }

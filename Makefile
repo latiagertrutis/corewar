@@ -32,7 +32,9 @@ FUNCS =	main.c \
 		read_alloc_size.c \
 		print_board.c \
 		exe_players.c \
-		core_live.c
+		core_live.c \
+		check_live_count.c \
+		fill_r1.c
 
 SRCS_DIR = srcs/
 
