@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/09 23:44:14 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/07/13 09:31:19 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -34,7 +34,9 @@ FUNCS =	main.c \
 		exe_players.c \
 		core_live.c \
 		check_live_count.c \
-		fill_r1.c
+		fill_r1.c \
+		core_ld.c \
+		get_mem_board.c
 
 SRCS_DIR = srcs/
 

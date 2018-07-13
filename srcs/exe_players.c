@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/12 03:19:18 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/13 09:28:23 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void			exe_pc(t_data *data, int j)
 	}
 	else
 	{
-		if (pos == 0)
+		if (pos <= 1)
 			data->players[j].wait_cycles += data->op[pos].mana;
 		else
 			data->players[j].pc++;
