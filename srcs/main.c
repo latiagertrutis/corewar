@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 20:48:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/14 11:08:16 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/14 14:54:04 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ int main(int ac, char **av)
 		ft_error("malloc failed");
 	take_champions(&data, av);
 	ft_ini_interface(data.arena->Graph);
-	ft_ini_board(data.arena->Graph);
-//	put_champs_to_arena(&data);
+	ft_printf("square mide %i x %i\n", data.arena->Graph->square->w, data.arena->Graph->square->h);
+//	ft_ini_board(data.arena->Graph, data.arena->board);
+	put_champs_to_arena(&data);
+	ft_ini_board(data.arena->Graph, data.arena->board);
 
 while (data.arena->Graph->running)
 	{

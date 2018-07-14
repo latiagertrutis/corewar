@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 06:40:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/14 11:03:29 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/14 14:39:55 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,25 +53,24 @@ static void		draw_rack(int cuant_squares[2], t_sdl *Graph, int first_col)
 static void		ini_big_rack(t_sdl *Graph)
 {
 	int square_dim[2];
-	int	cuant_squares[2];
 
 	if (SDL_SetRenderDrawColor(Graph->screen.Renderer, 255, 0, 0,
 			SDL_ALPHA_OPAQUE))
 		ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
-	cuant_squares[0] = 64;
-	cuant_squares[1] = (MEM_SIZE / 64 + (MEM_SIZE % 64 ? 1 : 0));
+	Graph->cuant_squares[0] = 64;
+	Graph->cuant_squares[1] = (MEM_SIZE / 64 + (MEM_SIZE % 64 ? 1 : 0));
 	square_dim[0] = 0;
 	square_dim[1] = 0;
-	while (square_dim[0] * cuant_squares[0] <= Graph->screen.w -
+	while (square_dim[0] * Graph->cuant_squares[0] <= Graph->screen.w -
 			(Graph->screen.w * LEFT_BORDER) - (Graph->screen.w * RIGHT_BORDER))
 		square_dim[0]++;
-	while (square_dim[1] * cuant_squares[1] <= Graph->screen.h -
+	while (square_dim[1] * Graph->cuant_squares[1] <= Graph->screen.h -
 			(Graph->screen.h * UPPER_BORDER) - (Graph->screen.h * BOTTOM_BORDER))
 		square_dim[1]++;
 	Graph->square = &(SDL_Rect){Graph->screen.w * RIGHT_BORDER + 1,
 			Graph->screen.h * UPPER_BORDER + 1, square_dim[0],
 			square_dim[1]};
-	draw_rack(cuant_squares, Graph, Graph->screen.w * RIGHT_BORDER + 1);
+	draw_rack(Graph->cuant_squares, Graph, Graph->screen.w * RIGHT_BORDER + 1);
 	if (SDL_SetRenderDrawColor(Graph->screen.Renderer, 0, 0, 0,
 			SDL_ALPHA_OPAQUE))
 	ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
@@ -86,15 +85,22 @@ static void				ini_rack(t_sdl *Graph)
 		ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
 	square_dim[0] = 0;
 	square_dim[1] = 0;
+	Graph->cuant_squares[0] = 64;
+	Graph->cuant_squares[1] = 64;
 	while (square_dim[0] * 64 <= Graph->screen.w - (Graph->screen.w *
 			LEFT_BORDER) - (Graph->screen.w * RIGHT_BORDER))
 		square_dim[0]++;
 	while (square_dim[1] * 64 <= Graph->screen.h - (Graph->screen.h *
 			UPPER_BORDER) - (Graph->screen.h * BOTTOM_BORDER))
 		square_dim[1]++;
-	Graph->square = &(SDL_Rect){Graph->screen.w * RIGHT_BORDER + 1,
-		Graph->screen.h * UPPER_BORDER + 1, square_dim[0], square_dim[1]};
-	draw_rack((int[2]){64, 64}, Graph, Graph->screen.w * RIGHT_BORDER + 1);
+	if (!(Graph->square = (SDL_Rect *)malloc(sizeof(SDL_Rect))))
+				ft_error("Error malloc ini_rack\n");
+	Graph->square->x = Graph->screen.w * RIGHT_BORDER;
+	Graph->square->y = Graph->screen.h * UPPER_BORDER;
+	Graph->square->w = square_dim[0];
+	Graph->square->h = square_dim[1];
+	ft_printf("square mide %i x %i\n", Graph->square->w, Graph->square->h);
+	draw_rack((int[2]){64, 64}, Graph, Graph->screen.w * RIGHT_BORDER);
 	if (SDL_SetRenderDrawColor(Graph->screen.Renderer, 0, 0, 0,
 			SDL_ALPHA_OPAQUE))
 		ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);

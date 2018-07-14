@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/14 11:06:54 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/07/14 13:19:20 by jagarcia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -76,13 +76,13 @@ $(NAME): $(OBJ)
 $(OBJ_DIR)%.o: $(SRCS_DIR)%.c $(INC) $(LIBFT_DIR)$(LIBFT_NAME)
 	@mkdir -p $(OBJ_DIR)
 	@printf "\033[92m--->Compiling $(@F)\033[0m"
-	@$(CC) $(CFLAGS) -c $< -I $(INC_DIR) -o $@
+	@$(CC) $(CFLAGS) -c $< -I $(INC_DIR) -I$(LIBFT_DIR)includes/ -o $@
 	@printf "\033[92m   [OK]\n\033[0m"
 
 $(OBJ_DIR)%.o: $(GRAPH_DIR)%.c $(INC) $(LIBFT_DIR)$(LIBFT_NAME)
 	@mkdir -p $(OBJ_DIR)
 	@printf "\033[92m--->Compiling $(@F)\033[0m"
-	@$(CC) $(CFLAGS) -c $< -I $(INC_DIR) -o $@
+	@$(CC) $(CFLAGS) -c $< -I $(INC_DIR) -I$(LIBFT_DIR)includes/ -o $@
 	@printf "\033[92m   [OK]\n\033[0m"
 else
 $(NAME) : |check_lib $(OBJ)
