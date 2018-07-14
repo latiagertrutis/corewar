@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 20:48:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/13 10:19:04 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/14 11:08:16 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int main(int ac, char **av)
 	if (!init_corewar(&data))
 		ft_error("malloc failed");
 	take_champions(&data, av);
+	ft_ini_interface(data.arena->Graph);
 	ft_ini_board(data.arena->Graph);
-//
 //	put_champs_to_arena(&data);
 
 while (data.arena->Graph->running)

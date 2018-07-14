@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/13 09:44:58 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/07/14 11:06:54 by jagarcia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -42,6 +42,7 @@ FUNCS =	main.c \
 GRAPH = ft_ini_graphics.c \
 		ft_quit_graphics.c \
 		ft_SDL_error.c \
+		ft_ini_interface.c \
 		ft_ini_board.c
 
 SRCS_DIR = srcs/
