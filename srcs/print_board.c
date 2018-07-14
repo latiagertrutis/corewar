@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 23:21:36 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/12 02:52:41 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/14 01:59:26 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,19 @@ static void	print_player_status(t_player *players, t_data *data)
 	}
 }
 
+static void	print_pcs(t_data *data, size_t i, int j)
+{
+	unsigned int k;
+
+	k = 0;
+	while (k < data->n_players)
+	{
+		if (data->players[k].pc == (i + j))
+			ft_putstr("\033[48;5;2m");
+		k++;
+	}
+}
+
 void		print_board(t_data *data, t_board *board)
 {
 	size_t			i;
@@ -38,11 +51,10 @@ void		print_board(t_data *data, t_board *board)
 	while (i < MEM_SIZE)
 	{
 		j = 0;
-		while (j < 64 && i + j < MEM_SIZE)
+		while (j < 64)
 		{
-			if (data->players[(int)board[i + j].id - 1].pc == (i + j))
-				ft_putstr("\033[48;5;100m");
 			ft_putstr(data->palete[(int)board[i + j].id]);
+			print_pcs(data, i, j);
 			ft_putchar(hexa[board[i + j].mem / 16]); //%16?
 			ft_putchar(hexa[board[i + j].mem % 16]);
 			ft_putstr("\033[0m ");

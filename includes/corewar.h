@@ -95,7 +95,8 @@ unsigned char		*get_mem_board(t_board *board, const unsigned int size);
 */
 void				core_live(t_player *player, t_op op, t_arena *arena);
 void				core_ld(t_player *player, t_op op, t_arena *arena);
-
+void				core_st(t_player *player, t_op op, t_arena *arena);
+void				core_add(t_player *player, t_op op, t_arena *arena);
 
 
 

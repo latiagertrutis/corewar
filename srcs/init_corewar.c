@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/01 00:34:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/13 09:23:22 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/14 06:37:53 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void 	init_func(t_data *data)
 {
 	(data->func)[0] = core_live;
 	(data->func)[1] = core_ld;
+	(data->func)[2] = core_st;
+	(data->func)[3] = core_add;
 }
 
 static void 	init_op(t_data *data)
