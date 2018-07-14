@@ -97,7 +97,6 @@ void				core_live(t_player *player, t_op op, t_arena *arena);
 void				core_ld(t_player *player, t_op op, t_arena *arena);
 void				core_st(t_player *player, t_op op, t_arena *arena);
 void				core_add(t_player *player, t_op op, t_arena *arena);
-
-
+void				core_and(t_player *player, t_op op, t_arena *arena);
 
 #endif

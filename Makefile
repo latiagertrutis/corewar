@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/14 06:37:29 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/07/14 09:02:38 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -38,7 +38,8 @@ FUNCS =	main.c \
 		core_ld.c \
 		get_mem_board.c \
 		core_st.c \
-		core_add.c
+		core_add.c \
+		core_and.c
 
 SRCS_DIR = srcs/
 
