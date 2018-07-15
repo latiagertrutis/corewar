@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 07:09:33 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/15 08:07:43 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/15 16:24:18 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static unsigned char	get_size(const unsigned char ocp, const unsigned char n_arg
 	return (2);
 }
 
-static void			get_value(t_player *player, t_board *board, t_arg *arg)
+static void			get_value(t_player *player, t_board *board, t_arg *arg, unsigned short *pc)
 {
 	unsigned char	aux[MAX_ARG_LEN];
 	unsigned char	i;
@@ -98,34 +98,34 @@ static void			get_value(t_player *player, t_board *board, t_arg *arg)
 		aux[0] = arg->arg[1];
 		while (i < REG_SIZE)
 		{
-			arg->arg[i] = board[(player->pc + ((i + *((unsigned short *)aux)) % IDX_MOD)) % MEM_SIZE].mem;
+			arg->arg[i] = board[(*pc + ((i + *((unsigned short *)aux)) % IDX_MOD)) % MEM_SIZE].mem;
 			i++;
 		}
 	}
 }
 
-static void			operate(t_player *player, t_arg *arg1, t_arg *arg2, t_board *board)
-{
-	unsigned char	reg_pos;
-	unsigned char	i;
+/* static void			operate(t_player *player, t_arg *arg1, t_arg *arg2, t_board *board) */
+/* { */
+/* 	unsigned char	reg_pos; */
+/* 	unsigned char	i; */
 
-	i = 0;
-	reg_pos = board[(player->pc + ((2 + arg1->len + arg2->len) % IDX_MOD)) % MEM_SIZE].mem - 1;
-	get_value(player, board, arg1);
-	get_value(player, board, arg2);
-	ft_printf("arg1.len: %u\narg1.type: %u\n", arg1->len, arg1->type);
-	print_memory(arg1->arg, 4, 4, 1);
-	ft_printf("arg2.len: %u\narg2.type: %u\n", arg2->len, arg2->type);
-	print_memory(arg2->arg, 4, 4, 1);
-	while (i < REG_SIZE)
-	{
-		player->reg[reg_pos][i] = arg1->arg[i] & arg2->arg[i];
-		i++;
-	}
-	ft_printf("res en %u es: \n", reg_pos);
-	print_memory(player->reg[reg_pos], 4, 4, 1);
-	player->carry = (!*((int *)(player->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry
-}
+/* 	i = 0; */
+/* 	reg_pos = board[(player->pc + ((2 + arg1->len + arg2->len) % IDX_MOD)) % MEM_SIZE].mem - 1; */
+/* 	get_value(player, board, arg1); */
+/* 	get_value(player, board, arg2); */
+/* 	ft_printf("arg1.len: %u\narg1.type: %u\n", arg1->len, arg1->type); */
+/* 	print_memory(arg1->arg, 4, 4, 1); */
+/* 	ft_printf("arg2.len: %u\narg2.type: %u\n", arg2->len, arg2->type); */
+/* 	print_memory(arg2->arg, 4, 4, 1); */
+/* 	while (i < REG_SIZE) */
+/* 	{ */
+/* 		player->reg[reg_pos][i] = arg1->arg[i] & arg2->arg[i]; */
+/* 		i++; */
+/* 	} */
+/* 	ft_printf("res en %u es: \n", reg_pos); */
+/* 	print_memory(player->reg[reg_pos], 4, 4, 1); */
+/* 	player->carry = (!*((int *)(player->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry */
+/* } */
 
 static t_arg		get_arg(const unsigned char ocp, unsigned short pos, t_board *board, const unsigned char n_arg)
 {
@@ -149,17 +149,32 @@ static t_arg		get_arg(const unsigned char ocp, unsigned short pos, t_board *boar
 }
 
 
-void				core_and(t_player *player, t_op op, t_arena *arena)
+void				core_and(t_player *player, unsigned short *pc, t_arena *arena)
 {
-	unsigned short 	pos;
 	unsigned char	ocp;
 	t_arg			arg1;
 	t_arg			arg2;
+	unsigned char	reg_pos;
+	unsigned char	i;
 
-	pos = player->pc;
-	ocp = arena->board[(pos + 1) % MEM_SIZE].mem;//en pc + 1 esta ocp y en pc + 2 esta el primer argum
-	arg1 = get_arg(ocp, pos, arena->board, 0);
-	arg2 = get_arg(ocp, pos, arena->board, 1);
-	operate(player, &arg1, &arg2, arena->board);
-	player->pc = (player->pc + 1 + 1 + arg1.len + arg2.len + 1);//and + ocp + arg1 + arg2 + rg
+	i = 0;
+	ocp = arena->board[(*pc + 1) % MEM_SIZE].mem;//en pc + 1 esta ocp y en pc + 2 esta el primer argum
+	arg1 = get_arg(ocp, *pc, arena->board, 0);
+	arg2 = get_arg(ocp, *pc, arena->board, 1);
+	reg_pos = arena->board[(*pc + ((2 + arg1.len + arg2.len) % IDX_MOD)) % MEM_SIZE].mem - 1;
+	get_value(player, arena->board, &arg1, pc);
+	get_value(player, arena->board, &arg2, pc);
+	ft_printf("arg1.len: %u\narg1.type: %u\n", arg1.len, arg1.type);
+	print_memory(arg1.arg, 4, 4, 1);
+	ft_printf("arg2.len: %u\narg2.type: %u\n", arg2.len, arg2.type);
+	print_memory(arg2.arg, 4, 4, 1);
+	while (i < REG_SIZE)
+	{
+		player->reg[reg_pos][i] = arg1.arg[i] & arg2.arg[i];
+		i++;
+	}
+	ft_printf("res en %u es: \n", reg_pos);
+	print_memory(player->reg[reg_pos], 4, 4, 1);
+	player->carry = (!*((int *)(player->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry
+	*pc = (*pc + 1 + 1 + arg1.len + arg2.len + 1);//and + ocp + arg1 + arg2 + rg
 }

@@ -25,7 +25,7 @@ static int 	charge_short(int size, t_arena *arena, int pc_pos)
 	i = 0;
 	while(i < size)
 	{
-		param[size - 1 - i] = arena->board[pc_pos + i].mem;
+		param[size - 1 - i] = arena->board[(pc_pos + i) % MEM_SIZE].mem;
 		i++;
 	}
 	print_memory(param, size, size, 1);

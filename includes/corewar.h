@@ -45,7 +45,7 @@ typedef struct 		s_player
 	char			*prog;
 	char 			*comment;
 	int 			wait_cycles;
-	unsigned short	pc;
+	unsigned short	*pc;
 }					t_player;
 
 typedef struct		s_op
@@ -68,7 +68,7 @@ typedef struct		s_data
 	char 			palete[5][10];
 	t_op 			op[17];
 	unsigned int	nb_cycles;
-	void			(*func[16])(t_player *, t_op, t_arena *);
+	void			(*func[16])(t_player *, unsigned short *, t_arena *);
 }					t_data;
 
 /*
@@ -105,18 +105,13 @@ unsigned char		*get_mem_board(t_board *board, const unsigned int size);
 /*
 **------------------op_functions-----------------------------------
 */
-void				core_live(t_player *player, t_op op, t_arena *arena);
-void 				core_sti(t_player *player, t_op op, t_arena *arena);
-void				core_ld(t_player *player, t_op op, t_arena *arena);
-void				core_st(t_player *player, t_op op, t_arena *arena);
-void				core_add(t_player *player, t_op op, t_arena *arena);
-<<<<<<< HEAD
-void				core_and(t_player *player, t_op op, t_arena *arena);
-=======
-void				core_zjmp(t_player *player, t_op op, t_arena *arena);
-void				core_fork(t_player *player, t_op op, t_arena *arena);
-
-
->>>>>>> sti
+void				core_live(t_player *player, unsigned short *pc, t_arena *arena);
+void 				core_sti(t_player *player, unsigned short *pc, t_arena *arena);
+void				core_ld(t_player *player, unsigned short *pc, t_arena *arena);
+void				core_st(t_player *player, unsigned short *pc, t_arena *arena);
+void				core_add(t_player *player, unsigned short *pc, t_arena *arena);
+void				core_and(t_player *player, unsigned short *pc, t_arena *arena);
+void				core_zjmp(t_player *player, unsigned short *pc, t_arena *arena);
+void				core_fork(t_player *player, unsigned short *pc, t_arena *arena);
 
 #endif
