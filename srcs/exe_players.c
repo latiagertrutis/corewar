@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/13 05:34:46 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/15 16:12:01 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,25 @@ void 				exe_players(t_data *data)
 {
 	int i;
 	unsigned int j;
+	SDL_Event	event;
 
 	i = 0;
 	fill_r1(data);
 
 	print_board(data, data->arena->board);
-	while(i < 5000)
+	while (data->arena->Graph->running)
 	{
-		usleep(100000);
+		while (SDL_PollEvent(&event))
+		{
+			if (event.type == SDL_QUIT)
+				data->arena->Graph->running = SDL_FALSE;
+			else if (event.type == SDL_KEYDOWN)
+			{
+				if (event.key.keysym.sym == SDLK_ESCAPE)
+					data->arena->Graph->running = SDL_FALSE;
+			}
+		}
+//		usleep(100000);
 		j = 0;
 		while(j < data->n_players)
 		{
@@ -60,7 +71,7 @@ void 				exe_players(t_data *data)
 		data->nb_cycles = i;
 		write(1, "\x1b[H\x1b[2J", 7);
 		print_board(data, data->arena->board);
-
-
+		ft_pcs_to_screen(data->arena->Graph, data->players, data->n_players);
+		ft_board_to_screen(data->arena->Graph, data->arena->board);
 	}
 }

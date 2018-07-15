@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 20:48:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/14 14:54:04 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/15 07:25:30 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@
 int main(int ac, char **av)
 {
 	t_data		data;
-	SDL_Event	event;
 
 //	if (ac < 2 || ac > 5)
 //		put_usage();
-	data = (t_data){1, NULL, NULL, {"\033[0m", "\033[38;5;1m", "\033[38;5;2m",
+	data = (t_data){4, NULL, NULL, {"\033[0m", "\033[38;5;1m", "\033[38;5;2m",
 		"\033[38;5;3m", "\033[38;5;4m"}, {{0, 0, {0}, 0, 0, 0, 0, 0}},
 		0, 0, {0}};
 	data.flags = ft_set_flags(ac, av);
@@ -28,26 +27,11 @@ int main(int ac, char **av)
 		ft_error("malloc failed");
 	take_champions(&data, av);
 	ft_ini_interface(data.arena->Graph);
-	ft_printf("square mide %i x %i\n", data.arena->Graph->square->w, data.arena->Graph->square->h);
-//	ft_ini_board(data.arena->Graph, data.arena->board);
+	ft_ini_font(data.arena->Graph);
 	put_champs_to_arena(&data);
-	ft_ini_board(data.arena->Graph, data.arena->board);
-
-while (data.arena->Graph->running)
-	{
-		while (SDL_PollEvent(&event))
-		{
-			if (event.type == SDL_QUIT)
-				data.arena->Graph->running = SDL_FALSE;
-			else if (event.type == SDL_KEYDOWN)
-			{
-				if (event.key.keysym.sym == SDLK_ESCAPE)
-					data.arena->Graph->running = SDL_FALSE;
-			}
-		}
-	}
-
-//	exe_players(&data);
+	ft_board_to_screen(data.arena->Graph, data.arena->board);
+	
+	exe_players(&data);
 
 	ft_quit_graphics(data.arena->Graph);
 	free(data.arena);

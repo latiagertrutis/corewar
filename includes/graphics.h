@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 05:11:58 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/14 12:59:10 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/15 10:30:00 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #define SDL_MAIN_HANDLED
 #include "../SDL2_files/SDL2_srcs/include/SDL.h"
 #include "../SDL2_files/SDL2_TTF_srcs/SDL_ttf.h"
-#include "op.h"
-#include "../libft/includes/libft.h"
 
 #define MODE_SDL 1
 #define MODE_TTF 0
@@ -47,5 +45,5 @@ void		ft_ini_graphics(t_sdl **Graph, int flags);
 void		ft_quit_graphics(t_sdl *Graph);
 void		ft_SDL_error(char *str, int mode);
 void		ft_ini_interface(t_sdl *Graph);
-void		ft_ini_board(t_sdl *Graph, char board[MEM_SIZE]);
+void		ft_ini_font(t_sdl *Graph);
 #endif

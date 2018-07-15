@@ -13,14 +13,18 @@
 
 #define MODE_SDL 1
 #define MODE_TTF 0
-#define SCREEN_W 674
-#define SCREEN_H 286
+#define SCREEN_W 1024
+#define SCREEN_H 780
 #define SCREEN_SCALE 1.2
 #define SCREEN_NAME "Corewar"
 #define LEFT_BORDER 0.357
 #define BOTTOM_BORDER 0.033
 #define UPPER_BORDER 0.033
 #define RIGHT_BORDER 0.0180
+#define RED_MASK 0xFF000000
+#define GREEN_MASK 0x00FF0000
+#define BLUE_MASK 0x0000FF00
+#define ALPHA_MASK 0x000000FF
 
 typedef struct s_sdl {
 	SDL_bool running;
@@ -32,7 +36,12 @@ typedef struct s_sdl {
 		SDL_Renderer *Renderer;
 	} screen;
 	int			cuant_squares[2];
-	TTF_Font *font;
+	struct {
+		TTF_Font *font;
+		int		w;
+		int		h;
+	} font_info;
+	SDL_Surface *rack;
 	SDL_Rect *square;
 } t_sdl;
 
@@ -133,12 +142,11 @@ void				core_live(t_player *player, t_op op, t_arena *arena);
 */
 
 
-
-
 void		ft_ini_graphics(t_sdl **Graph, int flags);
 void		ft_quit_graphics(t_sdl *Graph);
 void		ft_SDL_error(char *str, int mode);
 void		ft_ini_interface(t_sdl *Graph);
-void		ft_ini_board(t_sdl *Graph, t_board board[MEM_SIZE]);
-void		ft_write_byte(int pos[2], char byte, SDL_Surface *surf, t_sdl *Graph);
+void		ft_ini_font(t_sdl *Graph);
+void		ft_board_to_screen(t_sdl *Graph, t_board board[MEM_SIZE]);
+void		ft_pcs_to_screen(t_sdl *Graph, t_player *player, int n_players);
 #endif
