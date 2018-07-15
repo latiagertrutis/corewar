@@ -7,6 +7,15 @@
 #include <fcntl.h>
 
 #define HEADER_SIZE 4 + PROG_NAME_LENGTH + 1 + 4 + 4
+#define MAX_ARG_LEN 4
+
+typedef struct		s_arg
+{
+	unsigned char	n_arg;
+	unsigned char	len;
+	unsigned char	type;
+	unsigned char	arg[MAX_ARG_LEN];
+}					t_arg;
 
 typedef struct 		s_board
 {

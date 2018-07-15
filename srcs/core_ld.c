@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 03:43:25 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/14 06:49:58 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/15 10:05:30 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void		load_indirect(t_player *player, t_board *board, const unsigned char
 	i = 0;
 	while (i < REG_SIZE)
 	{//accediendo mediante el anterior indirecto se copia en el registro lo apuntado
-		player->reg[reg_pos][i] = board[(i + player->pc + (*((unsigned short *)board_pos) % IDX_MOD)) % MEM_SIZE].mem;
+		player->reg[reg_pos][i] = board[(i + player->pc + (*(( short *)board_pos) % IDX_MOD)) % MEM_SIZE].mem;
 		i++;
 	}
 	player->pc = (player->pc + 1 + 1 + 1 + IND_SIZE) % MEM_SIZE;//ld + opc + reg + ind
