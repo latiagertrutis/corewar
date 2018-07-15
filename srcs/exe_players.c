@@ -29,8 +29,11 @@ static void			exe_pc(t_data *data, int j)
 	}
 	else
 	{
-		if (pos <= 3 || pos == 5)
-			data->players[j].wait_cycles += data->op[pos].mana;
+		if (pos <= 3 || || pos == 5 || pos == 10 || pos == 8)
+		{
+			
+			data->players[j].wait_cycles += data->op[pos].mana + 1; // +1 MATEO
+		}
 		else
 		{
 			data->players[j].pc = (data->players[j].pc + 1) % MEM_SIZE;
