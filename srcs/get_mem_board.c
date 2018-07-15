@@ -1,40 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_memory.c                                     :+:      :+:    :+:   */
+/*   get_mem_board.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/09 23:00:00 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/09 23:00:06 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/07/13 04:32:58 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/07/13 04:39:29 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	print_memory(const void *addr, size_t size, int line, int space)
+unsigned char	*get_mem_board(t_board *board, const unsigned int size)
 {
-	size_t			i;
-	int 			j;
-	unsigned char	*p;
-	char 			*hexa;
+	unsigned char	*buff;
+	unsigned int	i;
 
-	hexa = "0123456789abcdef";
-	p = (unsigned char *)addr;
+	if (!(buff = (unsigned char *)malloc(sizeof(unsigned char) * size)))
+		ft_error("malloc failed");
 	i = 0;
 	while (i < size)
 	{
-		j = 0;
-		while (j < line && i + j < size)
-		{
-			ft_putchar(hexa[*(p + i + j)/16]); //%16?
-			ft_putchar(hexa[*(p + i + j) % 16]);
-			if (space == 1 || j % space)
-				ft_putchar(' ');
-			j += 1;
-		}
-		ft_putchar('\n');
-		i += line;
+		buff[i] = board[i].mem;
+		i++;
 	}
-
+	return (buff);
 }

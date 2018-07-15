@@ -7,6 +7,7 @@
 #include <fcntl.h>
 
 #define HEADER_SIZE 4 + PROG_NAME_LENGTH + 1 + 4 + 4
+#define PC_BUFF 20
 
 typedef struct 		s_board
 {
@@ -33,7 +34,6 @@ typedef struct 		s_player
 	char 			*comment;
 	int 			wait_cycles;
 	unsigned short	pc;
-	
 }					t_player;
 
 typedef struct		s_op
@@ -87,6 +87,7 @@ void				print_board(t_data *data, t_board *board);
 void 				exe_players(t_data *data);
 void				check_live_count(t_player *players, int nb_players);
 void				fill_r1(t_data *data);
+unsigned char		*get_mem_board(t_board *board, const unsigned int size);
 
 
 /*
@@ -94,6 +95,11 @@ void				fill_r1(t_data *data);
 */
 void				core_live(t_player *player, t_op op, t_arena *arena);
 void 				core_sti(t_player *player, t_op op, t_arena *arena);
+void				core_ld(t_player *player, t_op op, t_arena *arena);
+void				core_st(t_player *player, t_op op, t_arena *arena);
+void				core_add(t_player *player, t_op op, t_arena *arena);
+void				core_zjmp(t_player *player, t_op op, t_arena *arena);
+void				core_fork(t_player *player, t_op op, t_arena *arena);
 
 
 

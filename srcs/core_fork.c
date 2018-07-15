@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core_zjmp.c                                        :+:      :+:    :+:   */
+/*   core_fork.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/15 05:25:36 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/15 05:25:37 by mzabalza         ###   ########.fr       */
+/*   Created: 2018/07/15 09:34:50 by mzabalza          #+#    #+#             */
+/*   Updated: 2018/07/15 09:34:53 by mzabalza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static 	int charge_short(int size, t_arena *arena, int pc_pos)
+static void	fork_player(t_player *player)
+{
+	
+}
+
+static int 	charge_short(int size, t_arena *arena, int pc_pos)
 {
 	int 	i;
 	char	param[size];
@@ -27,14 +32,12 @@ static 	int charge_short(int size, t_arena *arena, int pc_pos)
 	return (*((unsigned short *)param));
 }
 
-void	core_zjmp(t_player *player, t_op op, t_arena *arena)
+void		core_fork(t_player *player, t_op op, t_arena *arena)
 {
-	unsigned short index;
+	unsigned short new_pc;
 
-	player->carry = 1;
-	if (player->carry == 1)
-	{
-		index = charge_short(2, arena, player->pc + 1);
-		player->pc += ((short)index % IDX_MOD) % MEM_SIZE;
-	}
+	new_pc = charge_short(2, arena, player->pc + 1);
+	fork_player(player);
+
+
 }

@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/12 03:19:18 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/14 06:46:35 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,15 @@ static void			exe_pc(t_data *data, int j)
 	}
 	else
 	{
-		if (pos == 0 || pos == 10 || pos == 8)
-			data->players[j].wait_cycles += data->op[pos].mana; // +1 MATEO
+		if (pos <= 3 || pos == 10 || pos == 8)
+		{
+			
+			data->players[j].wait_cycles += data->op[pos].mana + 1; // +1 MATEO
+		}
 		else
-			data->players[j].pc++;
+		{
+			data->players[j].pc = (data->players[j].pc + 1) % MEM_SIZE;
+		}
 	}
 }
 
@@ -60,7 +65,5 @@ void 				exe_players(t_data *data)
 		data->nb_cycles = i;
 		write(1, "\x1b[H\x1b[2J", 7);
 		print_board(data, data->arena->board);
-
-
 	}
 }
