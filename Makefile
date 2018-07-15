@@ -34,7 +34,8 @@ FUNCS =	main.c \
 		exe_players.c \
 		core_live.c \
 		check_live_count.c \
-		fill_r1.c
+		fill_r1.c \
+		core_sti.c
 
 SRCS_DIR = srcs/
 

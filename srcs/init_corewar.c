@@ -15,6 +15,11 @@
 static void 	init_func(t_data *data)
 {
 	(data->func)[0] = core_live;
+	(data->func)[10] = core_sti; //Usar a la macro de la posicion!!!!
+	(data->func)[8] = core_live;
+
+
+
 }
 
 static void 	init_op(t_data *data)

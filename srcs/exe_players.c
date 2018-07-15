@@ -29,8 +29,8 @@ static void			exe_pc(t_data *data, int j)
 	}
 	else
 	{
-		if (pos == 0)
-			data->players[j].wait_cycles += data->op[pos].mana;
+		if (pos == 0 || pos == 10 || pos == 8)
+			data->players[j].wait_cycles += data->op[pos].mana; // +1 MATEO
 		else
 			data->players[j].pc++;
 	}

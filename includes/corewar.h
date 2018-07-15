@@ -93,7 +93,7 @@ void				fill_r1(t_data *data);
 **------------------op_functions-----------------------------------
 */
 void				core_live(t_player *player, t_op op, t_arena *arena);
-
+void 				core_sti(t_player *player, t_op op, t_arena *arena);
 
 
 
