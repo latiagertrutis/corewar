@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:49:00 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/12 01:42:04 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/16 16:35:43 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void 		take_champions(t_data *data, char **av)
 		ft_printf("{red}PROG:\n{eoc}");
 		data->players[i].prog = read_alloc_size(fd, data->players[i].prog_size);
 		print_memory(data->players[i].prog, data->players[i].prog_size, 16, 2);
+		data->players[i].lst_pc = -1;
 		i++;
 	}
 

@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 06:40:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/15 15:08:00 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/16 16:37:12 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void		draw_rack(int cuant_squares[2], t_sdl *Graph, int first_col)
 	k = cuant_squares[1];
 	i = cuant_squares[0];
 	j = -1;
-	while (++j < MEM_SIZE)
+	while (++j <= MEM_SIZE)
 	{
 		if (k && !i)
 		{
@@ -122,4 +122,7 @@ void				ft_ini_interface(t_sdl *Graph)
 	else
 		ini_big_rack(Graph);
 	SDL_RenderPresent(Graph->screen.Renderer);
+	Graph->screen.screen = SDL_GetWindowSurface(Graph->screen.window);
+	Graph->rack_square = SDL_CreateRGBSurface(0, Graph->square->w - 2,
+			Graph->square->h - 2, 32, RED_MASK, GREEN_MASK, BLUE_MASK, ALPHA_MASK);
 }

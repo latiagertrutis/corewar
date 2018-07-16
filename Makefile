@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/15 14:10:56 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/07/16 18:59:39 by jagarcia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -45,7 +45,8 @@ GRAPH = ft_ini_graphics.c \
 		ft_ini_interface.c \
 		ft_ini_font.c \
 		ft_board_to_screen.c \
-		ft_pcs_to_screen.c
+		ft_pcs_to_screen.c \
+		ft_write_byte.c
 
 SRCS_DIR = srcs/
 
