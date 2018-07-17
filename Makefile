@@ -35,6 +35,8 @@ FUNCS =	main.c \
 		check_live_count.c \
 		get_mem_board.c \
 		fill_r1.c \
+		# core_fork.c \
+		# core_zjmp.c \
 		# core_sti.c \
 		# core_ld.c \
 		# core_live.c \
@@ -42,7 +44,7 @@ FUNCS =	main.c \
 		# core_add.c \
 		# core_and.c \
 		# core_zjmp.c \
-		# core_fork.c
+
 
 SRCS_DIR = srcs/
 

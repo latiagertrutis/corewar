@@ -32,12 +32,10 @@ static int 	charge_short(int size, t_arena *arena, int pc_pos)
 	return (*((unsigned short *)param));
 }
 
-void		core_fork(t_player *player, t_op op, t_arena *arena)
+void		core_fork(t_player *player, t_pc *pc, t_arena *arena)
 {
 	unsigned short new_pc;
 
 	new_pc = charge_short(2, arena, player->pc + 1);
 	fork_player(player);
-
-
 }
