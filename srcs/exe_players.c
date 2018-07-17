@@ -25,7 +25,7 @@ static void			exe_pc(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	else if (pc->wait_cycles == 1)
 	{
 		pc->wait_cycles--;
-		data->func[op_nb](player, pc->pc, arena);
+		data->func[op_nb](player, pc, arena);
 	}
 	else
 	{
