@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/12 23:45:52 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/12 23:45:55 by mzabalza         ###   ########.fr       */
+/*   Updated: 2018/07/17 14:32:06 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,22 @@
 // meto el numero de jugador en el registro 1
 void			fill_r1(t_data *data)
 {
-	int i;
+	unsigned int 	i;
+	unsigned int 	j;
+	t_player		*player;
+	unsigned int	n_players;
 
 	i = 0;
-	while(i < data->n_players)
+	player = data->players;
+	n_players = data->n_players;
+	while(i < n_players)
 	{
-		ft_memcpy(data->players[i].reg[0], &(data->players[i].player_nb), 4);
+		j = 0;
+		while (j < player[i].nb_pc)
+		{
+			ft_memcpy(player[i].pc[j].reg[0], &(player[i].player_nb), sizeof(int));
+			j++;
+		}
 		i++;
 	}
 }

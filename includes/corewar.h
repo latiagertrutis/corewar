@@ -39,9 +39,7 @@ typedef struct 		s_pc
 
 typedef struct 		s_player
 {
-	char 			reg[REG_NUMBER][REG_SIZE];
 	unsigned int 	live_counter;
-	unsigned int	carry : 1;
 	char			*content;
 	char 			*name;
 	int				player_nb;

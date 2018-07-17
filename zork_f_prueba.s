@@ -1,7 +1,8 @@
 .name "zork"
 .comment "I'M ALIIIIVE"
 
-l2:	ld	%-8, r2
-	ld	%10, r8
-	and	r2, r8, r4
-	st	r4, 200
+l2:	st		r2, 200
+	st		r2, 200
+	fork	%:l2
+	ld		%10, r2
+	st		r2, 200

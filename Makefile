@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/14 09:02:38 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/07/17 11:51:20 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -37,8 +37,8 @@ FUNCS =	main.c \
 		fill_r1.c \
 		core_fork.c \
 		# core_zjmp.c \
-		# core_sti.c \
 		# core_ld.c \
+		# core_sti.c \
 		# core_live.c \
 		# core_st.c \
 		# core_add.c \
