@@ -21,7 +21,7 @@ static void 	init_func(t_data *data)
 	// (data->func)[2] = core_st;
 	// (data->func)[3] = core_add;
 	// (data->func)[5] = core_and;
-	// (data->func)[11] = core_fork;
+	(data->func)[11] = core_fork;
 	
 }
 

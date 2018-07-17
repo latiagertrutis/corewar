@@ -34,8 +34,16 @@ static int 	charge_short(int size, t_arena *arena, int pc_pos)
 
 void		core_fork(t_player *player, t_pc *pc, t_arena *arena)
 {
-	unsigned short new_pc;
+	unsigned int pc_i;
 
-	new_pc = charge_short(2, arena, player->pc + 1);
+	new_pc = charge_short(2, arena, ((pc->pc) + 1 % MEM_SIZE));
+	if (!(player->nb_pc % 20))
+	{
+		pc_i = (pc - player->pc);
+		player->pc = realloc_pc(player, player->pc, player->nb_pc);
+		pc = player->pc + i;
+	}
+	player->nb_pc++;
+	
 	fork_player(player);
 }

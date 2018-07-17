@@ -34,6 +34,7 @@ typedef struct 		s_pc
 	unsigned int	carry : 1;
 	unsigned short	pc;
 	size_t 			wait_cycles;
+	char 			reg[REG_NUMBER][REG_SIZE];
 }					t_pc;
 
 typedef struct 		s_player
