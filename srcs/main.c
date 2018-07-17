@@ -22,9 +22,9 @@ int main(int ac, char **av)
 	data = (t_data){ac - 1, NULL, NULL, {"\033[0m", "\033[38;5;1m", "\033[38;5;2m",
 	   		"\033[38;5;3m", "\033[38;5;4m"}, {{0, 0, {0}, 0, 0, 0, 0, 0}}, 0, {0}};
 	if (!init_corewar(&data))
-		ft_error("malloc failed");
+	ft_error("malloc failed");
 	take_champions(&data, av);
-//
+
 	put_champs_to_arena(&data);
 
 

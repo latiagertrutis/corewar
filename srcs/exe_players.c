@@ -12,39 +12,36 @@
 
 #include "corewar.h"
 
-static void			exe_pc(t_data *data, int j)
+static void			exe_pc(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 {
-	unsigned int pos;
+	unsigned char op_nb;
 
-	pos = (data->arena->board[data->players[j].pc].mem) - 1;
-	if (data->players[j].wait_cycles > 1)
+	op_nb = (arena->board[pc->pc % MEM_SIZE].mem) - 1;
+	if (pc->wait_cycles > 1)
 	{
-		data->players[j].wait_cycles--;
+		pc->wait_cycles--;
 		return ;
 	}
-	else if (data->players[j].wait_cycles == 1)
+	else if (pc->wait_cycles == 1)
 	{
-		data->players[j].wait_cycles--;
-		data->func[pos](data->players + j, data->op[pos], data->arena);
+		pc->wait_cycles--;
+		data->func[op_nb](player, pc->pc, arena);
 	}
 	else
 	{
-		if (pos <= 3 || || pos == 5 || pos == 10 || pos == 8)
-		{
-			
-			data->players[j].wait_cycles += data->op[pos].mana + 1; // +1 MATEO
-		}
+		// if (pos <= 3 || || pos == 5 || pos == 10 || pos == 8)
+		if (op_nb == 15)
+			pc->wait_cycles += (data->op[op_nb].mana) + 1;
 		else
-		{
-			data->players[j].pc = (data->players[j].pc + 1) % MEM_SIZE;
-		}
+			pc->pc = (pc->pc + 1) % MEM_SIZE;
 	}
 }
 
 void 				exe_players(t_data *data)
 {
-	int i;
+	unsigned int i;
 	unsigned int j;
+	unsigned int k;
 
 	i = 0;
 	fill_r1(data);
@@ -56,8 +53,12 @@ void 				exe_players(t_data *data)
 		j = 0;
 		while(j < data->n_players)
 		{
-			exe_pc(data, j);
-			j++;
+			k = 0;
+			while (k < data->players[j].nb_pc)
+			{
+				exe_pc((data->players) + j, (data->players[j].pc) + k, data->arena, data);
+				j++;
+			}
 		}
 		if (!(i % CYCLE_TO_DIE))
 			check_live_count(data->players, data->n_players);

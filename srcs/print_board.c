@@ -27,15 +27,21 @@ static void	print_player_status(t_player *players, t_data *data)
 	}
 }
 
-static void	print_pcs(t_data *data, size_t i, int j)
+static void	print_pcs(t_player *players, const unsigned int nb_players, size_t i, int j)
 {
-	unsigned int k;
+	unsigned int 	k;
+	unsigned int 	t;
 
 	k = 0;
-	while (k < data->n_players)
+	while (k < nb_players)
 	{
-		if (data->players[k].pc == (i + j))
-			ft_putstr("\033[48;5;2m");
+		t = 0;
+		while (t < players[k].nb_pc)
+		{
+			if (players[k].pc[t].pc == (i + j))
+				ft_putstr("\033[48;5;2m");
+			t++;
+		}
 		k++;
 	}
 }
@@ -54,7 +60,7 @@ void		print_board(t_data *data, t_board *board)
 		while (j < 64)
 		{
 			ft_putstr(data->palete[(int)board[i + j].id]);
-			print_pcs(data, i, j);
+			print_pcs(data->players, data->n_players, i, j);
 			ft_putchar(hexa[board[i + j].mem / 16]); //%16?
 			ft_putchar(hexa[board[i + j].mem % 16]);
 			ft_putstr("\033[0m ");

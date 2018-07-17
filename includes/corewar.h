@@ -18,9 +18,6 @@ typedef struct		s_arg
 	unsigned char	arg[MAX_ARG_LEN];
 }					t_arg;
 
-
-
-
 typedef struct 		s_board
 {
 	unsigned char 	mem;
@@ -31,6 +28,13 @@ typedef struct 		s_arena
 {
 	t_board			board[MEM_SIZE];
 }					t_arena;
+
+typedef struct 		s_pc
+{
+	unsigned int	carry : 1;
+	unsigned short	pc;
+	size_t 			wait_cycles;
+}					t_pc;
 
 typedef struct 		s_player
 {
@@ -44,9 +48,11 @@ typedef struct 		s_player
 	unsigned int	prog_size;
 	char			*prog;
 	char 			*comment;
-	int 			wait_cycles;
-	unsigned short	*pc;
+	unsigned int 	nb_pc;
+	t_pc 			*pc;
 }					t_player;
+
+//hay que hacer una estructura del PC que contenga minimo 1 pc(pos) 2 carry, wait_cycles
 
 typedef struct		s_op
 {
@@ -68,7 +74,7 @@ typedef struct		s_data
 	char 			palete[5][10];
 	t_op 			op[17];
 	unsigned int	nb_cycles;
-	void			(*func[16])(t_player *, unsigned short *, t_arena *);
+	void			(*func[16])(t_player *, unsigned short , t_arena *);
 }					t_data;
 
 /*
