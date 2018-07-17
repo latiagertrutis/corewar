@@ -105,18 +105,27 @@ void 				exe_players(t_data *data);
 void				check_live_count(t_player *players, int nb_players);
 void				fill_r1(t_data *data);
 unsigned char		*get_mem_board(t_board *board, const unsigned int size);
+unsigned char		get_size_arg(const unsigned char ocp, const unsigned char n_arg);
+t_arg				get_arg(const unsigned char ocp, unsigned short pos, t_board *board, const unsigned char n_arg);
+void				get_arg_value(t_board *board, t_arg *arg, t_pc *pc);
 
 
 /*
 **------------------op_functions-----------------------------------
 */
 void				core_live(t_player *player, t_pc *pc, t_arena *arena);
-void 				core_sti(t_player *player, t_pc *pc, t_arena *arena);
 void				core_ld(t_player *player, t_pc *pc, t_arena *arena);
 void				core_st(t_player *player, t_pc *pc, t_arena *arena);
 void				core_add(t_player *player, t_pc *pc, t_arena *arena);
+void				core_sub(t_player *player, t_pc *pc, t_arena *arena);
 void				core_and(t_player *player, t_pc *pc, t_arena *arena);
+void				core_or(t_player *player, t_pc *pc, t_arena *arena);
+void				core_xor(t_player *player, t_pc *pc, t_arena *arena);
 void				core_zjmp(t_player *player, t_pc *pc, t_arena *arena);
+void 				core_ldi(t_player *player, t_pc *pc, t_arena *arena);
+void 				core_sti(t_player *player, t_pc *pc, t_arena *arena);
 void				core_fork(t_player *player, t_pc *pc, t_arena *arena);
+void				core_lld(t_player *player, t_pc *pc, t_arena *arena);
+void				core_lldi(t_player *player, t_pc *pc, t_arena *arena);
 
 #endif
