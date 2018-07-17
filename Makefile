@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/17 11:51:20 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/07/17 15:04:55 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -35,12 +35,12 @@ FUNCS =	main.c \
 		check_live_count.c \
 		get_mem_board.c \
 		fill_r1.c \
+		core_st.c \
+		core_add.c \
+		core_and.c \
 		core_ld.c
 		# core_sti.c \
 		# core_live.c \
-		# core_st.c \
-		# core_add.c \
-		# core_and.c \
 		# core_zjmp.c \
 
 

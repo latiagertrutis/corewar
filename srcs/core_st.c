@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 23:23:06 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/17 12:36:49 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/17 15:17:08 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,27 @@ static void store_in_ram(t_player *player, t_board *board, unsigned char reg_pos
 	while (i < REG_SIZE)
 	{
 		board[(i + pc->pc + (*((unsigned short *)board_pos) % IDX_MOD)) % MEM_SIZE].mem =
-			player->reg[reg_pos][i];
+			pc->reg[reg_pos][i];
 		board[(i + pc->pc + (*((unsigned short *)board_pos) % IDX_MOD)) % MEM_SIZE].id =
 			player->id + 1;
 		i++;
 	}
 	pc->pc = (pc->pc + 1 + 1 + 1 + IND_SIZE) % MEM_SIZE;//ld + opc + reg1 + ind
-	pc->carry = (!*((int *)(player->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry
+	pc->carry = (!*((int *)(pc->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry
 }
 
-static void	store_in_reg(t_player *player, unsigned char reg_pos1, unsigned char reg_pos2, t_pc *pc)
+static void	store_in_reg(unsigned char reg_pos1, unsigned char reg_pos2, t_pc *pc)
 {
 	unsigned int	i;
 
 	i = 0;
 	while (i < REG_SIZE)
 	{
-		player->reg[reg_pos2][i] = player->reg[reg_pos1][i];
+		pc->reg[reg_pos2][i] = pc->reg[reg_pos1][i];
 		i++;
 	}
 	pc->pc = (pc->pc + 1 + 1 + 1 + 1) % MEM_SIZE;//ld + opc + reg1 + reg2
-	pc->carry = (!*((int *)(player->reg[reg_pos1]))) ? 0x1 : 0x0;//actualizar carry
+	pc->carry = (!*((int *)(pc->reg[reg_pos1]))) ? 0x1 : 0x0;//actualizar carry
 }
 
 void		core_st(t_player *player, t_pc *pc, t_arena *arena)
@@ -64,5 +64,7 @@ void		core_st(t_player *player, t_pc *pc, t_arena *arena)
 	if (ocp == 0x70 && (reg_pos1 = (arena->board[(pos + 2) % MEM_SIZE].mem - 1)) < REG_NUMBER)
 		store_in_ram(player, arena->board, reg_pos1, pc);
 	else if (ocp == 0x50 && (reg_pos1 = (arena->board[(pos + 2) % MEM_SIZE].mem - 1)) < REG_NUMBER && (reg_pos2 = (arena->board[(pos + 3) % MEM_SIZE].mem - 1)) < REG_NUMBER)
-		store_in_reg(player, reg_pos1, reg_pos2, pc);
+		store_in_reg(reg_pos1, reg_pos2, pc);
+	else
+		pc->pc = (pc->pc + 1) % MEM_SIZE;
 }
