@@ -105,6 +105,8 @@ void 				exe_players(t_data *data);
 void				check_live_count(t_player *players, int nb_players);
 void				fill_r1(t_data *data);
 unsigned char		*get_mem_board(t_board *board, const unsigned int size);
+t_pc				*realloc_pc(t_player *player, t_pc *pc, const unsigned int nb_pc);
+
 
 
 /*
@@ -118,5 +120,7 @@ void				core_add(t_player *player, t_pc *pc, t_arena *arena);
 void				core_and(t_player *player, t_pc *pc, t_arena *arena);
 void				core_zjmp(t_player *player, t_pc *pc, t_arena *arena);
 void				core_fork(t_player *player, t_pc *pc, t_arena *arena);
+void				core_lfork(t_player *player, t_pc *pc, t_arena *arena);
+
 
 #endif

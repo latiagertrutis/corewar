@@ -24,13 +24,8 @@ int main(int ac, char **av)
 	if (!init_corewar(&data))
 	ft_error("malloc failed");
 	take_champions(&data, av);
-
 	put_champs_to_arena(&data);
-
-
 	exe_players(&data);
-
-	
 	free(data.arena);
 	free_players(data.players, data.n_players);
 	return (0);

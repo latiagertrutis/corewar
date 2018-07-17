@@ -16,13 +16,14 @@ static void 	init_func(t_data *data)
 {
 	// (data->func)[0] = core_live;
 	// (data->func)[10] = core_sti; //Usar a la macro de la posicion!!!!
-	// (data->func)[8] = core_zjmp;
+	(data->func)[8] = core_zjmp;
 	// (data->func)[1] = core_ld;
 	// (data->func)[2] = core_st;
 	// (data->func)[3] = core_add;
 	// (data->func)[5] = core_and;
 	(data->func)[11] = core_fork;
-	
+	(data->func)[14] = core_lfork;
+	(data->func)[15] = core_aff;
 }
 
 static void 	init_op(t_data *data)

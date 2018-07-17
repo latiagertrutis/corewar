@@ -30,7 +30,7 @@ static void			exe_pc(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	else
 	{
 		// if (pos <= 3 || || pos == 5 || pos == 10 || pos == 8)
-		if (op_nb == 11)
+		if (op_nb == 11 || op_nb == 8 || op_nb == 14 || op_nb == 15)
 			pc->wait_cycles += (data->op[op_nb].mana) + 1;
 		else
 			pc->pc = (pc->pc + 1) % MEM_SIZE;
@@ -57,14 +57,21 @@ void 				exe_players(t_data *data)
 			while (k < data->players[j].nb_pc)
 			{
 				exe_pc((data->players) + j, (data->players[j].pc) + k, data->arena, data);
-				j++;
+				ft_putnbr(data->players[j].pc[0].pc);
+				ft_putchar(' ');
+				ft_putnbr(data->players[j].pc[1].pc);
+				ft_putchar(' ');
+				ft_putnbr(data->players[j].pc[2].pc);
+				ft_putchar('\n');
+				k++;
 			}
+			j++;
 		}
 		if (!(i % CYCLE_TO_DIE))
 			check_live_count(data->players, data->n_players);
 		i++;
 		data->nb_cycles = i;
 		write(1, "\x1b[H\x1b[2J", 7);
-		print_board(data, data->arena->board);
+		// print_board(data, data->arena->board);
 	}
 }

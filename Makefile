@@ -35,8 +35,11 @@ FUNCS =	main.c \
 		check_live_count.c \
 		get_mem_board.c \
 		fill_r1.c \
+		realloc_pc.c \
 		core_fork.c \
-		# core_zjmp.c \
+		core_zjmp.c \
+		core_lfork.c \
+		core_aff.c
 		# core_ld.c \
 		# core_sti.c \
 		# core_live.c \

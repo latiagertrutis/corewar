@@ -18,7 +18,7 @@ t_pc	*realloc_pc(t_player *player, t_pc *pc, const unsigned int nb_pc)
 
 	if (!(new_pc = (t_pc *)malloc(sizeof(t_pc) * (nb_pc + 20))))
 		ft_error("malloc failed");
-	ft_memcpy(new_pc, pc, nb_pc + 20);
+	ft_memcpy(new_pc, pc, sizeof(t_pc) * nb_pc);
 	free(pc);
 	return (new_pc);
 }

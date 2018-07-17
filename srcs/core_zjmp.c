@@ -27,14 +27,14 @@ static 	int charge_short(int size, t_arena *arena, int pc_pos)
 	return (*((unsigned short *)param));
 }
 
-void	core_zjmp(t_player *player, t_op op, t_arena *arena)
+void	core_zjmp(t_player *player, t_pc *pc, t_arena *arena)
 {
 	unsigned short index;
 
-	player->carry = 1;
-	if (player->carry == 1)
+	// pc->carry = 1;
+	if (pc->carry == 1)
 	{
-		index = charge_short(2, arena, player->pc + 1);
-		player->pc += ((short)index % IDX_MOD) % MEM_SIZE;
+		index = charge_short(2, arena,  ((pc->pc) + 1 % MEM_SIZE));
+		pc->pc += ((short)index % IDX_MOD) % MEM_SIZE;
 	}
 }
