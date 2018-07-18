@@ -35,7 +35,8 @@ typedef struct		s_arg
 #define GREEN_MASK 0x00FF0000
 #define BLUE_MASK 0x0000FF00
 #define ALPHA_MASK 0x000000FF
-
+#define BACK_COLOR 28, 28, 21,
+#define FIELD_COLOR 61, 61, 51,
 typedef struct s_sdl {
 	SDL_bool running;
 	struct {
@@ -183,7 +184,7 @@ void		ft_quit_graphics(t_sdl *Graph);
 void		ft_SDL_error(char *str, int mode);
 void		ft_ini_interface(t_sdl *Graph);
 void		ft_ini_font(t_sdl *Graph);
-void		ft_board_to_screen(t_sdl *Graph, t_arena *arena, int first_time);
+void		ft_board_to_screen(t_sdl *Graph, t_arena *arena);
 void		ft_pcs_to_screen(t_sdl *Graph, t_player *player, int n_players, t_board board[MEM_SIZE]);
 void		ft_write_byte(int pos, t_board byte, t_sdl *Graph);
 #endif

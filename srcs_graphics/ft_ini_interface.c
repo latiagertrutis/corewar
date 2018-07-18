@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 06:40:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/17 09:19:50 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/18 09:16:52 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@ static void		draw_rack(int cuant_squares[2], t_sdl *Graph, int first_col)
 	int j;
 	int	k;
 
-	if (SDL_SetRenderDrawColor(Graph->screen.Renderer,28, 28, 21,
-			SDL_ALPHA_OPAQUE))
-		ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
 	Graph->square->x = Graph->screen.w * RIGHT_BORDER;
 	Graph->square->y = Graph->screen.h * UPPER_BORDER;
 	k = cuant_squares[1];
@@ -52,10 +49,7 @@ static void		draw_rack(int cuant_squares[2], t_sdl *Graph, int first_col)
 		Graph->square->x += Graph->square->w - 1;
 		i--;
 	}
-//	if (SDL_SetRenderDrawColor(Graph->screen.Renderer, 0, 0, 0,
-//		SDL_ALPHA_OPAQUE))
-//	ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
-	SDL_RenderPresent(Graph->screen.Renderer);
+//	SDL_RenderPresent(Graph->screen.Renderer);
 }
 
 static void		ini_big_rack(t_sdl *Graph)
@@ -104,30 +98,40 @@ static void				ini_rack(t_sdl *Graph)
 
 void				ft_ini_interface(t_sdl *Graph)
 {
-	SDL_Surface *surf;
-	SDL_Rect border[4];
-	SDL_Texture *tex_border;
+//	SDL_Surface *surf;
+//	SDL_Rect border[4];
+//	SDL_Texture *tex_border;
 
-//	if (!(surf = SDL_GetWindowSurface(Graph->screen.window)))
-//		ft_SDL_error("SDL_GetWindowSurface", MODE_SDL);
-	if (!(surf = SDL_CreateRGBSurface(0, Graph->screen.w, Graph->screen.h, 32, RED_MASK, GREEN_MASK, BLUE_MASK, ALPHA_MASK)))
-		ft_SDL_error("SDL_CreateRGBSurface", MODE_SDL);
-	ini_borders(border, Graph, surf);
-	if (!(tex_border = SDL_CreateTextureFromSurface(Graph->screen.Renderer, surf)))
-		ft_SDL_error("SDL_CreateTextureFromSurface", MODE_SDL);
-	if (SDL_RenderCopy(Graph->screen.Renderer, tex_border, NULL, NULL))
-		ft_SDL_error("SDL_RenderCopy", MODE_SDL);
-	SDL_FreeSurface(surf);
-	SDL_DestroyTexture(tex_border);
+//	if (!(surf = SDL_CreateRGBSurface(0, Graph->screen.w, Graph->screen.h, 32, RED_MASK, GREEN_MASK, BLUE_MASK, ALPHA_MASK)))
+//		ft_SDL_error("SDL_CreateRGBSurface", MODE_SDL);
+//	ini_borders(border, Graph, surf);
+//	if (!(tex_border = SDL_CreateTextureFromSurface(Graph->screen.Renderer, surf)))
+//		ft_SDL_error("SDL_CreateTextureFromSurface", MODE_SDL);
+//	if (SDL_RenderCopy(Graph->screen.Renderer, tex_border, NULL, NULL))
+//		ft_SDL_error("SDL_RenderCopy", MODE_SDL);
+//	SDL_FreeSurface(surf);
+//	SDL_DestroyTexture(tex_border);
+	if (SDL_SetRenderDrawColor(Graph->screen.Renderer, FIELD_COLOR
+			SDL_ALPHA_OPAQUE))
+		ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
+	SDL_RenderFillRect(Graph->screen.Renderer, &(SDL_Rect)
+	{Graph->screen.w * RIGHT_BORDER,
+	Graph->screen.h * UPPER_BORDER,
+	Graph->screen.w - (Graph->screen.w * RIGHT_BORDER) -
+			(Graph->screen.w * LEFT_BORDER),
+	Graph->screen.h - (Graph->screen.h * UPPER_BORDER) -
+			Graph->screen.h * BOTTOM_BORDER});
+	if (SDL_SetRenderDrawColor(Graph->screen.Renderer, BACK_COLOR
+			SDL_ALPHA_OPAQUE))
+	ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
 	if (MEM_SIZE <= 4096)
 		ini_rack(Graph);
 	else
 		ini_big_rack(Graph);
-	SDL_RenderPresent(Graph->screen.Renderer);
+//	SDL_RenderPresent(Graph->screen.Renderer);
 	if (!(Graph->screen.screen = SDL_CreateRGBSurface(0, Graph->screen.w, Graph->screen.h, 32, RED_MASK, GREEN_MASK, BLUE_MASK, ALPHA_MASK)))
 		ft_SDL_error("SDL_CreateRGBSurface", MODE_SDL);
 	SDL_SetColorKey(Graph->screen.screen, SDL_FALSE, 0);
-//	Graph->screen.screen = SDL_GetWindowSurface(Graph->screen.window);
 	Graph->rack_square = SDL_CreateRGBSurface(0, Graph->square->w - 2,
 			Graph->square->h - 2, 32, RED_MASK, GREEN_MASK, BLUE_MASK, ALPHA_MASK);
 }

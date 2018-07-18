@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/18 08:41:11 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/18 09:50:05 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,21 @@ static void			exe_pc(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 		else
 			pc->pc = (pc->pc + 1) % MEM_SIZE;
 	}
+}
+
+static void			set_back_to_front(t_sdl *Graph)
+{
+	SDL_Texture *texture;
+
+	if (SDL_SetRenderDrawColor(Graph->screen.Renderer, BACK_COLOR
+		SDL_ALPHA_OPAQUE))
+	ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
+	SDL_RenderClear(Graph->screen.Renderer);
+	if (!(texture = SDL_CreateTextureFromSurface(Graph->screen.Renderer, Graph->screen.screen)))
+		ft_SDL_error("SDL_CreateTextureFromSurface", MODE_SDL);
+//	SDL_RenderCopy(Graph->screen.Renderer, texture, NULL, NULL);
+	SDL_DestroyTexture(texture);
+	SDL_RenderPresent(Graph->screen.Renderer);
 }
 
 void 				exe_players(t_data *data)
@@ -67,7 +82,7 @@ void 				exe_players(t_data *data)
 			k = 0;
 			while (k < data->players[j].nb_pc)
 			{
-				exe_pc((data->players) + j, (data->players[j].pc) + k, data->arena, data);
+//				exe_pc((data->players) + j, (data->players[j].pc) + k, data->arena, data);
 				k++;
 			}
 			j++;
@@ -78,8 +93,9 @@ void 				exe_players(t_data *data)
 		data->nb_cycles = i;
 //		write(1, "\x1b[H\x1b[2J", 7);
 //		print_board(data, data->arena->board);
-		ft_board_to_screen(data->arena->Graph, data->arena, 0);
+		ft_ini_interface(data->arena->Graph);
+		ft_board_to_screen(data->arena->Graph, data->arena);
 		ft_pcs_to_screen(data->arena->Graph, data->players, data->n_players, data->arena->board);
-		SDL_RenderPresent(data->arena->Graph->screen.Renderer);
+		set_back_to_front(data->arena->Graph);
 	}
 }

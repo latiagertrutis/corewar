@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 07:37:31 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/17 09:47:27 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/18 09:47:56 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,44 +32,25 @@ static SDL_Color	take_color_pc(int id)
 void	ft_pcs_to_screen(t_sdl *Graph, t_player *players, int n_players, t_board board[MEM_SIZE])
 {
 	int i;
+	unsigned int j;
 	SDL_Color color;
-	SDL_Surface *screen;
 	SDL_Rect	pc;
-	SDL_Texture *text;
 	
 
 	i = 0;
-	if (!(screen = SDL_CreateRGBSurface(0, Graph->screen.w, Graph->screen.h, 32, RED_MASK, GREEN_MASK, BLUE_MASK, ALPHA_MASK)))
-		ft_SDL_error("SDL_CreateRGBSurface", MODE_SDL);
-//	SDL_SetColorKey(screen, SDL_FALSE, 0x3d3d33);
-//	screen = Graph->screen.screen;
 	while (i < n_players)
 	{
-		if (!players[i].wait_cycles)
+		j = 0;
+		color = take_color_pc(players[i].id);
+		if (SDL_SetRenderDrawColor(Graph->screen.Renderer, color.r, color.g, color.b , SDL_ALPHA_OPAQUE))
+		ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
+		while (j < players[i].nb_pc)
 		{
-			if (players[i].lst2_pc >= 0)
-				ft_write_byte(players[i].lst2_pc, board[players[i].lst2_pc], Graph);
-			players[i].lst2_pc = players[i].lst_pc;
-			players[i].lst_pc = players[i].pc;
-			color = take_color_pc(players[i].id);
-			SDL_SetRenderDrawColor(Graph->screen.Renderer, color.r, color.g,
-				color.b, color.a);
-			pc = (SDL_Rect){Graph->screen.w * RIGHT_BORDER + (Graph->square->w - 1) * (players[i].pc % Graph->cuant_squares[0]) + 1, Graph->screen.h * UPPER_BORDER + (Graph->square->h - 1) * (players[i].pc / Graph->cuant_squares[1]) + 1, Graph->square->w - 2, Graph->square->h - 2};
-			SDL_FillRect(screen, &pc, SDL_MapRGBA(screen->format, color.r, color.g, color.b, color.a));
-//			players[i].lst2_pc = players[i].lst_pc;
-//			players[i].lst_pc = players[i].pc;
-			if (players[i].pc == 64 * 50)
-				exit(1);
+			ft_printf("Jugador %i de %i, pc %i de %i en posicion %i\n", i, n_players, j, players[i].nb_pc, players[i].pc[j].pc);
+			pc = (SDL_Rect){Graph->screen.w * RIGHT_BORDER + (Graph->square->w - 1) * (players[i].pc[j].pc % Graph->cuant_squares[0]) + 1, Graph->screen.h * UPPER_BORDER + (Graph->square->h - 1) * (players[i].pc[j].pc / Graph->cuant_squares[1]) + 1, Graph->square->w - 2, Graph->square->h - 2};
+			SDL_RenderFillRect(Graph->screen.Renderer, &pc);
+			j++;
 		}
 		i++;
 	}
-	text = SDL_CreateTextureFromSurface(Graph->screen.Renderer, screen);
-	SDL_RenderCopy(Graph->screen.Renderer, text, NULL, NULL);
-	SDL_FreeSurface(screen);
-	SDL_DestroyTexture(text);
-//	SDL_RenderPresent(Graph->screen.Renderer);
-//	SDL_RenderPresent(Graph->screen.Renderer);
-//	usleep(100000000);
-//	exit(1);
-//	SDL_UpdateWindowSurface(Graph->screen.window);
 }

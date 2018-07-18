@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/18 08:43:29 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/07/18 08:49:50 by jagarcia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -40,11 +40,11 @@ FUNCS =	main.c \
 		fill_r1.c \
 		core_st.c \
 		core_add.c \
-		core_and.c \
-		core_ld.c
-		# core_sti.c \
-		# core_live.c \
-		# core_zjmp.c \
+		core_ld.c \
+		core_and.c 
+#		core_sti.c \
+#		core_live.c \
+#		core_zjmp.c \
 
 GRAPH = ft_ini_graphics.c \
 		ft_quit_graphics.c \

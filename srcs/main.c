@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 20:48:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/18 08:39:43 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/18 09:39:20 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,11 @@ int main(int ac, char **av)
 	if (!init_corewar(&data))
 	ft_error("malloc failed");
 	take_champions(&data, av);
+	ft_putstr("HOLA CARACOLA");
+	put_champs_to_arena(&data);
 	ft_ini_interface(data.arena->Graph);
 	ft_ini_font(data.arena->Graph);
-	put_champs_to_arena(&data);
-	ft_board_to_screen(data.arena->Graph, data.arena, 1);
-	SDL_RenderPresent(data.arena->Graph->screen.Renderer);
-	ft_ini_interface(data.arena->Graph);
-	ft_board_to_screen(data.arena->Graph, data.arena, 1);
+	ft_board_to_screen(data.arena->Graph, data.arena);
 	SDL_RenderPresent(data.arena->Graph->screen.Renderer);
 	exe_players(&data);
 

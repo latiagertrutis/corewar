@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 07:09:33 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/17 17:27:05 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/18 08:50:04 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,16 +102,16 @@ void				core_and(t_player *player, t_pc *pc, t_arena *arena)
 
 	i = 0;
 	ocp = arena->board[(pc->pc + 1) % MEM_SIZE].mem;//en pc + 1 esta ocp y en pc + 2 esta el primer argum
-	arg1 = get_arg(ocp, pc->pc, arena->board, 0);
-	arg2 = get_arg(ocp, pc->pc, arena->board, 1);
+//	arg1 = get_arg(ocp, pc->pc, arena->board, 0);
+//	arg2 = get_arg(ocp, pc->pc, arena->board, 1);
 	if (!arg1.len || !arg2.len)
 	{
 		pc->pc = (pc->pc + 1) % MEM_SIZE;
 		return ;
 	}
 	reg_pos = arena->board[(pc->pc + ((2 + arg1.len + arg2.len) % IDX_MOD)) % MEM_SIZE].mem - 1;
-	get_arg_value(arena->board, &arg1, pc);
-	get_arg_value(arena->board, &arg2, pc);
+//	get_arg_value(arena->board, &arg1, pc);
+//	get_arg_value(arena->board, &arg2, pc);
 	ft_printf("arg1.len: %u\narg1.type: %u\n", arg1.len, arg1.type);
 	print_memory(arg1.arg, 4, 4, 1);
 	ft_printf("arg2.len: %u\narg2.type: %u\n", arg2.len, arg2.type);
