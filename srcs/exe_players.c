@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/16 19:02:25 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/17 09:35:01 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,7 @@ void 				exe_players(t_data *data)
 		print_board(data, data->arena->board);
 		ft_board_to_screen(data->arena->Graph, data->arena, 0);
 		ft_pcs_to_screen(data->arena->Graph, data->players, data->n_players, data->arena->board);
+		SDL_RenderPresent(data->arena->Graph->screen.Renderer);
+
 	}
 }

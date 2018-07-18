@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 20:48:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/16 19:02:21 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/17 09:33:21 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ int main(int ac, char **av)
 	ft_ini_font(data.arena->Graph);
 	put_champs_to_arena(&data);
 	ft_board_to_screen(data.arena->Graph, data.arena, 1);
-	
+	SDL_RenderPresent(data.arena->Graph->screen.Renderer);
+	ft_ini_interface(data.arena->Graph);
+	ft_board_to_screen(data.arena->Graph, data.arena, 1);
+	SDL_RenderPresent(data.arena->Graph->screen.Renderer);
 	exe_players(&data);
 
 	ft_quit_graphics(data.arena->Graph);

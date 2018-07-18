@@ -75,6 +75,7 @@ typedef struct 		s_player
 	int 			wait_cycles;
 	unsigned short	pc;
 	unsigned short	lst_pc;
+	unsigned short	lst2_pc;
 	
 }					t_player;
 
