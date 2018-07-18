@@ -12,8 +12,6 @@
 
 #include "corewar.h"
 
-#include <unistd.h>
-
 void	print_memory(const void *addr, size_t size, int line, int space)
 {
 	size_t			i;

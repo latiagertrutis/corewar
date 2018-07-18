@@ -17,7 +17,7 @@ static void		fill_region(const t_data *data, const unsigned int i, const unsigne
 	unsigned int j;
 
 	j = 0;
-	data->players[i].pc = j + i * inc;
+	data->players[i].pc->pc = j + i * inc;
 	while (j < data->players[i].prog_size)
 	{
 		data->arena->board[j + i * inc] = (t_board){data->players[i].prog[j], data->players[i].id + 1};

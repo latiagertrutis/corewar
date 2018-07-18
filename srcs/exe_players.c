@@ -6,46 +6,48 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/17 09:35:01 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/18 08:41:11 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void			exe_pc(t_data *data, int j)
+static void			exe_pc(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 {
-	unsigned int pos;
+	unsigned char op_nb;
 
-	pos = (data->arena->board[data->players[j].pc].mem) - 1;
-	if (data->players[j].wait_cycles > 1)
+	op_nb = (arena->board[pc->pc % MEM_SIZE].mem) - 1;
+	if (pc->wait_cycles > 1)
 	{
-		data->players[j].wait_cycles--;
+		pc->wait_cycles--;
 		return ;
 	}
-	else if (data->players[j].wait_cycles == 1)
+	else if (pc->wait_cycles == 1)
 	{
-		data->players[j].wait_cycles--;
-		data->func[pos](data->players + j, data->op[pos], data->arena);
+		pc->wait_cycles--;
+		data->func[op_nb](player, pc, arena);
 	}
 	else
 	{
-		if (pos == 0)
-			data->players[j].wait_cycles += data->op[pos].mana;
+		// if (pos <= 3 || || pos == 5 || pos == 10 || pos == 8)
+		if (op_nb < 15)
+			pc->wait_cycles += (data->op[op_nb].mana) + 1;
 		else
-			data->players[j].pc++;
+			pc->pc = (pc->pc + 1) % MEM_SIZE;
 	}
 }
 
 void 				exe_players(t_data *data)
 {
-	int i;
+	unsigned int i;
 	unsigned int j;
 	SDL_Event	event;
+	unsigned int k;
 
 	i = 0;
 	fill_r1(data);
 
-	print_board(data, data->arena->board);
+//	print_board(data, data->arena->board);
 	while (data->arena->Graph->running)
 	{
 		while (SDL_PollEvent(&event))
@@ -62,18 +64,22 @@ void 				exe_players(t_data *data)
 		j = 0;
 		while(j < data->n_players)
 		{
-			exe_pc(data, j);
+			k = 0;
+			while (k < data->players[j].nb_pc)
+			{
+				exe_pc((data->players) + j, (data->players[j].pc) + k, data->arena, data);
+				k++;
+			}
 			j++;
 		}
 		if (!(i % CYCLE_TO_DIE))
 			check_live_count(data->players, data->n_players);
 		i++;
 		data->nb_cycles = i;
-		write(1, "\x1b[H\x1b[2J", 7);
-		print_board(data, data->arena->board);
+//		write(1, "\x1b[H\x1b[2J", 7);
+//		print_board(data, data->arena->board);
 		ft_board_to_screen(data->arena->Graph, data->arena, 0);
 		ft_pcs_to_screen(data->arena->Graph, data->players, data->n_players, data->arena->board);
 		SDL_RenderPresent(data->arena->Graph->screen.Renderer);
-
 	}
 }

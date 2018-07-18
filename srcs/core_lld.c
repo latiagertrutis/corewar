@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core_ld.c                                          :+:      :+:    :+:   */
+/*   core_lld.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/13 03:43:25 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/17 15:32:43 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/07/17 17:53:33 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/07/17 17:56:16 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-/*
-** ocp =  11   11   11      00
-**       1arg 2arg 3arg   no susa
-*/
-
-/*
-** POSSIBLE CAST TO GENERIC
-*/
 
 static void		load_direct(t_board *board, const unsigned char reg_pos, t_pc *pc)
 {
@@ -53,14 +44,14 @@ static void		load_indirect(t_board *board, const unsigned char reg_pos, t_pc *pc
 	i = 0;
 	while (i < REG_SIZE)
 	{//accediendo mediante el anterior indirecto se copia en el registro lo apuntado
-		pc->reg[reg_pos][i] = board[(i + pc->pc + (*(( short *)board_pos) % IDX_MOD)) % MEM_SIZE].mem;
+		pc->reg[reg_pos][i] = board[(i + pc->pc + *(( short *)board_pos)) % MEM_SIZE].mem;
 		i++;
 	}
 	pc->pc = (pc->pc + 1 + 1 + 1 + IND_SIZE) % MEM_SIZE;//ld + opc + reg + ind
 	pc->carry = (!*((int *)(pc->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry
 }
 
-void			core_ld(t_player *player, t_pc *pc, t_arena *arena)
+void			core_lld(t_player *player, t_pc *pc, t_arena *arena)
 {
 	unsigned short 	pos;
 	unsigned char	ocp;

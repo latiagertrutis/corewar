@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/17 08:51:15 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/07/18 08:43:29 by jagarcia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -34,10 +34,17 @@ FUNCS =	main.c \
 		read_alloc_size.c \
 		print_board.c \
 		exe_players.c \
-		core_live.c \
 		check_live_count.c \
+		flags.c \
+		get_mem_board.c \
 		fill_r1.c \
-		flags.c
+		core_st.c \
+		core_add.c \
+		core_and.c \
+		core_ld.c
+		# core_sti.c \
+		# core_live.c \
+		# core_zjmp.c \
 
 GRAPH = ft_ini_graphics.c \
 		ft_quit_graphics.c \

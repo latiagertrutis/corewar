@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_opc.c                                          :+:      :+:    :+:   */
+/*   get_mem_board.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/13 03:52:23 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/13 03:55:32 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/07/13 04:32:58 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/07/13 04:39:29 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int		get_opc(t_board *board)
+unsigned char	*get_mem_board(t_board *board, const unsigned int size)
 {
-	char	opc[4];
+	unsigned char	*buff;
+	unsigned int	i;
 
-	opc[0] = board[0].mem;
-	opc[1] = board[1].mem;
-	opc[2] = board[2].mem;
-	opc[3] = board[3].mem;
-	return(*((int *)opc));
+	if (!(buff = (unsigned char *)malloc(sizeof(unsigned char) * size)))
+		ft_error("malloc failed");
+	i = 0;
+	while (i < size)
+	{
+		buff[i] = board[i].mem;
+		i++;
+	}
+	return (buff);
 }

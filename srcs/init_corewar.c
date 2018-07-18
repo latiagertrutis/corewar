@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/01 00:34:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/16 18:57:11 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/18 08:40:12 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,15 @@
 
 static void 	init_func(t_data *data)
 {
-	(data->func)[0] = core_live;
+	// (data->func)[0] = core_live;
+	// (data->func)[10] = core_sti; //Usar a la macro de la posicion!!!!
+	// (data->func)[8] = core_zjmp;
+	(data->func)[1] = core_ld;
+	(data->func)[2] = core_st;
+	(data->func)[3] = core_add;
+	(data->func)[5] = core_and;
+	// (data->func)[11] = core_fork;
+	
 }
 
 static void 	init_op(t_data *data)
@@ -54,7 +62,10 @@ static int init_players(t_data *data)
 	i = 0;
 	while (i < data->n_players)
 	{
-		data->players[i] = (t_player){{0}, 0, 0, NULL, NULL,  i + 1, i + 1, 0, NULL, NULL, 0, 0};
+		data->players[i] = (t_player){0, NULL, NULL,  i + 1, i + 1, 0, NULL, NULL, 1, NULL};
+		if (!(data->players[i].pc = (t_pc *)malloc(sizeof(t_pc) * PC_BUFF)))
+			ft_error("malloc failed");
+		data->players[i].pc[0] = (t_pc){0, 0, 0, {{0}}};
 		i++;
 	}
 	return (1);

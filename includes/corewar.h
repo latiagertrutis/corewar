@@ -10,6 +10,16 @@
 #include <math.h>
 
 #define HEADER_SIZE 4 + PROG_NAME_LENGTH + 1 + 4 + 4
+#define PC_BUFF 20
+#define MAX_ARG_LEN 4
+
+typedef struct		s_arg
+{
+	unsigned char	n_arg;
+	unsigned char	len;
+	unsigned char	type;
+	unsigned char	arg[MAX_ARG_LEN];
+}					t_arg;
 
 #define MODE_SDL 1
 #define MODE_TTF 0
@@ -60,11 +70,17 @@ typedef struct 		s_arena
 	t_sdl			*Graph;
 }					t_arena;
 
+typedef struct 		s_pc
+{
+	unsigned int	carry : 1;
+	unsigned short	pc;
+	size_t 			wait_cycles;
+	char 			reg[REG_NUMBER][REG_SIZE];
+}					t_pc;
+
 typedef struct 		s_player
 {
-	char 			reg[REG_NUMBER][REG_SIZE];
 	unsigned int 	live_counter;
-	unsigned int	carry : 1;
 	char			*content;
 	char 			*name;
 	int				player_nb;
@@ -72,12 +88,11 @@ typedef struct 		s_player
 	unsigned int	prog_size;
 	char			*prog;
 	char 			*comment;
-	int 			wait_cycles;
-	unsigned short	pc;
-	unsigned short	lst_pc;
-	unsigned short	lst2_pc;
-	
+	unsigned int 	nb_pc;
+	t_pc 			*pc;
 }					t_player;
+
+//hay que hacer una estructura del PC que contenga minimo 1 pc(pos) 2 carry, wait_cycles
 
 typedef struct		s_op
 {
@@ -100,7 +115,7 @@ typedef struct		s_data
 	t_op 			op[17];
 	unsigned int	nb_cycles;
 	int				flags;
-	void			(*func[16])(t_player *, t_op, t_arena *);
+	void			(*func[16])(t_player *, t_pc *, t_arena *);
 }					t_data;
 
 /*
@@ -131,7 +146,10 @@ void				print_board(t_data *data, t_board *board);
 void 				exe_players(t_data *data);
 void				check_live_count(t_player *players, int nb_players);
 void				fill_r1(t_data *data);
-int					get_opc(t_board *board);
+unsigned char		*get_mem_board(t_board *board, const unsigned int size);
+unsigned char		get_size_arg(const unsigned char ocp, const unsigned char n_arg);
+t_arg				get_arg(const unsigned char ocp, unsigned short pos, t_board *board, const unsigned char n_arg);
+void				get_arg_value(t_board *board, t_arg *arg, t_pc *pc);
 
 //Anyadidas Jaume
 int					ft_set_flags(int argn, char **argv);
@@ -140,7 +158,20 @@ int					ft_check_flags(int flags, char flag);
 /*
 **------------------op_functions-----------------------------------
 */
-void				core_live(t_player *player, t_op op, t_arena *arena);
+void				core_live(t_player *player, t_pc *pc, t_arena *arena);
+void				core_ld(t_player *player, t_pc *pc, t_arena *arena);
+void				core_st(t_player *player, t_pc *pc, t_arena *arena);
+void				core_add(t_player *player, t_pc *pc, t_arena *arena);
+void				core_sub(t_player *player, t_pc *pc, t_arena *arena);
+void				core_and(t_player *player, t_pc *pc, t_arena *arena);
+void				core_or(t_player *player, t_pc *pc, t_arena *arena);
+void				core_xor(t_player *player, t_pc *pc, t_arena *arena);
+void				core_zjmp(t_player *player, t_pc *pc, t_arena *arena);
+void 				core_ldi(t_player *player, t_pc *pc, t_arena *arena);
+void 				core_sti(t_player *player, t_pc *pc, t_arena *arena);
+void				core_fork(t_player *player, t_pc *pc, t_arena *arena);
+void				core_lld(t_player *player, t_pc *pc, t_arena *arena);
+void				core_lldi(t_player *player, t_pc *pc, t_arena *arena);
 
 /*
 **------------------graphic_functions-----------------------------------
