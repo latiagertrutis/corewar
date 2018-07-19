@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 17:17:57 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/17 17:19:14 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/19 15:55:16 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void			get_arg_value(t_board *board, t_arg *arg, t_pc *pc)
 		aux[0] = arg->arg[1];
 		while (i < REG_SIZE)
 		{
-			arg->arg[i] = board[(pc->pc + ((i + *((unsigned short *)aux)) % IDX_MOD)) % MEM_SIZE].mem;
+			arg->arg[i] = board[ft_mod((pc->pc + ((i + *((short *)aux)) % IDX_MOD)), MEM_SIZE)].mem;
 			i++;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/01 00:34:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/17 15:30:01 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/19 13:05:42 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,20 @@
 
 static void 	init_func(t_data *data)
 {
-	// (data->func)[0] = core_live;
-	// (data->func)[10] = core_sti; //Usar a la macro de la posicion!!!!
-	// (data->func)[8] = core_zjmp;
+	(data->func)[0] = core_live;
 	(data->func)[1] = core_ld;
 	(data->func)[2] = core_st;
 	(data->func)[3] = core_add;
+	(data->func)[4] = core_sub;
 	(data->func)[5] = core_and;
-	// (data->func)[11] = core_fork;
-	
+	(data->func)[6] = core_or;
+	(data->func)[7] = core_xor;
+//	(data->func)[8] = core_zjmp;
+	(data->func)[9] = core_ldi;
+	(data->func)[10] = core_sti;
+//	(data->func)[11] = core_fork;
+	(data->func)[12] = core_lld;
+	(data->func)[13] = core_lldi;
 }
 
 static void 	init_op(t_data *data)

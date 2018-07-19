@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/17 15:54:11 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/19 13:00:32 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void			exe_pc(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	else
 	{
 		// if (pos <= 3 || || pos == 5 || pos == 10 || pos == 8)
-		if (op_nb < 15)
+		if (op_nb < 14)
 			pc->wait_cycles += (data->op[op_nb].mana) + 1;
 		else
 			pc->pc = (pc->pc + 1) % MEM_SIZE;

@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/17 15:04:55 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/07/19 15:33:14 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -35,13 +35,24 @@ FUNCS =	main.c \
 		check_live_count.c \
 		get_mem_board.c \
 		fill_r1.c \
+		get_size_arg.c \
+		get_arg.c \
+		get_arg_value.c \
+		ft_mod.c \
+		core_live.c \
+		core_ld.c \
 		core_st.c \
 		core_add.c \
+		core_sub.c \
 		core_and.c \
-		core_ld.c
-		# core_sti.c \
-		# core_live.c \
+		core_or.c \
+		core_xor.c \
+		core_ldi.c \
+		core_sti.c \
+		core_lld.c \
+		core_lldi.c
 		# core_zjmp.c \
+		core_fork.c \
 
 
 SRCS_DIR = srcs/

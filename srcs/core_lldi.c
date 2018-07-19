@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 17:56:52 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/17 17:57:56 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/19 13:52:43 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ void	core_lldi(t_player *player, t_pc *pc, t_arena *arena)
 
 	i = 0;
 	ocp = arena->board[(pc->pc + 1) % MEM_SIZE].mem;//en pc + 1 esta ocp y en pc + 2 esta el primer argum
-	arg1 = get_arg(ocp, pc->pc, arena->board, 0);
-	arg2 = get_arg(ocp, pc->pc, arena->board, 1);
+	arg1 = (t_arg){0, 0, 0, 0x0, {0}};
+	arg2 = (t_arg){1, 0, 0, 0x0, {0}};
+	get_arg(ocp, pc->pc, arena->board, &arg1);
+	get_arg(ocp, pc->pc, arena->board, &arg2);
 	if (!arg1.len || !arg2.len || arg2.type == IND_CODE)
 	{
 		pc->pc = (pc->pc + 1) % MEM_SIZE;

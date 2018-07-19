@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 23:23:06 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/17 15:17:08 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/19 16:00:50 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static void store_in_ram(t_player *player, t_board *board, unsigned char reg_pos
 	i = 0;
 	while (i < REG_SIZE)
 	{
-		board[(i + pc->pc + (*((unsigned short *)board_pos) % IDX_MOD)) % MEM_SIZE].mem =
+		board[ft_mod((i + pc->pc + (*((short *)board_pos) % IDX_MOD)), MEM_SIZE)].mem =
 			pc->reg[reg_pos][i];
-		board[(i + pc->pc + (*((unsigned short *)board_pos) % IDX_MOD)) % MEM_SIZE].id =
+		board[ft_mod((i + pc->pc + (*((short *)board_pos) % IDX_MOD)), MEM_SIZE)].id =
 			player->id + 1;
 		i++;
 	}
