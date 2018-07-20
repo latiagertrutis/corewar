@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/20 13:14:59 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/20 13:22:01 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void 				exe_players(t_data *data)
 		ft_board_to_screen(data->arena->Graph, data->arena);
 		ft_pcs_to_screen(data, data->arena->Graph, data->players);
 		set_back_to_front(data->arena->Graph, data->arena->Graph->screen.screen);
-		if (data->i == 100)
-			data->arena->Graph->running = 0;
+//		if (data->i == 100)
+//			data->arena->Graph->running = 0;
 	}
 }

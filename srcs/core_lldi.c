@@ -6,13 +6,13 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 17:56:52 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/20 12:47:45 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/20 13:19:07 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	core_ldi(t_player *player, t_pc *pc, t_arena *arena)
+void	core_lldi(t_player *player, t_pc *pc, t_arena *arena)
 {
 	unsigned char	ocp;
 	t_arg			arg1;
