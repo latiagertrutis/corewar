@@ -19,6 +19,7 @@ typedef struct		s_arg
 	unsigned char	n_arg;
 	unsigned char	len;
 	unsigned char	type;
+	unsigned int	dir_size : 1; //1 for D4 0 for D2
 	unsigned char	arg[MAX_ARG_LEN];
 }					t_arg;
 
@@ -150,9 +151,10 @@ void 				exe_players(t_data *data);
 void				check_live_count(t_player *players, int nb_players);
 void				fill_r1(t_data *data);
 unsigned char		*get_mem_board(t_board *board, const unsigned int size);
-unsigned char		get_size_arg(const unsigned char ocp, const unsigned char n_arg);
-t_arg				get_arg(const unsigned char ocp, unsigned short pos, t_board *board, const unsigned char n_arg);
+unsigned char		get_size_arg(const unsigned char ocp, const unsigned char n_arg, const unsigned int dir_size);
+void				get_arg(const unsigned char ocp, unsigned short pos, t_board *board, t_arg *arg);
 void				get_arg_value(t_board *board, t_arg *arg, t_pc *pc);
+int					ft_mod(const int nb, const unsigned int mod);
 
 //Anyadidas Jaume
 int					ft_set_flags(int argn, char **argv);
