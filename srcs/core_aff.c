@@ -12,30 +12,15 @@
 
 #include "corewar.h"
 
-static int 	charge_short(int size, t_arena *arena, int pc_pos)
+static unsigned int to_big_endian(char *reg)
 {
 	int 	i;
-	char	param[size];
+	char	param[4];
 
 	i = 0;
-	while(i < size)
+	while (i < 4)
 	{
-		param[size - 1 - i] = arena->board[(pc_pos + i) % MEM_SIZE].mem;
-		i++;
-	}
-	print_memory(param, size, size, 1);
-	return (*((unsigned short *)param));
-}
-
-static 	int charge_int(int size, t_arena *arena, const int pc_pos)
-{
-	int 	i;
-	char	param[size];
-
-	i = 0;
-	while(i < size)
-	{
-		param[size - 1 - i] = arena->board[pc_pos + i].mem;
+		param[3 - i] = reg[i];
 		i++;
 	}
 	return (*((unsigned int *)param));
@@ -46,10 +31,12 @@ void		core_aff(t_player *player, t_pc *pc, t_arena *arena)
 	char 			reg_nb;
 	char 			reg_content;
 
-	reg_nb = arena->board[(pc->pc + 1) % MEM_SIZE].mem;
-	reg_content = (charge_int(sizeof(int), arena, (pc->pc + 1) % MEM_SIZE)) % 256;
+	reg_nb = arena->board[(pc->pc + 2) % MEM_SIZE].mem;
+	reg_content = (to_big_endian(pc->reg[reg_nb - 1])) % 256;
+	ft_putstr("Aff: ");
 	ft_putchar(reg_content);
-	pc += ((1 + 1) % MEM_SIZE); //OCP para que?
+	ft_putchar('\n');
+	pc->pc = ((pc->pc + 3) % MEM_SIZE);
 }
 
 

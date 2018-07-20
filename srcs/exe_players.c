@@ -48,7 +48,7 @@ void 				exe_players(t_data *data)
 	print_board(data, data->arena->board);
 	while(i < 5000)
 	{
-//		usleep(100000);
+		usleep(100000);
 		j = 0;
 		while(j < data->n_players)
 		{
@@ -65,6 +65,6 @@ void 				exe_players(t_data *data)
 		i++;
 		data->nb_cycles = i;
 		write(1, "\x1b[H\x1b[2J", 7);
-		// print_board(data, data->arena->board);
+		print_board(data, data->arena->board);
 	}
 }

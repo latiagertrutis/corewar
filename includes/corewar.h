@@ -131,5 +131,7 @@ void				core_fork(t_player *player, t_pc *pc, t_arena *arena);
 void				core_lfork(t_player *player, t_pc *pc, t_arena *arena);
 void				core_lld(t_player *player, t_pc *pc, t_arena *arena);
 void				core_lldi(t_player *player, t_pc *pc, t_arena *arena);
+void				core_aff(t_player *player, t_pc *pc, t_arena *arena);
+
 
 #endif
