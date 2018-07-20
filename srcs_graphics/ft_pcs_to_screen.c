@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 07:37:31 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/18 09:47:56 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/20 12:51:22 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ static SDL_Color	take_color_pc(int id)
 		return ((SDL_Color){89 - mod, 89 - mod, 75 - mod, SDL_ALPHA_OPAQUE});
 }
 
-void	ft_pcs_to_screen(t_sdl *Graph, t_player *players, int n_players, t_board board[MEM_SIZE])
+void	ft_pcs_to_screen(t_data *data, t_sdl *Graph, t_player *players)
 {
-	int i;
+	unsigned int i;
 	unsigned int j;
 	SDL_Color color;
-	SDL_Rect	pc;
+	SDL_Rect	pc_rect;
 	
 
 	i = 0;
-	while (i < n_players)
+	while (i < data->n_players)
 	{
 		j = 0;
 		color = take_color_pc(players[i].id);
@@ -46,9 +46,12 @@ void	ft_pcs_to_screen(t_sdl *Graph, t_player *players, int n_players, t_board bo
 		ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
 		while (j < players[i].nb_pc)
 		{
-			ft_printf("Jugador %i de %i, pc %i de %i en posicion %i\n", i, n_players, j, players[i].nb_pc, players[i].pc[j].pc);
-			pc = (SDL_Rect){Graph->screen.w * RIGHT_BORDER + (Graph->square->w - 1) * (players[i].pc[j].pc % Graph->cuant_squares[0]) + 1, Graph->screen.h * UPPER_BORDER + (Graph->square->h - 1) * (players[i].pc[j].pc / Graph->cuant_squares[1]) + 1, Graph->square->w - 2, Graph->square->h - 2};
-			SDL_RenderFillRect(Graph->screen.Renderer, &pc);
+			pc_rect = (SDL_Rect){Graph->screen.w * RIGHT_BORDER + (Graph->square->w - 1) * (players[i].pc[j].pc % Graph->cuant_squares[0]) + 1, Graph->screen.h * UPPER_BORDER + (Graph->square->h - 1) * (players[i].pc[j].pc / Graph->cuant_squares[1]) + 1, Graph->square->w - 2, Graph->square->h - 2};
+//			if (players[i].pc[j].pc == 64)
+//				exit(1);
+			if (SDL_FillRect(Graph->screen.screen, &pc_rect, (color.r << 24) | color.g << 16 | color.b << 8 | color.a))
+				ft_SDL_error("SDL_FillRect", MODE_SDL);
+				
 			j++;
 		}
 		i++;

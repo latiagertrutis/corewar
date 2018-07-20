@@ -8,6 +8,7 @@
 #include "op.h"
 #include <fcntl.h>
 #include <math.h>
+#include <pthread.h>
 
 #define HEADER_SIZE 4 + PROG_NAME_LENGTH + 1 + 4 + 4
 #define PC_BUFF 20
@@ -116,6 +117,7 @@ typedef struct		s_data
 	t_op 			op[17];
 	unsigned int	nb_cycles;
 	int				flags;
+	int				i;
 	void			(*func[16])(t_player *, t_pc *, t_arena *);
 }					t_data;
 
@@ -185,6 +187,7 @@ void		ft_SDL_error(char *str, int mode);
 void		ft_ini_interface(t_sdl *Graph);
 void		ft_ini_font(t_sdl *Graph);
 void		ft_board_to_screen(t_sdl *Graph, t_arena *arena);
-void		ft_pcs_to_screen(t_sdl *Graph, t_player *player, int n_players, t_board board[MEM_SIZE]);
+void		ft_pcs_to_screen(t_data *data, t_sdl *Graph, t_player *players);
 void		ft_write_byte(int pos, t_board byte, t_sdl *Graph);
+void		ft_draw_rack(t_data *data, SDL_Surface *screen);
 #endif
