@@ -6,11 +6,20 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 17:53:33 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/17 17:56:16 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/20 12:44:01 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+/*
+** ocp =  11   11   11      00
+**       1arg 2arg 3arg   no susa
+*/
+
+/*
+** POSSIBLE CAST TO GENERIC
+*/
 
 static void		load_direct(t_board *board, const unsigned char reg_pos, t_pc *pc)
 {
@@ -44,7 +53,7 @@ static void		load_indirect(t_board *board, const unsigned char reg_pos, t_pc *pc
 	i = 0;
 	while (i < REG_SIZE)
 	{//accediendo mediante el anterior indirecto se copia en el registro lo apuntado
-		pc->reg[reg_pos][i] = board[(i + pc->pc + *(( short *)board_pos)) % MEM_SIZE].mem;
+		pc->reg[reg_pos][i] = board[ft_mod((i + pc->pc + (*((short *)board_pos))), MEM_SIZE)].mem;
 		i++;
 	}
 	pc->pc = (pc->pc + 1 + 1 + 1 + IND_SIZE) % MEM_SIZE;//ld + opc + reg + ind
