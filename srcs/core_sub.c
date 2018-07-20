@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core_add.c                                         :+:      :+:    :+:   */
+/*   core_sub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/14 05:45:24 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/17 15:30:59 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/07/17 17:39:59 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/07/17 17:40:49 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static void		add_reg(t_pc *pc, const unsigned char reg1, const unsigned char reg2, const unsigned char reg3)
 {
-	(*(unsigned int *)pc->reg[reg3]) = (*(unsigned int *)pc->reg[reg1]) + (*(unsigned int *)pc->reg[reg2]);
+	(*(unsigned int *)pc->reg[reg3]) = (*(unsigned int *)pc->reg[reg1]) - (*(unsigned int *)pc->reg[reg2]);
 	ft_printf("el reg vale %u\n", (*(unsigned int *)pc->reg[reg3]));
 	pc->pc = (pc->pc + 1 + 1 + 1 + 1 + 1) % MEM_SIZE;//ld + opc + reg1 + reg2 + reg3
 	pc->carry = (!*((int *)(pc->reg[reg3]))) ? 0x1 : 0x0;//actualizar carry
 }
 
-void			core_add(t_player *player, t_pc *pc, t_arena *arena)
+void			core_sub(t_player *player, t_pc *pc, t_arena *arena)
 {
 	unsigned short 	pos;
 	unsigned char	ocp;

@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/17 11:51:20 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/07/19 15:33:14 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -39,14 +39,24 @@ FUNCS =	main.c \
 		core_fork.c \
 		core_zjmp.c \
 		core_lfork.c \
-		core_aff.c
-		# core_ld.c \
-		# core_sti.c \
-		# core_live.c \
-		# core_st.c \
-		# core_add.c \
-		# core_and.c \
-		# core_zjmp.c \
+		core_aff.c \
+		get_size_arg.c \
+		get_arg.c \
+		get_arg_value.c \
+		ft_mod.c \
+		core_live.c \
+		core_ld.c \
+		core_st.c \
+		core_add.c \
+		core_sub.c \
+		core_and.c \
+		core_or.c \
+		core_xor.c \
+		core_ldi.c \
+		core_sti.c \
+		core_lld.c \
+		core_lldi.c
+
 
 
 SRCS_DIR = srcs/

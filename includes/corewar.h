@@ -15,6 +15,7 @@ typedef struct		s_arg
 	unsigned char	n_arg;
 	unsigned char	len;
 	unsigned char	type;
+	unsigned int	dir_size : 1; //1 for D4 0 for D2
 	unsigned char	arg[MAX_ARG_LEN];
 }					t_arg;
 
@@ -106,21 +107,29 @@ void				check_live_count(t_player *players, int nb_players);
 void				fill_r1(t_data *data);
 unsigned char		*get_mem_board(t_board *board, const unsigned int size);
 t_pc				*realloc_pc(t_player *player, t_pc *pc, const unsigned int nb_pc);
-
+unsigned char		get_size_arg(const unsigned char ocp, const unsigned char n_arg, const unsigned int dir_size);
+void				get_arg(const unsigned char ocp, unsigned short pos, t_board *board, t_arg *arg);
+void				get_arg_value(t_board *board, t_arg *arg, t_pc *pc);
+int					ft_mod(const int nb, const unsigned int mod);
 
 
 /*
 **------------------op_functions-----------------------------------
 */
 void				core_live(t_player *player, t_pc *pc, t_arena *arena);
-void 				core_sti(t_player *player, t_pc *pc, t_arena *arena);
 void				core_ld(t_player *player, t_pc *pc, t_arena *arena);
 void				core_st(t_player *player, t_pc *pc, t_arena *arena);
 void				core_add(t_player *player, t_pc *pc, t_arena *arena);
+void				core_sub(t_player *player, t_pc *pc, t_arena *arena);
 void				core_and(t_player *player, t_pc *pc, t_arena *arena);
+void				core_or(t_player *player, t_pc *pc, t_arena *arena);
+void				core_xor(t_player *player, t_pc *pc, t_arena *arena);
 void				core_zjmp(t_player *player, t_pc *pc, t_arena *arena);
+void 				core_ldi(t_player *player, t_pc *pc, t_arena *arena);
+void 				core_sti(t_player *player, t_pc *pc, t_arena *arena);
 void				core_fork(t_player *player, t_pc *pc, t_arena *arena);
 void				core_lfork(t_player *player, t_pc *pc, t_arena *arena);
-
+void				core_lld(t_player *player, t_pc *pc, t_arena *arena);
+void				core_lldi(t_player *player, t_pc *pc, t_arena *arena);
 
 #endif

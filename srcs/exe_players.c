@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/14 09:07:04 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/19 13:00:32 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ static void			exe_pc(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	}
 	else
 	{
-		// if (pos <= 3 || || pos == 5 || pos == 10 || pos == 8)
-		if (op_nb == 11 || op_nb == 8 || op_nb == 14 || op_nb == 15)
+		if (op_nb <= 15)
 			pc->wait_cycles += (data->op[op_nb].mana) + 1;
 		else
 			pc->pc = (pc->pc + 1) % MEM_SIZE;
@@ -49,7 +48,7 @@ void 				exe_players(t_data *data)
 	print_board(data, data->arena->board);
 	while(i < 5000)
 	{
-		usleep(100000);
+//		usleep(100000);
 		j = 0;
 		while(j < data->n_players)
 		{
@@ -57,12 +56,6 @@ void 				exe_players(t_data *data)
 			while (k < data->players[j].nb_pc)
 			{
 				exe_pc((data->players) + j, (data->players[j].pc) + k, data->arena, data);
-				ft_putnbr(data->players[j].pc[0].pc);
-				ft_putchar(' ');
-				ft_putnbr(data->players[j].pc[1].pc);
-				ft_putchar(' ');
-				ft_putnbr(data->players[j].pc[2].pc);
-				ft_putchar('\n');
 				k++;
 			}
 			j++;
