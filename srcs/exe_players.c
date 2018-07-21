@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/21 15:35:29 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/21 20:07:50 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,58 @@ static void			exe_pc(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	}
 }
 
+static void			set_back_to_front(t_sdl *Graph, SDL_Surface *surf)
+{
+	SDL_Texture *texture;
+	Uint32	format;
+	int		*pixels_tex;
+	int		pitch;
+
+//	if (!(texture = SDL_CreateTextureFromSurface(Graph->screen.Renderer, surf)))
+//		ft_SDL_error("SDL_CreateTextureFromSurface", MODE_SDL);
+	
+//	SDL_LockTexture(Graph->screen.texture, NULL, (void **)&pixels_tex, &pitch);
+//	SDL_LockSurface(Graph->screen.screen);
+//	memcpy(pixels_tex, Graph->screen.screen->pixels, Graph->screen.screen->w * Graph->screen.screen->h * 4);
+//	SDL_UnlockSurface(Graph->screen.screen);
+//	SDL_UnlockTexture(Graph->screen.texture);
+//	ft_printf("format2 screen_surf \t%b\n",surf->format->format);
+//	SDL_QueryTexture(Graph->screen.texture, &format, NULL, NULL, NULL);
+//	ft_printf("format3 texture \t%b\n",format);
+	SDL_RenderCopy(Graph->screen.Renderer, Graph->screen.texture, NULL, &(SDL_Rect){Graph->screen.h * RIGHT_BORDER, Graph->screen.h * UPPER_BORDER, Graph->screen.w - (Graph->screen.w * LEFT_BORDER) - (Graph->screen.w * RIGHT_BORDER), Graph->screen.h - (Graph->screen.h * UPPER_BORDER) - (Graph->screen.h * BOTTOM_BORDER)});
+//	SDL_DestroyTexture(texture);
+	SDL_RenderPresent(Graph->screen.Renderer);
+	if (SDL_SetRenderDrawColor(Graph->screen.Renderer, BACK_COLOR SDL_ALPHA_OPAQUE))
+		ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
+	SDL_RenderClear(Graph->screen.Renderer);
+//	SDL_LockTexture(Graph->screen.texture, NULL, (void **)&pixels_tex, &pitch);
+//	SDL_LockSurface(Graph->screen.screen);
+//	for (int j = 0; j < Graph->screen.h * pitch / 4; j++)
+//		pixels_tex[j] = 0x1C1C15;
+//	SDL_UnlockSurface(Graph->screen.screen);
+//	SDL_UnlockTexture(Graph->screen.texture);
+}
+
 void 				exe_players(t_data *data)
 {
-	unsigned int i;
 	unsigned int j;
-	unsigned int k;
+	SDL_Event	event;
+	unsigned int k;	
 
-	i = 0;
+	data->i = 0;
 	fill_r1(data);
-
-	print_board(data, data->arena->board);
-	while(i < 500000)
+	while (data->arena->Graph->running)
 	{
-//		usleep(100000);
+		while (SDL_PollEvent(&event))
+		{
+			if (event.type == SDL_QUIT)
+				data->arena->Graph->running = SDL_FALSE;
+			else if (event.type == SDL_KEYDOWN)
+			{
+				if (event.key.keysym.sym == SDLK_ESCAPE)
+					data->arena->Graph->running = SDL_FALSE;
+			}
+		}
 		j = 0;
 		while(j < data->n_players)
 		{
@@ -60,15 +99,15 @@ void 				exe_players(t_data *data)
 			}
 			j++;
 		}
-		if (!(i % CYCLE_TO_DIE))
+		if (!(data->i % CYCLE_TO_DIE))
 			check_live_count(data->players, data->n_players);
-		i++;
-		data->nb_cycles = i;
-//		if (i == 3957)
-//		{
-		write(1, "\x1b[H\x1b[2J", 7);
-		print_board(data, data->arena->board);
-//		exit(1);
-//		}
+		data->i++;
+		data->nb_cycles = data->i;
+//		ft_draw_rack(data, data->arena->Graph->screen.screen);
+		ft_board_to_screen(data->arena->Graph, data->arena);
+		ft_pcs_to_screen(data, data->arena->Graph, data->players);
+		set_back_to_front(data->arena->Graph, data->arena->Graph->screen.screen);
+//		if (data->i == 100)
+//			data->arena->Graph->running = 0;
 	}
 }
