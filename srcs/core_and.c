@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 07:09:33 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/19 13:47:39 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/21 13:53:55 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,5 @@ void				core_and(t_player *player, t_pc *pc, t_arena *arena)
 	ft_printf("res en %u es: \n", reg_pos);
 	print_memory(pc->reg[reg_pos], 4, 4, 1);
 	pc->carry = (!*((int *)(pc->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry
-	pc->pc = (pc->pc + 1 + 1 + arg1.len + arg2.len + 1);//and + ocp + arg1 + arg2 + rg
+	pc->pc = (pc->pc + 1 + 1 + arg1.len + arg2.len + 1) % MEM_SIZE;//and + ocp + arg1 + arg2 + rg
 }

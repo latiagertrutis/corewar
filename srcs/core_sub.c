@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 17:39:59 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/17 17:40:49 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/21 13:59:24 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void		add_reg(t_pc *pc, const unsigned char reg1, const unsigned char reg
 	(*(unsigned int *)pc->reg[reg3]) = (*(unsigned int *)pc->reg[reg1]) - (*(unsigned int *)pc->reg[reg2]);
 	ft_printf("el reg vale %u\n", (*(unsigned int *)pc->reg[reg3]));
 	pc->pc = (pc->pc + 1 + 1 + 1 + 1 + 1) % MEM_SIZE;//ld + opc + reg1 + reg2 + reg3
-	pc->carry = (!*((int *)(pc->reg[reg3]))) ? 0x1 : 0x0;//actualizar carry
 }
 
 void			core_sub(t_player *player, t_pc *pc, t_arena *arena)

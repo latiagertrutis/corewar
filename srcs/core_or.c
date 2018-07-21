@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 17:38:01 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/19 13:48:02 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/21 13:53:41 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,5 @@ void				core_or(t_player *player, t_pc *pc, t_arena *arena)
 	*((uint32_t *)(pc->reg[reg_pos])) = *((uint32_t *)(arg1.arg)) | *((uint32_t *)(arg2.arg));
 	ft_printf("res en %u es: \n", reg_pos);
 	print_memory(pc->reg[reg_pos], 4, 4, 1);
-	pc->carry = (!*((int *)(pc->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry
-	pc->pc = (pc->pc + 1 + 1 + arg1.len + arg2.len + 1);//and + ocp + arg1 + arg2 + rg
+	pc->pc = (pc->pc + 1 + 1 + arg1.len + arg2.len + 1) % MEM_SIZE;//and + ocp + arg1 + arg2 + rg
 }

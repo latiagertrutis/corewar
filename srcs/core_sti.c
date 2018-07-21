@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 02:59:04 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/19 15:50:55 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/21 13:58:50 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,5 @@ void			core_sti(t_player *player, t_pc *pc, t_arena *arena)
 		arena->board[ft_mod((pc->pc + ((*((int *)(arg2.arg)) + *((int *)(arg3.arg)) + i) % IDX_MOD)), MEM_SIZE)].id = player->id + 1;
 		i++;
 	}
-	pc->carry = (!*((int *)(pc->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry
-	pc->pc = (pc->pc + 1 + 1 + arg2.len + arg3.len + 1);//and + ocp + arg2 + arg3 + rg
+	pc->pc = (pc->pc + 1 + 1 + arg2.len + arg3.len + 1) % MEM_SIZE;//and + ocp + arg2 + arg3 + rg
 }

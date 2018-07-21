@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 16:55:06 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/19 15:53:49 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/21 13:57:53 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,5 @@ void	core_ldi(t_player *player, t_pc *pc, t_arena *arena)
 		pc->reg[reg_pos][i] = arena->board[ft_mod((pc->pc + ((*((int *)(arg1.arg)) + *((int *)(arg2.arg)) + i) % IDX_MOD)), MEM_SIZE)].mem;
 		i++;
 	}
-	pc->carry = (!*((int *)(pc->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry
-	pc->pc = (pc->pc + 1 + 1 + arg1.len + arg2.len + 1);//and + ocp + arg1 + arg2 + rg
+	pc->pc = (pc->pc + 1 + 1 + arg1.len + arg2.len + 1) % MEM_SIZE;//and + ocp + arg1 + arg2 + rg
 }

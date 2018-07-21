@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 23:23:06 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/19 16:00:50 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/21 13:55:56 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void store_in_ram(t_player *player, t_board *board, unsigned char reg_pos
 		i++;
 	}
 	pc->pc = (pc->pc + 1 + 1 + 1 + IND_SIZE) % MEM_SIZE;//ld + opc + reg1 + ind
-	pc->carry = (!*((int *)(pc->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry
 }
 
 static void	store_in_reg(unsigned char reg_pos1, unsigned char reg_pos2, t_pc *pc)
@@ -49,7 +48,6 @@ static void	store_in_reg(unsigned char reg_pos1, unsigned char reg_pos2, t_pc *p
 		i++;
 	}
 	pc->pc = (pc->pc + 1 + 1 + 1 + 1) % MEM_SIZE;//ld + opc + reg1 + reg2
-	pc->carry = (!*((int *)(pc->reg[reg_pos1]))) ? 0x1 : 0x0;//actualizar carry
 }
 
 void		core_st(t_player *player, t_pc *pc, t_arena *arena)
