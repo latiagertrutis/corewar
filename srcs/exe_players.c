@@ -41,34 +41,36 @@ void 				exe_players(t_data *data)
 	unsigned int i;
 	unsigned int j;
 	unsigned int k;
+	unsigned int t;
 
 	i = 0;
 	fill_r1(data);
-
 	print_board(data, data->arena->board);
 	while(i < 500000)
 	{
-		usleep(100000);
-		j = 0;
-		while(j < data->n_players)
+		t = 0;
+		while (t < data->cycle_to_die)
 		{
-			k = 0;
-			while (k < data->players[j].nb_pc)
+
+			// usleep(100);
+			j = 0;
+			while(j < data->n_players)
 			{
-				exe_pc((data->players) + j, (data->players[j].pc) + k, data->arena, data);
-				k++;
+				k = 0;
+				while (k < data->players[j].nb_pc)
+				{
+					exe_pc((data->players) + j, (data->players[j].pc) + k, data->arena, data);
+					k++;
+				}
+				j++;
 			}
-			j++;
+			i++;
+			data->nb_cycles = i;
+			t++;
+			write(1, "\x1b[H\x1b[2J", 7);
+			print_board(data, data->arena->board);
 		}
-		if (!(i % CYCLE_TO_DIE))
-			check_live_count(data->players, data->n_players);
-		i++;
-		data->nb_cycles = i;
-//		if (i == 3957)
-//		{
-		write(1, "\x1b[H\x1b[2J", 7);
-		print_board(data, data->arena->board);
-//		exit(1);
-//		}
+		check_live_count(data->players, data->n_players);
+		data->cycle_to_die -= CYCLE_DELTA;
 	}
 }
