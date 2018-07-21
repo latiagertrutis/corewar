@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 06:40:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/19 17:56:06 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/21 17:04:40 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ static void		draw_rack(int cuant_squares[2], t_sdl *Graph, int first_col)
 	int j;
 	int	k;
 
-	if (!(Graph->rack = SDL_CreateRGBSurface(0, Graph->screen.w - (Graph->screen.w * RIGHT_BORDER) - (Graph->screen.w * LEFT_BORDER), Graph->screen.h - (Graph->screen.h * UPPER_BORDER) - Graph->screen.h * BOTTOM_BORDER, 32, RED_MASK, GREEN_MASK, BLUE_MASK, ALPHA_MASK)))
+	if (!(Graph->rack = SDL_CreateRGBSurfaceWithFormat(0, Graph->screen.w - (Graph->screen.w * RIGHT_BORDER) - (Graph->screen.w * LEFT_BORDER), Graph->screen.h - (Graph->screen.h * UPPER_BORDER) - Graph->screen.h * BOTTOM_BORDER, 32, 372645892)))
 		ft_SDL_error("SDL_CreateRGBSurface", MODE_SDL);
-	SDL_FillRect(Graph->rack, NULL, 0xFF0000FF/* 0x3D3D33FF */);
+	SDL_FillRect(Graph->rack, NULL, SDL_MapRGBA(Graph->rack->format, 0, 0xFF, 0, 255));
 	k = cuant_squares[1];
 	i = cuant_squares[0];
 	j = -1;
 		if (SDL_SetRenderDrawColor(Graph->screen.Renderer, BACK_COLOR
 			SDL_ALPHA_OPAQUE))
 	ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
-	while (++j <= MEM_SIZE)
+	while (++j < MEM_SIZE)
 	{
 		if (k && !i)
 		{
@@ -37,9 +37,11 @@ static void		draw_rack(int cuant_squares[2], t_sdl *Graph, int first_col)
 			k--;
 		}
 //		if (SDL_RenderDrawRect(Graph->screen.Renderer, Graph->square))
-		if (SDL_FillRect(Graph->rack, Graph->square, 0x1C1C15FF))
+		if (SDL_FillRect(Graph->rack, Graph->square, SDL_MapRGBA(Graph->rack->format, 0x1C, 0x1C, 0x15, 0xFF)))
+//			ft_SDL_error("SDL_RenderDrawRect", MODE_SDL);
+//		if (SDL_FillRect(Graph->rack, Graph->square, SDL_MapRGBA(Graph->rack->format, 0xFF, 0x00, 0x00, 0xFF)))
 			ft_SDL_error("SDL_RenderDrawRect", MODE_SDL);
-		if (SDL_FillRect(Graph->rack, &(SDL_Rect){Graph->square->x + 1, Graph->square->y + 1, Graph->square->w - 2, Graph->square->h - 2}, 0x3D3D33FF))
+		if (SDL_FillRect(Graph->rack, &(SDL_Rect){Graph->square->x + 1, Graph->square->y + 1, Graph->square->w - 2, Graph->square->h - 2}, SDL_MapRGBA(Graph->rack->format, 0x3D, 0x3D, 0x33, 0xFF)))
 			ft_SDL_error("SDL_RenderDrawRect", MODE_SDL);
 		Graph->square->x += Graph->square->w - 1;
 		i--;
@@ -92,13 +94,16 @@ static void				ini_rack(t_sdl *Graph)
 
 void				ft_ini_interface(t_sdl *Graph)
 {
-	if (!(Graph->screen.screen = SDL_CreateRGBSurface(0, Graph->screen.w, Graph->screen.h, 32, RED_MASK, GREEN_MASK, BLUE_MASK, ALPHA_MASK)))
-		ft_SDL_error("SDL_CreateRGBSurface", MODE_SDL);
+	if (!(Graph->screen.screen = SDL_CreateRGBSurfaceWithFormat(0, Graph->screen.w, Graph->screen.h, 32, 372645892)))
+				ft_SDL_error("SDL_CreateRGBSurface", MODE_SDL);
+//	SDL_FillRect(Graph->screen.screen, &(SDL_Rect){0, 0, Graph->screen.screen->w, Graph->screen.screen->h}, 0xFF0000FF);
 	SDL_SetColorKey(Graph->screen.screen, SDL_FALSE, 0x3D3D33FF);
 	if (MEM_SIZE <= 4096)
 		ini_rack(Graph);
 	else
 		ini_big_rack(Graph);
-	Graph->rack_square = SDL_CreateRGBSurface(0, Graph->square->w - 2,
-			Graph->square->h - 2, 32, RED_MASK, GREEN_MASK, BLUE_MASK, ALPHA_MASK);
+	Graph->rack_square = SDL_CreateRGBSurfaceWithFormat(0, Graph->square->w - 2,
+			Graph->square->h - 2, 32, Graph->rack->format->format);
+	if (!(Graph->screen.texture = SDL_CreateTexture(Graph->screen.Renderer, 372645892, SDL_TEXTUREACCESS_STREAMING, Graph->screen.w - (Graph->screen.w * LEFT_BORDER) - (Graph->screen.w * RIGHT_BORDER), Graph->screen.h - (Graph->screen.h * UPPER_BORDER) - (Graph->screen.h * BOTTOM_BORDER))))
+		ft_SDL_error("SDL_CreateTexture", MODE_SDL);
 }

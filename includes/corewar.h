@@ -25,18 +25,14 @@ typedef struct		s_arg
 
 #define MODE_SDL 1
 #define MODE_TTF 0
-#define SCREEN_W 1024
-#define SCREEN_H 780
+#define SCREEN_W 1280
+#define SCREEN_H 800
 #define SCREEN_SCALE 1.2
 #define SCREEN_NAME "Corewar"
-#define LEFT_BORDER 0.357
-#define BOTTOM_BORDER 0.0335
+#define LEFT_BORDER 0.3567
+#define BOTTOM_BORDER 0.0328
 #define UPPER_BORDER 0.033
 #define RIGHT_BORDER 0.0180
-#define RED_MASK 0xFF000000
-#define GREEN_MASK 0x00FF0000
-#define BLUE_MASK 0x0000FF00
-#define ALPHA_MASK 0x000000FF
 #define BACK_COLOR 28, 28, 21,
 #define FIELD_COLOR 61, 61, 51,
 typedef struct s_sdl {
@@ -47,6 +43,7 @@ typedef struct s_sdl {
 		const char *name;
 		SDL_Window *window;
 		SDL_Renderer *Renderer;
+		SDL_Texture *texture;
 		SDL_Surface *screen;
 	} screen;
 	int			cuant_squares[2];
@@ -55,6 +52,7 @@ typedef struct s_sdl {
 		int		w;
 		int		h;
 	} font_info;
+	SDL_Surface	*character_buffer;
 	SDL_Surface *rack;
 	SDL_Surface *rack_square;
 	SDL_Rect *square;

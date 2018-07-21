@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 20:48:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/20 13:03:47 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/21 13:16:18 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int main(int ac, char **av)
 	ft_ini_interface(data.arena->Graph);
 	ft_ini_font(data.arena->Graph);
 	SDL_GetRendererInfo(data.arena->Graph->screen.Renderer, &info);
-	ft_printf("Name = %s\nflags = %x\nnum texture formats = %x\ntexture formats[0]] = %u\ntexture formats[1]] = %u\ntexture formats[2]] = %u\ntexture formats[3]] = %u\ntexture formats[4]] = %u\ntexture formats[5]] = %u\ntexture formats[6]] = %u\ntexture formats[7]] = %u\ntexture formats[8]] = %u\ntexture formats[9]] = %u\ntexture formats[10]] = %u\ntexture formats[11]] = %u\ntexture formats[12]] = %u\ntexture formats[13]] = %u\ntexture formats[14]] = %u\ntexture formats[15]] = %u\n", info.name, info.flags, info.num_texture_formats, info.texture_formats[0], info.texture_formats[1], info.texture_formats[2], info.texture_formats[3], info.texture_formats[4], info.texture_formats[5], info.texture_formats[6], info.texture_formats[7], info.texture_formats[8], info.texture_formats[9], info.texture_formats[10], info.texture_formats[11], info.texture_formats[12], info.texture_formats[13], info.texture_formats[14], info.texture_formats[15]);
+	ft_printf("Name = %s\nflags = %x\nnum texture formats = %x\ntexture formats[0]] = \t%b\nsizeof SDL_Surface %i\n", info.name, info.flags, info.num_texture_formats, info.texture_formats[0], sizeof(SDL_Surface));
 	SDL_RenderPresent(data.arena->Graph->screen.Renderer);
 	exe_players(&data);
 	ft_quit_graphics(data.arena->Graph);
