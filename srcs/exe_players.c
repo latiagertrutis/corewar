@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/21 15:35:29 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/21 18:39:39 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void 				exe_players(t_data *data)
 	print_board(data, data->arena->board);
 	while(i < 500000)
 	{
-//		usleep(100000);
+		usleep(100000);
 		j = 0;
 		while(j < data->n_players)
 		{
@@ -64,7 +64,7 @@ void 				exe_players(t_data *data)
 			check_live_count(data->players, data->n_players);
 		i++;
 		data->nb_cycles = i;
-//		if (i == 3957)
+//		if (i == 27)
 //		{
 		write(1, "\x1b[H\x1b[2J", 7);
 		print_board(data, data->arena->board);

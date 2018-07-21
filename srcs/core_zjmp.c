@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 05:25:36 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/21 15:29:32 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/21 19:00:27 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static 	int charge_short(int size, t_arena *arena, int pc_pos)
 		i++;
 	}
 	print_memory(param, size, size, 1);
+	exit(1);
 	return (*((unsigned short *)param));
 }
 
