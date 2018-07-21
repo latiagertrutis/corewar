@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 09:34:50 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/15 09:34:53 by mzabalza         ###   ########.fr       */
+/*   Updated: 2018/07/21 14:57:15 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ void		core_fork(t_player *player, t_pc *pc, t_arena *arena)
 		player->pc = realloc_pc(player, player->pc, player->nb_pc);
 		pc = player->pc + pc_i;
 	}
-	player->pc[player->nb_pc] = (t_pc){((pc->pc + new_i) %IDX_MOD) % MEM_SIZE, pc->carry, 0, {{0}}};
+	player->pc[player->nb_pc] = (t_pc){pc->carry, ft_mod((pc->pc + (new_i % IDX_MOD)), MEM_SIZE), 0, {{0}}};
+	ft_printf("pc1 es: %d\npc2 es: %d\nnb_pc es: %d\n", pc->pc, player->pc[player->nb_pc].pc, player->nb_pc);
+//	exit(1);
 	ft_memcpy((player->pc + player->nb_pc)->reg, pc->reg, REG_NUMBER * REG_SIZE);
 	pc->pc = (pc->pc + 3) % MEM_SIZE;
 	player->nb_pc++;

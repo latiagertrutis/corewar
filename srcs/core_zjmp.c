@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 05:25:36 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/21 13:18:03 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/21 15:29:32 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	core_zjmp(t_player *player, t_pc *pc, t_arena *arena)
 	// pc->carry = 1;
 	if (pc->carry == 1)
 	{
-		index = charge_short(2, arena,  ((pc->pc) + 1 % MEM_SIZE));
-		pc->pc += ((short)index % IDX_MOD) % MEM_SIZE;
+		index = charge_short(2, arena,  (((pc->pc) + 1) % MEM_SIZE));
+		pc->pc = ft_mod(pc->pc + (short)index, MEM_SIZE);
 	}
 	else
 		pc->pc = (pc->pc + 1 + 2) % MEM_SIZE;//zjmp + D2
