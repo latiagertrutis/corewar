@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 07:37:31 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/21 16:58:19 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/21 20:37:08 by mzabalza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ static Uint32	take_color_pc(int id, SDL_PixelFormat *format)
 
 	mod = 5;
 	if (!id)
-		return (SDL_MapRGBA(format, 51, 255, 51, 255));
+		return (SDL_MapRGBA(format, 51, 255, 51, 100));
 	else if (id == 1)
-		return (SDL_MapRGBA(format, 255, 204, 0, 255));
+		return (SDL_MapRGBA(format, 255, 204, 0, 100));
 	else if (id == 2)
-		return (SDL_MapRGBA(format, 0xFF, 0xF2, 0xCF, 255));
+		return (SDL_MapRGBA(format, 0xFF, 0xF2, 0xCF, 100));
 	else if (id == 3)
-		return (SDL_MapRGBA(format, 252, 102, 92, 255));
+		return (SDL_MapRGBA(format, 252, 102, 92, 100));
 	else
-		return (SDL_MapRGBA(format, 89, 89, 75, 255));
+		return (SDL_MapRGBA(format, 89, 89, 75, 100));
 }
 
 void	ft_pcs_to_screen(t_data *data, t_sdl *Graph, t_player *players)

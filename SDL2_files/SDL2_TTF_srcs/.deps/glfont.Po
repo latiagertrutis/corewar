@@ -38,14 +38,14 @@ glfont.o: glfont.c /usr/include/stdlib.h /usr/include/Availability.h \
   /usr/include/secure/_stdio.h /usr/include/secure/_common.h \
   /usr/include/string.h /usr/include/sys/_types/_rsize_t.h \
   /usr/include/sys/_types/_errno_t.h /usr/include/strings.h \
-  /usr/include/secure/_string.h /Users/jagarcia/.brew/include/SDL2/SDL.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_main.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_stdinc.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_config.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_platform.h \
+  /usr/include/secure/_string.h /Users/mzabalza/.brew/include/SDL2/SDL.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_main.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_stdinc.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_config.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_platform.h \
   /usr/include/AvailabilityMacros.h /usr/include/TargetConditionals.h \
-  /Users/jagarcia/.brew/include/SDL2/begin_code.h \
-  /Users/jagarcia/.brew/include/SDL2/close_code.h \
+  /Users/mzabalza/.brew/include/SDL2/begin_code.h \
+  /Users/mzabalza/.brew/include/SDL2/close_code.h \
   /usr/include/sys/types.h /usr/include/sys/_types/_blkcnt_t.h \
   /usr/include/sys/_types/_blksize_t.h /usr/include/sys/_types/_gid_t.h \
   /usr/include/sys/_types/_in_addr_t.h \
@@ -82,16 +82,16 @@ glfont.o: glfont.c /usr/include/stdlib.h /usr/include/Availability.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include/inttypes.h \
   /usr/include/inttypes.h /usr/include/math.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include/float.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_assert.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_atomic.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_audio.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_error.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_endian.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_mutex.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_thread.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_rwops.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_clipboard.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_cpuinfo.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_assert.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_atomic.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_audio.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_error.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_endian.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_mutex.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_thread.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_rwops.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_clipboard.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_cpuinfo.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include/immintrin.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include/mmintrin.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include/xmmintrin.h \
@@ -135,35 +135,37 @@ glfont.o: glfont.c /usr/include/stdlib.h /usr/include/Availability.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include/xsavecintrin.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include/xsavesintrin.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include/adxintrin.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_events.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_video.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_pixels.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_rect.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_surface.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_blendmode.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_keyboard.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_keycode.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_scancode.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_mouse.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_joystick.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_gamecontroller.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_quit.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_gesture.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_touch.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_filesystem.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_haptic.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_hints.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_loadso.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_log.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_messagebox.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_power.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_render.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_shape.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_system.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_timer.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_version.h SDL_ttf.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_opengl.h \
-  /Users/jagarcia/.brew/include/SDL2/SDL_opengl_glext.h
+  /Users/mzabalza/.brew/include/SDL2/SDL_events.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_video.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_pixels.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_rect.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_surface.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_blendmode.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_keyboard.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_keycode.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_scancode.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_mouse.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_joystick.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_gamecontroller.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_quit.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_gesture.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_touch.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_filesystem.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_haptic.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_hints.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_loadso.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_log.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_messagebox.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_power.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_render.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_shape.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_system.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_timer.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_version.h SDL_ttf.h \
+  ../SDL2_srcs/include/SDL.h ../SDL2_srcs/include/begin_code.h \
+  ../SDL2_srcs/include/close_code.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_opengl.h \
+  /Users/mzabalza/.brew/include/SDL2/SDL_opengl_glext.h
 
 /usr/include/stdlib.h:
 
@@ -311,23 +313,23 @@ glfont.o: glfont.c /usr/include/stdlib.h /usr/include/Availability.h \
 
 /usr/include/secure/_string.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL.h:
+/Users/mzabalza/.brew/include/SDL2/SDL.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_main.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_main.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_stdinc.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_stdinc.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_config.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_config.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_platform.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_platform.h:
 
 /usr/include/AvailabilityMacros.h:
 
 /usr/include/TargetConditionals.h:
 
-/Users/jagarcia/.brew/include/SDL2/begin_code.h:
+/Users/mzabalza/.brew/include/SDL2/begin_code.h:
 
-/Users/jagarcia/.brew/include/SDL2/close_code.h:
+/Users/mzabalza/.brew/include/SDL2/close_code.h:
 
 /usr/include/sys/types.h:
 
@@ -425,25 +427,25 @@ glfont.o: glfont.c /usr/include/stdlib.h /usr/include/Availability.h \
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include/float.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_assert.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_assert.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_atomic.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_atomic.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_audio.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_audio.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_error.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_error.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_endian.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_endian.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_mutex.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_mutex.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_thread.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_thread.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_rwops.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_rwops.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_clipboard.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_clipboard.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_cpuinfo.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_cpuinfo.h:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include/immintrin.h:
 
@@ -531,62 +533,68 @@ glfont.o: glfont.c /usr/include/stdlib.h /usr/include/Availability.h \
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include/adxintrin.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_events.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_events.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_video.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_video.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_pixels.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_pixels.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_rect.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_rect.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_surface.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_surface.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_blendmode.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_blendmode.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_keyboard.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_keyboard.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_keycode.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_keycode.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_scancode.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_scancode.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_mouse.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_mouse.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_joystick.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_joystick.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_gamecontroller.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_gamecontroller.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_quit.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_quit.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_gesture.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_gesture.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_touch.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_touch.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_filesystem.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_filesystem.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_haptic.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_haptic.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_hints.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_hints.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_loadso.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_loadso.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_log.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_log.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_messagebox.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_messagebox.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_power.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_power.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_render.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_render.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_shape.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_shape.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_system.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_system.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_timer.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_timer.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_version.h:
+/Users/mzabalza/.brew/include/SDL2/SDL_version.h:
 
 SDL_ttf.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_opengl.h:
+../SDL2_srcs/include/SDL.h:
 
-/Users/jagarcia/.brew/include/SDL2/SDL_opengl_glext.h:
+../SDL2_srcs/include/begin_code.h:
+
+../SDL2_srcs/include/close_code.h:
+
+/Users/mzabalza/.brew/include/SDL2/SDL_opengl.h:
+
+/Users/mzabalza/.brew/include/SDL2/SDL_opengl_glext.h:

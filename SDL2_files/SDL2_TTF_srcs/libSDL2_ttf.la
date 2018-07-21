@@ -17,7 +17,7 @@ old_library='libSDL2_ttf.a'
 inherited_linker_flags=' '
 
 # Libraries that this one depends upon.
-dependency_libs=' -L/Users/jagarcia/.brew/opt/freetype/lib -lfreetype -L/Users/jagarcia/.brew/lib -lSDL2'
+dependency_libs=' -L/Users/mzabalza/.brew/opt/freetype/lib -lfreetype -L/Users/mzabalza/.brew/lib -lSDL2'
 
 # Names of additional weak libraries provided by this library
 weak_library_names=''

@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/20 13:51:33 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/07/21 20:25:45 by mzabalza         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,7 +16,7 @@ NAME = prueba
 
 CFLAGS = #-fsanitize=address #-Wall -Wextra -Werror -g3
 
-SDLFLAGS = `sdl2-config --cflags` `sdl2-config --libs` -lSDL2_ttf -lpthread
+SDLFLAGS = `sdl2-config --cflags` `sdl2-config --libs` -lSDL2_ttf 
 
 CC = gcc
 
