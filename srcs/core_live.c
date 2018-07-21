@@ -26,16 +26,19 @@ static int 	take_live_nb(t_board *board)
 void	core_live(t_player *player, t_pc *pc, t_arena *arena)
 {
 	unsigned short	pos;
-	int 			live_nb;
+	int 	live_nb;
 
 	pos = pc->pc;
 	live_nb = take_live_nb((arena->board) + pos + 1);
-	
-	ft_printf("live: %d", live_nb);
+	// ft_putnbr(live_nb);
+	// exit(1);
+	// ft_printf("live: %d", live_nb);
+	// ft_putnbr((*(int *)(pc->reg[0])));
 	if (live_nb == *((int *)(pc->reg[0])))
 	{
 		player->live_counter++;
-		ft_printf("Player %d alive", player->id);
+		ft_putnbr(player->live_counter);
+		// ft_printf("Player %d alive", player->id);
 	}
 	pc->pc += 5;
 }

@@ -48,7 +48,7 @@ void 				exe_players(t_data *data)
 	print_board(data, data->arena->board);
 	while(i < 500000)
 	{
-//		usleep(100000);
+		usleep(100000);
 		j = 0;
 		while(j < data->n_players)
 		{
