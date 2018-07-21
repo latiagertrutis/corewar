@@ -68,6 +68,7 @@ typedef struct		s_op
 
 typedef struct		s_data
 {
+	unsigned int 	cycle_to_die;
 	unsigned int	n_players;
 	t_player		*players;
 	t_arena			*arena;

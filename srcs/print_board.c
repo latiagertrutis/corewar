@@ -22,6 +22,8 @@ static void	print_player_status(t_player *players, t_data *data)
 		ft_putstr(data->palete[(int)players[i].id + 1]);
 		ft_printf("Player nb: %d, name:%s, lives: %d\n"
 			, players[i].player_nb, players[i].name, players[i].live_counter);
+		print_memory(&(players[i].player_nb), 4, 4, 1);
+		ft_putchar('\n');
 		ft_putstr("\033[0m ");
 		i++;
 	}

@@ -21,8 +21,11 @@ void 	check_live_count(t_player *players, int nb_players)
 	{
 		if ((players[i].live_counter))
 			players[i].live_counter = 0;
-		// else
-		// 	delete_player[i]
+		else
+		{
+			ft_printf("Jugador %s is dead", players[i].name); //decidir que hacer cuando muere
+			exit(1);
+		}
 		i++;
 	}
 }

@@ -19,7 +19,7 @@ int main(int ac, char **av)
 
 	if (ac < 2 || ac > 5)
 		put_usage();
-	data = (t_data){ac - 1, NULL, NULL, {"\033[0m", "\033[38;5;1m", "\033[38;5;2m",
+	data = (t_data){CYCLE_TO_DIE, ac - 1, NULL, NULL, {"\033[0m", "\033[38;5;1m", "\033[38;5;2m",
 	   		"\033[38;5;3m", "\033[38;5;4m"}, {{0, 0, {0}, 0, 0, 0, 0, 0}}, 0, {0}};
 	if (!init_corewar(&data))
 	ft_error("malloc failed");
