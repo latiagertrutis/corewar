@@ -1,5 +1,8 @@
 .name "zork"
 .comment "I'M ALIIIIVE"
 
-cosa:	ldi r1, %-1, r2
-		st r2, 200
+cosa:
+			ld %-1, r7
+			st r7, 260
+			ldi %-1, %-2, r2
+			st r2, 200
