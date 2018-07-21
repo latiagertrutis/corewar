@@ -188,6 +188,6 @@ void		ft_ini_interface(t_sdl *Graph);
 void		ft_ini_font(t_sdl *Graph);
 void		ft_board_to_screen(t_sdl *Graph, t_arena *arena);
 void		ft_pcs_to_screen(t_data *data, t_sdl *Graph, t_player *players);
-void		ft_write_byte(int pos, t_board byte, t_sdl *Graph);
+void		ft_write_byte(int pos, t_arena *arena, char *pixel, int pitch);
 void		ft_draw_rack(t_data *data, SDL_Surface *screen);
 #endif
