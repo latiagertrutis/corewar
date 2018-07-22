@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-void 	check_live_count(t_player *players, int nb_players)
+void 	check_live_count(t_player *players, int nb_players, t_data *data)
 {
 	int i;
 

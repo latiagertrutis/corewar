@@ -70,7 +70,7 @@ void 				exe_players(t_data *data)
 			write(1, "\x1b[H\x1b[2J", 7);
 			print_board(data, data->arena->board);
 		}
-		check_live_count(data->players, data->n_players);
+		check_live_count(data->players, data->n_players, data);
 		data->cycle_to_die -= CYCLE_DELTA;
 	}
 }
