@@ -56,6 +56,7 @@ typedef struct s_sdl {
 	SDL_Surface *rack;
 	SDL_Surface *rack_square;
 	SDL_Rect *square;
+	SDL_Rect *big_square;
 } t_sdl;
 
 typedef struct 		s_board

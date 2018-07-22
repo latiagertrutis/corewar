@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 06:40:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/21 17:04:40 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/22 12:14:44 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,19 @@ void				ft_ini_interface(t_sdl *Graph)
 {
 	if (!(Graph->screen.screen = SDL_CreateRGBSurfaceWithFormat(0, Graph->screen.w, Graph->screen.h, 32, 372645892)))
 				ft_SDL_error("SDL_CreateRGBSurface", MODE_SDL);
-//	SDL_FillRect(Graph->screen.screen, &(SDL_Rect){0, 0, Graph->screen.screen->w, Graph->screen.screen->h}, 0xFF0000FF);
-	SDL_SetColorKey(Graph->screen.screen, SDL_FALSE, 0x3D3D33FF);
 	if (MEM_SIZE <= 4096)
 		ini_rack(Graph);
 	else
 		ini_big_rack(Graph);
 	Graph->rack_square = SDL_CreateRGBSurfaceWithFormat(0, Graph->square->w - 2,
 			Graph->square->h - 2, 32, Graph->rack->format->format);
-	if (!(Graph->screen.texture = SDL_CreateTexture(Graph->screen.Renderer, 372645892, SDL_TEXTUREACCESS_STREAMING, Graph->screen.w - (Graph->screen.w * LEFT_BORDER) - (Graph->screen.w * RIGHT_BORDER), Graph->screen.h - (Graph->screen.h * UPPER_BORDER) - (Graph->screen.h * BOTTOM_BORDER))))
+	if (!(Graph->big_square = (SDL_Rect *)malloc(sizeof(SDL_Rect))))
+		ft_error("Error malloc ft_ini_interface\n");
+	Graph->big_square->x = Graph->screen.w * RIGHT_BORDER;
+	Graph->big_square->y = Graph->screen.h * UPPER_BORDER;
+	Graph->big_square->w = Graph->screen.w * (1 - RIGHT_BORDER - LEFT_BORDER);
+	Graph->big_square->h = Graph->screen.h * (1 - UPPER_BORDER - BOTTOM_BORDER);
+	ft_printf("caca = %i\n",Graph->big_square->w);
+	if (!(Graph->screen.texture = SDL_CreateTexture(Graph->screen.Renderer, 372645892, SDL_TEXTUREACCESS_STREAMING, Graph->big_square->w, Graph->big_square->h)))
 		ft_SDL_error("SDL_CreateTexture", MODE_SDL);
 }

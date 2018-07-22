@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 05:20:16 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/20 15:02:26 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/22 13:03:01 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "corewar.h"
@@ -48,6 +48,8 @@ void ft_ini_graphics(t_sdl **Graph, int flags)
 	if (SDL_SetRenderDrawColor((*Graph)->screen.Renderer, BACK_COLOR
 			SDL_ALPHA_OPAQUE))
 		ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
+	SDL_RenderClear((*Graph)->screen.Renderer);
+	SDL_RenderPresent((*Graph)->screen.Renderer);
 	SDL_RenderClear((*Graph)->screen.Renderer);
 	SDL_RenderPresent((*Graph)->screen.Renderer);
 }
