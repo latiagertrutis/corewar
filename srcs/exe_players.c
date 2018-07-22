@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/21 23:00:28 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/22 13:18:35 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void 				exe_players(t_data *data)
 	while(i < 500000)
 	{
 		t = 0;
-		while (t < data->cycle_to_die)
+		while (t < 500000)//data->cycle_to_die)
 		{
 
 			// usleep(100);
