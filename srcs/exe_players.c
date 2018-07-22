@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/22 14:21:21 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/22 15:26:50 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@ static void			exe_pc(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	}
 }
 
+static void				test(t_sdl *Graph)
+{
+	SDL_Surface *surf;
+	SDL_Texture *text;
+
+	surf = TTF_RenderUTF8_Blended(Graph->font_info.font, "ABCDEFGHIJKLMNOPQRSTUVWXYZ", (SDL_Color){255, 255, 0, 0});
+	text = SDL_CreateTextureFromSurface(Graph->screen.Renderer, surf);
+//	SDL_SetRenderTarget(Graph->screen.Renderer, Graph->screen.texture);
+	SDL_RenderCopy(Graph->screen.Renderer, text, NULL, &(SDL_Rect){100, 50, surf->w, surf->h});
+}
+
 static void			set_back_to_front(t_sdl *Graph, SDL_Surface *surf)
 {
 	SDL_Texture *texture;
@@ -60,11 +71,12 @@ static void			set_back_to_front(t_sdl *Graph, SDL_Surface *surf)
 	SDL_RenderCopy(Graph->screen.Renderer, Graph->screen.texture, NULL, Graph->big_square);
 //	SDL_DestroyTexture(texture);
 //	usleep(5000);
+//	test(Graph);
 	SDL_RenderPresent(Graph->screen.Renderer);
 	if (SDL_SetRenderDrawColor(Graph->screen.Renderer, BACK_COLOR SDL_ALPHA_OPAQUE))
 		ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
 //	SDL_SetRenderTarget(Graph->screen.Renderer, Graph->screen.texture);
-//	SDL_RenderClear(Graph->screen.Renderer);
+	SDL_RenderClear(Graph->screen.Renderer);
 //	SDL_LockTexture(Graph->screen.texture, NULL, (void **)&pixels_tex, &pitch);
 //	SDL_LockSurface(Graph->screen.screen);
 //	for (int j = 0; j < Graph->screen.h * pitch / 4; j++)
@@ -72,6 +84,8 @@ static void			set_back_to_front(t_sdl *Graph, SDL_Surface *surf)
 //	SDL_UnlockSurface(Graph->screen.screen);
 //	SDL_UnlockTexture(Graph->screen.texture);
 }
+
+
 
 void 				exe_players(t_data *data)
 {

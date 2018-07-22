@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 04:10:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/22 12:45:06 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/22 15:23:42 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void			text_to_texture(t_sdl *Graph, char *pixel, int pitch)
 //		memcpy(pixel + (Graph->square->x + 1) * pitch / Graph->big_square->w + (Graph->square->y + 1) * pitch + j * pitch, surf_byte->pixels + j * surf_byte->pitch, surf_byte->pitch);
 	while (i < Graph->rack_square->h)
 	{
-		ft_memcpy(pixel + (Graph->square->x + 1) *pitch / Graph->big_square->w +
+		ft_memcpy(pixel + (Graph->square->x + 1) * pitch / Graph->big_square->w +
 			(Graph->square->y + 1) * pitch + i * pitch,
 			Graph->rack_square->pixels + i * Graph->rack_square->pitch,
 			Graph->rack_square->pitch);
