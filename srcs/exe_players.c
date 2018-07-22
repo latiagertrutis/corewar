@@ -6,11 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/07/22 13:50:24 by jagarcia         ###   ########.fr       */
-=======
-/*   Updated: 2018/07/22 13:16:08 by jagarcia         ###   ########.fr       */
->>>>>>> origin/jaume-2
+/*   Updated: 2018/07/22 14:21:21 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +25,9 @@ static void			exe_pc(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	else if (pc->wait_cycles == 1)
 	{
 		pc->wait_cycles--;
-		data->func[op_nb](player, pc, arena);
+		ft_printf("ejecutando %d\n", op_nb);
+		if (op_nb <= 15)
+			data->func[op_nb](player, pc, arena);
 	}
 	else
 	{
@@ -66,7 +64,7 @@ static void			set_back_to_front(t_sdl *Graph, SDL_Surface *surf)
 	if (SDL_SetRenderDrawColor(Graph->screen.Renderer, BACK_COLOR SDL_ALPHA_OPAQUE))
 		ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
 //	SDL_SetRenderTarget(Graph->screen.Renderer, Graph->screen.texture);
-	SDL_RenderClear(Graph->screen.Renderer);
+//	SDL_RenderClear(Graph->screen.Renderer);
 //	SDL_LockTexture(Graph->screen.texture, NULL, (void **)&pixels_tex, &pitch);
 //	SDL_LockSurface(Graph->screen.screen);
 //	for (int j = 0; j < Graph->screen.h * pitch / 4; j++)
@@ -85,10 +83,10 @@ void 				exe_players(t_data *data)
 	data->i = 0;
 	fill_r1(data);
 //	print_board(data, data->arena->board);
-	while(data->nb_cycles < 500000 || data->arena->Graph->running)
+	while(data->nb_cycles < 500000 && data->arena->Graph->running)
 	{
 		t = 0;
-		while (t < data->cycle_to_die || data->arena->Graph->running)
+		while (t < data->cycle_to_die && data->arena->Graph->running)
 		{
 			while (SDL_PollEvent(&event))
 			{
