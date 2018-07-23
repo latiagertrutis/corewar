@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 02:59:04 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/21 13:58:50 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/22 01:17:22 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,7 @@
 /* 	player->pc += 1 + param_size[0] + param_size[1] + param_size[2]; //mana + 1 */
 /* } */
 
-static	void	short_to_int(t_arg *arg)
-{
-	*((int *)(arg->arg)) = *((short *)(arg->arg));
-}
-
-void			core_sti(t_player *player, t_pc *pc, t_arena *arena)
+void			core_sti(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned char	ocp;
 	t_arg			arg2;
@@ -120,9 +115,9 @@ void			core_sti(t_player *player, t_pc *pc, t_arena *arena)
 	invert_bytes(arg2.arg, arg2.type == DIR_CODE ? 2 : 4);
 	invert_bytes(arg3.arg, arg3.type == DIR_CODE ? 2 : 4);
 	if (arg2.type == DIR_CODE)
-		short_to_int(&arg2);
+		*((int *)arg2.arg) = *((short *)arg2.arg);
 	if (arg3.type == DIR_CODE)
-		short_to_int(&arg3);
+		*((int *)arg3.arg) = *((short *)arg3.arg);
 	ft_printf("arg2.len: %u\narg2.type: %u\n", arg2.len, arg2.type);
 	print_memory(arg2.arg, 4, 4, 1);
 	ft_printf("arg3.len: %u\narg3.type: %u\n", arg3.len, arg3.type);

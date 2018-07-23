@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/21 15:35:29 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/22 13:18:35 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void			exe_pc(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	else if (pc->wait_cycles == 1)
 	{
 		pc->wait_cycles--;
-		data->func[op_nb](player, pc, arena);
+		data->func[op_nb](player, pc, arena, data);
 	}
 	else
 	{
@@ -38,21 +38,18 @@ static void			exe_pc(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 
 void 				exe_players(t_data *data)
 {
-	unsigned int i;
 	unsigned int j;
 	unsigned int k;
 	unsigned int t;
 
-	i = 0;
 	fill_r1(data);
 	print_board(data, data->arena->board);
-	while(i < 500000)
+	while(data->nb_cycles < 500000)
 	{
 		t = 0;
 		while (t < data->cycle_to_die)
 		{
-
-			// usleep(100);
+			usleep(100000);
 			j = 0;
 			while(j < data->n_players)
 			{
@@ -64,13 +61,11 @@ void 				exe_players(t_data *data)
 				}
 				j++;
 			}
-			i++;
-			data->nb_cycles = i;
+			data->nb_cycles++;
 			t++;
 			write(1, "\x1b[H\x1b[2J", 7);
 			print_board(data, data->arena->board);
 		}
 		check_live_count(data->players, data->n_players, data);
-		data->cycle_to_die -= CYCLE_DELTA;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 09:34:50 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/21 14:57:15 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/21 18:34:12 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int 	charge_short(int size, t_arena *arena, int pc_pos)
 	return (*((unsigned short *)param));
 }
 
-void		core_fork(t_player *player, t_pc *pc, t_arena *arena)
+void		core_fork(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned short 	pc_i;
 	short			new_i;
@@ -42,7 +42,8 @@ void		core_fork(t_player *player, t_pc *pc, t_arena *arena)
 	player->pc[player->nb_pc] = (t_pc){pc->carry, ft_mod((pc->pc + (new_i % IDX_MOD)), MEM_SIZE), 0, {{0}}};
 	ft_printf("pc1 es: %d\npc2 es: %d\nnb_pc es: %d\n", pc->pc, player->pc[player->nb_pc].pc, player->nb_pc);
 //	exit(1);
-	ft_memcpy((player->pc + player->nb_pc)->reg, pc->reg, REG_NUMBER * REG_SIZE);
+	for (int j = 0; j < REG_NUMBER; j++)
+		ft_memcpy(player->pc[player->nb_pc].reg[j], pc->reg[j], REG_SIZE);
 	pc->pc = (pc->pc + 3) % MEM_SIZE;
 	player->nb_pc++;
 }

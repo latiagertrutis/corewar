@@ -60,7 +60,7 @@ static void		load_indirect(t_board *board, const unsigned char reg_pos, t_pc *pc
 	pc->carry = (!*((int *)(pc->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry
 }
 
-void			core_lld(t_player *player, t_pc *pc, t_arena *arena)
+void			core_lld(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned short 	pos;
 	unsigned char	ocp;

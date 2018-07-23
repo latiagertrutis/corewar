@@ -19,7 +19,7 @@ static void		add_reg(t_pc *pc, const unsigned char reg1, const unsigned char reg
 	pc->pc = (pc->pc + 1 + 1 + 1 + 1 + 1) % MEM_SIZE;//ld + opc + reg1 + reg2 + reg3
 }
 
-void			core_sub(t_player *player, t_pc *pc, t_arena *arena)
+void			core_sub(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned short 	pos;
 	unsigned char	ocp;

@@ -12,7 +12,21 @@
 
 #include "corewar.h"
 
-static int 	take_live_nb(t_board *board)
+static void search_nb(t_player *players, int nb_players, int live_nb)
+{
+	int i;
+
+	i = 0;
+	while (i < nb_players)
+	{
+		if (players[i].player_nb == live_nb)
+			players[i].live_counter++;
+		i++;
+	}
+
+}
+
+static int 			take_live_nb(t_board *board)
 {
 	char rtn[4];
 
@@ -23,14 +37,15 @@ static int 	take_live_nb(t_board *board)
 	return((*(int *)rtn));
 }
 
-void	core_live(t_player *player, t_pc *pc, t_arena *arena)
+void				core_live(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned short	pos;
 	int 	live_nb;
 
 	pos = pc->pc;
 	live_nb = take_live_nb((arena->board) + pos + 1);
-	if (live_nb == (*((int *)(pc->reg[0]))))
-		player->live_counter++;
+	// if (live_nb == (*((int *)(pc->reg[0]))))
+		// player->live_counter++;
+	search_nb(data->players, data->n_players, live_nb);
 	pc->pc += 5;
 }
