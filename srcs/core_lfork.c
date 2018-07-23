@@ -27,7 +27,7 @@ static int 	charge_short(int size, t_arena *arena, int pc_pos)
 	return (*((unsigned short *)param));
 }
 
-void		core_lfork(t_player *player, t_pc *pc, t_arena *arena)
+void		core_lfork(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned short 	pc_i;
 	short			new_i;

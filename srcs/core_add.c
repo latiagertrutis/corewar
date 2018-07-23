@@ -20,7 +20,7 @@ static void		add_reg(t_pc *pc, const unsigned char reg1, const unsigned char reg
 	pc->carry = (!*((int *)(pc->reg[reg3]))) ? 0x1 : 0x0;//actualizar carry
 }
 
-void			core_add(t_player *player, t_pc *pc, t_arena *arena)
+void			core_add(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned short 	pos;
 	unsigned char	ocp;

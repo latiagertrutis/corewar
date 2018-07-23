@@ -50,7 +50,7 @@ static void	store_in_reg(unsigned char reg_pos1, unsigned char reg_pos2, t_pc *p
 	pc->pc = (pc->pc + 1 + 1 + 1 + 1) % MEM_SIZE;//ld + opc + reg1 + reg2
 }
 
-void		core_st(t_player *player, t_pc *pc, t_arena *arena)
+void		core_st(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned short 	pos;
 	unsigned char	ocp;

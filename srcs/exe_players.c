@@ -25,9 +25,9 @@ static void			exe_pc(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	else if (pc->wait_cycles == 1)
 	{
 		pc->wait_cycles--;
-		ft_printf("ejecutando %d\n", op_nb);
+		ft_printf("executing.. %d\n", op_nb);
 		if (op_nb <= 15)
-			data->func[op_nb](player, pc, arena);
+			data->func[op_nb](player, pc, arena, data);
 	}
 	else
 	{
@@ -145,7 +145,6 @@ void 				exe_players(t_data *data)
 //				exit(1);
 			}
 		}
-		check_live_count(data->players, data->n_players);
-		data->cycle_to_die -= CYCLE_DELTA;
+		check_live_count(data->players, data->n_players, data);
 	}
 }

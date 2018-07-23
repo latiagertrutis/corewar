@@ -90,7 +90,7 @@
 /* 	player->pc += 1 + param_size[0] + param_size[1] + param_size[2]; //mana + 1 */
 /* } */
 
-void			core_sti(t_player *player, t_pc *pc, t_arena *arena)
+void			core_sti(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned char	ocp;
 	t_arg			arg2;

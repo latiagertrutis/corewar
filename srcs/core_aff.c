@@ -26,7 +26,7 @@ static unsigned int to_big_endian(char *reg)
 	return (*((unsigned int *)param));
 }
 
-void		core_aff(t_player *player, t_pc *pc, t_arena *arena)
+void		core_aff(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 {
 	char 			reg_nb;
 	char 			reg_content;
