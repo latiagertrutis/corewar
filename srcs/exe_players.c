@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/22 15:26:50 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/23 13:24:54 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,10 +131,12 @@ void 				exe_players(t_data *data)
 //				check_live_count(data->players, data->n_players);
 			data->i++;
 			data->nb_cycles++;
-//			ft_draw_rack(data, data->arena->Graph->screen.screen);
 			ft_board_to_screen(data->arena->Graph, data->arena);
+			ft_draw_rack(data, data->arena->Graph->screen.screen);
 			ft_pcs_to_screen(data, data->arena->Graph, data->players);
 			set_back_to_front(data->arena->Graph, data->arena->Graph->screen.screen);
+//			if (data->i == 100)
+//				exit(1);
 		}
 		check_live_count(data->players, data->n_players);
 		data->cycle_to_die -= CYCLE_DELTA;
