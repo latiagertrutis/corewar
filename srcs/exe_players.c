@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/23 13:24:54 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/23 13:45:55 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,10 @@ void 				exe_players(t_data *data)
 	unsigned int j;
 	unsigned int k;
 	unsigned int t;
+	unsigned int pause;
 	SDL_Event	event;
 
+	pause = 1;
 	data->i = 0;
 	fill_r1(data);
 //	print_board(data, data->arena->board);
@@ -110,9 +112,13 @@ void 				exe_players(t_data *data)
 				{
 					if (event.key.keysym.sym == SDLK_ESCAPE)
 						data->arena->Graph->running = SDL_FALSE;
+					if (event.key.keysym.sym == SDLK_SPACE)
+						pause = pause ? 0 : 1;
 				}
 			}
 			// usleep(100);
+			if (pause)
+			{
 			j = 0;
 			while(j < data->n_players)
 			{
@@ -137,6 +143,7 @@ void 				exe_players(t_data *data)
 			set_back_to_front(data->arena->Graph, data->arena->Graph->screen.screen);
 //			if (data->i == 100)
 //				exit(1);
+			}
 		}
 		check_live_count(data->players, data->n_players);
 		data->cycle_to_die -= CYCLE_DELTA;
