@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 23:23:06 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/21 13:55:56 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/23 15:26:56 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void		core_st(t_player *player, t_pc *pc, t_arena *arena)
 		store_in_ram(player, arena->board, reg_pos1, pc);
 	else if (ocp == 0x50 && (reg_pos1 = (arena->board[(pos + 2) % MEM_SIZE].mem - 1)) < REG_NUMBER && (reg_pos2 = (arena->board[(pos + 3) % MEM_SIZE].mem - 1)) < REG_NUMBER)
 		store_in_reg(reg_pos1, reg_pos2, pc);
-	else
+	else if (!check_ocp(ocp))
 		pc->pc = (pc->pc + 1) % MEM_SIZE;
+	else
+		pc->pc = (pc->pc + 1 + get_size_arg(ocp, 0, 4) + get_size_arg(ocp, 1, 4)) % MEM_SIZE;
 }

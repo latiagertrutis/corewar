@@ -154,8 +154,9 @@ unsigned char		*get_mem_board(t_board *board, const unsigned int size);
 t_pc				*realloc_pc(t_player *player, t_pc *pc, const unsigned int nb_pc);
 unsigned char		get_size_arg(const unsigned char ocp, const unsigned char n_arg, const unsigned int dir_size);
 void				get_arg(const unsigned char ocp, unsigned short pos, t_board *board, t_arg *arg);
-void				get_arg_value(t_board *board, t_arg *arg, t_pc *pc);
+int					get_arg_value(t_board *board, t_arg *arg, t_pc *pc);
 int					ft_mod(const int nb, const unsigned int mod);
+unsigned char		check_ocp(const unsigned char ocp);
 
 //Anyadidas Jaume
 int					ft_set_flags(int argn, char **argv);
