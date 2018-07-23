@@ -6,15 +6,17 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/19 15:33:14 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/07/20 13:51:33 by jagarcia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re check_lib
 
 NAME = prueba
 
 CFLAGS = #-fsanitize=address #-Wall -Wextra -Werror -g3
+
+SDLFLAGS = `sdl2-config --cflags` `sdl2-config --libs` -lSDL2_ttf -lpthread
 
 CC = gcc
 
@@ -33,6 +35,7 @@ FUNCS =	main.c \
 		print_board.c \
 		exe_players.c \
 		check_live_count.c \
+		flags.c \
 		get_mem_board.c \
 		fill_r1.c \
 		realloc_pc.c \
@@ -58,8 +61,19 @@ FUNCS =	main.c \
 		core_lldi.c
 
 
+GRAPH = ft_ini_graphics.c \
+		ft_quit_graphics.c \
+		ft_SDL_error.c \
+		ft_ini_interface.c \
+		ft_ini_font.c \
+		ft_board_to_screen.c \
+		ft_pcs_to_screen.c \
+		ft_write_byte.c \
+		ft_draw_rack.c
 
 SRCS_DIR = srcs/
+
+GRAPH_DIR = srcs_graphics/
 
 INC_DIR = includes/
 
@@ -69,24 +83,46 @@ LIBFT_NAME = libft.a
 
 OBJ_DIR = objects/
 
-OBJ = $(patsubst %.c, $(OBJ_DIR)%.o,$(FUNCS))
+OBJ_FUNCS = $(patsubst %.c, $(OBJ_DIR)%.o,$(FUNCS))
+
+OBJ_GRAPH = $(patsubst %.c, $(OBJ_DIR)%.o, $(GRAPH))
 
 INC = $(wildcard $(INC_DIR)*.h)
 
+OBJ = $(OBJ_FUNCS) $(OBJ_GRAPH)
+
+MODE = 0
+
+ifeq ($(MODE), 1)
 all: $(NAME)
 
-.PHONY: $(LIBFT_DIR)$(LIBFT_NAME)
+$(NAME): $(OBJ)
+	@$(CC) $(OBJ) $(SDLFLAGS) -L$(LIBFT_DIR) -lft -o $(NAME)
 
-$(NAME): $(OBJ) | $(LIBFT_DIR)$(LIBFT_NAME)
-	@$(CC) $(OBJ) -L$(LIBFT_DIR) -lft -o $(NAME)
-
-$(OBJ_DIR)%.o: $(SRCS_DIR)%.c $(INC)
+$(OBJ_DIR)%.o: $(SRCS_DIR)%.c $(INC) $(LIBFT_DIR)$(LIBFT_NAME)
 	@mkdir -p $(OBJ_DIR)
 	@printf "\033[92m--->Compiling $(@F)\033[0m"
-	@$(CC) $(CFLAGS) -c $< -I $(INC_DIR) -o $@
+	@$(CC) $(CFLAGS) -c $< -I $(INC_DIR) -I$(LIBFT_DIR)includes/ -o $@
 	@printf "\033[92m   [OK]\n\033[0m"
 
-$(LIBFT_DIR)$(LIBFT_NAME):
+$(OBJ_DIR)%.o: $(GRAPH_DIR)%.c $(INC) $(LIBFT_DIR)$(LIBFT_NAME)
+	@mkdir -p $(OBJ_DIR)
+	@printf "\033[92m--->Compiling $(@F)\033[0m"
+	@$(CC) $(CFLAGS) -c $< -I $(INC_DIR) -I$(LIBFT_DIR)includes/ -o $@
+	@printf "\033[92m   [OK]\n\033[0m"
+else
+$(NAME) : |check_lib $(OBJ)
+
+$(OBJ_DIR)%.o : $(SRCS_DIR)%.c $(INC) $(LIBFT_DIR)$(LIBFT_NAME)
+	@printf "\033[92mCreating $(NAME)\033[0m\n"
+	@$(MAKE) MODE=1
+	@printf "\033[92mDone $(NAME) [OK]\n\033[0m"
+$(OBJ_DIR)%.o : $(GRAPH_DIR)%.c $(INC) $(LIBFT_DIR)$(LIBFT_NAME)
+	@printf "\033[92mCreating $(NAME)\033[0m\n"
+	@$(MAKE) MODE=1
+	@printf "\033[92mDone $(NAME) [OK]\n\033[0m"
+endif
+check_lib:
 	@$(MAKE) -sC $(LIBFT_DIR)
 
 clean:
