@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/23 13:45:55 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/23 23:18:55 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,9 @@ void 				exe_players(t_data *data)
 	unsigned int t;
 	unsigned int pause;
 	SDL_Event	event;
+	int			step;
 
+	step = 0;
 	pause = 1;
 	data->i = 0;
 	fill_r1(data);
@@ -104,6 +106,7 @@ void 				exe_players(t_data *data)
 		t = 0;
 		while (t < data->cycle_to_die && data->arena->Graph->running)
 		{
+			step = 0;
 			while (SDL_PollEvent(&event))
 			{
 				if (event.type == SDL_QUIT)
@@ -112,24 +115,31 @@ void 				exe_players(t_data *data)
 				{
 					if (event.key.keysym.sym == SDLK_ESCAPE)
 						data->arena->Graph->running = SDL_FALSE;
-					if (event.key.keysym.sym == SDLK_SPACE)
+					else if (event.key.keysym.sym == SDLK_SPACE)
 						pause = pause ? 0 : 1;
+					else if (event.key.keysym.sym == SDLK_RIGHT)
+						step = 1;
+
 				}
+//				else if (event.type == SDL_KEYUP)
+//					if (event.key.keysym.sym == SDLK_RIGHT)
+//						step = 0;
+
 			}
 			// usleep(100);
-			if (pause)
+			if (pause || step)
 			{
 			j = 0;
-			while(j < data->n_players)
-			{
-				k = 0;
-				while (k < data->players[j].nb_pc)
+//			while(j < data->n_players)
+//			{
+				k = data->players[j].nb_pc;
+				while (k)
 				{
-					exe_pc((data->players) + j, (data->players[j].pc) + k, data->arena, data);
-					k++;
+					exe_pc((data->players) + j, (data->players[j].pc) + k - 1, data->arena, data);
+					k--;
 				}
-				j++;
-			}
+//				j++;
+//			}
 			t++;
 //			write(1, "\x1b[H\x1b[2J", 7);
 //			print_board(data, data->arena->board);

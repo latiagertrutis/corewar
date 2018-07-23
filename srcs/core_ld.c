@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 03:43:25 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/23 15:26:58 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/23 22:27:47 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ static void		load_direct(t_board *board, const unsigned char reg_pos, t_pc *pc)
 		pc->reg[reg_pos][i] = board[(pos + i) % MEM_SIZE].mem;
 		i++;
 	}
+	ft_printf("\n****** ld (DIR)*******\nreg_pos: %u\ncont: ", reg_pos);
+	print_memory(pc->reg[reg_pos], 4, 4, 1);
+	ft_printf("*******************\n");
 	pc->pc = (pc->pc + 1 + 1 + 1 + DIR_SIZE) % MEM_SIZE;//ld + opc + reg + dir
 	pc->carry = (!*((int *)(pc->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry
 }
@@ -56,6 +59,9 @@ static void		load_indirect(t_board *board, const unsigned char reg_pos, t_pc *pc
 		pc->reg[reg_pos][i] = board[ft_mod((i + pc->pc + (*((short *)board_pos) % IDX_MOD)), MEM_SIZE)].mem;
 		i++;
 	}
+	ft_printf("\n****** ld (IND)*******\nInd: %u\nreg_pos: %u\ncont: ", *((short *)board_pos), reg_pos);
+	print_memory(pc->reg[reg_pos], 4, 4, 1);
+	ft_printf("*******************\n");
 	pc->pc = (pc->pc + 1 + 1 + 1 + IND_SIZE) % MEM_SIZE;//ld + opc + reg + ind
 	pc->carry = (!*((int *)(pc->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry
 }
@@ -74,12 +80,12 @@ void			core_ld(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	else if (ocp == 0xD0 && (reg_pos = arena->board[((pos + 2) + IND_SIZE) % MEM_SIZE].mem - 1) < REG_NUMBER)
 		load_indirect(arena->board, reg_pos, pc);
 	else if (!check_ocp(ocp))
-		pc->pc = (pc->pc + 1) % MEM_SIZE;
+		pc->pc = (pc->pc + 2) % MEM_SIZE;
 	else
-		pc->pc = (pc->pc + 1 + get_size_arg(ocp, 0, 4) + get_size_arg(ocp, 1, 4)) % MEM_SIZE;
+		pc->pc = (pc->pc + 1 + get_size_arg(ocp, 0, 4) + get_size_arg(ocp, 1, 4) + get_size_arg(ocp, 2, 4)) % MEM_SIZE;
 
 //	load_data(player, arena->board, ++pos, ocp);
-	print_memory(pc->reg[(*(arena->board + (pos + 2) + IND_SIZE)).mem - 1], 4, 16, 1);
+//	print_memory(pc->reg[(*(arena->board + (pos + 2) + IND_SIZE)).mem - 1], 4, 16, 1);
 //	print_memory(pc->reg[(*(arena->board + (pos + 2) + REG_SIZE)).mem - 1], 4, 16, 1);
 //	exit(1);
 }

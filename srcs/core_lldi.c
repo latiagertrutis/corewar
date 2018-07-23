@@ -6,11 +6,18 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 17:56:52 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/23 15:34:08 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/23 21:08:01 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+static int			verify_ocp(const unsigned char ocp)
+{
+	if ((0x30 & ocp) == 0x30 || (0xC & ocp) == 0x8 || (0xC & ocp) == 0xC)
+		return (0);
+	return (1);
+}
 
 void	core_lldi(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 {
@@ -34,11 +41,11 @@ void	core_lldi(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	print_memory(arg2.arg, 4, 4, 1);
 	if (!arg1.len || !arg2.len || arg2.type == IND_CODE)
 	{
-		pc->pc = (pc->pc + 1) % MEM_SIZE;
+		pc->pc = (pc->pc + 2) % MEM_SIZE;
 		return ;
 	}
 	reg_pos = arena->board[(pc->pc + ((2 + arg1.len + arg2.len))) % MEM_SIZE].mem - 1;
-	if (get_arg_value(arena->board, &arg1, pc) && get_arg_value(arena->board, &arg2, pc))
+	if (verify_ocp(ocp) && get_arg_value(arena->board, &arg1, pc) && get_arg_value(arena->board, &arg2, pc))
 	{
 		invert_bytes(arg1.arg, arg1.type == DIR_CODE ? 2 : 4);//apnar pa registro
 		invert_bytes(arg2.arg, arg2.type == DIR_CODE ? 2 : 4);
@@ -58,5 +65,5 @@ void	core_lldi(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 			i++;
 		}
 	}
-	pc->pc = (pc->pc + 1 + 1 + arg1.len + arg2.len + 1) % MEM_SIZE;//and + ocp + arg1 + arg2 + rg
+	pc->pc = (pc->pc + 1 + 1 + arg1.len + arg2.len + get_size_arg(ocp, 2, 0)) % MEM_SIZE;//and + ocp + arg1 + arg2 + rg
 }
