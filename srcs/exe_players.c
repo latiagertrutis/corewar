@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/24 18:56:31 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/24 18:59:13 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void 				exe_players(t_data *data)
 						data->mods->step = 0;
 			}
 			// usleep(100);
-			if (data->mods->pause || data->mods->step)
+			if (!data->mods->pause || data->mods->step)
 			{
 				j = 0;
 //				while(j < data->n_players)

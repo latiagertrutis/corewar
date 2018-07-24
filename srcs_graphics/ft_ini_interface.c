@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 06:40:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/24 18:47:03 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/24 19:36:36 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void				ini_rack(t_sdl *Graph)
 	Graph->square->y = 0;
 	Graph->square->w = square_dim[0];
 	Graph->square->h = square_dim[1];
-	draw_rack((int[2]){64, 64}, Graph, 0);
+//	draw_rack((int[2]){64, 64}, Graph, 0);
 }
 
 void				ft_ini_interface(t_sdl *Graph)
