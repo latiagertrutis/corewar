@@ -2,7 +2,7 @@
 .comment "I'M ALIIIIVE"
 
 cosa:
-			ld %-1, r7
-			st r7, 260
-			ldi %-1, %-2, r2
-			st r2, 200
+	ld	%100, r2
+	ld	%200, r3
+	ld	%-3, r6
+	sti	r2, r6, r3

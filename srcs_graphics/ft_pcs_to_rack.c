@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 07:37:31 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/24 18:43:16 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/24 18:54:09 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static Uint32	take_color_pc(int id, SDL_PixelFormat *format)
 
 	mod = 5;
 	if (!id)
-		return (SDL_MapRGBA(format, 51, 255, 51, 255));
+		return (SDL_MapRGBA(format, 51, 255, 51, 50));
 	else if (id == 1)
 		return (SDL_MapRGBA(format, 255, 204, 0, 255));
 	else if (id == 2)
@@ -53,11 +53,16 @@ void	ft_pcs_to_rack(unsigned int n_players, t_sdl *Graph, t_player *players)
 //			SDL_FillRect(Graph->rack, &pc_rect, color);
 
 			SDL_LockTexture(Graph->screen.texture, &pc_rect, (void **)&pixel, &pitch);
-			for(int d = 0; d < pc_rect.h; d++)
-			{
-				for(int k = 0; k < pc_rect.w; k++)
-					pixel[d * pitch / 4 + k] = color;
-			}
+//			for(int d = 0; d < pc_rect.h; d++)
+//			{
+			int d;
+			d = 1;
+			for(int k = 0; k < pc_rect.w; k++)
+				pixel[d * pitch / 4 + k] = color;
+			d = pc_rect.h - 1;
+			for(int k = 0; k < pc_rect.w; k++)
+				pixel[d * pitch / 4 + k] = color;
+//			}
 			SDL_UnlockTexture(Graph->screen.texture);
 			
 			j++;

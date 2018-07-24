@@ -6,13 +6,13 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 17:17:57 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/19 15:55:16 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/23 14:19:18 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void			get_arg_value(t_board *board, t_arg *arg, t_pc *pc)
+int			get_arg_value(t_board *board, t_arg *arg, t_pc *pc)
 {
 	unsigned char	aux[MAX_ARG_LEN];
 	unsigned char	i;
@@ -21,6 +21,8 @@ void			get_arg_value(t_board *board, t_arg *arg, t_pc *pc)
 	if (arg->type == REG_CODE)
 	{
 		aux[0] = arg->arg[0];
+		if (aux[0] > 16)
+			return (0);
 		while (i < REG_SIZE)
 		{
 			arg->arg[i] = pc->reg[aux[0] - 1][i];
@@ -37,4 +39,5 @@ void			get_arg_value(t_board *board, t_arg *arg, t_pc *pc)
 			i++;
 		}
 	}
+	return (1);
 }

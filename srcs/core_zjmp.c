@@ -6,37 +6,39 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 05:25:36 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/22 13:16:57 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/23 17:10:16 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static 	int charge_short(int size, t_arena *arena, int pc_pos)
+static 	short charge_short(t_board *board, unsigned short pc_pos)
 {
 	int 	i;
-	char	param[size];
+	char	param[2];
 
 	i = 0;
-	while(i < size)
+	while(i < 2)
 	{
-		param[size - 1 - i] = arena->board[(pc_pos + i) % MEM_SIZE].mem;
+		param[2 - 1 - i] = board[(pc_pos + i) % MEM_SIZE].mem;
 		i++;
 	}
-	print_memory(param, size, size, 1);
+	print_memory(param, 2, 2, 1);
 //	exit(1);
-	return (*((unsigned short *)param));
+	return (*((short *)param));
 }
 
-void	core_zjmp(t_player *player, t_pc *pc, t_arena *arena)
+void	core_zjmp(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned short index;
+	unsigned short pos;
 
 	// pc->carry = 1;
-	if (pc->carry == 1)
+	if (pc->carry == 0x1)
 	{
-		index = charge_short(2, arena,  (((pc->pc) + 1) % MEM_SIZE));
-		pc->pc = ft_mod(pc->pc + (short)index, MEM_SIZE);
+		pos = pc->pc;
+		index = charge_short(arena->board,  pos + 1);
+		pc->pc = ft_mod(pc->pc + charge_short(arena->board, pos + 1), MEM_SIZE);
 	}
 	else
 		pc->pc = (pc->pc + 1 + 2) % MEM_SIZE;//zjmp + D2

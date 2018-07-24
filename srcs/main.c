@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 20:48:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/24 18:29:05 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/24 18:56:45 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,11 @@ int main(int ac, char **av)
 {
 	t_data		data;
 
-//	if (ac < 2 || ac > 5)
-//		put_usage();
-//	data = (t_data){CYCLE_TO_DIE, ac - 1, NULL, NULL, {"\033[0m", "\033[38;5;1m", "\033[38;5;2m",
+//	data = (t_data){0, CYCLE_TO_DIE, ac - 1, NULL, NULL, {"\033[0m", "\033[38;5;1m", "\033[38;5;2m",
 //	   		"\033[38;5;3m", "\033[38;5;4m"}, {{0, 0, {0}, 0, 0, 0, 0, 0}}, 0, {0}};
-	SDL_RendererInfo	info;
-
 //	if (ac < 2 || ac > 5)
 //		put_usage();
-	data = (t_data){CYCLE_TO_DIE, 1, NULL, NULL, {"\033[0m", "\033[38;5;1m", "\033[38;5;2m",
+	data = (t_data){0, CYCLE_TO_DIE, 1, NULL, NULL, {"\033[0m", "\033[38;5;1m", "\033[38;5;2m",
 		"\033[38;5;3m", "\033[38;5;4m"}, {{0, 0, {0}, 0, 0, 0, 0, 0}},
 	                0, 0, 0, NULL, {0}};
 	data.flags = ft_set_flags(ac, av);
