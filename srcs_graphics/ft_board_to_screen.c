@@ -6,97 +6,89 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 04:10:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/23 13:23:18 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/24 18:42:40 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void			take_hexa_byte(unsigned char byte, char hexa[3])
+static int			take_hexa_byte(unsigned char byte, char hexa_byte[3])
 {
 	char			*hexa_characters;
 
-	 hexa_characters = "0123456789ABCDEF";
-	 hexa[0] = hexa_characters[byte / 16];
-	 hexa[1] = hexa_characters[byte % 16];
-	 hexa[2] = 0;
+	hexa_characters = "0123456789ABCDEF";
+	hexa_byte[0] = hexa_characters[byte / 16];
+	hexa_byte[1] = hexa_characters[byte % 16];
+	hexa_byte[2] = 0;
+	return (byte);
 }
 
-static SDL_Color	take_color_byte(int id)
+static int			take_color_byte(t_board byte)
 {
-	if (id == 1)
-		return ((SDL_Color){51, 255, 51, SDL_ALPHA_OPAQUE});
-	else if (id == 2)
-		return ((SDL_Color){255, 204, 0, SDL_ALPHA_OPAQUE});
-	else if (id == 3)
-		return ((SDL_Color){0xFF, 0xF2, 0xCF, SDL_ALPHA_OPAQUE});
-	else if (id == 4)
-		return ((SDL_Color){252, 102, 92, SDL_ALPHA_OPAQUE});
-	else
-		return ((SDL_Color){89, 89, 75, SDL_ALPHA_OPAQUE});
-}
-
-static void			text_to_texture(t_sdl *Graph, char *pixel, int pitch)
-{
-	int	i;
-
-	i = 0;
-	SDL_LockSurface(Graph->rack_square);
-//	for(int j = 0; j < surf_byte->h; j++)
-//		memcpy(pixel + (Graph->square->x + 1) * pitch / Graph->big_square->w + (Graph->square->y + 1) * pitch + j * pitch, surf_byte->pixels + j * surf_byte->pitch, surf_byte->pitch);
-	while (i < Graph->rack_square->h)
+	if (!byte.new)
 	{
-		ft_memcpy(pixel + (Graph->square->x) * pitch / Graph->big_square->w +
-			(Graph->square->y) * pitch + i * pitch,
-			Graph->rack_square->pixels + i * Graph->rack_square->pitch,
-			Graph->rack_square->pitch);
-//		ft_memcpy(pixel + i * pitch, Graph->rack_square->pixels + i * Graph->rack_square->pitch, Graph->rack_square->pitch);
-		i++;
+		if (byte.id == 1)
+			return (0);
+		else if (byte.id == 2)
+			return (1);
+		else if (byte.id == 3)
+			return (2);
+		else if (byte.id == 4)
+			return (3);
+		else
+			return (4);
 	}
-	SDL_UnlockSurface(Graph->rack_square);
+	else
+	{
+		if (byte.id == 1)
+			return (5);
+		else if (byte.id == 2)
+			return (6);
+		else if (byte.id == 3)
+			return (7);
+		else
+			return (8);
+	}
 }
 
-static void			write_byte(int pos, t_arena *arena, char *pixel, int pitch)
+static void			write_byte(int pos, t_board board[MEM_SIZE], t_sdl *Graph)
 {
 	char		hexa_byte[3];
 	SDL_Surface *surf_byte;
-	SDL_Color	color;
-	t_sdl		*Graph;
 	SDL_Surface *tmp;
 
-	Graph = arena->Graph;
-	color = take_color_byte(arena->board[pos].id);
-	take_hexa_byte(arena->board[pos].mem, hexa_byte);
-	SDL_FillRect(Graph->rack_square, NULL,
-		SDL_MapRGBA(Graph->rack_square->format, 0x3D, 0x3D, 0x33, 0xFF));
-	if (!(surf_byte = TTF_RenderUTF8_Blended(Graph->font_info.font, hexa_byte,
-		color)))
-		ft_SDL_error("TTF_RenderUTF8_Blended", MODE_TTF);
-	Graph->square->x = (Graph->square->w - 1) * (pos % Graph->cuant_squares[0]) + 1;
-	Graph->square->y = (Graph->square->h - 1) * (pos / Graph->cuant_squares[1]) + 1;
-	tmp = SDL_ConvertSurfaceFormat(surf_byte, 372645892, 0);
-	SDL_FreeSurface(surf_byte);
-	SDL_BlitSurface(tmp, NULL, Graph->rack_square,
-		&(SDL_Rect){(Graph->rack_square->w - tmp->w) / 2,
-		(Graph->rack_square->h - tmp->h) / 2,
+	Graph->square->x = (Graph->square->w - 1) * (pos % Graph->cuant_squares[0]);
+	Graph->square->y = (Graph->square->h - 1) * (pos / Graph->cuant_squares[1]);
+	surf_byte = Graph->hexa_bytes[take_color_byte(board[pos])]
+		[take_hexa_byte(board[pos].mem, hexa_byte)];
+	if (!(tmp = SDL_ConvertSurfaceFormat(surf_byte, 372645892, 0)))
+		ft_SDL_error("SDL_ConvertSurfaceFormat", MODE_SDL);
+	SDL_BlitSurface(tmp, NULL, Graph->rack,
+		&(SDL_Rect){Graph->square->x + 1, Graph->square->y + 1,
 		tmp->w, tmp->h});
-	SDL_BlitSurface(Graph->rack_square, NULL, Graph->rack, &(SDL_Rect){Graph->square->x, Graph->square->y, Graph->rack_square->w, Graph->rack_square->h});
 	SDL_FreeSurface(tmp);
-//	SDL_LockTexture(Graph->screen.texture, &(SDL_Rect){Graph->square->x, Graph->square->y, Graph->rack_square->w + 10, Graph->rack_square->h + 10}, (void **)&pixel, &pitch);
-//	text_to_texture(Graph, pixel, pitch);
-//	SDL_UnlockTexture(Graph->screen.texture);
 }
 
-void	ft_board_to_screen(t_sdl *Graph, t_arena *arena)
+void	ft_board_to_screen(t_sdl *Graph, t_board board[MEM_SIZE], t_data *data)
 {
 	int			i;
 	char		*pixel;
 	int			pitch;
+	SDL_Surface	*rack;
+	SDL_Texture	*texture;
 
 	i = 0;
-//	SDL_LockTexture(Graph->screen.texture, NULL, (void **)&pixel, &pitch);
-//	usleep(10000);
 	while (i < MEM_SIZE)
-		write_byte(i++, arena, pixel, pitch);
-//	SDL_UnlockTexture(Graph->screen.texture);
+		write_byte(i++, board, Graph);
+	rack = Graph->rack;
+	texture = Graph->screen.texture;
+	SDL_LockTexture(Graph->screen.texture, NULL, (void **)&pixel, &pitch);
+	SDL_LockSurface(rack);
+	i = -1;
+	while (++i < rack->h)
+		memcpy(pixel + i * pitch, rack->pixels + i * rack->pitch,
+			rack->pitch);
+	SDL_UnlockSurface(rack);
+	SDL_UnlockTexture(Graph->screen.texture);
+	ft_pcs_to_rack(data->n_players, Graph, data->players);
 }

@@ -6,12 +6,26 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 20:48:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/23 13:26:39 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/24 18:29:05 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include <stdio.h> //printf !!
+
+static t_mods		*ini_mods(int flags)
+{
+	t_mods *mods;
+	
+	if (!(mods = (t_mods *)ft_memalloc(sizeof(t_mods))))
+		ft_error("Error malloc ini_mods\n");
+	mods->running = 0x1;
+	if (ft_check_flags(flags, 'f'))
+		mods->fullscreen = 0x1;
+	if (ft_check_flags(flags, 'v'))
+		mods->visual = 0x1;
+	return (mods);
+}
 
 int main(int ac, char **av)
 {
@@ -27,19 +41,20 @@ int main(int ac, char **av)
 //		put_usage();
 	data = (t_data){CYCLE_TO_DIE, 1, NULL, NULL, {"\033[0m", "\033[38;5;1m", "\033[38;5;2m",
 		"\033[38;5;3m", "\033[38;5;4m"}, {{0, 0, {0}, 0, 0, 0, 0, 0}},
-	                0, 0, 0, {0}};
+	                0, 0, 0, NULL, {0}};
 	data.flags = ft_set_flags(ac, av);
+	data.mods = ini_mods(data.flags);
 	if (!init_corewar(&data))
 		ft_error("malloc failed");
 	take_champions(&data, av);
 	put_champs_to_arena(&data);
-	ft_ini_interface(data.arena->Graph);
-	ft_ini_font(data.arena->Graph);
-	SDL_GetRendererInfo(data.arena->Graph->screen.Renderer, &info);
-	ft_printf("Name = %s\nflags = %x\nnum texture formats = %x\ntexture formats[0]] = \t%b\nsizeof SDL_Surface %i\n", info.name, info.flags, info.num_texture_formats, info.texture_formats[0], sizeof(SDL_Surface));
-//	SDL_RenderPresent(data.arena->Graph->screen.Renderer);
+//	ft_ini_interface(data.arena->Graph);
+//	ft_ini_font(data.arena->Graph);
+//	SDL_GetRendererInfo(data.arena->Graph->screen.Renderer, &info);
+//	ft_printf("Name = %s\nflags = %x\nnum texture formats = %x\ntexture formats[0]] = \t%b\nsizeof SDL_Surface %i\n", info.name, info.flags, info.num_texture_formats, info.texture_formats[0], sizeof(SDL_Surface));
 	exe_players(&data);
-	ft_quit_graphics(data.arena->Graph);
+	if (data.mods->visual)
+		ft_quit_graphics(data.arena->Graph);
 	free(data.arena);
 	free_players(data.players, data.n_players);
 	return (0);

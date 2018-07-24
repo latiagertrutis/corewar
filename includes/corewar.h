@@ -33,10 +33,10 @@ typedef struct		s_arg
 #define BOTTOM_BORDER 0.0328
 #define UPPER_BORDER 0.033
 #define RIGHT_BORDER 0.0180
-#define BACK_COLOR 28, 28, 21,
+//#define BACK_COLOR 28, 28, 21,
+#define BACK_COLOR 0, 0, 0,
 #define FIELD_COLOR 61, 61, 51,
 typedef struct s_sdl {
-	SDL_bool running;
 	struct {
 		int w;
 		int h;
@@ -44,7 +44,6 @@ typedef struct s_sdl {
 		SDL_Window *window;
 		SDL_Renderer *Renderer;
 		SDL_Texture *texture;
-		SDL_Surface *screen;
 	} screen;
 	int			cuant_squares[2];
 	struct {
@@ -52,9 +51,8 @@ typedef struct s_sdl {
 		int		w;
 		int		h;
 	} font_info;
-	SDL_Surface	*character_buffer;
+	SDL_Surface ***hexa_bytes;
 	SDL_Surface *rack;
-	SDL_Surface *rack_square;
 	SDL_Rect *square;
 	SDL_Rect *big_square;
 } t_sdl;
@@ -63,6 +61,7 @@ typedef struct 		s_board
 {
 	unsigned char 	mem;
 	char			id;
+	unsigned int	new : 1;
 }					t_board;
 
 typedef struct 		s_arena
@@ -108,6 +107,15 @@ typedef struct		s_op
 	int				n2;
 }					t_op;
 
+typedef struct		s_mods
+{
+	unsigned int	running : 1;
+	unsigned int	pause : 1;
+	unsigned int	step : 1;
+	unsigned int	visual : 1;
+	unsigned int	fullscreen : 1;
+}					t_mods;
+
 typedef struct		s_data
 {
 	unsigned int 	cycle_to_die;
@@ -119,6 +127,7 @@ typedef struct		s_data
 	unsigned int	nb_cycles;
 	int				flags;
 	int				i;
+	t_mods			*mods;
 	void			(*func[16])(t_player *, t_pc *, t_arena *);
 }					t_data;
 
@@ -187,13 +196,13 @@ void				core_aff(t_player *player, t_pc *pc, t_arena *arena);
 */
 
 
-void		ft_ini_graphics(t_sdl **Graph, int flags);
+void		ft_ini_graphics(t_sdl **Graph, t_mods *mods);
 void		ft_quit_graphics(t_sdl *Graph);
 void		ft_SDL_error(char *str, int mode);
 void		ft_ini_interface(t_sdl *Graph);
 void		ft_ini_font(t_sdl *Graph);
-void		ft_board_to_screen(t_sdl *Graph, t_arena *arena);
-void		ft_pcs_to_screen(t_data *data, t_sdl *Graph, t_player *players);
-void		ft_write_byte(int pos, t_arena *arena, char *pixel, int pitch);
-void		ft_draw_rack(t_data *data, SDL_Surface *screen);
+void		ft_board_to_screen(t_sdl *Graph, t_board board[MEM_SIZE], t_data *data);
+void		ft_pcs_to_rack(unsigned int n_players, t_sdl *Graph, t_player *players);
+void			ft_set_back_to_front(t_sdl *Graph);
+
 #endif

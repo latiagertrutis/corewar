@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 05:20:16 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/22 13:03:01 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/24 18:41:41 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "corewar.h"
@@ -20,11 +20,10 @@ static t_sdl	*ini_graph(void)
 	Graph->screen.w = SCREEN_W;
 	Graph->screen.h = SCREEN_H;
 	Graph->screen.name = SCREEN_NAME;
-	Graph->running = SDL_TRUE;
 	return (Graph);
 }
 
-void ft_ini_graphics(t_sdl **Graph, int flags)
+void ft_ini_graphics(t_sdl **Graph, t_mods *mods)
 {
 	*Graph = ini_graph();
 	if (SDL_Init(SDL_INIT_EVERYTHING))
@@ -35,8 +34,7 @@ void ft_ini_graphics(t_sdl **Graph, int flags)
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, (*Graph)->screen.w,
 			(*Graph)->screen.h, SDL_WINDOW_RESIZABLE)))
 		ft_SDL_error("SDL_CreateWindow", MODE_SDL);
-	if (ft_check_flags(flags, 'f') &&
-			SDL_SetWindowFullscreen((*Graph)->screen.window,
+	if (mods->fullscreen && SDL_SetWindowFullscreen((*Graph)->screen.window,
 			SDL_WINDOW_FULLSCREEN_DESKTOP))
 		ft_SDL_error("SDL_SetWindowFullscreen", MODE_SDL);
 	SDL_GetWindowSize((*Graph)->screen.window, &((*Graph)->screen.w),
@@ -48,8 +46,6 @@ void ft_ini_graphics(t_sdl **Graph, int flags)
 	if (SDL_SetRenderDrawColor((*Graph)->screen.Renderer, BACK_COLOR
 			SDL_ALPHA_OPAQUE))
 		ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
-	SDL_RenderClear((*Graph)->screen.Renderer);
-	SDL_RenderPresent((*Graph)->screen.Renderer);
-	SDL_RenderClear((*Graph)->screen.Renderer);
-	SDL_RenderPresent((*Graph)->screen.Renderer);
+	ft_ini_interface(*Graph);
+	ft_ini_font(*Graph);
 }

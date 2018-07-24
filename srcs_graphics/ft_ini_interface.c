@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 06:40:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/22 12:14:44 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/24 18:47:03 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,23 @@ static void		draw_rack(int cuant_squares[2], t_sdl *Graph, int first_col)
 	int j;
 	int	k;
 
-	if (!(Graph->rack = SDL_CreateRGBSurfaceWithFormat(0, Graph->screen.w - (Graph->screen.w * RIGHT_BORDER) - (Graph->screen.w * LEFT_BORDER), Graph->screen.h - (Graph->screen.h * UPPER_BORDER) - Graph->screen.h * BOTTOM_BORDER, 32, 372645892)))
-		ft_SDL_error("SDL_CreateRGBSurface", MODE_SDL);
-	SDL_FillRect(Graph->rack, NULL, SDL_MapRGBA(Graph->rack->format, 0, 0xFF, 0, 255));
-	k = cuant_squares[1];
+	k = cuant_squares[1] - 1;
 	i = cuant_squares[0];
 	j = -1;
-		if (SDL_SetRenderDrawColor(Graph->screen.Renderer, BACK_COLOR
-			SDL_ALPHA_OPAQUE))
-	ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
 	while (++j < MEM_SIZE)
 	{
-		if (k && !i)
+		if (--k && !i)
 		{
 			Graph->square->y += Graph->square->h - 1;
 			Graph->square->x = first_col;
 			i = cuant_squares[0];
-			k--;
 		}
-//		if (SDL_RenderDrawRect(Graph->screen.Renderer, Graph->square))
-		if (SDL_FillRect(Graph->rack, Graph->square, SDL_MapRGBA(Graph->rack->format, 0x1C, 0x1C, 0x15, 0xFF)))
-//			ft_SDL_error("SDL_RenderDrawRect", MODE_SDL);
-//		if (SDL_FillRect(Graph->rack, Graph->square, SDL_MapRGBA(Graph->rack->format, 0xFF, 0x00, 0x00, 0xFF)))
+		if (SDL_FillRect(Graph->rack, Graph->square,
+				SDL_MapRGBA(Graph->rack->format, BACK_COLOR SDL_ALPHA_OPAQUE)))
 			ft_SDL_error("SDL_RenderDrawRect", MODE_SDL);
-		if (SDL_FillRect(Graph->rack, &(SDL_Rect){Graph->square->x + 1, Graph->square->y + 1, Graph->square->w - 2, Graph->square->h - 2}, SDL_MapRGBA(Graph->rack->format, 0x3D, 0x3D, 0x33, 0xFF)))
+		if (SDL_FillRect(Graph->rack, &(SDL_Rect){Graph->square->x + 1,
+				Graph->square->y + 1, Graph->square->w - 2, Graph->square->h - 2}
+				,SDL_MapRGBA(Graph->rack->format, FIELD_COLOR SDL_ALPHA_OPAQUE)))
 			ft_SDL_error("SDL_RenderDrawRect", MODE_SDL);
 		Graph->square->x += Graph->square->w - 1;
 		i--;
@@ -94,21 +87,21 @@ static void				ini_rack(t_sdl *Graph)
 
 void				ft_ini_interface(t_sdl *Graph)
 {
-	if (!(Graph->screen.screen = SDL_CreateRGBSurfaceWithFormat(0, Graph->screen.w, Graph->screen.h, 32, 372645892)))
-				ft_SDL_error("SDL_CreateRGBSurface", MODE_SDL);
-	if (MEM_SIZE <= 4096)
-		ini_rack(Graph);
-	else
-		ini_big_rack(Graph);
-	Graph->rack_square = SDL_CreateRGBSurfaceWithFormat(0, Graph->square->w - 2,
-			Graph->square->h - 2, 32, Graph->rack->format->format);
 	if (!(Graph->big_square = (SDL_Rect *)malloc(sizeof(SDL_Rect))))
 		ft_error("Error malloc ft_ini_interface\n");
 	Graph->big_square->x = Graph->screen.w * RIGHT_BORDER;
 	Graph->big_square->y = Graph->screen.h * UPPER_BORDER;
 	Graph->big_square->w = Graph->screen.w * (1 - RIGHT_BORDER - LEFT_BORDER);
 	Graph->big_square->h = Graph->screen.h * (1 - UPPER_BORDER - BOTTOM_BORDER);
-	ft_printf("caca = %i\n",Graph->big_square->w);
-	if (!(Graph->screen.texture = SDL_CreateTexture(Graph->screen.Renderer, 372645892, SDL_TEXTUREACCESS_STREAMING, Graph->big_square->w, Graph->big_square->h)))
+	if (!(Graph->rack = SDL_CreateRGBSurfaceWithFormat(0, Graph->big_square->w,
+			Graph->big_square->h, 32, 372645892)))
+		ft_SDL_error("SDL_CreateRGBSurface", MODE_SDL);
+	if (MEM_SIZE <= 4096)
+		ini_rack(Graph);
+	else
+		ini_big_rack(Graph);
+	if (!(Graph->screen.texture = SDL_CreateTexture(Graph->screen.Renderer,
+			372645892, SDL_TEXTUREACCESS_STREAMING, Graph->big_square->w,
+			Graph->big_square->h)))
 		ft_SDL_error("SDL_CreateTexture", MODE_SDL);
 }
