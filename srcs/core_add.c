@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 05:45:24 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/23 22:49:35 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/24 16:49:16 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ static void		add_reg(t_pc *pc, const unsigned char reg1, const unsigned char reg
 	memcpy(aux2, pc->reg[reg2], REG_SIZE);
 	invert_bytes(aux1, REG_SIZE);
 	invert_bytes(aux2, REG_SIZE);
-	ft_printf("RESTA el reg1: %u vale: %d\n", reg1, *((int *)aux1));
+	ft_printf("SUMA el reg1: %u vale: %d\n", reg1, *((int *)aux1));
 	print_memory(pc->reg[reg1], 4, 4, 1);
-	ft_printf("RESTA el reg2: %u vale: %d\n", reg2, *((int *)aux2));
+	ft_printf("SUMA el reg2: %u vale: %d\n", reg2, *((int *)aux2));
 	print_memory(pc->reg[reg2], 4, 4, 1);
 	(*(int *)pc->reg[reg3]) = *((int *)aux1) + *((int *)aux2);
-	ft_printf("RESTA el reg3: %u vale: %d\n", reg3, *((int *)pc->reg[reg3]));
+	ft_printf("SUMA el reg3: %u vale: %d\n", reg3, *((int *)pc->reg[reg3]));
 	invert_bytes(pc->reg[reg3], REG_SIZE);
 	print_memory(pc->reg[reg3], 4, 4, 1);
 	pc->pc = (pc->pc + 1 + 1 + 1 + 1 + 1) % MEM_SIZE;//ld + opc + reg1 + reg2 + reg3
