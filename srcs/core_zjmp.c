@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 05:25:36 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/23 17:10:16 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/24 19:19:31 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,12 @@ static 	short charge_short(t_board *board, unsigned short pc_pos)
 
 void	core_zjmp(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 {
-	unsigned short index;
 	unsigned short pos;
 
-	// pc->carry = 1;
+//	 pc->carry = 1;
 	if (pc->carry == 0x1)
 	{
 		pos = pc->pc;
-		index = charge_short(arena->board,  pos + 1);
 		pc->pc = ft_mod(pc->pc + charge_short(arena->board, pos + 1), MEM_SIZE);
 	}
 	else

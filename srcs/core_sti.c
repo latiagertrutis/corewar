@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 02:59:04 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/23 21:35:26 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/24 19:40:57 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,17 +120,21 @@ void			core_sti(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	}
 	if 	(verify_ocp(ocp) && get_arg_value(arena->board, &arg2, pc) && get_arg_value(arena->board, &arg3, pc))
 	{
-		ft_printf("EJECUTANDO STI\n");
+		ft_printf("************ STI *****************\narg2 tipo %d cont: \n", arg2.type);
+		print_memory(arg2.arg, 4, 4, 1);
+		ft_printf("arg3 tipo: %u cont:\n", arg3.type);
+		print_memory(arg3.arg, 4, 4, 1);
+		ft_printf("reg: \n");
+		print_memory(pc->reg[reg_pos], 4, 4, 1);
+		ft_printf("el pc es %d\n", (pc - player->pc));
+		ft_printf("**********************************\n");
+
 		invert_bytes(arg2.arg, arg2.type == DIR_CODE ? 2 : 4);
 		invert_bytes(arg3.arg, arg3.type == DIR_CODE ? 2 : 4);
 		if (arg2.type == DIR_CODE)
 			*((int *)arg2.arg) = *((short *)arg2.arg);
 		if (arg3.type == DIR_CODE)
 			*((int *)arg3.arg) = *((short *)arg3.arg);
-		ft_printf("arg2.len: %u\narg2.type: %u\n", arg2.len, arg2.type);
-		print_memory(arg2.arg, 4, 4, 1);
-		ft_printf("arg3.len: %u\narg3.type: %u\n", arg3.len, arg3.type);
-		print_memory(arg3.arg, 4, 4, 1);
 //	ft_printf("la direccion es: %d\n", -38 % IDX_MOD)//ft_mod((pc->pc + ft_mod((*((int *)(arg2.arg)) + *((int *)(arg3.arg)) + i), IDX_MOD)), MEM_SIZE));
 //	exit(1);
 		while (i < REG_SIZE)
