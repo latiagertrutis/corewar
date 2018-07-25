@@ -12,7 +12,41 @@
 
 #include "../includes/corewar.h"
 
-int	ft_set_flags(int argn, char **argv)
+static void		check_player_nb(int argn, char **argv, t_data *data, int *i)
+{
+	if (argv[i[0]][1] == 'n')
+	{
+		i[0]++;
+		if (i[0] < argn)
+		{
+			if (!(data->dump = ft_atoi(argv[i[0]])))
+				ft_error("Can't read source file -n\n");
+		}
+		else
+			ft_error("Can't read source file -n\n");
+		// i[0]++;
+	}
+}
+
+static void		check_dump(int argn, char **argv, t_data *data, int *i)
+{
+	if (argv[i[0]][1] == 'd')
+	{
+		i[0]++;
+		if (i[0] < argn)
+		{
+			if (!(data->dump = ft_atoi(argv[i[0]])))
+				ft_error("Can't read source file -d\n");
+		}
+		else
+			ft_error("Can't read source file -d\n");
+		// i[0]++;
+	}
+	else
+		check_player_nb(argn, argv, data, i);
+}
+
+int				ft_set_flags(int argn, char **argv, t_data *data)
 {
 	int	i[2];
 	int	flag;
@@ -24,20 +58,26 @@ int	ft_set_flags(int argn, char **argv)
 		i[1] = 0;
 		if (argv[i[0]][i[1]] == '-')
 		{
+			if (!argv[i[0]][i[1] + 1])
+				ft_error("No input after '-'\n");
 			while (argv[i[0]][++i[1]])
 			{
 				if (argv[i[0]][i[1]] >= 97 && argv[i[0]][i[1]] <= 122)
 					flag = flag | (1 << (argv[i[0]][i[1]] - 97));
 			}
+			check_dump(argn, argv, data, i);
 		}
+		else
+			data->n_players++;
 		i[0]++;
 	}
+	ft_printf("NUMBER OF PLAYERS: %d\n", data->n_players);
 	return (flag);
 }
 
-int ft_check_flags(int flags, char flag)
+int 			ft_check_flags(int flags, char flag)
 {
-	if (flags & (1 << (flag - 97)))
+	if (flags & (1 << (flag - 97))) 
 		return (1);
 	return (0);
 }

@@ -12,6 +12,9 @@
 
 #include "corewar.h"
 
+
+//recorrer todo los pc y eliminar los que no han dicho live
+
 void 	check_live_count(t_player *players, int nb_players, t_data *data)
 {
 	unsigned int nbr_live;

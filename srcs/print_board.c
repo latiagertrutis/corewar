@@ -15,13 +15,19 @@
 static void	print_player_status(t_player *players, t_data *data)
 {
 	int i;
+	int ply_nb;
 
+	// ft_putnbr(data->n_players);
+	// exit(1);
 	i = 0;
 	while(i < data->n_players)
 	{
+		ply_nb = players[i].player_nb;
+		if (ply_nb < 0)
+			invert_bytes(&ply_nb, sizeof(int));
 		ft_putstr(data->palete[(int)players[i].id + 1]);
-		ft_printf("Player nb: %d, name:%s, lives: %d\n"
-			, players[i].player_nb, players[i].name, players[i].live_counter);
+		ft_printf("Player nb: %d, name:%s, lives: %d, last live %d\n"
+			, ply_nb, players[i].name, players[i].live_counter, players[i].last_live);
 		print_memory(&(players[i].player_nb), 4, 4, 1);
 		ft_putchar('\n');
 		ft_putstr("\033[0m ");

@@ -47,6 +47,7 @@ FUNCS =	main.c \
 		get_arg.c \
 		get_arg_value.c \
 		ft_mod.c \
+		check_winner.c \
 		core_live.c \
 		core_ld.c \
 		core_st.c \

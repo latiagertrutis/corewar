@@ -79,7 +79,7 @@ void			core_lld(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 		pc->pc = (pc->pc + 1 + get_size_arg(ocp, 0, 4) + get_size_arg(ocp, 1, 4) + get_size_arg(ocp, 2, 4)) % MEM_SIZE;
 
 //	load_data(player, arena->board, ++pos, ocp);
-	print_memory(pc->reg[(*(arena->board + (pos + 2) + IND_SIZE)).mem - 1], 4, 16, 1);
+	// print_memory(pc->reg[(*(arena->board + (pos + 2) + IND_SIZE)).mem - 1], 4, 16, 1);
 //	print_memory(pc->reg[(*(arena->board + (pos + 2) + REG_SIZE)).mem - 1], 4, 16, 1);
 //	exit(1);
 }

@@ -72,7 +72,7 @@ static int init_players(t_data *data)
 	{
 		cosa = -(i + 1);
 		invert_bytes(&cosa, 4);
-		data->players[i] = (t_player){0, NULL, NULL, cosa, i + 1, 0, NULL, NULL, 1, NULL};
+		data->players[i] = (t_player){0, 0, NULL, NULL, cosa, i + 1, 0, NULL, NULL, 1, NULL}; //coa tiene que ser el siguient numero disponible creo
 		if (!(data->players[i].pc = (t_pc *)malloc(sizeof(t_pc) * PC_BUFF)))
 			ft_error("malloc failed");
 		data->players[i].pc[0] = (t_pc){0, 0, 0, {{0}}};

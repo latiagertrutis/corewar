@@ -97,6 +97,7 @@ typedef struct 		s_pc
 
 typedef struct 		s_player
 {
+	unsigned int  	last_live; //new
 	unsigned int 	live_counter;
 	char			*content;
 	char 			*name;
@@ -134,6 +135,7 @@ typedef struct		s_mods
 
 typedef struct		s_data
 {
+	unsigned int 	dump;
 	unsigned int 	max_checks;
 	unsigned int 	cycle_to_die;
 	unsigned int	n_players;
@@ -163,7 +165,7 @@ typedef struct		s_data
 */
 
 void				print_memory(const void *addr, size_t size, int line, int space);
-void 				take_champions(t_data *data, char **av);
+void 				take_champions(t_data *data, char **av, int i);
 void 				big_hexa_2_dec(char *str, int size);
 void				invert_bytes(void *arr, const size_t size);
 int 				init_corewar(t_data *data);
@@ -182,11 +184,12 @@ unsigned char		get_size_arg(const unsigned char ocp, const unsigned char n_arg, 
 void				get_arg(const unsigned char ocp, unsigned short pos, t_board *board, t_arg *arg);
 int					get_arg_value(t_board *board, t_arg *arg, t_pc *pc);
 int					ft_mod(const int nb, const unsigned int mod);
+void 				check_winner(t_player *players, int nb_players);
 unsigned char		check_ocp(const unsigned char ocp);
 
 
 //Anyadidas Jaume
-int					ft_set_flags(int argn, char **argv);
+int					ft_set_flags(int argn, char **argv, t_data *data);
 int					ft_check_flags(int flags, char flag);
 
 

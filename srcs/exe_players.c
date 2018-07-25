@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/25 17:53:41 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/25 18:10:23 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void			exe_pc(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	else if (pc->wait_cycles == 1)
 	{
 		pc->wait_cycles--;
-		ft_printf("executing.. %d\n", op_nb);
+//		ft_printf("executing.. %d\n", op_nb);
 		if (op_nb <= 15)
 			data->func[op_nb](player, pc, arena, data);
 	}
@@ -79,6 +79,7 @@ void 				exe_players(t_data *data)
 				j = 0;
 				while(j < data->n_players)
 				{
+
 					k = data->players[j].nb_pc;
 					while (k)
 					{
@@ -88,23 +89,18 @@ void 				exe_players(t_data *data)
 					j++;
 				}
 				t++;
-//				write(1, "\x1b[H\x1b[2J", 7);
-//				print_board(data, data->arena->board);
-//				if (!(data->i % CYCLE_TO_DIE))
-//					check_live_count(data->players, data->n_players);
-				data->i++;
-//				data->nb_cycles++;
+				data->nb_cycles++;
 				if (data->mods->visual)
 				{
 					ft_board_to_screen(data->arena->Graph, data->arena->board, data);
 					ft_set_back_to_front(data->arena->Graph, data);
 				}
-//				if (data->i == 100)
-//					exit(1);
-//				pause = 0;
-
+				// if (data->nb_cycles == 100)
+				// 	exit(1);
+>>>>>>> ba3733de484bcf80bfeda3ac859a206d717ffc00
 			}
 		}
 		check_live_count(data->players, data->n_players, data);
 	}
+	check_winner(data->players, data->n_players);
 }

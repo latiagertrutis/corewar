@@ -1,4 +1,4 @@
-.name "zork"
+.name "mal zork"
 .comment "I'M ALIIIIVE"
 
 ld: 	
@@ -7,5 +7,6 @@ ld:
 		and r2, %0, r3
 
 live:
-		live %-1
+		ld %45, r2
+		and r2, %0, r3
 		zjmp %:live
