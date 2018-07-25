@@ -41,7 +41,7 @@ int main(int ac, char **av)
 //		put_usage();
 	data = (t_data){0, 0, CYCLE_TO_DIE, 0, NULL, NULL, {"\033[0m", "\033[38;5;1m", "\033[38;5;2m",
 		"\033[38;5;3m", "\033[38;5;4m"}, {{0, 0, {0}, 0, 0, 0, 0, 0}},
-	                0, 0, 0, {0}};
+	                0, 0, 0, NULL, {0}};
 
 	data.flags = ft_set_flags(ac, av, &data);
 

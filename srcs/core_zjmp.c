@@ -23,7 +23,7 @@ static 	short charge_short(t_board *board, unsigned short pc_pos)
 		param[2 - 1 - i] = board[(pc_pos + i) % MEM_SIZE].mem;
 		i++;
 	}
-	print_memory(param, 2, 2, 1);
+	// print_memory(param, 2, 2, 1);
 //	exit(1);
 	return (*((short *)param));
 }

@@ -95,8 +95,8 @@ void 				exe_players(t_data *data)
 					ft_board_to_screen(data->arena->Graph, data->arena->board, data);
 					ft_set_back_to_front(data->arena->Graph);
 				}
-				if (data->nb_cycles == 100)
-					exit(1);
+				// if (data->nb_cycles == 100)
+				// 	exit(1);
 			}
 		}
 		check_live_count(data->players, data->n_players, data);

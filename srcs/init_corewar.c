@@ -85,7 +85,7 @@ static int init_arena(t_data *data)
 {
 	if (!(data->arena = (t_arena *)ft_memalloc(sizeof(t_arena))))
 		return (0);
-ß	if (data->mods->visual)
+	if (data->mods->visual)
 		ft_ini_graphics(&(data->arena->Graph), data->mods, data);
 	return (1);
 
