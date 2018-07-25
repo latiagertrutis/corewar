@@ -2,7 +2,8 @@
 .comment "I'M ALIIIIVE"
 
 cosa:
-			ld %-1, r7
-			st r7, 260
-			ldi %-1, %-2, r2
-			st r2, 200
+	live %-1
+	fork %-5
+	ld %423142, r7
+	st r7, -9
+	live %-1

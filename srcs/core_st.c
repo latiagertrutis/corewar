@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 23:23:06 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/21 13:55:56 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/23 21:25:37 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void store_in_ram(t_player *player, t_board *board, unsigned char reg_pos, t_pc *pc)
 {
 	unsigned int	i;
-	unsigned char	board_pos[IND_SIZE];
+	char			board_pos[IND_SIZE];
 	unsigned short	pos;
 
 	i = 0;
@@ -34,6 +34,9 @@ static void store_in_ram(t_player *player, t_board *board, unsigned char reg_pos
 			player->id + 1;
 		i++;
 	}
+	ft_printf("\n****** st (IND)*******\nInd: %u\nreg_pos: %u\ncont: ", *((short *)board_pos), reg_pos);
+	print_memory(pc->reg[reg_pos], 4, 4, 1);
+	ft_printf("*******************\n");
 	pc->pc = (pc->pc + 1 + 1 + 1 + IND_SIZE) % MEM_SIZE;//ld + opc + reg1 + ind
 }
 
@@ -47,6 +50,10 @@ static void	store_in_reg(unsigned char reg_pos1, unsigned char reg_pos2, t_pc *p
 		pc->reg[reg_pos2][i] = pc->reg[reg_pos1][i];
 		i++;
 	}
+	ft_printf("\n****** st (REG/REG) *******\reg_pos1: %u\nreg_pos2: %u\ncont: ", reg_pos1, reg_pos2);
+	print_memory(pc->reg[reg_pos1], 4, 4, 1);
+	print_memory(pc->reg[reg_pos2], 4, 4, 1);
+	ft_printf("*******************\n");
 	pc->pc = (pc->pc + 1 + 1 + 1 + 1) % MEM_SIZE;//ld + opc + reg1 + reg2
 }
 
@@ -63,6 +70,8 @@ void		core_st(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 		store_in_ram(player, arena->board, reg_pos1, pc);
 	else if (ocp == 0x50 && (reg_pos1 = (arena->board[(pos + 2) % MEM_SIZE].mem - 1)) < REG_NUMBER && (reg_pos2 = (arena->board[(pos + 3) % MEM_SIZE].mem - 1)) < REG_NUMBER)
 		store_in_reg(reg_pos1, reg_pos2, pc);
+	else if (!check_ocp(ocp))
+		pc->pc = (pc->pc + 2) % MEM_SIZE;
 	else
-		pc->pc = (pc->pc + 1) % MEM_SIZE;
+		pc->pc = (pc->pc + 1 + get_size_arg(ocp, 0, 1) + get_size_arg(ocp, 1, 1) + get_size_arg(ocp, 2, 1)) % MEM_SIZE;
 }

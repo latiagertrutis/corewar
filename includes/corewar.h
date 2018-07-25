@@ -29,14 +29,26 @@ typedef struct		s_arg
 #define SCREEN_H 800
 #define SCREEN_SCALE 1.2
 #define SCREEN_NAME "Corewar"
-#define LEFT_BORDER 0.3567
-#define BOTTOM_BORDER 0.0328
-#define UPPER_BORDER 0.033
-#define RIGHT_BORDER 0.0180
-#define BACK_COLOR 28, 28, 21,
+/* #define LEFT_BORDER 0.3567 */
+/* #define BOTTOM_BORDER 0.0328 */
+/* #define UPPER_BORDER 0.033 */
+/* #define RIGHT_BORDER 0.0180 */
+#define LEFT_BORDER 0.434
+#define BOTTOM_BORDER 0.055
+#define UPPER_BORDER 0.055
+#define RIGHT_BORDER 0.04
+//#define BACK_COLOR 28, 28, 21,
+#define BACK_COLOR 0, 0, 0,
 #define FIELD_COLOR 61, 61, 51,
+
+typedef	struct	s_info
+{
+	SDL_Surface *cicles;
+	SDL_Surface *lifes;
+	SDL_Surface *name;
+}				t_info;
+
 typedef struct s_sdl {
-	SDL_bool running;
 	struct {
 		int w;
 		int h;
@@ -44,7 +56,6 @@ typedef struct s_sdl {
 		SDL_Window *window;
 		SDL_Renderer *Renderer;
 		SDL_Texture *texture;
-		SDL_Surface *screen;
 	} screen;
 	int			cuant_squares[2];
 	struct {
@@ -52,17 +63,20 @@ typedef struct s_sdl {
 		int		w;
 		int		h;
 	} font_info;
-	SDL_Surface	*character_buffer;
+	SDL_Texture *info_text;
+	t_info		infos[4];
+	SDL_Surface ***hexa_bytes;
 	SDL_Surface *rack;
-	SDL_Surface *rack_square;
 	SDL_Rect *square;
 	SDL_Rect *big_square;
+	SDL_Rect *square_info;
 } t_sdl;
 
 typedef struct 		s_board
 {
 	unsigned char 	mem;
 	char			id;
+	unsigned int	new : 1;
 }					t_board;
 
 typedef struct 		s_arena
@@ -109,6 +123,15 @@ typedef struct		s_op
 	int				n2;
 }					t_op;
 
+typedef struct		s_mods
+{
+	unsigned int	running : 1;
+	unsigned int	pause : 1;
+	unsigned int	step : 1;
+	unsigned int	visual : 1;
+	unsigned int	fullscreen : 1;
+}					t_mods;
+
 typedef struct		s_data
 {
 	unsigned int 	dump;
@@ -122,6 +145,7 @@ typedef struct		s_data
 	unsigned int	nb_cycles;
 	int				flags;
 	int				i;
+	t_mods			*mods;
 	void			(*func[16])(t_player *, t_pc *, t_arena *, struct s_data *);
 }					t_data;
 
@@ -157,10 +181,10 @@ unsigned char		*get_mem_board(t_board *board, const unsigned int size);
 t_pc				*realloc_pc(t_player *player, t_pc *pc, const unsigned int nb_pc);
 unsigned char		get_size_arg(const unsigned char ocp, const unsigned char n_arg, const unsigned int dir_size);
 void				get_arg(const unsigned char ocp, unsigned short pos, t_board *board, t_arg *arg);
-void				get_arg_value(t_board *board, t_arg *arg, t_pc *pc);
+int					get_arg_value(t_board *board, t_arg *arg, t_pc *pc);
 int					ft_mod(const int nb, const unsigned int mod);
 void 				check_winner(t_player *players, int nb_players);
-
+unsigned char		check_ocp(const unsigned char ocp);
 
 
 //Anyadidas Jaume
@@ -194,13 +218,15 @@ void				core_aff(t_player *player, t_pc *pc, t_arena *arena, t_data *data);
 */
 
 
-void		ft_ini_graphics(t_sdl **Graph, int flags);
+void		ft_ini_graphics(t_sdl **Graph, t_mods *mods, t_data *data);
 void		ft_quit_graphics(t_sdl *Graph);
 void		ft_SDL_error(char *str, int mode);
 void		ft_ini_interface(t_sdl *Graph);
 void		ft_ini_font(t_sdl *Graph);
-void		ft_board_to_screen(t_sdl *Graph, t_arena *arena);
-void		ft_pcs_to_screen(t_data *data, t_sdl *Graph, t_player *players);
-void		ft_write_byte(int pos, t_arena *arena, char *pixel, int pitch);
-void		ft_draw_rack(t_data *data, SDL_Surface *screen);
+void		ft_board_to_screen(t_sdl *Graph, t_board board[MEM_SIZE], t_data *data);
+void		ft_pcs_to_rack(unsigned int n_players, t_sdl *Graph, t_player *players);
+void		ft_set_back_to_front(t_sdl *Graph);
+void		ft_ini_information(t_data *data);
+
+
 #endif

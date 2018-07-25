@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 02:59:04 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/22 01:17:22 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/24 19:40:57 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,14 @@
 /* 	player->pc += 1 + param_size[0] + param_size[1] + param_size[2]; //mana + 1 */
 /* } */
 
+static int			verify_ocp(const unsigned char ocp)
+{
+	if ((0xC & ocp) == 0xC || (0xC0 & ocp) == 0x80 || (0xC0 & ocp) == 0xC0)
+		return (0);
+	return (1);
+
+}
+
 void			core_sti(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned char	ocp;
@@ -107,28 +115,34 @@ void			core_sti(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	get_arg(ocp, pc->pc, arena->board, &arg3);
 	if (!arg2.len || !arg3.len || arg3.type == IND_CODE)
 	{
-		pc->pc = (pc->pc + 1) % MEM_SIZE;
+		pc->pc = (pc->pc + 2) % MEM_SIZE;
 		return ;
 	}
-	get_arg_value(arena->board, &arg2, pc);
-	get_arg_value(arena->board, &arg3, pc);
-	invert_bytes(arg2.arg, arg2.type == DIR_CODE ? 2 : 4);
-	invert_bytes(arg3.arg, arg3.type == DIR_CODE ? 2 : 4);
-	if (arg2.type == DIR_CODE)
-		*((int *)arg2.arg) = *((short *)arg2.arg);
-	if (arg3.type == DIR_CODE)
-		*((int *)arg3.arg) = *((short *)arg3.arg);
-//	ft_printf("arg2.len: %u\narg2.type: %u\n", arg2.len, arg2.type);
-//	print_memory(arg2.arg, 4, 4, 1);
-//	ft_printf("arg3.len: %u\narg3.type: %u\n", arg3.len, arg3.type);
-//	print_memory(arg3.arg, 4, 4, 1);
+	if 	(verify_ocp(ocp) && get_arg_value(arena->board, &arg2, pc) && get_arg_value(arena->board, &arg3, pc))
+	{
+		ft_printf("************ STI *****************\narg2 tipo %d cont: \n", arg2.type);
+		print_memory(arg2.arg, 4, 4, 1);
+		ft_printf("arg3 tipo: %u cont:\n", arg3.type);
+		print_memory(arg3.arg, 4, 4, 1);
+		ft_printf("reg: \n");
+		print_memory(pc->reg[reg_pos], 4, 4, 1);
+		ft_printf("el pc es %d\n", (pc - player->pc));
+		ft_printf("**********************************\n");
+
+		invert_bytes(arg2.arg, arg2.type == DIR_CODE ? 2 : 4);
+		invert_bytes(arg3.arg, arg3.type == DIR_CODE ? 2 : 4);
+		if (arg2.type == DIR_CODE)
+			*((int *)arg2.arg) = *((short *)arg2.arg);
+		if (arg3.type == DIR_CODE)
+			*((int *)arg3.arg) = *((short *)arg3.arg);
 //	ft_printf("la direccion es: %d\n", -38 % IDX_MOD)//ft_mod((pc->pc + ft_mod((*((int *)(arg2.arg)) + *((int *)(arg3.arg)) + i), IDX_MOD)), MEM_SIZE));
 //	exit(1);
-	while (i < REG_SIZE)
-	{//con idx mod es el resto puesto que es un rango y puede optar a valores negativos en cambio MEM_SIZE precisa de ser un modulo puesto que la memoria es circular y en ningun caso puede ser negativo
-		arena->board[ft_mod((pc->pc + ((*((int *)(arg2.arg)) + *((int *)(arg3.arg)) + i) % IDX_MOD)), MEM_SIZE)].mem = pc->reg[reg_pos][i];
-		arena->board[ft_mod((pc->pc + ((*((int *)(arg2.arg)) + *((int *)(arg3.arg)) + i) % IDX_MOD)), MEM_SIZE)].id = player->id + 1;
-		i++;
+		while (i < REG_SIZE)
+		{//con idx mod es el resto puesto que es un rango y puede optar a valores negativos en cambio MEM_SIZE precisa de ser un modulo puesto que la memoria es circular y en ningun caso puede ser negativo
+			arena->board[ft_mod((pc->pc + i + ((*((int *)(arg2.arg)) + *((int *)(arg3.arg))) % IDX_MOD)), MEM_SIZE)].mem = pc->reg[reg_pos][i];
+			arena->board[ft_mod((pc->pc + i + ((*((int *)(arg2.arg)) + *((int *)(arg3.arg))) % IDX_MOD)), MEM_SIZE)].id = player->id + 1;
+			i++;
+		}
 	}
-	pc->pc = (pc->pc + 1 + 1 + arg2.len + arg3.len + 1) % MEM_SIZE;//and + ocp + arg2 + arg3 + rg
+	pc->pc = (pc->pc + 1 + 1 + arg2.len + arg3.len + get_size_arg(ocp, 0, 0)) % MEM_SIZE;//and + ocp + arg2 + arg3 + rg
 }
