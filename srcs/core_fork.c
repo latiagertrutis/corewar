@@ -23,7 +23,7 @@ static int 	charge_short(int size, t_arena *arena, int pc_pos)
 		param[size - 1 - i] = arena->board[(pc_pos + i) % MEM_SIZE].mem;
 		i++;
 	}
-	print_memory(param, size, size, 1);
+	// print_memory(param, size, size, 1);
 	return (*((unsigned short *)param));
 }
 
@@ -40,7 +40,7 @@ void		core_fork(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 		pc = player->pc + pc_i;
 	}
 	player->pc[player->nb_pc] = (t_pc){pc->carry, ft_mod((pc->pc + (new_i % IDX_MOD)), MEM_SIZE), 0, {{0}}};
-	ft_printf("pc1 es: %d\npc2 es: %d\nnb_pc es: %d\n", pc->pc, player->pc[player->nb_pc].pc, player->nb_pc);
+//	ft_printf("pc1 es: %d\npc2 es: %d\nnb_pc es: %d\n", pc->pc, player->pc[player->nb_pc].pc, player->nb_pc);
 //	exit(1);
 	for (int j = 0; j < REG_NUMBER; j++)
 		ft_memcpy(player->pc[player->nb_pc].reg[j], pc->reg[j], REG_SIZE);

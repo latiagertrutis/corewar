@@ -15,7 +15,7 @@
 static void		add_reg(t_pc *pc, const unsigned char reg1, const unsigned char reg2, const unsigned char reg3)
 {
 	(*(unsigned int *)pc->reg[reg3]) = (*(unsigned int *)pc->reg[reg1]) + (*(unsigned int *)pc->reg[reg2]);
-	ft_printf("el reg vale %u\n", (*(unsigned int *)pc->reg[reg3]));
+//	ft_printf("el reg vale %u\n", (*(unsigned int *)pc->reg[reg3]));
 	pc->pc = (pc->pc + 1 + 1 + 1 + 1 + 1) % MEM_SIZE;//ld + opc + reg1 + reg2 + reg3
 	pc->carry = (!*((int *)(pc->reg[reg3]))) ? 0x1 : 0x0;//actualizar carry
 }

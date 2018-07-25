@@ -23,7 +23,7 @@ static 	int charge_short(int size, t_arena *arena, int pc_pos)
 		param[size - 1 - i] = arena->board[(pc_pos + i) % MEM_SIZE].mem;
 		i++;
 	}
-	print_memory(param, size, size, 1);
+	// print_memory(param, size, size, 1);
 //	exit(1);
 	return (*((unsigned short *)param));
 }

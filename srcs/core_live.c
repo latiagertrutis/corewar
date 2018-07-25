@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-static void search_nb(t_player *players, int nb_players, int live_nb)
+static void search_nb(t_player *players, int nb_players, int live_nb, int j)
 {
 	int i;
 
@@ -20,7 +20,10 @@ static void search_nb(t_player *players, int nb_players, int live_nb)
 	while (i < nb_players)
 	{
 		if (players[i].player_nb == live_nb)
+		{
 			players[i].live_counter++;
+			players[i].last_live = j;
+		}
 		i++;
 	}
 
@@ -46,6 +49,6 @@ void				core_live(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	live_nb = take_live_nb((arena->board) + pos + 1);
 	// if (live_nb == (*((int *)(pc->reg[0]))))
 		// player->live_counter++;
-	search_nb(data->players, data->n_players, live_nb);
+	search_nb(data->players, data->n_players, live_nb, data->nb_cycles);
 	pc->pc += 5;
 }

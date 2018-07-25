@@ -118,10 +118,10 @@ void			core_sti(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 		*((int *)arg2.arg) = *((short *)arg2.arg);
 	if (arg3.type == DIR_CODE)
 		*((int *)arg3.arg) = *((short *)arg3.arg);
-	ft_printf("arg2.len: %u\narg2.type: %u\n", arg2.len, arg2.type);
-	print_memory(arg2.arg, 4, 4, 1);
-	ft_printf("arg3.len: %u\narg3.type: %u\n", arg3.len, arg3.type);
-	print_memory(arg3.arg, 4, 4, 1);
+//	ft_printf("arg2.len: %u\narg2.type: %u\n", arg2.len, arg2.type);
+//	print_memory(arg2.arg, 4, 4, 1);
+//	ft_printf("arg3.len: %u\narg3.type: %u\n", arg3.len, arg3.type);
+//	print_memory(arg3.arg, 4, 4, 1);
 //	ft_printf("la direccion es: %d\n", -38 % IDX_MOD)//ft_mod((pc->pc + ft_mod((*((int *)(arg2.arg)) + *((int *)(arg3.arg)) + i), IDX_MOD)), MEM_SIZE));
 //	exit(1);
 	while (i < REG_SIZE)

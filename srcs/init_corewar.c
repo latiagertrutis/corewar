@@ -72,7 +72,7 @@ static int init_players(t_data *data)
 	{
 		cosa = -(i + 1);
 		invert_bytes(&cosa, 4);
-		data->players[i] = (t_player){0, NULL, NULL, cosa, i + 1, 0, NULL, NULL, 1, NULL};
+		data->players[i] = (t_player){0, 0, NULL, NULL, cosa, i + 1, 0, NULL, NULL, 1, NULL}; //cosa tiene que ser el siguient numero disponible creo
 		if (!(data->players[i].pc = (t_pc *)malloc(sizeof(t_pc) * PC_BUFF)))
 			ft_error("malloc failed");
 		data->players[i].pc[0] = (t_pc){0, 0, 0, {{0}}};
@@ -85,7 +85,7 @@ static int init_arena(t_data *data)
 {
 	if (!(data->arena = (t_arena *)ft_memalloc(sizeof(t_arena))))
 		return (0);
-	ft_ini_graphics(&(data->arena->Graph), data->flags);
+//	ft_ini_graphics(&(data->arena->Graph), data->flags);
 	return (1);
 
 }
