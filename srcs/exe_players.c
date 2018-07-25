@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/25 14:38:42 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/25 17:53:41 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,15 +92,15 @@ void 				exe_players(t_data *data)
 //				print_board(data, data->arena->board);
 //				if (!(data->i % CYCLE_TO_DIE))
 //					check_live_count(data->players, data->n_players);
-//				data->i++;
+				data->i++;
 //				data->nb_cycles++;
 				if (data->mods->visual)
 				{
 					ft_board_to_screen(data->arena->Graph, data->arena->board, data);
-					ft_set_back_to_front(data->arena->Graph);
+					ft_set_back_to_front(data->arena->Graph, data);
 				}
-				if (data->i == 100)
-					exit(1);
+//				if (data->i == 100)
+//					exit(1);
 //				pause = 0;
 
 			}

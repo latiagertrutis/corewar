@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 06:40:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/24 23:53:09 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/25 17:13:09 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,11 @@ void				ft_ini_interface(t_sdl *Graph)
 			372645892, SDL_TEXTUREACCESS_STREAMING, Graph->big_square->w,
 			Graph->big_square->h)))
 		ft_SDL_error("SDL_CreateTexture", MODE_SDL);
+	if (!(Graph->pc = SDL_CreateTexture(Graph->screen.Renderer,
+			372645892, SDL_TEXTUREACCESS_STREAMING, Graph->square->w - 2,
+			Graph->square->h - 2)))
+		ft_SDL_error("SDL_CreateTexture", MODE_SDL);
+	SDL_SetTextureBlendMode(Graph->pc, SDL_BLENDMODE_BLEND);
+	SDL_SetTextureBlendMode(Graph->screen.texture, SDL_BLENDMODE_BLEND);
+	SDL_SetTextureAlphaMod(Graph->screen.texture, 100);
 }

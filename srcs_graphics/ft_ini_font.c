@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 11:09:42 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/24 18:42:06 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/25 15:59:04 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void		insert_hexa_surf(char pair[3], t_sdl *Graph, int index[3])
 		Graph->square->h - 2, 32, Graph->rack->format->format);
 	SDL_FillRect(rack_square, NULL,
 		SDL_MapRGBA(rack_square->format,
-		0x3D, 0x3D, 0x33, 0xFF));
+		0x3D, 0x3D, 0x33, 255));
 	pair[1] = (index[1] >= 10 ? 'A' + index[1] - 10 : '0' + index[1]);
 	tmp = TTF_RenderUTF8_Blended(Graph->font_info.font, pair,
 		take_color_byte(index[2]));

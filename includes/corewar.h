@@ -64,6 +64,7 @@ typedef struct s_sdl {
 		int		h;
 	} font_info;
 	SDL_Texture *info_text;
+	SDL_Texture *pc;
 	t_info		infos[4];
 	SDL_Surface ***hexa_bytes;
 	SDL_Surface *rack;
@@ -221,8 +222,8 @@ void		ft_SDL_error(char *str, int mode);
 void		ft_ini_interface(t_sdl *Graph);
 void		ft_ini_font(t_sdl *Graph);
 void		ft_board_to_screen(t_sdl *Graph, t_board board[MEM_SIZE], t_data *data);
-void		ft_pcs_to_rack(unsigned int n_players, t_sdl *Graph, t_player *players);
-void		ft_set_back_to_front(t_sdl *Graph);
+void		ft_pcs_to_rack(unsigned int n_players, t_sdl *Graph, t_player *players, int alpha_mod);
+void		ft_set_back_to_front(t_sdl *Graph, t_data *data);
 void		ft_ini_information(t_data *data);
 
 
