@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 06:40:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/24 19:36:36 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/24 23:53:09 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void				ft_ini_interface(t_sdl *Graph)
 	if (!(Graph->rack = SDL_CreateRGBSurfaceWithFormat(0, Graph->big_square->w,
 			Graph->big_square->h, 32, 372645892)))
 		ft_SDL_error("SDL_CreateRGBSurface", MODE_SDL);
+//	SDL_FillRect(Graph->rack, &(SDL_Rect){0, 0, Graph->rack->w, Graph->rack->h}, SDL_MapRGBA(Graph->rack->format, 255, 0, 0, SDL_ALPHA_OPAQUE));
 	if (MEM_SIZE <= 4096)
 		ini_rack(Graph);
 	else

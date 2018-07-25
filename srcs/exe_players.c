@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/24 22:56:48 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/25 14:38:42 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void 				exe_players(t_data *data)
 	
 	fill_r1(data);
 //	print_board(data, data->arena->board);
-	while(data->nb_cycles < 500000 && data->mods->running)
+	while(data->cycle_to_die && data->mods->running)
 	{
 		t = 0;
 		while (t < data->cycle_to_die && data->mods->running)
@@ -77,30 +77,30 @@ void 				exe_players(t_data *data)
 			if (!data->mods->pause || data->mods->step)
 			{
 				j = 0;
-//				while(j < data->n_players)
-//				{
+				while(j < data->n_players)
+				{
 					k = data->players[j].nb_pc;
 					while (k)
 					{
 						exe_pc((data->players) + j, (data->players[j].pc) + k - 1, data->arena, data);
 						k--;
 					}
-//					j++;
-//				}
+					j++;
+				}
 				t++;
 //				write(1, "\x1b[H\x1b[2J", 7);
 //				print_board(data, data->arena->board);
 //				if (!(data->i % CYCLE_TO_DIE))
 //					check_live_count(data->players, data->n_players);
-				data->i++;
-				data->nb_cycles++;
+//				data->i++;
+//				data->nb_cycles++;
 				if (data->mods->visual)
 				{
 					ft_board_to_screen(data->arena->Graph, data->arena->board, data);
 					ft_set_back_to_front(data->arena->Graph);
 				}
-//				if (data->i == 100)
-//					exit(1);
+				if (data->i == 100)
+					exit(1);
 //				pause = 0;
 
 			}

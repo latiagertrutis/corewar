@@ -29,13 +29,25 @@ typedef struct		s_arg
 #define SCREEN_H 800
 #define SCREEN_SCALE 1.2
 #define SCREEN_NAME "Corewar"
-#define LEFT_BORDER 0.3567
-#define BOTTOM_BORDER 0.0328
-#define UPPER_BORDER 0.033
-#define RIGHT_BORDER 0.0180
+/* #define LEFT_BORDER 0.3567 */
+/* #define BOTTOM_BORDER 0.0328 */
+/* #define UPPER_BORDER 0.033 */
+/* #define RIGHT_BORDER 0.0180 */
+#define LEFT_BORDER 0.434
+#define BOTTOM_BORDER 0.055
+#define UPPER_BORDER 0.055
+#define RIGHT_BORDER 0.04
 //#define BACK_COLOR 28, 28, 21,
 #define BACK_COLOR 0, 0, 0,
 #define FIELD_COLOR 61, 61, 51,
+
+typedef	struct	s_info
+{
+	SDL_Surface *cicles;
+	SDL_Surface *lifes;
+	SDL_Surface *name;
+}				t_info;
+
 typedef struct s_sdl {
 	struct {
 		int w;
@@ -51,10 +63,13 @@ typedef struct s_sdl {
 		int		w;
 		int		h;
 	} font_info;
+	SDL_Texture *info_text;
+	t_info		infos[4];
 	SDL_Surface ***hexa_bytes;
 	SDL_Surface *rack;
 	SDL_Rect *square;
 	SDL_Rect *big_square;
+	SDL_Rect *square_info;
 } t_sdl;
 
 typedef struct 		s_board
@@ -200,13 +215,15 @@ void				core_aff(t_player *player, t_pc *pc, t_arena *arena, t_data *data);
 */
 
 
-void		ft_ini_graphics(t_sdl **Graph, t_mods *mods);
+void		ft_ini_graphics(t_sdl **Graph, t_mods *mods, t_data *data);
 void		ft_quit_graphics(t_sdl *Graph);
 void		ft_SDL_error(char *str, int mode);
 void		ft_ini_interface(t_sdl *Graph);
 void		ft_ini_font(t_sdl *Graph);
 void		ft_board_to_screen(t_sdl *Graph, t_board board[MEM_SIZE], t_data *data);
 void		ft_pcs_to_rack(unsigned int n_players, t_sdl *Graph, t_player *players);
-void			ft_set_back_to_front(t_sdl *Graph);
+void		ft_set_back_to_front(t_sdl *Graph);
+void		ft_ini_information(t_data *data);
+
 
 #endif

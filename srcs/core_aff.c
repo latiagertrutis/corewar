@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 16:44:28 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/23 18:24:22 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/25 14:49:35 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		core_aff(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	char 			reg_content;
 
 	ft_printf("JOPUTA");
-	exit(1);
+//	exit(1);
 	reg_nb = arena->board[(pc->pc + 2) % MEM_SIZE].mem;
 	reg_content = (to_big_endian(pc->reg[reg_nb - 1])) % 256;
 	ft_putstr("Aff: ");
