@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 06:40:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/25 19:51:22 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/26 18:44:22 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,6 @@ static void				ini_rack(t_sdl *Graph)
 
 static Uint32	take_color_pc(int id, SDL_PixelFormat *format)
 {
-	int mod;
-
-	mod = 5;
 	if (!id)
 		return (SDL_MapRGBA(format, 51, 255, 51, 128));
 	else if (id == 1)

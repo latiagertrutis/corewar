@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/12 23:45:52 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/17 14:32:06 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/26 19:34:55 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void			fill_r1(t_data *data)
 	while(i < n_players)
 	{
 		j = 0;
-		while (j < player[i].nb_pc)
+		while (j < data->nb_pc)
 		{
-			ft_memcpy(player[i].pc[j].reg[0], &(player[i].player_nb), sizeof(int));
+			ft_memcpy(data->pc[j].reg[0], &(player[i].player_nb), sizeof(int));
 			j++;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 04:10:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/25 18:35:59 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/26 18:31:54 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,4 @@ void	ft_board_to_screen(t_sdl *Graph, t_board board[MEM_SIZE], t_data *data)
 			rack->pitch);
 	SDL_UnlockSurface(rack);
 	SDL_UnlockTexture(Graph->screen.texture);
-//	ft_pcs_to_rack(data->n_players, Graph, data->players);
 }

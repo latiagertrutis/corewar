@@ -6,35 +6,29 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 07:37:31 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/25 19:50:57 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/26 19:25:00 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	ft_pcs_to_rack(unsigned int n_players, t_sdl *Graph,
-		t_player *players, int stela)
+void	ft_pcs_to_rack(t_sdl *Graph, t_data *data, int stela)
 {
-	unsigned int i;
 	unsigned int j;
 	SDL_Rect	pc_rect;
 	
-	i = 0;
 	pc_rect = (SDL_Rect){0, 0, Graph->square->w - 2, Graph->square->h - 2};
-	while (i < n_players)
+	j = 0;
+	ft_printf("hay %i pcs\n", data->nb_pc);
+	while (j < data->nb_pc)
 	{
-		j = 0;
-		while (j < players[i].nb_pc)
-		{
-			pc_rect.x = Graph->screen.w * RIGHT_BORDER + (Graph->square->w - 1)
-				* (players[i].pc[j].pc % Graph->cuant_squares[0]) + 1;
-			pc_rect.y = Graph->screen.h * UPPER_BORDER + (Graph->square->h - 1)
-				* (players[i].pc[j].pc / Graph->cuant_squares[1]) + 1;
-			SDL_RenderCopy(Graph->screen.Renderer, Graph->pc[i + MAX_PLAYERS *
-				stela], NULL, &pc_rect);
-			j++;
-			
-		}
-		i++;
+		ft_printf("data->pc[%i].id = %i y esta en %i\n", j, data->pc[j].id, data->pc[j].pc);
+		pc_rect.x = Graph->screen.w * RIGHT_BORDER + (Graph->square->w - 1)
+			* (data->pc[j].pc % Graph->cuant_squares[0]) + 1;
+		pc_rect.y = Graph->screen.h * UPPER_BORDER + (Graph->square->h - 1)
+			* (data->pc[j].pc / Graph->cuant_squares[1]) + 1;
+		SDL_RenderCopy(Graph->screen.Renderer, Graph->pc[(int)data->pc[j].id + MAX_PLAYERS *
+			stela], NULL, &pc_rect);
+		j++;		
 	}
 }

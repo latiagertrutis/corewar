@@ -6,18 +6,18 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 23:56:45 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/25 18:39:40 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/26 19:11:43 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void		fill_region(t_pc pc, const t_data *data, const unsigned int i, const unsigned int inc)
+static void		fill_region(const t_data *data, const unsigned int i, const unsigned int inc)
 {
 	unsigned int j;
 
 	j = 0;
-	pc.pc = j + i * inc;
+	data->pc[i].pc = j + i * inc;
 	while (j < data->players[i].prog_size)
 	{
 		data->arena->board[j + i * inc] = (t_board){data->players[i].prog[j], data->players[i].id + 1, 0};
@@ -34,7 +34,7 @@ void			put_champs_to_arena(const t_data *data)
 	i = 0;
 	while (i < data->n_players)
 	{
-		fill_region(data->pc[i], data, i, inc);
+		fill_region(data, i, inc);
 		i++;
 	}
 }

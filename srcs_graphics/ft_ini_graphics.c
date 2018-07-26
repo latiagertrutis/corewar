@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 05:20:16 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/25 17:39:25 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/26 18:34:32 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "corewar.h"
@@ -47,5 +47,5 @@ void ft_ini_graphics(t_sdl **Graph, t_mods *mods, t_data *data)
 		ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
 	ft_ini_interface(*Graph);
 	ft_ini_font(*Graph);
-	ft_ini_information(data);
+//	ft_ini_information(data);
 }
