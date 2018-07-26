@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 16:55:06 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/26 19:31:22 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/26 21:23:52 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int			verify_ocp(const unsigned char ocp)
 	return (1);
 }
 
-void	core_ldi(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
+void	core_ldi(t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned char	ocp;
 	t_arg			arg1;
@@ -54,7 +54,8 @@ void	core_ldi(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 		}
 		pc->pc = (pc->pc + 1 + 1 + arg1.len + arg2.len + get_size_arg(ocp, 2, 0)) % MEM_SIZE;//and + ocp + arg1 + arg2 + rg
 	}
-	pc->pc = (pc->pc + 1 + 1 + get_size_arg(ocp, 0, 0) + get_size_arg(ocp, 1, 0) + get_size_arg(ocp, 2, 0)) % MEM_SIZE;//and + ocp + arg1 + arg2 + rg
+	else
+		pc->pc = (pc->pc + 1 + 1 + get_size_arg(ocp, 0, 0) + get_size_arg(ocp, 1, 0) + get_size_arg(ocp, 2, 0)) % MEM_SIZE;//and + ocp + arg1 + arg2 + rg
 }
 /* ft_printf("arg1:\n"); */
 /* print_memory(arg1.arg, 4, 4, 1); */

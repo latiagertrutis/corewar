@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 16:25:48 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/23 18:23:16 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/26 21:48:29 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void		core_lfork(t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned short 	pc_i;
 	unsigned short	pos;
+	unsigned int	j;
 	short			new_i;
 
 	pos = pc->pc;
@@ -51,10 +52,12 @@ void		core_lfork(t_pc *pc, t_arena *arena, t_data *data)
 	data->pc[data->nb_pc] = (t_pc){pc->carry, ft_mod((pos + (new_i)), MEM_SIZE), 0, {{0}}, pc->id};
 	// ft_printf("pc1 es: %d\npc2 es: %d\nnb_pc es: %d\n", pc->pc, player->pc[player->nb_pc].pc, player->nb_pc);
 //	exit(1);
-	for (int j = 0; j < REG_NUMBER; j++) //PODEMOS USAR FOR ???????
+	j = 0;
+	while (j < REG_NUMBER) //PODEMOS USAR FOR ???????
 	{
 		// ft_memcpy(player->pc[player->nb_pc].reg[j], pc->reg[j], REG_SIZE);
 		ft_memcpy(data->pc[data->nb_pc].reg[j], pc->reg[j], REG_SIZE);
+		j++;
 	}
 	pc->pc = (pc->pc + 3) % MEM_SIZE;
 	// player->nb_pc++;

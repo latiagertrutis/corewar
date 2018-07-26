@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 07:09:33 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/26 17:32:30 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/26 22:32:42 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void			apply_and(t_arg *arg1, t_arg *arg2, t_pc *pc, const unsigned char 
 	}
 }
 
-void				core_and(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
+void				core_and(t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned char	ocp;
 	t_arg			arg1;
@@ -55,11 +55,11 @@ void				core_and(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 		reg_pos = arena->board[(pc->pc + 2 + arg1.len + arg2.len) % MEM_SIZE].mem - 1;
 		if (get_arg_value(arena->board, &arg1, pc) && get_arg_value(arena->board, &arg2, pc))
 			apply_and(&arg1, &arg2, pc, reg_pos);
-		pc->carry = (!*((int *)(pc->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry
 		pc->pc = (pc->pc + 1 + 1 + arg1.len + arg2.len + 1) % MEM_SIZE;//and + ocp + arg1 + arg2 + rg
 	}
 	else
 		pc->pc = (pc->pc + 1 + 1 + get_size_arg(ocp, 0, 1) + get_size_arg(ocp, 1, 1) + get_size_arg(ocp, 2, 1)) % MEM_SIZE;//and + ocp + arg1 + arg2 + arg3
+	pc->carry = (!*((int *)(pc->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry
 }
 //		ft_printf("arg1.len: %u\narg1.type: %u\n", arg1.len, arg1.type);
 //		print_memory(arg1.arg, 4, 4, 1);

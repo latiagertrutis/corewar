@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 17:39:59 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/26 16:46:10 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/26 21:45:03 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ static void		sub_reg(t_pc *pc, const unsigned char reg1, const unsigned char reg
 		aux2[REG_SIZE - 1 - i] = pc->reg[reg2][i];
 		i++;
 	}
-//	ft_printf("SUMA el reg1: %u vale: %d\n", reg1, *((int *)aux1));
+//	ft_printf("RESTA el reg1: %u vale: %d\n", reg1, *((int *)aux1));
 //	print_memory(pc->reg[reg1], 4, 4, 1);
 //	ft_printf("SUMA el reg2: %u vale: %d\n", reg2, *((int *)aux2));
 //	print_memory(pc->reg[reg2], 4, 4, 1);
-	(*(int *)pc->reg[reg3]) = *((int *)aux1) - *((int *)aux2);
+	(*(int32_t *)pc->reg[reg3]) = *((int32_t *)aux1) - *((int32_t *)aux2);
 //	ft_printf("SUMA el reg3: %u vale: %d\n", reg3, *((int *)pc->reg[reg3]));
 	invert_bytes(pc->reg[reg3], REG_SIZE);
 //	print_memory(pc->reg[reg3], 4, 4, 1);
@@ -37,7 +37,7 @@ static void		sub_reg(t_pc *pc, const unsigned char reg1, const unsigned char reg
 	pc->carry = (!*((int *)(pc->reg[reg3]))) ? 0x1 : 0x0;//actualizar carry
 }
 
-void			core_sub(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
+void			core_sub(t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned short 	pos;
 	unsigned char	ocp;

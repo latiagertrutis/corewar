@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 05:45:24 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/26 19:46:58 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/26 21:33:27 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void		add_reg(t_pc *pc, const unsigned char reg1, const unsigned char reg
 //	print_memory(pc->reg[reg1], 4, 4, 1);
 //	ft_printf("SUMA el reg2: %u vale: %d\n", reg2, *((int *)aux2));
 //	print_memory(pc->reg[reg2], 4, 4, 1);
-	(*(int *)pc->reg[reg3]) = *((int *)aux1) + *((int *)aux2);
+	(*(int32_t *)pc->reg[reg3]) = *((int32_t *)aux1) + *((int32_t *)aux2);
 //	ft_printf("SUMA el reg3: %u vale: %d\n", reg3, *((int *)pc->reg[reg3]));
 	invert_bytes(pc->reg[reg3], REG_SIZE);
 //	print_memory(pc->reg[reg3], 4, 4, 1);
