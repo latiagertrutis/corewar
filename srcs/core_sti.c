@@ -98,7 +98,7 @@ static int			verify_ocp(const unsigned char ocp)
 
 }
 
-void			core_sti(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
+void			core_sti(t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned char	ocp;
 	t_arg			arg2;
@@ -120,14 +120,14 @@ void			core_sti(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	}
 	if 	(verify_ocp(ocp) && get_arg_value(arena->board, &arg2, pc) && get_arg_value(arena->board, &arg3, pc))
 	{
-		ft_printf("************ STI *****************\narg2 tipo %d cont: \n", arg2.type);
-		print_memory(arg2.arg, 4, 4, 1);
-		ft_printf("arg3 tipo: %u cont:\n", arg3.type);
-		print_memory(arg3.arg, 4, 4, 1);
-		ft_printf("reg: \n");
-		print_memory(pc->reg[reg_pos], 4, 4, 1);
-		ft_printf("el pc es %d\n", (pc - player->pc));
-		ft_printf("**********************************\n");
+		// ft_printf("************ STI *****************\narg2 tipo %d cont: \n", arg2.type);
+		// print_memory(arg2.arg, 4, 4, 1);
+		// ft_printf("arg3 tipo: %u cont:\n", arg3.type);
+		// print_memory(arg3.arg, 4, 4, 1);
+		// ft_printf("reg: \n");
+		// print_memory(pc->reg[reg_pos], 4, 4, 1);
+		// ft_printf("el pc es %d\n", (pc - player->pc));
+		// ft_printf("**********************************\n");
 
 		invert_bytes(arg2.arg, arg2.type == DIR_CODE ? 2 : 4);
 		invert_bytes(arg3.arg, arg3.type == DIR_CODE ? 2 : 4);
@@ -140,7 +140,8 @@ void			core_sti(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 		while (i < REG_SIZE)
 		{//con idx mod es el resto puesto que es un rango y puede optar a valores negativos en cambio MEM_SIZE precisa de ser un modulo puesto que la memoria es circular y en ningun caso puede ser negativo
 			arena->board[ft_mod((pc->pc + i + ((*((int *)(arg2.arg)) + *((int *)(arg3.arg))) % IDX_MOD)), MEM_SIZE)].mem = pc->reg[reg_pos][i];
-			arena->board[ft_mod((pc->pc + i + ((*((int *)(arg2.arg)) + *((int *)(arg3.arg))) % IDX_MOD)), MEM_SIZE)].id = player->id + 1;
+			// arena->board[ft_mod((pc->pc + i + ((*((int *)(arg2.arg)) + *((int *)(arg3.arg))) % IDX_MOD)), MEM_SIZE)].id = player->id + 1;
+			arena->board[ft_mod((pc->pc + i + ((*((int *)(arg2.arg)) + *((int *)(arg3.arg))) % IDX_MOD)), MEM_SIZE)].id = pc->id + 1;
 			i++;
 		}
 	}

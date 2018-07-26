@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-static void			exe_pc(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
+static void			exe_pc(t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned char op_nb;
 
@@ -27,7 +27,10 @@ static void			exe_pc(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 		pc->wait_cycles--;
 //		ft_printf("executing.. %d\n", op_nb);
 		if (op_nb <= 15)
-			data->func[op_nb](player, pc, arena, data);
+		{
+			// data->func[op_nb](player, pc, arena, data);
+			data->func[op_nb](pc, arena, data);
+		}
 	}
 	else
 	{
@@ -51,11 +54,18 @@ void 				exe_players(t_data *data)
 	
 	fill_r1(data);
 //	print_board(data, data->arena->board);
-	while(data->cycle_to_die && data->mods->running)
+	while(data->cycle_to_die > 0 && data->mods->running)
 	{
+		// write(1, "\x1b[H\x1b[2J", 7);
+		// ft_putnbr(data->cycle_to_die);
+		if (data->cycle_to_die <= 0)
+			data->mods->running = 0;
 		t = 0;
 		while (t < data->cycle_to_die && data->mods->running)
 		{
+			// if (data->cycle_to_die <= 0)
+			// 	break;
+			// usleep(10);
 			while (SDL_PollEvent(&event) && data->mods->visual)
 			{
 				if (event.type == SDL_QUIT)
@@ -80,10 +90,11 @@ void 				exe_players(t_data *data)
 				while(j < data->n_players)
 				{
 
-					k = data->players[j].nb_pc;
+					k = data->nb_pc;
 					while (k)
 					{
-						exe_pc((data->players) + j, (data->players[j].pc) + k - 1, data->arena, data);
+						// exe_pc((data->players) + j, (data->players[j].pc) + k - 1, data->arena, data);
+						exe_pc((data->pc) + k - 1, data->arena, data);
 						k--;
 					}
 					j++;

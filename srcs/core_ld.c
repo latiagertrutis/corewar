@@ -33,9 +33,9 @@ static void		load_direct(t_board *board, const unsigned char reg_pos, t_pc *pc)
 		pc->reg[reg_pos][i] = board[(pos + i) % MEM_SIZE].mem;
 		i++;
 	}
-	ft_printf("\n****** ld (DIR)*******\nreg_pos: %u\ncont: ", reg_pos);
-	print_memory(pc->reg[reg_pos], 4, 4, 1);
-	ft_printf("*******************\n");
+	// ft_printf("\n****** ld (DIR)*******\nreg_pos: %u\ncont: ", reg_pos);
+	// print_memory(pc->reg[reg_pos], 4, 4, 1);
+	// ft_printf("*******************\n");
 	pc->pc = (pc->pc + 1 + 1 + 1 + DIR_SIZE) % MEM_SIZE;//ld + opc + reg + dir
 	pc->carry = (!*((int *)(pc->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry
 }
@@ -59,14 +59,14 @@ static void		load_indirect(t_board *board, const unsigned char reg_pos, t_pc *pc
 		pc->reg[reg_pos][i] = board[ft_mod((i + pc->pc + (*((short *)board_pos) % IDX_MOD)), MEM_SIZE)].mem;
 		i++;
 	}
-	ft_printf("\n****** ld (IND)*******\nInd: %u\nreg_pos: %u\ncont: ", *((short *)board_pos), reg_pos);
-	print_memory(pc->reg[reg_pos], 4, 4, 1);
-	ft_printf("*******************\n");
+	// ft_printf("\n****** ld (IND)*******\nInd: %u\nreg_pos: %u\ncont: ", *((short *)board_pos), reg_pos);
+	// print_memory(pc->reg[reg_pos], 4, 4, 1);
+	// ft_printf("*******************\n");
 	pc->pc = (pc->pc + 1 + 1 + 1 + IND_SIZE) % MEM_SIZE;//ld + opc + reg + ind
 	pc->carry = (!*((int *)(pc->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry
 }
 
-void			core_ld(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
+void			core_ld(t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned short 	pos;
 	unsigned char	ocp;

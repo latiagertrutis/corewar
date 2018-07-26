@@ -28,7 +28,7 @@ static 	short charge_short(t_board *board, unsigned short pc_pos)
 	return (*((short *)param));
 }
 
-void	core_zjmp(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
+void	core_zjmp(t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned short pos;
 

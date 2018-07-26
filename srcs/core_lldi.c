@@ -19,7 +19,7 @@ static int			verify_ocp(const unsigned char ocp)
 	return (1);
 }
 
-void	core_lldi(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
+void	core_lldi(t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned char	ocp;
 	t_arg			arg1;
@@ -33,12 +33,16 @@ void	core_lldi(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	arg2 = (t_arg){1, 0, 0, 0x0, {0}};
 	get_arg(ocp, pc->pc, arena->board, &arg1);
 	get_arg(ocp, pc->pc, arena->board, &arg2);
+
+	
 //	arg1.arg[0] = 0;
 //	arg1.arg[1] = 1;
-	ft_printf("arg1:\n");
-	print_memory(arg1.arg, 4, 4, 1);
-	ft_printf("arg2: [%u]\n", arg2.len);
-	print_memory(arg2.arg, 4, 4, 1);
+
+
+	// ft_printf("arg1:\n");
+	// print_memory(arg1.arg, 4, 4, 1);
+	// ft_printf("arg2: [%u]\n", arg2.len);
+	// print_memory(arg2.arg, 4, 4, 1);
 	if (!arg1.len || !arg2.len || arg2.type == IND_CODE)
 	{
 		pc->pc = (pc->pc + 2) % MEM_SIZE;
@@ -53,11 +57,11 @@ void	core_lldi(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 			*((int *)arg1.arg) = *((short *)arg1.arg);
 		if (arg2.type == DIR_CODE)
 			*((int *)arg2.arg) = *((short *)arg2.arg);
-		ft_printf("arg1.len: %u\narg1.type: %u\n", arg1.len, arg1.type);
-		print_memory(arg1.arg, 4, 4, 1);
-		ft_printf("arg2.len: %u\narg2.type: %u\n", arg2.len, arg2.type);
-		print_memory(arg2.arg, 4, 4, 1);
-		ft_printf("fsgdfg: %d\n", (0x00020002 + 2));
+		// ft_printf("arg1.len: %u\narg1.type: %u\n", arg1.len, arg1.type);
+		// print_memory(arg1.arg, 4, 4, 1);
+		// ft_printf("arg2.len: %u\narg2.type: %u\n", arg2.len, arg2.type);
+		// print_memory(arg2.arg, 4, 4, 1);
+		// ft_printf("fsgdfg: %d\n", (0x00020002 + 2));
 //	exit(1);
 		while (i < REG_SIZE)
 		{

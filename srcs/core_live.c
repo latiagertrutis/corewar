@@ -26,7 +26,6 @@ static void search_nb(t_player *players, int nb_players, int live_nb, int j)
 		}
 		i++;
 	}
-
 }
 
 static int 			take_live_nb(t_board *board)
@@ -40,7 +39,7 @@ static int 			take_live_nb(t_board *board)
 	return((*(int *)rtn));
 }
 
-void				core_live(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
+void				core_live(t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned short	pos;
 	int 	live_nb;

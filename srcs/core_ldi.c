@@ -19,7 +19,7 @@ static int			verify_ocp(const unsigned char ocp)
 	return (1);
 }
 
-void	core_ldi(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
+void	core_ldi(t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned char	ocp;
 	t_arg			arg1;
@@ -35,10 +35,10 @@ void	core_ldi(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	get_arg(ocp, pc->pc, arena->board, &arg2);
 //	arg1.arg[0] = 0;
 //	arg1.arg[1] = 1;
-	ft_printf("arg1:\n");
-	print_memory(arg1.arg, 4, 4, 1);
-	ft_printf("arg2: [%u]\n", arg2.len);
-	print_memory(arg2.arg, 4, 4, 1);
+	// ft_printf("arg1:\n");
+	// print_memory(arg1.arg, 4, 4, 1);
+	// ft_printf("arg2: [%u]\n", arg2.len);
+	// print_memory(arg2.arg, 4, 4, 1);
 	if (!arg1.len || !arg2.len || arg2.type == IND_CODE)
 	{
 		pc->pc = (pc->pc + 2) % MEM_SIZE;
@@ -47,11 +47,11 @@ void	core_ldi(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	reg_pos = arena->board[(pc->pc + ((2 + arg1.len + arg2.len) % IDX_MOD)) % MEM_SIZE].mem - 1;
 	if (verify_ocp(ocp) && get_arg_value(arena->board, &arg1, pc) && get_arg_value(arena->board, &arg2, pc))
 	{
-		ft_printf("************ LDI *****************\narg1 tipo %d cont: \n", arg1.type);
-		print_memory(arg1.arg, 4, 4, 1);
-		ft_printf("arg2 tipo: %u cont:\n", arg2.type);
-		print_memory(arg2.arg, 4, 4, 1);
-		ft_printf("**********************************\n");
+		// ft_printf("************ LDI *****************\narg1 tipo %d cont: \n", arg1.type);
+		// print_memory(arg1.arg, 4, 4, 1);
+		// ft_printf("arg2 tipo: %u cont:\n", arg2.type);
+		// print_memory(arg2.arg, 4, 4, 1);
+		// ft_printf("**********************************\n");
 
 		invert_bytes(arg1.arg, arg1.type == DIR_CODE ? 2 : 4);//apnar pa registro
 		invert_bytes(arg2.arg, arg2.type == DIR_CODE ? 2 : 4);

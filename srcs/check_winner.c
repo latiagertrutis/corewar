@@ -21,7 +21,7 @@ void 	check_winner(t_player *players, int nb_players)
 	winner = &players[i++];
 	while (i < nb_players)
 	{
-		if (players[i].last_live < winner->last_live)
+		if (players[i].last_live > winner->last_live)
 			winner = &players[i];
 		i++;
 	}

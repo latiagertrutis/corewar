@@ -19,7 +19,7 @@ static int			verify_ocp(const unsigned char ocp)
 	return (1);
 }
 
-void				core_and(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
+void				core_and(t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned char	ocp;
 	t_arg			arg1;
