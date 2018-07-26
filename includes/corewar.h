@@ -12,7 +12,7 @@
 
 #define HEADER_SIZE 4 + PROG_NAME_LENGTH + 1 + 4 + 4
 #define PC_BUFF 20
-#define MAX_ARG_LEN 4
+#define MAX_ARG_LEN REG_SIZE
 
 typedef struct		s_arg
 {
