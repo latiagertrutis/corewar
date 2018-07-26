@@ -45,8 +45,16 @@ typedef	struct	s_info
 {
 	SDL_Surface *cicles;
 	SDL_Surface *lifes;
-	SDL_Surface *name;
+	SDL_Surface *lst_life;
 }				t_info;
+
+typedef struct s_font
+{
+	TTF_Font	*font;
+	int			font_size;
+	int			w;
+	int			h;
+}				t_font;
 
 typedef struct s_sdl {
 	struct {
@@ -58,14 +66,14 @@ typedef struct s_sdl {
 		SDL_Texture *texture;
 	} screen;
 	int			cuant_squares[2];
-	struct {
-		TTF_Font *font;
-		int		w;
-		int		h;
-	} font_info;
+	t_font	font[2];
 	SDL_Texture *info_text;
-	SDL_Texture *pc;
-	t_info		infos[4];
+	SDL_Texture **pc;
+	struct {
+		SDL_Surface *cicles;
+		SDL_Surface *cicle_to_die;
+	} general_info;
+	t_info		player_info[4];
 	SDL_Surface ***hexa_bytes;
 	SDL_Surface *rack;
 	SDL_Rect *square;
@@ -228,6 +236,7 @@ void		ft_board_to_screen(t_sdl *Graph, t_board board[MEM_SIZE], t_data *data);
 void		ft_pcs_to_rack(unsigned int n_players, t_sdl *Graph, t_player *players, int alpha_mod);
 void		ft_set_back_to_front(t_sdl *Graph, t_data *data);
 void		ft_ini_information(t_data *data);
+void		ft_ini_material(t_data *data, t_sdl *Graph);
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/25 18:10:23 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/25 18:12:39 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ void 				exe_players(t_data *data)
 				}
 				// if (data->nb_cycles == 100)
 				// 	exit(1);
->>>>>>> ba3733de484bcf80bfeda3ac859a206d717ffc00
 			}
 		}
 		check_live_count(data->players, data->n_players, data);

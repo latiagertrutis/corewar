@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 04:10:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/25 17:38:58 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/25 18:35:59 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int			take_hexa_byte(unsigned char byte, char hexa_byte[3])
 
 static int			take_color_byte(t_board byte)
 {
+	
 	if (!byte.new)
 	{
 		if (byte.id == 1)

@@ -6,40 +6,11 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 06:40:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/25 17:13:09 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/25 19:51:22 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-static void		draw_rack(int cuant_squares[2], t_sdl *Graph, int first_col)
-{
-	int i;
-	int j;
-	int	k;
-
-	k = cuant_squares[1] - 1;
-	i = cuant_squares[0];
-	j = -1;
-	while (++j < MEM_SIZE)
-	{
-		if (--k && !i)
-		{
-			Graph->square->y += Graph->square->h - 1;
-			Graph->square->x = first_col;
-			i = cuant_squares[0];
-		}
-		if (SDL_FillRect(Graph->rack, Graph->square,
-				SDL_MapRGBA(Graph->rack->format, BACK_COLOR SDL_ALPHA_OPAQUE)))
-			ft_SDL_error("SDL_RenderDrawRect", MODE_SDL);
-		if (SDL_FillRect(Graph->rack, &(SDL_Rect){Graph->square->x + 1,
-				Graph->square->y + 1, Graph->square->w - 2, Graph->square->h - 2}
-				,SDL_MapRGBA(Graph->rack->format, FIELD_COLOR SDL_ALPHA_OPAQUE)))
-			ft_SDL_error("SDL_RenderDrawRect", MODE_SDL);
-		Graph->square->x += Graph->square->w - 1;
-		i--;
-	}
-}
 
 static void		ini_big_rack(t_sdl *Graph)
 {
@@ -58,7 +29,6 @@ static void		ini_big_rack(t_sdl *Graph)
 	Graph->square = &(SDL_Rect){Graph->screen.w * RIGHT_BORDER + 1,
 			Graph->screen.h * UPPER_BORDER + 1, square_dim[0],
 			square_dim[1]};
-	draw_rack(Graph->cuant_squares, Graph, Graph->screen.w * RIGHT_BORDER);
 }
 
 static void				ini_rack(t_sdl *Graph)
@@ -82,7 +52,62 @@ static void				ini_rack(t_sdl *Graph)
 	Graph->square->y = 0;
 	Graph->square->w = square_dim[0];
 	Graph->square->h = square_dim[1];
-//	draw_rack((int[2]){64, 64}, Graph, 0);
+}
+
+static Uint32	take_color_pc(int id, SDL_PixelFormat *format)
+{
+	int mod;
+
+	mod = 5;
+	if (!id)
+		return (SDL_MapRGBA(format, 51, 255, 51, 128));
+	else if (id == 1)
+		return (SDL_MapRGBA(format, 255, 204, 0, 128));
+	else if (id == 2)
+		return (SDL_MapRGBA(format, 0xFF, 0xF2, 0xCF, 128));
+	else if (id == 3)
+		return (SDL_MapRGBA(format, 252, 102, 92, 128));
+	else if (id == 4)
+		return (SDL_MapRGBA(format, 51, 255, 51, 178));
+	else if (id == 5)
+		return (SDL_MapRGBA(format, 255, 204, 0, 178));
+	else if (id == 6)
+		return (SDL_MapRGBA(format, 0xFF, 0xF2, 0xCF, 178));
+	else
+		return (SDL_MapRGBA(format, 252, 102, 92, 178));
+		
+}
+
+static void			ini_pcs(t_sdl *Graph)
+{
+	int			i[3];
+	SDL_Rect	pc;
+	int			*pixel;
+	int			pitch;
+	Uint32		color;
+
+	pc = (SDL_Rect){0, 0, Graph->square->w - 2, Graph->square->h - 2};
+	i[0] = 0;
+	while (i[0] < MAX_PLAYERS * 2)
+	{
+		color = take_color_pc(i[0], Graph->rack->format);
+		if (!(Graph->pc[i[0]] = SDL_CreateTexture(Graph->screen.Renderer,
+				372645892, SDL_TEXTUREACCESS_STREAMING, Graph->square->w - 2,
+				Graph->square->h - 2)))
+			ft_SDL_error("SDL_CreateTexture", MODE_SDL);
+		SDL_SetTextureBlendMode(Graph->pc[i[0]], SDL_BLENDMODE_BLEND);
+		SDL_LockTexture(Graph->pc[i[0]], &pc, (void **)&pixel, &pitch);
+		i[1] = 0;
+		while (i[1] < pc.h)
+		{
+			i[2] = 0;
+			while (i[2] < pc.w)
+				pixel[i[1] * pitch / 4 + i[2]++] = color;
+			i[1]++;
+		}
+		SDL_UnlockTexture(Graph->pc[i[0]]);
+		i[0]++;
+	}
 }
 
 void				ft_ini_interface(t_sdl *Graph)
@@ -96,7 +121,6 @@ void				ft_ini_interface(t_sdl *Graph)
 	if (!(Graph->rack = SDL_CreateRGBSurfaceWithFormat(0, Graph->big_square->w,
 			Graph->big_square->h, 32, 372645892)))
 		ft_SDL_error("SDL_CreateRGBSurface", MODE_SDL);
-//	SDL_FillRect(Graph->rack, &(SDL_Rect){0, 0, Graph->rack->w, Graph->rack->h}, SDL_MapRGBA(Graph->rack->format, 255, 0, 0, SDL_ALPHA_OPAQUE));
 	if (MEM_SIZE <= 4096)
 		ini_rack(Graph);
 	else
@@ -105,11 +129,10 @@ void				ft_ini_interface(t_sdl *Graph)
 			372645892, SDL_TEXTUREACCESS_STREAMING, Graph->big_square->w,
 			Graph->big_square->h)))
 		ft_SDL_error("SDL_CreateTexture", MODE_SDL);
-	if (!(Graph->pc = SDL_CreateTexture(Graph->screen.Renderer,
-			372645892, SDL_TEXTUREACCESS_STREAMING, Graph->square->w - 2,
-			Graph->square->h - 2)))
-		ft_SDL_error("SDL_CreateTexture", MODE_SDL);
-	SDL_SetTextureBlendMode(Graph->pc, SDL_BLENDMODE_BLEND);
+	if (!(Graph->pc = (SDL_Texture **)malloc(sizeof(SDL_Texture *) *
+			MAX_PLAYERS * 2)))
+		ft_error("Error malloc ft_ini_interface\n");
+	ini_pcs(Graph);
 	SDL_SetTextureBlendMode(Graph->screen.texture, SDL_BLENDMODE_BLEND);
 	SDL_SetTextureAlphaMod(Graph->screen.texture, 100);
 }
