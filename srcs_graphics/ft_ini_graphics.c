@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 05:20:16 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/25 04:18:40 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/26 18:34:32 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "corewar.h"
@@ -43,10 +43,9 @@ void ft_ini_graphics(t_sdl **Graph, t_mods *mods, t_data *data)
 			-1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)))
 		ft_SDL_error("SDL_CreateRenderer", MODE_SDL);
 	ft_printf("La ventana es %i x %i\n", (*Graph)->screen.w, (*Graph)->screen.h);
-	if (SDL_SetRenderDrawColor((*Graph)->screen.Renderer, BACK_COLOR
-			SDL_ALPHA_OPAQUE))
+	if (SDL_SetRenderDrawColor((*Graph)->screen.Renderer, 0, 0, 0, 0))
 		ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
 	ft_ini_interface(*Graph);
 	ft_ini_font(*Graph);
-	ft_ini_information(data);
+//	ft_ini_information(data);
 }

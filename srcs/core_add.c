@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 05:45:24 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/26 16:43:33 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/26 19:46:58 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void		add_reg(t_pc *pc, const unsigned char reg1, const unsigned char reg
 	pc->carry = (!*((int *)(pc->reg[reg3]))) ? 0x1 : 0x0;//actualizar carry
 }
 
-void			core_add(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
+void			core_add(t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned short 	pos;
 	unsigned char	ocp;

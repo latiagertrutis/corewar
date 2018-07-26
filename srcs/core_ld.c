@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 03:43:25 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/26 16:31:16 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/26 19:45:23 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void		load_indirect(t_board *board, const unsigned char reg_pos, t_pc *pc
 	pc->carry = (!*((int *)(pc->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry
 }
 
-void			core_ld(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
+void			core_ld(t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned short 	pos;
 	unsigned char	ocp;

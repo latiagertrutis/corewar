@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 04:10:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/24 18:42:40 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/26 18:31:54 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int			take_hexa_byte(unsigned char byte, char hexa_byte[3])
 
 static int			take_color_byte(t_board byte)
 {
+	
 	if (!byte.new)
 	{
 		if (byte.id == 1)
@@ -90,5 +91,4 @@ void	ft_board_to_screen(t_sdl *Graph, t_board board[MEM_SIZE], t_data *data)
 			rack->pitch);
 	SDL_UnlockSurface(rack);
 	SDL_UnlockTexture(Graph->screen.texture);
-	ft_pcs_to_rack(data->n_players, Graph, data->players);
 }

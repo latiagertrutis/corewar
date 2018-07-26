@@ -6,13 +6,13 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/25 14:38:42 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/26 19:28:17 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void			exe_pc(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
+static void			exe_pc(t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned char op_nb;
 
@@ -27,7 +27,10 @@ static void			exe_pc(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 		pc->wait_cycles--;
 //		ft_printf("executing.. %d\n", op_nb);
 		if (op_nb <= 15)
-			data->func[op_nb](player, pc, arena, data);
+		{
+			// data->func[op_nb](player, pc, arena, data);
+			data->func[op_nb](pc, arena, data);
+		}
 	}
 	else
 	{
@@ -51,11 +54,19 @@ void 				exe_players(t_data *data)
 	
 	fill_r1(data);
 //	print_board(data, data->arena->board);
-	while(data->cycle_to_die && data->mods->running)
+	while(data->cycle_to_die > 0 && data->mods->running)
 	{
+		// write(1, "\x1b[H\x1b[2J", 7);
+		// ft_putnbr(data->cycle_to_die);
+		if (data->cycle_to_die <= 0)
+			data->mods->running = 0;
 		t = 0;
 		while (t < data->cycle_to_die && data->mods->running)
 		{
+
+			// if (data->cycle_to_die <= 0)
+			// 	break;
+			// usleep(10);
 			while (SDL_PollEvent(&event) && data->mods->visual)
 			{
 				if (event.type == SDL_QUIT)
@@ -76,26 +87,31 @@ void 				exe_players(t_data *data)
 			// usleep(100);
 			if (!data->mods->pause || data->mods->step)
 			{
-				j = 0;
-				while(j < data->n_players)
-				{
+//				j = 0;
+//				while(j < data->n_players)
+//				{
 
-					k = data->players[j].nb_pc;
-					while (k)
-					{
-						exe_pc((data->players) + j, (data->players[j].pc) + k - 1, data->arena, data);
-						k--;
-					}
-					j++;
+				k = data->nb_pc;
+				ft_printf("EXE_INI\n");
+				while (k)
+				{
+					ft_printf("pc numerp %i\n", k);
+						// exe_pc((data->players) + j, (data->players[j].pc) + k - 1, data->arena, data);
+					exe_pc((data->pc) + k - 1, data->arena, data);
+					k--;
 				}
+				ft_printf("EXE_FIN\n");
+//					j++;
+//				}
 				t++;
 				data->nb_cycles++;
+
 				if (data->mods->visual)
 				{
 					ft_board_to_screen(data->arena->Graph, data->arena->board, data);
-					ft_set_back_to_front(data->arena->Graph);
+					ft_set_back_to_front(data->arena->Graph, data);
 				}
-				// if (data->nb_cycles == 100)
+			// if (data->nb_cycles == 100)
 				// 	exit(1);
 			}
 		}

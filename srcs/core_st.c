@@ -6,13 +6,13 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 23:23:06 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/26 16:27:57 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/26 19:46:10 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void store_in_ram(t_player *player, t_board *board, unsigned char reg_pos, t_pc *pc)
+static void store_in_ram(t_board *board, unsigned char reg_pos, t_pc *pc)
 {
 	unsigned int	i;
 	char			board_pos[IND_SIZE];
@@ -28,7 +28,7 @@ static void store_in_ram(t_player *player, t_board *board, unsigned char reg_pos
 	i = 0;
 	while (i < REG_SIZE)
 	{
-		board[ft_mod((i + aux_pc + (*((short *)board_pos) % IDX_MOD)), MEM_SIZE)] = (t_board){pc->reg[reg_pos][i], player->id, 0x1};
+		board[ft_mod((i + aux_pc + (*((short *)board_pos) % IDX_MOD)), MEM_SIZE)] = (t_board){pc->reg[reg_pos][i], pc->id, 0x1};
 		i++;
 	}
 //	ft_printf("\n****** st (IND)*******\nInd: %u\nreg_pos: %u\ncont: ", *((short *)board_pos), reg_pos);
@@ -54,7 +54,7 @@ static void	store_in_reg(unsigned char reg_pos1, unsigned char reg_pos2, t_pc *p
 	pc->pc = (pc->pc + 1 + 1 + 1 + 1) % MEM_SIZE;//ld + opc + reg1 + reg2
 }
 
-void		core_st(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
+void		core_st(t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned short 	pos;
 	unsigned char	ocp;
@@ -64,7 +64,7 @@ void		core_st(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	pos = pc->pc;
 	ocp = arena->board[(pos + 1) % MEM_SIZE].mem;//en pc + 1 esta ocp y en pc + 2 esta el primer argumento
 	if (ocp == 0x70 && (reg_pos1 = (arena->board[(pos + 2) % MEM_SIZE].mem - 1)) < REG_NUMBER)
-		store_in_ram(player, arena->board, reg_pos1, pc);
+		store_in_ram(arena->board, reg_pos1, pc);
 	else if (ocp == 0x50 && (reg_pos1 = (arena->board[(pos + 2) % MEM_SIZE].mem - 1)) < REG_NUMBER &&
 	         (reg_pos2 = (arena->board[(pos + 3) % MEM_SIZE].mem - 1)) < REG_NUMBER)
 		store_in_reg(reg_pos1, reg_pos2, pc);

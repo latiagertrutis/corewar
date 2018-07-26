@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 03:49:02 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/25 04:28:51 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/25 23:20:25 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static Uint32	take_color_player(int i, SDL_PixelFormat *format)
 		return (SDL_MapRGBA(format, 255, 242, 207, SDL_ALPHA_OPAQUE));
 	else if (i == 3)
 		return (SDL_MapRGBA(format, 252, 102, 92, SDL_ALPHA_OPAQUE));
+	else if (i == 4)
+		return (SDL_MapRGBA(format, FIELD_COLOR SDL_ALPHA_OPAQUE));
 	else
 		return (SDL_MapRGBA(format, 0, 0, 0, SDL_ALPHA_OPAQUE));
 
@@ -36,10 +38,9 @@ static void		ini_general(t_sdl *Graph)
 	
 	info_marc = SDL_CreateRGBSurfaceWithFormat(0, Graph->square_info->w,
 		Graph->square_info->h, 32, 372645892);
-	SDL_FillRect(info_marc, NULL, SDL_MapRGBA(info_marc->format,
-		FIELD_COLOR SDL_ALPHA_OPAQUE));
-	SDL_FillRect(info_marc, &(SDL_Rect){10, 10, info_marc->w - 20,
-		info_marc->h - 20}, SDL_MapRGBA(info_marc->format, 0, 0, 0,
+	SDL_FillRect(info_marc, NULL, take_color_player(4, info_marc->format));
+	SDL_FillRect(info_marc, &(SDL_Rect){5, 5, info_marc->w - 10,
+		info_marc->h - 10}, SDL_MapRGBA(info_marc->format, 0, 0, 0,
 		SDL_ALPHA_OPAQUE));
 	SDL_LockTexture(Graph->info_text, Graph->square_info,
 		(void **)&pixel, &pitch);
@@ -59,9 +60,9 @@ static void		ini_player(t_sdl *Graph, int i, SDL_Surface *info_marc)
 	int		pitch;
 	int		j;
 	
-	SDL_FillRect(info_marc, NULL, take_color_player(i, info_marc->format));
-	SDL_FillRect(info_marc, &(SDL_Rect){10, 10, info_marc->w - 20,
-			info_marc->h - 20}, take_color_player(-1, info_marc->format));
+	SDL_FillRect(info_marc, NULL, take_color_player(4, info_marc->format));
+	SDL_FillRect(info_marc, &(SDL_Rect){5, 5, info_marc->w - 10,
+			info_marc->h - 10}, take_color_player(-1, info_marc->format));
 	SDL_LockTexture(Graph->info_text, &(SDL_Rect){0, Graph->square_info->h +
 		info_marc->h * i, info_marc->w, info_marc->h}, (void **)&pixel, &pitch);
 	SDL_LockSurface(info_marc);
@@ -92,4 +93,5 @@ void	ft_ini_information(t_data *data)
 			(Graph->big_square->h - Graph->square_info->h) / 4, 32, 372645892);
 	while(i < MAX_PLAYERS)
 		ini_player(Graph, i++, info_marc);
+	ft_ini_material(data, Graph);
 }
