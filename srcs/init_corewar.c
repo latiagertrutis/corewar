@@ -60,7 +60,6 @@ static void 	init_op(t_data *data)
 	data->op[16] = (t_op){0, 0, {0}, 0, 0, 0, 0, 0};
 }
 
-
 static int init_players(t_data *data)
 {
 	unsigned int i;
@@ -76,6 +75,7 @@ static int init_players(t_data *data)
 		if (!(data->players[i].pc = (t_pc *)malloc(sizeof(t_pc) * PC_BUFF)))
 			ft_error("malloc failed");
 		data->players[i].pc[0] = (t_pc){0, 0, 0, {{0}}};
+		data->pc[i].id = i; //CAMBIAR ESTO A i?????
 		i++;
 	}
 	return (1);

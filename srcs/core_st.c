@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-static void store_in_ram(t_player *player, t_board *board, unsigned char reg_pos, t_pc *pc)
+static void store_in_ram(t_board *board, unsigned char reg_pos, t_pc *pc)
 {
 	unsigned int	i;
 	char			board_pos[IND_SIZE];
@@ -31,12 +31,12 @@ static void store_in_ram(t_player *player, t_board *board, unsigned char reg_pos
 		board[ft_mod((i + pc->pc + (*((short *)board_pos) % IDX_MOD)), MEM_SIZE)].mem =
 			pc->reg[reg_pos][i];
 		board[ft_mod((i + pc->pc + (*((short *)board_pos) % IDX_MOD)), MEM_SIZE)].id =
-			player->id + 1;
+			pc->id + 1;
 		i++;
 	}
-	ft_printf("\n****** st (IND)*******\nInd: %u\nreg_pos: %u\ncont: ", *((short *)board_pos), reg_pos);
-	print_memory(pc->reg[reg_pos], 4, 4, 1);
-	ft_printf("*******************\n");
+	// ft_printf("\n****** st (IND)*******\nInd: %u\nreg_pos: %u\ncont: ", *((short *)board_pos), reg_pos);
+	// print_memory(pc->reg[reg_pos], 4, 4, 1);
+	// ft_printf("*******************\n");
 	pc->pc = (pc->pc + 1 + 1 + 1 + IND_SIZE) % MEM_SIZE;//ld + opc + reg1 + ind
 }
 
@@ -50,14 +50,14 @@ static void	store_in_reg(unsigned char reg_pos1, unsigned char reg_pos2, t_pc *p
 		pc->reg[reg_pos2][i] = pc->reg[reg_pos1][i];
 		i++;
 	}
-	ft_printf("\n****** st (REG/REG) *******\reg_pos1: %u\nreg_pos2: %u\ncont: ", reg_pos1, reg_pos2);
-	print_memory(pc->reg[reg_pos1], 4, 4, 1);
-	print_memory(pc->reg[reg_pos2], 4, 4, 1);
-	ft_printf("*******************\n");
+	// ft_printf("\n****** st (REG/REG) *******\reg_pos1: %u\nreg_pos2: %u\ncont: ", reg_pos1, reg_pos2);
+	// print_memory(pc->reg[reg_pos1], 4, 4, 1);
+	// print_memory(pc->reg[reg_pos2], 4, 4, 1);
+	// ft_printf("*******************\n");
 	pc->pc = (pc->pc + 1 + 1 + 1 + 1) % MEM_SIZE;//ld + opc + reg1 + reg2
 }
 
-void		core_st(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
+void		core_st(t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned short 	pos;
 	unsigned char	ocp;
@@ -67,7 +67,11 @@ void		core_st(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
 	pos = pc->pc;
 	ocp = arena->board[(pos + 1) % MEM_SIZE].mem;//en pc + 1 esta ocp y en pc + 2 esta el primer argumento
 	if (ocp == 0x70 && (reg_pos1 = (arena->board[(pos + 2) % MEM_SIZE].mem - 1)) < REG_NUMBER)
-		store_in_ram(player, arena->board, reg_pos1, pc);
+	{
+		// store_in_ram(player, arena->board, reg_pos1, pc);
+		store_in_ram(arena->board, reg_pos1, pc);
+
+	}
 	else if (ocp == 0x50 && (reg_pos1 = (arena->board[(pos + 2) % MEM_SIZE].mem - 1)) < REG_NUMBER && (reg_pos2 = (arena->board[(pos + 3) % MEM_SIZE].mem - 1)) < REG_NUMBER)
 		store_in_reg(reg_pos1, reg_pos2, pc);
 	else if (!check_ocp(ocp))

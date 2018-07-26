@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-t_pc	*realloc_pc(t_player *player, t_pc *pc, const unsigned int nb_pc)
+t_pc	*realloc_pc(t_pc *pc, const unsigned int nb_pc)
 {
 	t_pc *new_pc;
 

@@ -26,18 +26,18 @@ static unsigned int to_big_endian(char *reg)
 	return (*((unsigned int *)param));
 }
 
-void		core_aff(t_player *player, t_pc *pc, t_arena *arena, t_data *data)
+void		core_aff(t_pc *pc, t_arena *arena, t_data *data)
 {
 	char 			reg_nb;
 	char 			reg_content;
 
-	ft_printf("JOPUTA");
+	// ft_printf("JOPUTA");
 //	exit(1);
 	reg_nb = arena->board[(pc->pc + 2) % MEM_SIZE].mem;
 	reg_content = (to_big_endian(pc->reg[reg_nb - 1])) % 256;
-	ft_putstr("Aff: ");
-	ft_putchar(reg_content);
-	ft_putchar('\n');
+	// ft_putstr("Aff: ");
+	// ft_putchar(reg_content);
+	// ft_putchar('\n');
 	pc->pc = ((pc->pc + 3) % MEM_SIZE);
 }
 

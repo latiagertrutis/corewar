@@ -29,11 +29,11 @@ void 	check_live_count(t_player *players, int nb_players, t_data *data)
 			nbr_live += players[i].live_counter;
 			players[i].live_counter = 0;
 		}
-		else
-		{
-			ft_printf("Jugador %s is dead", players[i].name); //decidir que hacer cuando muere
-			exit(1);
-		}
+		// else
+		// {
+		// 	ft_printf("Jugador %s is dead", players[i].name); //decidir que hacer cuando muere
+		// 	exit(1);
+		// }
 		i++;
 	}
 	if (nbr_live >= NBR_LIVE || data->max_checks == MAX_CHECKS)

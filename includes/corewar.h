@@ -101,6 +101,7 @@ typedef struct 		s_pc
 	unsigned short	pc;
 	size_t 			wait_cycles;
 	char 			reg[REG_NUMBER][REG_SIZE];
+	char 			id;
 }					t_pc;
 
 typedef struct 		s_player
@@ -145,7 +146,7 @@ typedef struct		s_data
 {
 	unsigned int 	dump;
 	unsigned int 	max_checks;
-	unsigned int 	cycle_to_die;
+	int 			cycle_to_die;
 	unsigned int	n_players;
 	t_player		*players;
 	t_arena			*arena;
@@ -155,7 +156,11 @@ typedef struct		s_data
 	int				flags;
 	int				i;
 	t_mods			*mods;
-	void			(*func[16])(t_player *, t_pc *, t_arena *, struct s_data *);
+	// void			(*func[16])(t_player *, t_pc *, t_arena *, struct s_data *);
+	void			(*func[16])(t_pc *, t_arena *, struct s_data *);
+	unsigned int 	nb_pc;
+	t_pc			*pc;
+
 }					t_data;
 
 /*
@@ -187,7 +192,7 @@ void 				exe_players(t_data *data);
 void 				check_live_count(t_player *players, int nb_players, t_data *data);
 void				fill_r1(t_data *data);
 unsigned char		*get_mem_board(t_board *board, const unsigned int size);
-t_pc				*realloc_pc(t_player *player, t_pc *pc, const unsigned int nb_pc);
+t_pc				*realloc_pc(t_pc *pc, const unsigned int nb_pc);
 unsigned char		get_size_arg(const unsigned char ocp, const unsigned char n_arg, const unsigned int dir_size);
 void				get_arg(const unsigned char ocp, unsigned short pos, t_board *board, t_arg *arg);
 int					get_arg_value(t_board *board, t_arg *arg, t_pc *pc);
@@ -204,22 +209,22 @@ int					ft_check_flags(int flags, char flag);
 /*
 **------------------op_functions-----------------------------------
 */
-void				core_live(t_player *player, t_pc *pc, t_arena *arena, t_data *data);
-void				core_ld(t_player *player, t_pc *pc, t_arena *arena, t_data *data);
-void				core_st(t_player *player, t_pc *pc, t_arena *arena, t_data *data);
-void				core_add(t_player *player, t_pc *pc, t_arena *arena, t_data *data);
-void				core_sub(t_player *player, t_pc *pc, t_arena *arena, t_data *data);
-void				core_and(t_player *player, t_pc *pc, t_arena *arena, t_data *data);
-void				core_or(t_player *player, t_pc *pc, t_arena *arena, t_data *data);
-void				core_xor(t_player *player, t_pc *pc, t_arena *arena, t_data *data);
-void				core_zjmp(t_player *player, t_pc *pc, t_arena *arena, t_data *data);
-void 				core_ldi(t_player *player, t_pc *pc, t_arena *arena, t_data *data);
-void 				core_sti(t_player *player, t_pc *pc, t_arena *arena, t_data *data);
-void				core_fork(t_player *player, t_pc *pc, t_arena *arena, t_data *data);
-void				core_lfork(t_player *player, t_pc *pc, t_arena *arena, t_data *data);
-void				core_lld(t_player *player, t_pc *pc, t_arena *arena, t_data *data);
-void				core_lldi(t_player *player, t_pc *pc, t_arena *arena, t_data *data);
-void				core_aff(t_player *player, t_pc *pc, t_arena *arena, t_data *data);
+void				core_live(t_pc *pc, t_arena *arena, t_data *data);
+void				core_ld(t_pc *pc, t_arena *arena, t_data *data);
+void				core_st(t_pc *pc, t_arena *arena, t_data *data);
+void				core_add(t_pc *pc, t_arena *arena, t_data *data);
+void				core_sub(t_pc *pc, t_arena *arena, t_data *data);
+void				core_and(t_pc *pc, t_arena *arena, t_data *data);
+void				core_or(t_pc *pc, t_arena *arena, t_data *data);
+void				core_xor(t_pc *pc, t_arena *arena, t_data *data);
+void				core_zjmp(t_pc *pc, t_arena *arena, t_data *data);
+void 				core_ldi(t_pc *pc, t_arena *arena, t_data *data);
+void 				core_sti(t_pc *pc, t_arena *arena, t_data *data);
+void				core_fork(t_pc *pc, t_arena *arena, t_data *data);
+void				core_lfork(t_pc *pc, t_arena *arena, t_data *data);
+void				core_lld(t_pc *pc, t_arena *arena, t_data *data);
+void				core_lldi(t_pc *pc, t_arena *arena, t_data *data);
+void				core_aff(t_pc *pc, t_arena *arena, t_data *data);
 
 
 /*
