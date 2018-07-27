@@ -14,14 +14,26 @@
 
 static void	check_magic(int fd)
 {
-	char buff[4];
+	char 	buff[4];
+	int 	magic;
+	// char 	*magic_str;
 
+	magic_str = f_strdup("COREWAR_EXEC_MAGIC");
+
+	magic = COREWAR_EXEC_MAGIC;
+	ft_putchar('\n');
 	read(fd, buff, 4);
-	if (buff[0] == (char)0x00 && buff[1] == (char)0xEA
-		&& buff[2] == (char)0x83 && buff[3] == (char)0xF3)
-		return ;
+	invert_bytes(buff, 4);
+	if (*(int *)buff == magic)
+		ft_putendl("mateo es el puto amo");
 	else
 		ft_error("FALSE: magic number incorrect\n");
+
+	
+	// if (buff[0] == (char)0x00 && buff[1] == (char)0xEA
+	// 	&& buff[2] == (char)0x83 && buff[3] == (char)0xF3)
+	// 	return ;
+
 }
 
 void		get_champion(t_data *data, char **av, int j, int i)
@@ -32,6 +44,7 @@ void		get_champion(t_data *data, char **av, int j, int i)
 	ft_printf("%sPlayer %d: ", data->palete[j + 1], j + 1);
 	fd = open(av[i], O_RDONLY);
 	check_magic(fd);
+	exit(1);
 	data->players[j].name = read_alloc_size(fd, PROG_NAME_LENGTH + 4);
 	ft_putstr(data->players[j].name);
 	ft_printf(", Player number: ");
