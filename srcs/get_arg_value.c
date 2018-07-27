@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 17:17:57 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/23 14:19:18 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/27 01:58:52 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int			get_arg_value(t_board *board, t_arg *arg, t_pc *pc)
 	if (arg->type == REG_CODE)
 	{
 		aux[0] = arg->arg[0];
-		if (aux[0] > 16)
+		if (aux[0] > 16 || aux[0]<= 0)
 			return (0);
 		while (i < REG_SIZE)
 		{
