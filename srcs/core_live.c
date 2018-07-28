@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/11 21:50:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/18 20:33:20 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/28 19:09:12 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ void				core_live(t_pc *pc, t_arena *arena, t_data *data)
 	// if (live_nb == (*((int *)(pc->reg[0]))))
 		// player->live_counter++;
 	search_nb(data->players, data->n_players, live_nb, data->nb_cycles);
-	pc->pc += 5;
+	pc->pc = (pc->pc + 1 + DIR_SIZE) % MEM_SIZE;//live + dir
 }
