@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/01 00:34:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/26 19:32:15 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/28 21:29:27 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void 	init_func(t_data *data)
 	(data->func)[7] = core_xor;
 	(data->func)[8] = core_zjmp;
 	(data->func)[9] = core_ldi;
-	(data->func)[10] = core_sti; //
+	(data->func)[10] = core_sti;
 	(data->func)[11] = core_fork;
 	(data->func)[12] = core_lld;
 	(data->func)[13] = core_lldi;
@@ -64,6 +64,8 @@ static int init_players(t_data *data)
 {
 	unsigned int i;
 	int cosa;
+
+	data->nb_pc = data->n_players;
 	if (!(data->players = (t_player *)ft_memalloc(sizeof(t_player) * data->n_players)))
 		return (0);
 	i = 0;
@@ -76,7 +78,7 @@ static int init_players(t_data *data)
 //			ft_error("malloc failed");
 //		data->players[i].pc[0] = (t_pc){0, 0, 0, {{0}}};
 		data->pc[i].id = i; //CAMBIAR ESTO A i?????
-		data->nb_pc++;
+		data->pc[i].active = 0x1; //CAMBIAR ESTO A i?????
 		i++;
 	}
 	return (1);

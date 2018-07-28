@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/11 21:50:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/28 19:09:12 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/28 21:31:40 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void				core_live(t_pc *pc, t_arena *arena, t_data *data)
 
 	pos = pc->pc;
 	live_nb = take_live_nb((arena->board) + pos + 1);
+	pc->live = 0x1;
 	// if (live_nb == (*((int *)(pc->reg[0]))))
 		// player->live_counter++;
 	search_nb(data->players, data->n_players, live_nb, data->nb_cycles);
