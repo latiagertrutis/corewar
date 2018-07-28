@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 17:53:33 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/23 19:51:43 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/28 17:13:34 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,8 @@ void			core_lld(t_pc *pc, t_arena *arena, t_data *data)
 		load_direct(arena->board, reg_pos, pc);
 	else if (ocp == 0xD0 && (reg_pos = arena->board[((pos + 2) + IND_SIZE) % MEM_SIZE].mem - 1) < REG_NUMBER)
 		load_indirect(arena->board, reg_pos, pc);
-	else if (!check_ocp(ocp))
-		pc->pc = (pc->pc + 2) % MEM_SIZE;
 	else
-		pc->pc = (pc->pc + 1 + get_size_arg(ocp, 0, 4) + get_size_arg(ocp, 1, 4) + get_size_arg(ocp, 2, 4)) % MEM_SIZE;
+		pc->pc = (pc->pc + 1 + 1 + get_size_arg(ocp, 0, 1) + get_size_arg(ocp, 1, 1)) % MEM_SIZE;//lld + ocp + a1 + a2
 
 //	load_data(player, arena->board, ++pos, ocp);
 	// print_memory(pc->reg[(*(arena->board + (pos + 2) + IND_SIZE)).mem - 1], 4, 16, 1);

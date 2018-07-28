@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 03:43:25 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/26 19:45:23 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/28 17:08:56 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ void			core_ld(t_pc *pc, t_arena *arena, t_data *data)
 		load_direct(arena->board, reg_pos, pc);
 	else if (ocp == 0xD0 && (reg_pos = arena->board[((pos + 2) + IND_SIZE) % MEM_SIZE].mem - 1) < REG_NUMBER)
 		load_indirect(arena->board, reg_pos, pc);
-	else if (!check_ocp(ocp))//if ocp is not valid jump it
-		pc->pc = (pc->pc + 2) % MEM_SIZE;
 	else//if ocp valid but not valid for this instruction jump what it sais
-		pc->pc = (pc->pc + 1 + get_size_arg(ocp, 0, 1) + get_size_arg(ocp, 1, 1) + get_size_arg(ocp, 2, 1)) % MEM_SIZE;
+		pc->pc = (pc->pc + 1 + 1 + get_size_arg(ocp, 0, 1) + get_size_arg(ocp, 1, 1)) % MEM_SIZE;//ld + ocp + a1 + a2
 }

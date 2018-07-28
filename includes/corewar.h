@@ -198,7 +198,6 @@ void				get_arg(const unsigned char ocp, unsigned short pos, t_board *board, t_a
 int					get_arg_value(t_board *board, t_arg *arg, t_pc *pc);
 int					ft_mod(const int nb, const unsigned int mod);
 void 				check_winner(t_player *players, int nb_players);
-unsigned char		check_ocp(const unsigned char ocp);
 
 
 //Anyadidas Jaume

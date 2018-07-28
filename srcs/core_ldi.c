@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 16:55:06 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/26 21:23:52 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/28 17:10:30 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ void	core_ldi(t_pc *pc, t_arena *arena, t_data *data)
 
 	i = 0;
 	ocp = arena->board[(pc->pc + 1) % MEM_SIZE].mem;//en pc + 1 esta ocp y en pc + 2 esta el primer argum
-	if (!check_ocp(ocp))
-		pc->pc = (pc->pc + 2) % MEM_SIZE;
-	else if (verify_ocp(ocp))
+	if (verify_ocp(ocp))
 	{
 		arg1 = (t_arg){0, 0, 0, 0x0, {0}};
 		arg2 = (t_arg){1, 0, 0, 0x0, {0}};

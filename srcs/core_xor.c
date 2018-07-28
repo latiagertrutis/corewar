@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 17:38:51 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/27 02:00:39 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/28 17:17:04 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ void				core_xor(t_pc *pc, t_arena *arena, t_data *data)
 	unsigned char	reg_pos;
 
 	ocp = arena->board[(pc->pc + 1) % MEM_SIZE].mem;//pc + 1 = ocp, pc + 2 = first arg
-	if (!check_ocp(ocp))
-		pc->pc = (pc->pc + 2) % MEM_SIZE;
-	else if (verify_ocp(ocp))
+	if (verify_ocp(ocp))
 	{
 		arg1 = (t_arg){0, 0, 0, 0x1, {0}};
 		arg2 = (t_arg){1, 0, 0, 0x1, {0}};

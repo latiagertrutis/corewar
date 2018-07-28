@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 17:39:59 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/26 21:45:03 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/28 17:16:35 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ void			core_sub(t_pc *pc, t_arena *arena, t_data *data)
 	ocp = arena->board[(pos + 1) % MEM_SIZE].mem;//pc + 1 = ocp, pc + 2 = first arg
 	if (ocp == 0x54 && (reg1 = arena->board[(pos + 2) % MEM_SIZE].mem - 1) < REG_NUMBER && (reg2 = arena->board[(pos + 3) % MEM_SIZE].mem - 1) < REG_NUMBER && (reg3 = arena->board[(pos + 4) % MEM_SIZE].mem - 1) < REG_NUMBER)
 		sub_reg(pc, reg1, reg2, reg3);
-	else if (!check_ocp(ocp))
-		pc->pc = (pc->pc + 2) % MEM_SIZE;
 	else
-		pc->pc = (pc->pc + 1 + get_size_arg(ocp, 0, 4) + get_size_arg(ocp, 1, 4) + get_size_arg(ocp, 2, 4)) % MEM_SIZE;
+		pc->pc = (pc->pc + 1 + 1 + get_size_arg(ocp, 0, 1) + get_size_arg(ocp, 1, 1) + get_size_arg(ocp, 2, 1)) % MEM_SIZE;//sub + ocp + a1 + a2 + a3
 }

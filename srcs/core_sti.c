@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 02:59:04 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/26 21:32:33 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/28 17:15:16 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ void			core_sti(t_pc *pc, t_arena *arena, t_data *data)
 
 	i = 0;
 	ocp = arena->board[(pc->pc + 1) % MEM_SIZE].mem;//en pc + 1 esta ocp y en pc + 2 esta el primer argum
-	if (!check_ocp(ocp))
-		pc->pc = (pc->pc + 2) % MEM_SIZE;
-	else if (verify_ocp (ocp))
+	if (verify_ocp (ocp))
 	{
 		reg_pos = arena->board[(pc->pc + 2) % MEM_SIZE].mem - 1;
 		arg2 = (t_arg){1, 0, 0, 0x0, {0}};

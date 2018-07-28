@@ -2,7 +2,8 @@
 .comment "I'M ALIIIIVE"
 
 cosa:
-	st r3, 7
-	or r2, r2, r4
+	ld %2684354560, r3
+	st r3, 6
+	add r3, r3, r3
 	zjmp %-5
 	zjmp %-5
