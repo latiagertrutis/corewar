@@ -68,8 +68,9 @@ typedef struct s_sdl {
 	SDL_Texture *info_text;
 	SDL_Texture **pc;
 	struct {
-		SDL_Surface *cicles;
-		SDL_Surface *cicle_to_die;
+		SDL_Rect *cicles;
+		SDL_Rect *cicle_to_die;
+		SDL_Rect *processos;
 	} general_info;
 	SDL_Surface ***hexa_bytes;
 	SDL_Surface *rack;
@@ -242,7 +243,7 @@ void		ft_pcs_to_rack(t_sdl *Graph, t_data *data, int alpha_mod);
 void		ft_set_back_to_front(t_sdl *Graph, t_data *data);
 void		ft_ini_information(t_data *data);
 void		ft_ini_material(t_data *data, t_sdl *Graph, SDL_Surface *info_marc);
-int			ft_write_string(t_sdl *Graph, char *str, int pos[2]);
-int			ft_write_number_fields(t_sdl *Graph, t_font *font, int pos[2], SDL_Surface number);
+SDL_Surface	*ft_write_string(t_sdl *Graph, char *str, int pos[2], int name);
+int			ft_write_number_fields(t_sdl *Graph, t_font *font, int pos[2], SDL_Surface *number);
 
 #endif

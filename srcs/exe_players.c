@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/29 18:13:00 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/29 18:25:39 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void 				exe_players(t_data *data)
 				k = data->nb_pc;
 				while (k)
 				{
-					ft_printf("pc live: %u\npc active: %u\ncycle to die: %d\n", data->pc[k - 1].live, data->pc[k - 1].active, data->nb_cycles);
+//					ft_printf("pc live: %u\npc active: %u\ncycle to die: %d\n", data->pc[k - 1].live, data->pc[k - 1].active, data->nb_cycles);
 					// exe_pc((data->players) + j, (data->players[j].pc) + k - 1, data->arena, data);
 					if (data->pc[k - 1].active)
 					{
