@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/26 22:36:15 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/29 18:13:00 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static void			exe_pc(t_pc *pc, t_arena *arena, t_data *data)
 
 void 				exe_players(t_data *data)
 {
-	unsigned int j;
 	unsigned int k;
 	unsigned int t;
 	SDL_Event	event;
@@ -94,8 +93,23 @@ void 				exe_players(t_data *data)
 				k = data->nb_pc;
 				while (k)
 				{
-						// exe_pc((data->players) + j, (data->players[j].pc) + k - 1, data->arena, data);
-					exe_pc((data->pc) + k - 1, data->arena, data);
+					ft_printf("pc live: %u\npc active: %u\ncycle to die: %d\n", data->pc[k - 1].live, data->pc[k - 1].active, data->nb_cycles);
+					// exe_pc((data->players) + j, (data->players[j].pc) + k - 1, data->arena, data);
+					if (data->pc[k - 1].active)
+					{
+						if (data->nb_cycles != 0 && !(data->nb_cycles % CYCLE_TO_DIE))
+						{
+							if (!(data->pc[k - 1].live))
+							{
+								data->pc[k - 1].active = 0x0;
+								k--;
+								continue;
+							}
+							else
+								data->pc[k - 1].live = 0x0;
+						}
+						exe_pc((data->pc) + k - 1, data->arena, data);
+					}
 					k--;
 				}
 //					j++;
@@ -108,7 +122,7 @@ void 				exe_players(t_data *data)
 					ft_board_to_screen(data->arena->Graph, data->arena->board, data);
 					ft_set_back_to_front(data->arena->Graph, data);
 				}
-			// if (data->nb_cycles == 100)
+				// if (data->nb_cycles == 100)
 				// 	exit(1);
 			}
 		}

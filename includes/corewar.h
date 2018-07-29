@@ -101,6 +101,8 @@ typedef struct 		s_pc
 	size_t 			wait_cycles;
 	char 			reg[REG_NUMBER][REG_SIZE];
 	char 			id;
+	unsigned int	active : 1;
+	unsigned int	live : 1;
 }					t_pc;
 
 typedef struct 		s_player
@@ -145,7 +147,7 @@ typedef struct		s_data
 {
 	unsigned int 	dump;
 	unsigned int 	max_checks;
-	int 			cycle_to_die;
+	unsigned int	cycle_to_die;
 	unsigned int	n_players;
 	t_player		*players;
 	t_arena			*arena;
@@ -177,7 +179,7 @@ typedef struct		s_data
 */
 
 void				print_memory(const void *addr, size_t size, int line, int space);
-void 				take_champions(t_data *data, char **av, int i);
+void 				take_champions(t_data *data, char **av, const unsigned int ac);
 void 				big_hexa_2_dec(char *str, int size);
 void				invert_bytes(void *arr, const size_t size);
 int 				init_corewar(t_data *data, int ac, char **av);
@@ -188,7 +190,7 @@ unsigned int		get_prog_size(int fd);
 char 				*read_alloc_size(int fd, int size);
 void				print_board(t_data *data, t_board *board);
 void 				exe_players(t_data *data);
-void 				check_live_count(t_player *players, int nb_players, t_data *data);
+void 				check_live_count(t_player *players, const unsigned int nb_players, t_data *data);
 void				fill_r1(t_data *data);
 unsigned char		*get_mem_board(t_board *board, const unsigned int size);
 t_pc				*realloc_pc(t_pc *pc, const unsigned int nb_pc);
@@ -197,7 +199,6 @@ void				get_arg(const unsigned char ocp, unsigned short pos, t_board *board, t_a
 int					get_arg_value(t_board *board, t_arg *arg, t_pc *pc);
 int					ft_mod(const int nb, const unsigned int mod);
 void 				check_winner(t_player *players, int nb_players);
-unsigned char		check_ocp(const unsigned char ocp);
 
 
 //Anyadidas Jaume

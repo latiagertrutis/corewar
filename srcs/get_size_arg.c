@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 17:03:16 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/23 15:29:29 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/28 16:42:06 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ unsigned char	get_size_arg(const unsigned char ocp, const unsigned char n_arg, c
 {
 	unsigned char type;
 
-	if (!check_ocp(ocp))
-		return (0);
 	type = (ocp & (0xC0 >> (2 * n_arg))) >> (2 * (3 - n_arg));
 	if (type == REG_CODE)
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/12 18:32:40 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/12 18:32:45 by mzabalza         ###   ########.fr       */
+/*   Updated: 2018/07/28 20:33:13 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 //recorrer todo los pc y eliminar los que no han dicho live
 
-void 	check_live_count(t_player *players, int nb_players, t_data *data)
+void 	check_live_count(t_player *players, const unsigned int nb_players, t_data *data)
 {
 	unsigned int nbr_live;
-	int i;
+	unsigned int i;
 
 	nbr_live = 0;
 	i = 0;

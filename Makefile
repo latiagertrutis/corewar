@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/28 18:55:57 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/07/29 18:11:03 by jagarcia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -58,8 +58,7 @@ FUNCS =	main.c \
 		core_ldi.c \
 		core_sti.c \
 		core_lld.c \
-		core_lldi.c \
-		check_ocp.c
+		core_lldi.c
 
 
 GRAPH = ft_ini_graphics.c \

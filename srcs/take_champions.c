@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:49:00 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/29 17:40:26 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/29 18:12:24 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void		get_champion(t_data *data, char **av, int j, int i)
 	ft_printf("{eoc}");
 }
 
-void 		take_champions(t_data *data, char **av, int ac)
+void 		take_champions(t_data *data, char **av, const unsigned int ac)
 {
 	
 	unsigned int	i;

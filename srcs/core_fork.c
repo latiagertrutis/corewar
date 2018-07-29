@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 09:34:50 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/23 18:18:22 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/28 21:29:48 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		core_fork(t_pc *pc, t_arena *arena, t_data *data)
 		pc = data->pc + pc_i; //pc * esta apuntando al ultimo pc creado
 	}
 	// player->pc[player->nb_pc] = (t_pc){pc->carry, ft_mod((pos + (new_i % IDX_MOD)), MEM_SIZE), 0, {{0}}};
-	data->pc[data->nb_pc] = (t_pc){pc->carry, ft_mod((pos + (new_i % IDX_MOD)), MEM_SIZE), 0, {{0}}, pc->id};
+	data->pc[data->nb_pc] = (t_pc){pc->carry, ft_mod((pos + (new_i % IDX_MOD)), MEM_SIZE), 0, {{0}}, pc->id, 0x1, 0x0};
 	// ft_printf("pc1 es: %d\npc2 es: %d\nnb_pc es: %d\n", pc->pc, player->pc[player->nb_pc].pc, player->nb_pc);
 //	exit(1);
 	for (int j = 0; j < REG_NUMBER; j++) //PODEMOS USAR FOR ???????
