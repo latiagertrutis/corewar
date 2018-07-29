@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/26 19:28:17 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/26 22:36:15 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,15 +92,12 @@ void 				exe_players(t_data *data)
 //				{
 
 				k = data->nb_pc;
-				ft_printf("EXE_INI\n");
 				while (k)
 				{
-					ft_printf("pc numerp %i\n", k);
 						// exe_pc((data->players) + j, (data->players[j].pc) + k - 1, data->arena, data);
 					exe_pc((data->pc) + k - 1, data->arena, data);
 					k--;
 				}
-				ft_printf("EXE_FIN\n");
 //					j++;
 //				}
 				t++;

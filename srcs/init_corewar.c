@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/01 00:34:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/26 19:32:15 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/29 17:44:55 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void 	init_op(t_data *data)
 	data->op[16] = (t_op){0, 0, {0}, 0, 0, 0, 0, 0};
 }
 
-static int init_players(t_data *data)
+static int init_players(t_data *data, int ac, char **av)
 {
 	unsigned int i;
 	int cosa;
@@ -79,6 +79,7 @@ static int init_players(t_data *data)
 		data->nb_pc++;
 		i++;
 	}
+	take_champions(data, av, ac);
 	return (1);
 }
 
@@ -92,13 +93,12 @@ static int init_arena(t_data *data)
 
 }
 
-int 	init_corewar(t_data *data)
+int 	init_corewar(t_data *data, int ac, char **av)
 {
+	if (!init_players(data, ac, av))
+		return (0);
 	if (!init_arena(data))
-		return (0);
-	if (!init_players(data))
-		return (0);
-	init_op(data);
+		return (0);	init_op(data);
 	init_func(data);
 	return (1);
 }
