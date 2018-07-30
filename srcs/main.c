@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 20:48:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/28 20:12:33 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/29 18:12:09 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,10 @@ int main(int ac, char **av)
 
 	data.mods = ini_mods(data.flags);
 
-	if (!init_corewar(&data))
+	if (!init_corewar(&data, ac, av))
 		ft_error("malloc failed");
 
 
-	take_champions(&data, av, ac);
 	// ft_putnbr(data.n_players);
 	// exit(1);
 

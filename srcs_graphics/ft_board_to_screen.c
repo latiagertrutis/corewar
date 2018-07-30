@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 04:10:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/26 18:31:54 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/27 03:13:44 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void			write_byte(int pos, t_board board[MEM_SIZE], t_sdl *Graph)
 	if (!(tmp = SDL_ConvertSurfaceFormat(surf_byte, 372645892, 0)))
 		ft_SDL_error("SDL_ConvertSurfaceFormat", MODE_SDL);
 	SDL_BlitSurface(tmp, NULL, Graph->rack,
-		&(SDL_Rect){Graph->square->x + 1, Graph->square->y + 1,
+		&(SDL_Rect){Graph->square->x + 1, Graph->square->y,
 		tmp->w, tmp->h});
 	SDL_FreeSurface(tmp);
 }

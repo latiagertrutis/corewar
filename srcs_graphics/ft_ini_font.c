@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 11:09:42 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/26 00:43:40 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/28 18:51:48 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ static void		insert_hexa_surf(char pair[3], t_sdl *Graph, int index[3])
 	SDL_Surface *tmp;
 	
 	rack_square = SDL_CreateRGBSurfaceWithFormat(0, Graph->square->w - 2,
-		Graph->square->h - 2, 32, Graph->rack->format->format);
+		Graph->square->h - 1, 32, Graph->rack->format->format);
 	SDL_FillRect(rack_square, NULL,
-		SDL_MapRGBA(rack_square->format,
-		0x3D, 0x3D, 0x33, 255));
+		SDL_MapRGBA(rack_square->format, 0, 0, 0, 255));
+//		0x3D, 0x3D, 0x33, 255));
 	pair[1] = (index[1] >= 10 ? 'A' + index[1] - 10 : '0' + index[1]);
 	tmp = TTF_RenderUTF8_Blended(Graph->font[0].font, pair,
 		take_color_byte(index[2]));
@@ -94,7 +94,7 @@ void		ft_ini_font(t_sdl *Graph)
 		if (Graph->font[0].font)
 			TTF_CloseFont(Graph->font[0].font);
 		if (!(Graph->font[0].font =
-				TTF_OpenFont("./Ubuntu-B.ttf", font_size++)))
+				TTF_OpenFont("./whitrabt.ttf", font_size++)))
 			ft_SDL_error("TTF_OpenFont", MODE_TTF);
 		TTF_SizeUTF8(Graph->font[0].font, "FF", &Graph->font[0].w,
 				&Graph->font[0].h);

@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/07/28 16:59:16 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/07/29 18:11:03 by jagarcia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -32,7 +32,6 @@ FUNCS =	main.c \
 		put_usage.c \
 		get_prog_size.c \
 		read_alloc_size.c \
-		print_board.c \
 		exe_players.c \
 		check_live_count.c \
 		flags.c \
@@ -69,9 +68,10 @@ GRAPH = ft_ini_graphics.c \
 		ft_ini_font.c \
 		ft_board_to_screen.c \
 		ft_pcs_to_rack.c \
-		ft_set_back_to_front.c
-#		ft_ini_information.c \
-#		ft_ini_material.c
+		ft_set_back_to_front.c \
+		ft_ini_information.c \
+		ft_ini_material.c \
+		writer.c
 
 SRCS_DIR = srcs/
 

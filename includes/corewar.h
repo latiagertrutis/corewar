@@ -25,6 +25,10 @@ typedef struct		s_arg
 
 #define MODE_SDL 1
 #define MODE_TTF 0
+#define FIELD_FONT 0
+#define TMP_FONT 1
+#define GENERAL_NBR_FONT 2
+#define PLAYER_NBR_FONT 3
 #define SCREEN_W 1280
 #define SCREEN_H 800
 #define SCREEN_SCALE 1.2
@@ -41,19 +45,13 @@ typedef struct		s_arg
 #define BACK_COLOR 0, 0, 0,
 #define FIELD_COLOR 61, 61, 51,
 
-typedef	struct	s_info
-{
-	SDL_Surface *cicles;
-	SDL_Surface *lifes;
-	SDL_Surface *lst_life;
-}				t_info;
-
 typedef struct s_font
 {
 	TTF_Font	*font;
 	int			font_size;
 	int			w;
 	int			h;
+	SDL_Color	color;
 }				t_font;
 
 typedef struct s_sdl {
@@ -66,16 +64,18 @@ typedef struct s_sdl {
 		SDL_Texture *texture;
 	} screen;
 	int			cuant_squares[2];
-	t_font	font[2];
+	t_font	font[4];
 	SDL_Texture *info_text;
 	SDL_Texture **pc;
 	struct {
-		SDL_Surface *cicles;
-		SDL_Surface *cicle_to_die;
+		SDL_Rect *cicles;
+		SDL_Rect *cicle_to_die;
+		SDL_Rect *processos;
 	} general_info;
-	t_info		player_info[4];
 	SDL_Surface ***hexa_bytes;
 	SDL_Surface *rack;
+	SDL_Surface *general_nbr;
+	SDL_Surface *player_nbr;
 	SDL_Rect *square;
 	SDL_Rect *big_square;
 	SDL_Rect *square_info;
@@ -183,7 +183,7 @@ void				print_memory(const void *addr, size_t size, int line, int space);
 void 				take_champions(t_data *data, char **av, const unsigned int ac);
 void 				big_hexa_2_dec(char *str, int size);
 void				invert_bytes(void *arr, const size_t size);
-int 				init_corewar(t_data *data);
+int 				init_corewar(t_data *data, int ac, char **av);
 void				put_champs_to_arena(const t_data *data);
 void 				free_players(t_player *player, int nb_players);
 void				put_usage();
@@ -241,8 +241,9 @@ void		ft_ini_font(t_sdl *Graph);
 void		ft_board_to_screen(t_sdl *Graph, t_board board[MEM_SIZE], t_data *data);
 void		ft_pcs_to_rack(t_sdl *Graph, t_data *data, int alpha_mod);
 void		ft_set_back_to_front(t_sdl *Graph, t_data *data);
-//void		ft_ini_information(t_data *data);
-//void		ft_ini_material(t_data *data, t_sdl *Graph);
-
+void		ft_ini_information(t_data *data);
+void		ft_ini_material(t_data *data, t_sdl *Graph, SDL_Surface *info_marc);
+SDL_Surface	*ft_write_string(t_sdl *Graph, char *str, int pos[2], int name);
+int			ft_write_number_fields(t_sdl *Graph, t_font *font, int pos[2], SDL_Surface *number);
 
 #endif

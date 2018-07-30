@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 03:49:02 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/25 23:20:25 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/28 19:14:09 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_ini_information(t_data *data)
 	
 	Graph = data->arena->Graph;
 	Graph->square_info = (SDL_Rect *)ft_memalloc(sizeof(SDL_Rect));
-	Graph->square_info->w = Graph->screen.w * LEFT_BORDER;
+	Graph->square_info->w = Graph->screen.w * LEFT_BORDER - Graph->screen.w * RIGHT_BORDER;
 	Graph->square_info->h = Graph->big_square->h / 4;
 	Graph->info_text = SDL_CreateTexture(Graph->screen.Renderer, 372645892,
 		SDL_TEXTUREACCESS_STREAMING, Graph->square_info->w,
@@ -93,5 +93,5 @@ void	ft_ini_information(t_data *data)
 			(Graph->big_square->h - Graph->square_info->h) / 4, 32, 372645892);
 	while(i < MAX_PLAYERS)
 		ini_player(Graph, i++, info_marc);
-	ft_ini_material(data, Graph);
+	ft_ini_material(data, Graph, info_marc);
 }

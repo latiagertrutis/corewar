@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/29 21:40:35 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/31 01:34:34 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void 				exe_players(t_data *data)
 	SDL_Event	event;
 
 	data->i = 0;
-	
+
 	fill_r1(data);
 //	print_board(data, data->arena->board);
 	while(data->cycle_to_die > 0 && data->mods->running)
@@ -91,10 +91,9 @@ void 				exe_players(t_data *data)
 //				{
 
 				k = data->nb_pc;
-				ft_printf("EXE_INI\n");
 				while (k)
 				{
-					ft_printf("pc live: %u\npc active: %u\ncycle to die: %d\n", data->pc[k - 1].live, data->pc[k - 1].active, data->nb_cycles);
+//					ft_printf("pc live: %u\npc active: %u\ncycle to die: %d\n", data->pc[k - 1].live, data->pc[k - 1].active, data->nb_cycles);
 					// exe_pc((data->players) + j, (data->players[j].pc) + k - 1, data->arena, data);
 					if (data->pc[k - 1].active)
 					{
@@ -113,7 +112,6 @@ void 				exe_players(t_data *data)
 					}
 					k--;
 				}
-				ft_printf("EXE_FIN\n");
 //					j++;
 //				}
 				t++;
