@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/28 21:53:08 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/29 21:40:35 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,8 @@ void 				exe_players(t_data *data)
 					ft_board_to_screen(data->arena->Graph, data->arena->board, data);
 					ft_set_back_to_front(data->arena->Graph, data);
 				}
-				// if (data->nb_cycles == 100)
+				 if (data->nb_cycles == 3802)
+					 data->mods->pause = 0x1;
 				// 	exit(1);
 			}
 		}

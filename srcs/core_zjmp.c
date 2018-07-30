@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 05:25:36 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/24 19:19:31 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/29 19:50:08 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	core_zjmp(t_pc *pc, t_arena *arena, t_data *data)
 	if (pc->carry == 0x1)
 	{
 		pos = pc->pc;
-		pc->pc = ft_mod(pc->pc + charge_short(arena->board, pos + 1), MEM_SIZE);
+		pc->pc = ft_mod(pc->pc + (charge_short(arena->board, pos + 1) % IDX_MOD), MEM_SIZE);
 	}
 	else
 		pc->pc = (pc->pc + 1 + 2) % MEM_SIZE;//zjmp + D2
