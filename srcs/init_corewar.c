@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/01 00:34:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/29 18:12:00 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/31 23:43:16 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int init_players(t_data *data, int ac, char **av)
 //			ft_error("malloc failed");
 //		data->players[i].pc[0] = (t_pc){0, 0, 0, {{0}}};
 		data->pc[i].id = i; //CAMBIAR ESTO A i?????
-		data->pc[i].active = 0x1; //CAMBIAR ESTO A i?????
+		data->pc[i].active = 0x1;
 		i++;
 	}
 	take_champions(data, av, ac);

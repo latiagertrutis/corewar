@@ -104,6 +104,7 @@ typedef struct 		s_pc
 	size_t 			wait_cycles;
 	char 			reg[REG_NUMBER][REG_SIZE];
 	char 			id;
+	unsigned char	op;
 	unsigned int	active : 1;
 	unsigned int	live : 1;
 }					t_pc;

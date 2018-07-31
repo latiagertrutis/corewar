@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 07:09:33 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/28 17:07:51 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/01 00:08:43 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int			verify_ocp(const unsigned char ocp)
 {
-	if ((0xC & ocp) == 0x8 || (0xC & ocp) == 0xC)
+	if ((0xC & ocp) == 0x8 || (0xC & ocp) == 0xC || (0xC0 & ocp) == 0x0 || (0x30 & ocp) == 0x0 || (0xC & ocp) == 0x0)
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/31 01:34:34 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/07/31 23:46:03 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ static void			exe_pc(t_pc *pc, t_arena *arena, t_data *data)
 	{
 		pc->wait_cycles--;
 //		ft_printf("executing.. %d\n", op_nb);
-		if (op_nb <= 15)
-		{
 			// data->func[op_nb](player, pc, arena, data);
-			data->func[op_nb](pc, arena, data);
-		}
+			data->func[pc->op](pc, arena, data);
 	}
 	else
 	{
 		if (op_nb <= 15)
+		{
 			pc->wait_cycles = (data->op[op_nb].mana) - 1;
+			pc->op = op_nb;
+		}
 		else
 			pc->pc = (pc->pc + 1) % MEM_SIZE;
 	}
@@ -93,7 +93,7 @@ void 				exe_players(t_data *data)
 				k = data->nb_pc;
 				while (k)
 				{
-//					ft_printf("pc live: %u\npc active: %u\ncycle to die: %d\n", data->pc[k - 1].live, data->pc[k - 1].active, data->nb_cycles);
+					ft_printf("pc live: %u\npc active: %u\ncycle to die: %d\n", data->pc[k - 1].live, data->pc[k - 1].active, data->nb_cycles);
 					// exe_pc((data->players) + j, (data->players[j].pc) + k - 1, data->arena, data);
 					if (data->pc[k - 1].active)
 					{
