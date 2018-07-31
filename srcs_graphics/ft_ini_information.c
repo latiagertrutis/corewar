@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 03:49:02 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/28 19:14:09 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/07/30 17:37:45 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,5 @@ void	ft_ini_information(t_data *data)
 	while(i < MAX_PLAYERS)
 		ini_player(Graph, i++, info_marc);
 	ft_ini_material(data, Graph, info_marc);
+	SDL_FreeSurface(info_marc);
 }

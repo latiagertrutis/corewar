@@ -68,10 +68,12 @@ typedef struct s_sdl {
 	SDL_Texture *info_text;
 	SDL_Texture **pc;
 	struct {
-		SDL_Rect *cicles;
+		SDL_Rect *cicles_gen;
+		SDL_Rect *cicles_play;
+		SDL_Rect *lst_life;
 		SDL_Rect *cicle_to_die;
 		SDL_Rect *processos;
-	} general_info;
+	} info;
 	SDL_Surface ***hexa_bytes;
 	SDL_Surface *rack;
 	SDL_Surface *general_nbr;
