@@ -248,5 +248,7 @@ void		ft_ini_information(t_data *data);
 void		ft_ini_material(t_data *data, t_sdl *Graph, SDL_Surface *info_marc);
 SDL_Surface	*ft_write_string(t_sdl *Graph, char *str, int pos[2], int name);
 int			ft_write_number_fields(t_sdl *Graph, t_font *font, int pos[2], SDL_Surface *number);
-
+void		ft_update_info(t_sdl *Graph, t_data *data, int cicles_pre_die);
+void		ft_put_general_info(t_sdl *Graph);
+void		ft_put_player_info(t_sdl *Graph, SDL_Surface *info_marc, t_data *data, int i);
 #endif
