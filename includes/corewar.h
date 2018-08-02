@@ -164,6 +164,7 @@ typedef struct		s_data
 	// void			(*func[16])(t_player *, t_pc *, t_arena *, struct s_data *);
 	void			(*func[16])(t_pc *, t_arena *, struct s_data *);
 	unsigned int 	nb_pc;
+	unsigned int 	nb_pc_active;
 	t_pc			*pc;
 
 }					t_data;

@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/01 12:53:15 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/02 23:24:47 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void 				exe_players(t_data *data)
 							if (!(data->pc[k - 1].live))
 							{
 								data->pc[k - 1].active = 0x0;
+								data->nb_pc_active--;
 								k--;
 								continue;
 							}

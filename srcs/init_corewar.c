@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/01 00:34:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/31 23:43:16 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/02 23:23:04 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static int init_players(t_data *data, int ac, char **av)
 	int cosa;
 
 	data->nb_pc = data->n_players;
+	data->nb_pc_active = data->n_players;
 	if (!(data->players = (t_player *)ft_memalloc(sizeof(t_player) * data->n_players)))
 		return (0);
 	i = 0;
