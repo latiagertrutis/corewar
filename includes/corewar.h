@@ -33,15 +33,11 @@ typedef struct		s_arg
 #define SCREEN_H 800
 #define SCREEN_SCALE 1.2
 #define SCREEN_NAME "Corewar"
-/* #define LEFT_BORDER 0.3567 */
-/* #define BOTTOM_BORDER 0.0328 */
-/* #define UPPER_BORDER 0.033 */
-/* #define RIGHT_BORDER 0.0180 */
 #define LEFT_BORDER 0.434
 #define BOTTOM_BORDER 0.055
 #define UPPER_BORDER 0.055
 #define RIGHT_BORDER 0.04
-//#define BACK_COLOR 28, 28, 21,
+#define NEW_COLOR_CYCLES 70
 #define BACK_COLOR 0, 0, 0,
 #define FIELD_COLOR 61, 61, 51,
 
@@ -87,7 +83,7 @@ typedef struct 		s_board
 {
 	unsigned char 	mem;
 	char			id;
-	unsigned int	new : 1;
+	unsigned int	new;
 }					t_board;
 
 typedef struct 		s_arena

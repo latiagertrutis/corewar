@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 02:59:04 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/01 00:09:37 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/04 18:18:13 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void			core_sti(t_pc *pc, t_arena *arena, t_data *data)
 			while (i < REG_SIZE)
 			{//con idx mod es el resto puesto que es un rango y puede optar a valores negativos en cambio MEM_SIZE precisa de ser un modulo puesto que la memoria es circular y en ningun caso puede ser negativo
 				arena->board[ft_mod((pc->pc + i + ((*((int *)(arg2.arg)) + *((int *)(arg3.arg))) % IDX_MOD)), MEM_SIZE)] =
-					(t_board){pc->reg[reg_pos][i], pc->id, 0x1};
+					(t_board){pc->reg[reg_pos][i], pc->id + 1, NEW_COLOR_CYCLES};
 				i++;
 			}
 		}

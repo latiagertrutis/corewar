@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 16:39:44 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/08/01 13:04:25 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/04 18:22:39 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	ft_update_info(t_sdl *Graph, t_data *data, int cicle_pre_die)
 		update_ctd_pcs(Graph, data->cycle_to_die, *Graph->info.cicle_to_die);
 	if (nbr_pcs != data->nb_pc)
 	{
-		update_ctd_pcs(Graph, data->nb_pc, *Graph->info.processos);
+		update_ctd_pcs(Graph, data->nb_pc_active, *Graph->info.processos);
 		nbr_pcs = data->nb_pc;
 	}
 //	i = 0;
