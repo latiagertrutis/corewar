@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 12:37:40 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/02 23:49:13 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/05 01:10:33 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ t_pc	*realloc_pc(t_pc *pc, const unsigned int nb_pc)
 	t_pc *new_pc;
 
 	if (pc && clean_pc_arr(pc, nb_pc))
+	{
 		return(pc);
+	}
 	if (!(new_pc = (t_pc *)malloc(sizeof(t_pc) * (nb_pc + 20))))
 		ft_error("malloc failed");
 	//habria que inicializar todo a zero mejor no?
