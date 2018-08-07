@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/08/01 10:22:46 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/08/07 17:09:52 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -46,6 +46,7 @@ FUNCS =	main.c \
 		get_arg.c \
 		get_arg_value.c \
 		ft_mod.c \
+		clean_pc_arr.c \
 		check_winner.c \
 		core_live.c \
 		core_ld.c \

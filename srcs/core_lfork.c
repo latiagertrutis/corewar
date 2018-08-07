@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 16:25:48 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/02 23:51:56 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/07 17:29:33 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,14 @@ void		core_lfork(t_pc *pc, t_arena *arena, t_data *data)
 		pc_i = (pc - data->pc);
 		// player->pc = realloc_pc(player, player->pc, player->nb_pc);
 		// player->pc = realloc_pc(data->pc, data->nb_pc);
-		data->pc = realloc_pc(data->pc, data->nb_pc);
-
+		if (data->nb_pc_active < data->nb_pc && pc)
+		{
+			clean_pc_arr(pc, data->nb_pc);
+			data->nb_pc = data->nb_pc_active;
+		}
+		else
+			data->pc = realloc_pc(data->pc, data->nb_pc);
 		pc = data->pc + pc_i; //pc * esta apuntando al ultimo pc creado
-		data->nb_pc = data->nb_pc_active;
 	}
 	// player->pc[player->nb_pc] = (t_pc){pc->carry, ft_mod((pos + (new_i % IDX_MOD)), MEM_SIZE), 0, {{0}}};
 	data->pc[data->nb_pc] = (t_pc){pc->carry, ft_mod((pos + (new_i)), MEM_SIZE), 0, {{0}}, pc->id, 0, 0x1, 0x0};
