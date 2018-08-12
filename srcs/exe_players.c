@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/02 23:24:47 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/12 19:20:14 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void 				exe_players(t_data *data)
 					// exe_pc((data->players) + j, (data->players[j].pc) + k - 1, data->arena, data);
 					if (data->pc[k - 1].active)
 					{
-						if (data->nb_cycles != 0 && !(data->nb_cycles % CYCLE_TO_DIE))
+						if (data->nb_cycles != 0 && !(data->nb_cycles % data->cycle_to_die)) //TODO mal meter data->turn_cycles
 						{
 							if (!(data->pc[k - 1].live))
 							{
@@ -111,7 +111,7 @@ void 				exe_players(t_data *data)
 							else
 								data->pc[k - 1].live = 0x0;
 						}
-						exe_pc((data->pc) + k - 1, data->arena, data);
+						exe_pc((data->pc) + k - 1, data->arena, data); //TODO ejecutamos el turno cycle to die
 					}
 					k--;
 				}
@@ -131,7 +131,7 @@ void 				exe_players(t_data *data)
 				// 	exit(1);
 			}
 		}
-		check_live_count(data->players, data->n_players, data);
+		check_live_count(data->players, data->n_players, data);// TODO quitar este while y dejarlo con el if cycle % cycle_to_die
 	}
 	check_winner(data->players, data->n_players);
 }

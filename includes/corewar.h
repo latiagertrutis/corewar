@@ -102,7 +102,7 @@ typedef struct 		s_pc
 	char 			id;
 	unsigned char	op;
 	unsigned int	active : 1;
-	unsigned int	live : 1;
+	unsigned int	live : 1; //TODO guardarlo en un int el numero total de lives que ha dicho. En core_live hacer live++;
 }					t_pc;
 
 typedef struct 		s_player
@@ -145,6 +145,7 @@ typedef struct		s_mods
 
 typedef struct		s_data
 {
+	//anadir variable para saber cuando se alcanza el cycle to die
 	unsigned int 	dump;
 	unsigned int 	max_checks;
 	unsigned int	cycle_to_die;
