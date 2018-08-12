@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 09:34:50 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/07 17:26:20 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/12 16:43:13 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		core_fork(t_pc *pc, t_arena *arena, t_data *data)
 		// player->pc = realloc_pc(data->pc, data->nb_pc);
 		if (data->nb_pc_active < data->nb_pc && pc)
 		{
-			clean_pc_arr(pc, data->nb_pc);
+			clean_pc_arr(data->pc, data->nb_pc);
 			data->nb_pc = data->nb_pc_active;
 		}
 		else
