@@ -6,13 +6,13 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/11 21:50:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/28 21:31:40 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/13 14:22:33 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void search_nb(t_player *players, int nb_players, int live_nb, int j)
+static void search_nb(t_player *players, int nb_players, int live_nb, int nb_cycles)
 {
 	int i;
 
@@ -22,7 +22,8 @@ static void search_nb(t_player *players, int nb_players, int live_nb, int j)
 		if (players[i].player_nb == live_nb)
 		{
 			players[i].live_counter++;
-			players[i].last_live = j;
+			players[i].last_live = nb_cycles;
+			return ;
 		}
 		i++;
 	}
@@ -46,9 +47,9 @@ void				core_live(t_pc *pc, t_arena *arena, t_data *data)
 
 	pos = pc->pc;
 	live_nb = take_live_nb((arena->board) + pos + 1);
-	pc->live = 0x1;
 	// if (live_nb == (*((int *)(pc->reg[0]))))
 		// player->live_counter++;
 	search_nb(data->players, data->n_players, live_nb, data->nb_cycles);
+	pc->live++;
 	pc->pc = (pc->pc + 1 + DIR_SIZE) % MEM_SIZE;//live + dir
 }

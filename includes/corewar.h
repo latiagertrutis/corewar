@@ -102,7 +102,7 @@ typedef struct 		s_pc
 	char 			id;
 	unsigned char	op;
 	unsigned int	active : 1;
-	unsigned int	live : 1; //TODO guardarlo en un int el numero total de lives que ha dicho. En core_live hacer live++;
+	unsigned int	live;
 }					t_pc;
 
 typedef struct 		s_player
@@ -162,6 +162,8 @@ typedef struct		s_data
 	void			(*func[16])(t_pc *, t_arena *, struct s_data *);
 	unsigned int 	nb_pc;
 	unsigned int 	nb_pc_active;
+	unsigned int 	nbr_live;
+	unsigned int	turn_cycles;
 	t_pc			*pc;
 
 }					t_data;
@@ -192,7 +194,7 @@ unsigned int		get_prog_size(int fd);
 char 				*read_alloc_size(int fd, int size);
 void				print_board(t_data *data, t_board *board);
 void 				exe_players(t_data *data);
-void 				check_live_count(t_player *players, const unsigned int nb_players, t_data *data);
+void 				check_live_count(t_data *data);
 void				fill_r1(t_data *data);
 unsigned char		*get_mem_board(t_board *board, const unsigned int size);
 t_pc				*realloc_pc(t_pc *pc, const unsigned int nb_pc);

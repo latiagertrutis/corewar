@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/12 19:20:14 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/13 13:52:37 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,28 +98,13 @@ void 				exe_players(t_data *data)
 //					ft_printf("pc live: %u\npc active: %u\ncycle to die: %d\n", data->pc[k - 1].live, data->pc[k - 1].active, data->nb_cycles);
 					// exe_pc((data->players) + j, (data->players[j].pc) + k - 1, data->arena, data);
 					if (data->pc[k - 1].active)
-					{
-						if (data->nb_cycles != 0 && !(data->nb_cycles % data->cycle_to_die)) //TODO mal meter data->turn_cycles
-						{
-							if (!(data->pc[k - 1].live))
-							{
-								data->pc[k - 1].active = 0x0;
-								data->nb_pc_active--;
-								k--;
-								continue;
-							}
-							else
-								data->pc[k - 1].live = 0x0;
-						}
 						exe_pc((data->pc) + k - 1, data->arena, data); //TODO ejecutamos el turno cycle to die
-					}
 					k--;
 				}
 //					j++;
 //				}
 				t++;
 				data->nb_cycles++;
-
 				if (data->mods->visual)
 				{
 					ft_board_to_screen(data->arena->Graph, data->arena->board, data);
@@ -131,7 +116,7 @@ void 				exe_players(t_data *data)
 				// 	exit(1);
 			}
 		}
-		check_live_count(data->players, data->n_players, data);// TODO quitar este while y dejarlo con el if cycle % cycle_to_die
+		check_live_count(data);
 	}
 	check_winner(data->players, data->n_players);
 }

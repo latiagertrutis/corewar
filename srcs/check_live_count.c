@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/12 18:32:40 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/28 20:33:13 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/13 13:58:29 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,32 @@
 
 //recorrer todo los pc y eliminar los que no han dicho live
 
-void 	check_live_count(t_player *players, const unsigned int nb_players, t_data *data)
+static void	reset_player(t_player *players, unsigned int nb_players)
+{
+	while (nb_players)
+		players[--nb_players].live_counter = 0;
+}
+
+void 	check_live_count(t_data *data)
 {
 	unsigned int nbr_live;
-	unsigned int i;
+	unsigned int k;
 
 	nbr_live = 0;
-	i = 0;
-	while(i < nb_players)
+	k = 0;
+	while(k < data->nb_pc)
 	{
-		if ((players[i].live_counter))
+		if (!(data->pc[k].live))
 		{
-			nbr_live += players[i].live_counter;
-			players[i].live_counter = 0;
+			data->pc[k].active = 0x0;
+			data->nb_pc_active--;
 		}
-		// else
-		// {
-		// 	ft_printf("Jugador %s is dead", players[i].name); //decidir que hacer cuando muere
-		// 	exit(1);
-		// }
-		i++;
+		else
+		{
+			nbr_live += data->pc[k].live;
+			data->pc[k].live = 0;
+		}
+		k++;
 	}
 	if (nbr_live >= NBR_LIVE || data->max_checks == MAX_CHECKS)
 	{
@@ -43,4 +49,5 @@ void 	check_live_count(t_player *players, const unsigned int nb_players, t_data 
 	}
 	else
 		data->max_checks++;
+	reset_player(data->players, data->n_players);
 }

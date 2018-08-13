@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 20:48:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/02 23:20:43 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/13 13:22:07 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int main(int ac, char **av)
 //		put_usage();
 	data = (t_data){0, 0, CYCLE_TO_DIE, 0, NULL, NULL, {"\033[0m", "\033[38;5;1m", "\033[38;5;2m",
 		"\033[38;5;3m", "\033[38;5;4m"}, {{0, 0, {0}, 0, 0, 0, 0, 0}},
-	                0, 0, 0, NULL, {0}, 0, 0, NULL}; //new anadido nb_pc y *pc al final
+	                0, 0, 0, NULL, {0}, 0, 0, 0, 0, NULL}; //new anadido nb_pc y *pc al final
 	if (!(data.pc = (t_pc *)ft_memalloc(sizeof(t_pc) * PC_BUFF)))
 		ft_error("malloc failed");
 //	data.pc[0] = (t_pc){0, 0, 0, {{0}}, 0};
