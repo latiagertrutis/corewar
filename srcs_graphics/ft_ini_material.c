@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 22:02:57 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/13 21:06:37 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/14 08:12:24 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,35 +45,38 @@ static void		ini_info_rects(t_sdl *Graph)
 	*Graph->info.processos = *Graph->info.cicles_gen;
 }
 
-static void		put_hall(t_sdl *Graph)
+static void		put_hall(t_sdl *Graph, SDL_Surface *info_marc)
 {
 	SDL_Surface *hall;
+	SDL_Surface	*new_hall;
 	SDL_RWops	*rwop;
 	char		*pixel;
 	int			pitch;
 	int			i;
 
-	rwop = SDL_RWFromFile("./images/hall.jpeg", "rb");
+	rwop = SDL_RWFromFile("./images/solo_hall.jpeg", "rb");
 	if (!(hall = IMG_LoadJPG_RW(rwop)))
 		ft_SDL_error("IMG_LoadJPH_RW", MODE_IMG);
 	if (SDL_RWclose(rwop))
 		ft_SDL_error("SDL_RWclose", MODE_SDL);
-	ft_printf("La zona mide %i y la imagen %i\n", Graph->square_info->w, hall->w);
-	SDL_LockTexture(Graph->info_text, &(SDL_Rect){Graph->square_info->w - hall->w, 0, hall->w, Graph->square_info->h}, (void **)&pixel, &pitch);
-	SDL_LockSurface(hall);
+	ft_printf("La zona mide %i x %i y la imagen %i x %i\n", Graph->square_info->w, Graph->big_square->h, hall->w, hall->h);
+	new_hall = SDL_CreateRGBSurfaceWithFormat(0, Graph->square_info->w - Graph->player_nbr->w * 21,
+			Graph->big_square->h, 32, 372645892);
+	SDL_BlitScaled(hall, NULL, new_hall, NULL);
+	SDL_LockTexture(Graph->info_text, &(SDL_Rect){Graph->square_info->w - new_hall->w, 0, new_hall->w, Graph->big_square->h}, (void **)&pixel, &pitch);
+	SDL_LockSurface(new_hall);
 	i = -1;
-	while (++i < Graph->square_info->h)
-		memcpy(pixel + i * pitch, hall->pixels + i * hall->pitch, hall->pitch);
-	SDL_UnlockSurface(hall);
+	while (++i < Graph->big_square->h)
+		memcpy(pixel + i * pitch, new_hall->pixels + i * new_hall->pitch, new_hall->pitch);
+	SDL_UnlockSurface(new_hall);
 	SDL_UnlockTexture(Graph->info_text);
-	SDL_FreeSurface(hall);
+	SDL_FreeSurface(new_hall);
 }
 
 void	ft_ini_material(t_data *data, t_sdl *Graph, SDL_Surface *info_marc)
 {
 	int i;
 
-	put_hall(Graph);
 	ini_info_rects(Graph);
 	ini_number(Graph, GENERAL_NBR_FONT, &Graph->general_nbr,
 			*Graph->info.cicles_gen);
@@ -93,4 +96,5 @@ void	ft_ini_material(t_data *data, t_sdl *Graph, SDL_Surface *info_marc)
 				info_marc->h / 6};
 		ft_put_player_info(Graph, info_marc, data, i++);
 	}
+	put_hall(Graph, info_marc);
 }

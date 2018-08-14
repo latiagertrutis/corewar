@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 03:49:02 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/30 17:37:45 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/14 08:12:52 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,12 @@ void	ft_ini_information(t_data *data)
 	Graph->info_text = SDL_CreateTexture(Graph->screen.Renderer, 372645892,
 		SDL_TEXTUREACCESS_STREAMING, Graph->square_info->w,
 		Graph->big_square->h);
-	ini_general(Graph);
+//	ini_general(Graph);
 	i = 0;
 	info_marc = SDL_CreateRGBSurfaceWithFormat(0, Graph->square_info->w,
 			(Graph->big_square->h - Graph->square_info->h) / 4, 32, 372645892);
-	while(i < MAX_PLAYERS)
-		ini_player(Graph, i++, info_marc);
+//	while(i < MAX_PLAYERS)
+//		ini_player(Graph, i++, info_marc);
 	ft_ini_material(data, Graph, info_marc);
 	SDL_FreeSurface(info_marc);
 }
