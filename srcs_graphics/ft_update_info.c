@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 16:39:44 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/08/04 18:22:39 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/14 09:16:31 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ static void		update_ctd_pcs(t_sdl *Graph, unsigned int ctd, SDL_Rect pieze)
 void	ft_update_info(t_sdl *Graph, t_data *data, int cicle_pre_die)
 {
 	static unsigned int	nbr_pcs = 0;
+//	static int			nbr_lives[MAX_PLAYERS] = ini_nbr_lives();
 	int					i;
 
 	update_cicles(Graph, data->nb_cycles, *Graph->info.cicles_gen);
@@ -98,9 +99,16 @@ void	ft_update_info(t_sdl *Graph, t_data *data, int cicle_pre_die)
 		update_ctd_pcs(Graph, data->nb_pc_active, *Graph->info.processos);
 		nbr_pcs = data->nb_pc;
 	}
-//	i = 0;
-//	while (i < data->n_players)
-//	{
-//
-//	}
+	i = 0;
+	while (i < data->n_players)
+	{
+//		if (data->players[i].last_live != nbr_lives[i])
+//		{
+		ft_printf("jugador %i lives %i last %i\n", i, data->players[i].live_counter, data->players[i].last_live);
+			update_ctd_pcs(Graph, data->players[i].live_counter, Graph->info.cicles_play[i]);
+			update_ctd_pcs(Graph, data->players[i].last_live, Graph->info.lst_life[i]);
+//			nbr_lives[i] = data->players[i].last_live;
+//		}
+		i++;
+	}
 }
