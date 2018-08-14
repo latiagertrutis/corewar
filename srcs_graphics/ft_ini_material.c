@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 22:02:57 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/01 10:26:17 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/13 21:06:37 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,35 @@ static void		ini_info_rects(t_sdl *Graph)
 	*Graph->info.processos = *Graph->info.cicles_gen;
 }
 
+static void		put_hall(t_sdl *Graph)
+{
+	SDL_Surface *hall;
+	SDL_RWops	*rwop;
+	char		*pixel;
+	int			pitch;
+	int			i;
+
+	rwop = SDL_RWFromFile("./images/hall.jpeg", "rb");
+	if (!(hall = IMG_LoadJPG_RW(rwop)))
+		ft_SDL_error("IMG_LoadJPH_RW", MODE_IMG);
+	if (SDL_RWclose(rwop))
+		ft_SDL_error("SDL_RWclose", MODE_SDL);
+	ft_printf("La zona mide %i y la imagen %i\n", Graph->square_info->w, hall->w);
+	SDL_LockTexture(Graph->info_text, &(SDL_Rect){Graph->square_info->w - hall->w, 0, hall->w, Graph->square_info->h}, (void **)&pixel, &pitch);
+	SDL_LockSurface(hall);
+	i = -1;
+	while (++i < Graph->square_info->h)
+		memcpy(pixel + i * pitch, hall->pixels + i * hall->pitch, hall->pitch);
+	SDL_UnlockSurface(hall);
+	SDL_UnlockTexture(Graph->info_text);
+	SDL_FreeSurface(hall);
+}
+
 void	ft_ini_material(t_data *data, t_sdl *Graph, SDL_Surface *info_marc)
 {
 	int i;
 
+	put_hall(Graph);
 	ini_info_rects(Graph);
 	ini_number(Graph, GENERAL_NBR_FONT, &Graph->general_nbr,
 			*Graph->info.cicles_gen);
