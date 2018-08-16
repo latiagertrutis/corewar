@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 16:39:44 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/08/14 09:16:31 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/16 07:43:24 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,29 @@ static void		copy_to_texture(SDL_Texture *text, SDL_Surface *surf, SDL_Rect *pos
 	SDL_UnlockTexture(text);
 }
 
-static void		update_digit(SDL_Rect pos, t_sdl *Graph, char digit[2])
+static SDL_Color	take_color(int i)
+{
+	if (i == 0)
+		return ((SDL_Color){51, 255, 51, SDL_ALPHA_OPAQUE});
+	else if (i == 1)
+		return ((SDL_Color){255, 204, 0, SDL_ALPHA_OPAQUE});
+	else if (i == 2)
+		return ((SDL_Color){255, 242, 207, SDL_ALPHA_OPAQUE});
+	else
+		return ((SDL_Color){252, 102, 92, SDL_ALPHA_OPAQUE});
+}
+
+static void		update_digit(SDL_Rect pos, t_sdl *Graph, char digit[2], int mode)
 {
 	SDL_Surface	*tmp;
 	t_font		font;
 	SDL_Surface *num_surf;
 
-	num_surf = Graph->general_nbr;
-	font = Graph->font[GENERAL_NBR_FONT];
+	if (mode == GENERAL_NBR_FONT)
+		num_surf = Graph->general_nbr;
+	else
+		num_surf = Graph->player_nbr;
+	font = Graph->font[mode];
 	tmp = TTF_RenderUTF8_Blended(font.font, digit, font.color);
 	SDL_FillRect(num_surf, &(SDL_Rect){1, 1, num_surf->w - 2, num_surf->h - 2},
 		SDL_MapRGBA(num_surf->format, 0, 0, 0, 255));
@@ -53,7 +68,7 @@ static void		update_cicles(t_sdl *Graph, unsigned int cicles, SDL_Rect pieze)
 	digits = "0123456789";
 	if (cicles % 10)
 		update_digit((SDL_Rect){pieze.x + 9 * (pieze.w - 1), pieze.y, pieze.w,
-				pieze.h}, Graph, (char[2]){digits[cicles % 10], 0});
+					pieze.h}, Graph, (char[2]){digits[cicles % 10], 0}, GENERAL_NBR_FONT);
 	else if (cicles > 0)
 	{
 		pos = 1;
@@ -61,26 +76,26 @@ static void		update_cicles(t_sdl *Graph, unsigned int cicles, SDL_Rect pieze)
 		{
 			update_digit((SDL_Rect){pieze.x + (10 - pos) * (pieze.w - 1),
 					pieze.y, pieze.w, pieze.h}, Graph,
-					(char[2]){digits[cicles % 10], 0});
+				(char[2]){digits[cicles % 10], 0}, GENERAL_NBR_FONT);
 			cicles /= 10;
 			pos++;
 		}
 	}
 }
 
-static void		update_ctd_pcs(t_sdl *Graph, unsigned int ctd, SDL_Rect pieze)
+static void		update_ctd_pcs_plyrs(t_sdl *Graph, unsigned int info, SDL_Rect pieze, int mode)
 {
 	int		pos;
 	char	*digits;
 
 	digits = "0123456789";
 	pos = 1;
-	while (ctd > 0)
+	while (info > 0)
 	{
 		update_digit((SDL_Rect){pieze.x + (10 - pos) * (pieze.w - 1),
 				pieze.y, pieze.w, pieze.h}, Graph,
-				(char[2]){digits[ctd % 10], 0});
-		ctd /= 10;
+			(char[2]){digits[info % 10], 0}, mode);
+		info /= 10;
 		pos++;
 	}
 }
@@ -93,22 +108,19 @@ void	ft_update_info(t_sdl *Graph, t_data *data, int cicle_pre_die)
 
 	update_cicles(Graph, data->nb_cycles, *Graph->info.cicles_gen);
 	if (!cicle_pre_die)
-		update_ctd_pcs(Graph, data->cycle_to_die, *Graph->info.cicle_to_die);
+		update_ctd_pcs_plyrs(Graph, data->cycle_to_die, *Graph->info.cicle_to_die, GENERAL_NBR_FONT);
 	if (nbr_pcs != data->nb_pc)
 	{
-		update_ctd_pcs(Graph, data->nb_pc_active, *Graph->info.processos);
+		update_ctd_pcs_plyrs(Graph, data->nb_pc_active, *Graph->info.processos, GENERAL_NBR_FONT);
 		nbr_pcs = data->nb_pc;
 	}
 	i = 0;
 	while (i < data->n_players)
 	{
-//		if (data->players[i].last_live != nbr_lives[i])
-//		{
+		Graph->font[PLAYER_NBR_FONT].color = take_color(i);
 		ft_printf("jugador %i lives %i last %i\n", i, data->players[i].live_counter, data->players[i].last_live);
-			update_ctd_pcs(Graph, data->players[i].live_counter, Graph->info.cicles_play[i]);
-			update_ctd_pcs(Graph, data->players[i].last_live, Graph->info.lst_life[i]);
-//			nbr_lives[i] = data->players[i].last_live;
-//		}
+		update_ctd_pcs_plyrs(Graph, data->players[i].live_counter, Graph->info.cicles_play[i], PLAYER_NBR_FONT);
+		update_ctd_pcs_plyrs(Graph, data->players[i].last_live, Graph->info.lst_life[i], PLAYER_NBR_FONT);
 		i++;
 	}
 }
