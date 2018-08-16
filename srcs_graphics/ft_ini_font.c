@@ -6,33 +6,11 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 11:09:42 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/28 18:51:48 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/08/16 08:59:46 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-static SDL_Color	take_color_byte(int i)
-{
-		if (i == 0)
-			return ((SDL_Color){51, 255, 51, SDL_ALPHA_OPAQUE});
-		else if (i == 1)
-			return ((SDL_Color){255, 204, 0, SDL_ALPHA_OPAQUE});
-		else if (i == 2)
-			return ((SDL_Color){255, 242, 207, SDL_ALPHA_OPAQUE});
-		else if (i == 3)
-			return ((SDL_Color){252, 102, 92, SDL_ALPHA_OPAQUE});
-		else if (i == 4)
-			return ((SDL_Color){89, 89, 75, SDL_ALPHA_OPAQUE});
-		else if (i == 5)
-			return ((SDL_Color){153, 255, 153, SDL_ALPHA_OPAQUE});
-		else if (i == 6)
-			return ((SDL_Color){255, 229, 127, SDL_ALPHA_OPAQUE});
-		else if (i == 7)
-			return ((SDL_Color){255, 248, 230, SDL_ALPHA_OPAQUE});
-		else
-			return ((SDL_Color){253, 178, 173, SDL_ALPHA_OPAQUE});
-}
 
 static void		insert_hexa_surf(char pair[3], t_sdl *Graph, int index[3])
 {
@@ -41,12 +19,10 @@ static void		insert_hexa_surf(char pair[3], t_sdl *Graph, int index[3])
 	
 	rack_square = SDL_CreateRGBSurfaceWithFormat(0, Graph->square->w - 2,
 		Graph->square->h - 1, 32, Graph->rack->format->format);
-	SDL_FillRect(rack_square, NULL,
-		SDL_MapRGBA(rack_square->format, 0, 0, 0, 255));
-//		0x3D, 0x3D, 0x33, 255));
+	SDL_FillRect(rack_square, NULL, ft_MapRGBA(rack_square->format, 5, 0));
 	pair[1] = (index[1] >= 10 ? 'A' + index[1] - 10 : '0' + index[1]);
 	tmp = TTF_RenderUTF8_Blended(Graph->font[0].font, pair,
-		take_color_byte(index[2]));
+		ft_SDL_color(index[2]));
 	SDL_BlitSurface(tmp, NULL, rack_square,
 		&(SDL_Rect){(rack_square->w - tmp->w) / 2,
 		(rack_square->h - tmp->h) / 2,

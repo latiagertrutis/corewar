@@ -6,23 +6,11 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/01 10:18:26 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/01 10:23:34 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/16 08:56:31 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-static SDL_Color	take_color(int i)
-{
-	if (i == 0)
-		return ((SDL_Color){51, 255, 51, SDL_ALPHA_OPAQUE});
-	else if (i == 1)
-		return ((SDL_Color){255, 204, 0, SDL_ALPHA_OPAQUE});
-	else if (i == 2)
-		return ((SDL_Color){255, 242, 207, SDL_ALPHA_OPAQUE});
-	else
-		return ((SDL_Color){252, 102, 92, SDL_ALPHA_OPAQUE});
-}
 
 static int		prepare_string(int pos[2], t_sdl *Graph, char *str, int mode)
 {
@@ -43,7 +31,7 @@ void		ft_put_player_info(t_sdl *Graph, SDL_Surface *info_marc,
 	int				tmp2;
 
 	tmp = 10;
-	Graph->font[TMP_FONT].color = take_color(i);
+	Graph->font[TMP_FONT].color = ft_SDL_color(i);
 	Graph->font[PLAYER_NBR_FONT].color = Graph->font[TMP_FONT].color;
 	y_pos = Graph->square_info->h + 10 + info_marc->h * i;
 	y_pos += prepare_string((int[2]){tmp,y_pos}, Graph,

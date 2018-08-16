@@ -6,28 +6,11 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 03:49:02 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/14 08:12:52 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/16 08:55:27 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-static Uint32	take_color_player(int i, SDL_PixelFormat *format)
-{
-	if (!i)
-		return (SDL_MapRGBA(format, 51, 255, 51, SDL_ALPHA_OPAQUE));
-	else if (i == 1)
-		return (SDL_MapRGBA(format, 255, 204, 0, SDL_ALPHA_OPAQUE));
-	else if (i == 2)
-		return (SDL_MapRGBA(format, 255, 242, 207, SDL_ALPHA_OPAQUE));
-	else if (i == 3)
-		return (SDL_MapRGBA(format, 252, 102, 92, SDL_ALPHA_OPAQUE));
-	else if (i == 4)
-		return (SDL_MapRGBA(format, FIELD_COLOR SDL_ALPHA_OPAQUE));
-	else
-		return (SDL_MapRGBA(format, 0, 0, 0, SDL_ALPHA_OPAQUE));
-
-}
 
 static void		ini_general(t_sdl *Graph)
 {
@@ -38,10 +21,9 @@ static void		ini_general(t_sdl *Graph)
 	
 	info_marc = SDL_CreateRGBSurfaceWithFormat(0, Graph->square_info->w,
 		Graph->square_info->h, 32, 372645892);
-	SDL_FillRect(info_marc, NULL, take_color_player(4, info_marc->format));
+	SDL_FillRect(info_marc, NULL, ft_MapRGBA(info_marc->format, 4, 0));
 	SDL_FillRect(info_marc, &(SDL_Rect){5, 5, info_marc->w - 10,
-		info_marc->h - 10}, SDL_MapRGBA(info_marc->format, 0, 0, 0,
-		SDL_ALPHA_OPAQUE));
+				info_marc->h - 10}, ft_MapRGBA(info_marc->format, 5, 0));
 	SDL_LockTexture(Graph->info_text, Graph->square_info,
 		(void **)&pixel, &pitch);
 	SDL_LockSurface(info_marc);
@@ -60,9 +42,9 @@ static void		ini_player(t_sdl *Graph, int i, SDL_Surface *info_marc)
 	int		pitch;
 	int		j;
 	
-	SDL_FillRect(info_marc, NULL, take_color_player(4, info_marc->format));
+	SDL_FillRect(info_marc, NULL, ft_MapRGBA(info_marc->format, 4, 0));
 	SDL_FillRect(info_marc, &(SDL_Rect){5, 5, info_marc->w - 10,
-			info_marc->h - 10}, take_color_player(-1, info_marc->format));
+			info_marc->h - 10}, ft_MapRGBA(info_marc->format, 5, 0));
 	SDL_LockTexture(Graph->info_text, &(SDL_Rect){0, Graph->square_info->h +
 		info_marc->h * i, info_marc->w, info_marc->h}, (void **)&pixel, &pitch);
 	SDL_LockSurface(info_marc);

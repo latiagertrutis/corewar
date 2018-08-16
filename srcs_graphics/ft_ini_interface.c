@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 06:40:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/13 07:37:23 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/16 08:58:01 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,27 +54,6 @@ static void				ini_rack(t_sdl *Graph)
 	Graph->square->h = square_dim[1];
 }
 
-static Uint32	take_color_pc(int id, SDL_PixelFormat *format)
-{
-	if (!id)
-		return (SDL_MapRGBA(format, 51, 255, 51, 128));
-	else if (id == 1)
-		return (SDL_MapRGBA(format, 255, 204, 0, 128));
-	else if (id == 2)
-		return (SDL_MapRGBA(format, 0xFF, 0xF2, 0xCF, 128));
-	else if (id == 3)
-		return (SDL_MapRGBA(format, 252, 102, 92, 128));
-	else if (id == 4)
-		return (SDL_MapRGBA(format, 51, 255, 51, 178));
-	else if (id == 5)
-		return (SDL_MapRGBA(format, 255, 204, 0, 178));
-	else if (id == 6)
-		return (SDL_MapRGBA(format, 0xFF, 0xF2, 0xCF, 178));
-	else
-		return (SDL_MapRGBA(format, 252, 102, 92, 178));
-		
-}
-
 static void			ini_pcs(t_sdl *Graph)
 {
 	int			i[3];
@@ -87,7 +66,7 @@ static void			ini_pcs(t_sdl *Graph)
 	i[0] = 0;
 	while (i[0] < MAX_PLAYERS * 2)
 	{
-		color = take_color_pc(i[0], Graph->rack->format);
+		color = ft_MapRGBA(Graph->rack->format, i[0], 1);
 		if (!(Graph->pc[i[0]] = SDL_CreateTexture(Graph->screen.Renderer,
 				372645892, SDL_TEXTUREACCESS_STREAMING, Graph->square->w - 2,
 				Graph->square->h - 2)))

@@ -6,13 +6,14 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 16:39:44 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/08/16 07:43:24 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/16 09:03:02 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void		copy_to_texture(SDL_Texture *text, SDL_Surface *surf, SDL_Rect *pos)
+static void		copy_to_texture(SDL_Texture *text, SDL_Surface *surf,
+		SDL_Rect *pos)
 {
 	char	*pixel;
 	int		pitch;
@@ -27,19 +28,8 @@ static void		copy_to_texture(SDL_Texture *text, SDL_Surface *surf, SDL_Rect *pos
 	SDL_UnlockTexture(text);
 }
 
-static SDL_Color	take_color(int i)
-{
-	if (i == 0)
-		return ((SDL_Color){51, 255, 51, SDL_ALPHA_OPAQUE});
-	else if (i == 1)
-		return ((SDL_Color){255, 204, 0, SDL_ALPHA_OPAQUE});
-	else if (i == 2)
-		return ((SDL_Color){255, 242, 207, SDL_ALPHA_OPAQUE});
-	else
-		return ((SDL_Color){252, 102, 92, SDL_ALPHA_OPAQUE});
-}
-
-static void		update_digit(SDL_Rect pos, t_sdl *Graph, char digit[2], int mode)
+static void		update_digit(SDL_Rect pos, t_sdl *Graph, char digit[2],
+		int mode)
 {
 	SDL_Surface	*tmp;
 	t_font		font;
@@ -68,7 +58,8 @@ static void		update_cicles(t_sdl *Graph, unsigned int cicles, SDL_Rect pieze)
 	digits = "0123456789";
 	if (cicles % 10)
 		update_digit((SDL_Rect){pieze.x + 9 * (pieze.w - 1), pieze.y, pieze.w,
-					pieze.h}, Graph, (char[2]){digits[cicles % 10], 0}, GENERAL_NBR_FONT);
+			pieze.h}, Graph, (char[2]){digits[cicles % 10], 0},
+			GENERAL_NBR_FONT);
 	else if (cicles > 0)
 	{
 		pos = 1;
@@ -83,7 +74,8 @@ static void		update_cicles(t_sdl *Graph, unsigned int cicles, SDL_Rect pieze)
 	}
 }
 
-static void		update_ctd_pcs_plyrs(t_sdl *Graph, unsigned int info, SDL_Rect pieze, int mode)
+static void		update_ctd_pcs_plyrs(t_sdl *Graph, unsigned int info,
+			SDL_Rect pieze, int mode)
 {
 	int		pos;
 	char	*digits;
@@ -103,24 +95,26 @@ static void		update_ctd_pcs_plyrs(t_sdl *Graph, unsigned int info, SDL_Rect piez
 void	ft_update_info(t_sdl *Graph, t_data *data, int cicle_pre_die)
 {
 	static unsigned int	nbr_pcs = 0;
-//	static int			nbr_lives[MAX_PLAYERS] = ini_nbr_lives();
 	int					i;
 
 	update_cicles(Graph, data->nb_cycles, *Graph->info.cicles_gen);
 	if (!cicle_pre_die)
-		update_ctd_pcs_plyrs(Graph, data->cycle_to_die, *Graph->info.cicle_to_die, GENERAL_NBR_FONT);
+		update_ctd_pcs_plyrs(Graph, data->cycle_to_die,
+			*Graph->info.cicle_to_die, GENERAL_NBR_FONT);
 	if (nbr_pcs != data->nb_pc)
 	{
-		update_ctd_pcs_plyrs(Graph, data->nb_pc_active, *Graph->info.processos, GENERAL_NBR_FONT);
+		update_ctd_pcs_plyrs(Graph, data->nb_pc_active, *Graph->info.processos,
+			GENERAL_NBR_FONT);
 		nbr_pcs = data->nb_pc;
 	}
 	i = 0;
 	while (i < data->n_players)
 	{
-		Graph->font[PLAYER_NBR_FONT].color = take_color(i);
-		ft_printf("jugador %i lives %i last %i\n", i, data->players[i].live_counter, data->players[i].last_live);
-		update_ctd_pcs_plyrs(Graph, data->players[i].live_counter, Graph->info.cicles_play[i], PLAYER_NBR_FONT);
-		update_ctd_pcs_plyrs(Graph, data->players[i].last_live, Graph->info.lst_life[i], PLAYER_NBR_FONT);
+		Graph->font[PLAYER_NBR_FONT].color = ft_SDL_color(i);
+		update_ctd_pcs_plyrs(Graph, data->players[i].live_counter,
+			Graph->info.cicles_play[i], PLAYER_NBR_FONT);
+		update_ctd_pcs_plyrs(Graph, data->players[i].last_live,
+			Graph->info.lst_life[i], PLAYER_NBR_FONT);
 		i++;
 	}
 }

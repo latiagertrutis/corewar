@@ -40,8 +40,17 @@ typedef struct		s_arg
 #define UPPER_BORDER 0.055
 #define RIGHT_BORDER 0.04
 #define NEW_COLOR_CYCLES 70
-#define BACK_COLOR 0, 0, 0,
-#define FIELD_COLOR 61, 61, 51,
+#define NONE_COLOR 89, 89, 75, SDL_ALPHA_OPAQUE
+#define PLAYER_ONE_COLORA 51, 255, 51, SDL_ALPHA_OPAQUE
+#define PLAYER_ONE_COLORB 153, 255, 153, SDL_ALPHA_OPAQUE
+#define PLAYER_TWO_COLORA 255, 204, 0, SDL_ALPHA_OPAQUE
+#define PLAYER_TWO_COLORB 255, 229, 127, SDL_ALPHA_OPAQUE
+#define PLAYER_THREE_COLORA 255, 242, 207, SDL_ALPHA_OPAQUE
+#define PLAYER_THREE_COLORB 255, 248, 230, SDL_ALPHA_OPAQUE
+#define PLAYER_FOUR_COLORA 252, 102, 92, SDL_ALPHA_OPAQUE
+#define PLAYER_FOUR_COLORB 253, 178, 173, SDL_ALPHA_OPAQUE
+#define BACK_COLOR 0, 0, 0, SDL_ALPHA_OPAQUE
+#define FIELD_COLOR 61, 61, 51, SDL_ALPHA_OPAQUE
 
 typedef struct s_font
 {
@@ -254,4 +263,7 @@ int			ft_write_number_fields(t_sdl *Graph, t_font *font, int pos[2], SDL_Surface
 void		ft_update_info(t_sdl *Graph, t_data *data, int cicles_pre_die);
 void		ft_put_general_info(t_sdl *Graph);
 void		ft_put_player_info(t_sdl *Graph, SDL_Surface *info_marc, t_data *data, int i);
+SDL_Color	ft_SDL_color(int i);
+Uint32		ft_MapRGBA(SDL_PixelFormat *format, int i, int alpha);
+
 #endif
