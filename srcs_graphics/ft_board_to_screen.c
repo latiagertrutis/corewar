@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 04:10:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/16 08:55:58 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/16 15:40:58 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int			take_hexa_byte(unsigned char byte, char hexa_byte[3])
 	return (byte);
 }
 
-static int			take_color_byte(t_board byte)
+static int			take_color_byte(t_board byte, t_data *data)
 {
 	if (!byte.new)
 	{
@@ -51,7 +51,7 @@ static int			take_color_byte(t_board byte)
 	}
 }
 
-static void			write_byte(int pos, t_board board[MEM_SIZE], t_sdl *Graph)
+static void			write_byte(int pos, t_board board[MEM_SIZE], t_sdl *Graph, t_data *data)
 {
 	char		hexa_byte[3];
 	SDL_Surface *surf_byte;
@@ -59,8 +59,17 @@ static void			write_byte(int pos, t_board board[MEM_SIZE], t_sdl *Graph)
 
 	Graph->square->x = (Graph->square->w - 1) * (pos % Graph->cuant_squares[0]);
 	Graph->square->y = (Graph->square->h - 1) * (pos / Graph->cuant_squares[1]);
-	surf_byte = Graph->hexa_bytes[take_color_byte(board[pos])]
-		[take_hexa_byte(board[pos].mem, hexa_byte)];
+	surf_byte = NULL;
+	if (data->mods->info)
+		surf_byte = Graph->hexa_bytes[take_color_byte(board[pos], data)]
+			[take_hexa_byte(board[pos].mem, hexa_byte)];
+	else
+	{
+		if (board[pos].id - 1 >= 0)
+			surf_byte = Graph->hexa_bytes[9][board[pos].id - 1];
+		else
+			surf_byte = Graph->hexa_bytes[9][4];
+	}
 	if (!(tmp = SDL_ConvertSurfaceFormat(surf_byte, 372645892, 0)))
 		ft_SDL_error("SDL_ConvertSurfaceFormat", MODE_SDL);
 	SDL_BlitSurface(tmp, NULL, Graph->rack,
@@ -80,7 +89,7 @@ void	ft_board_to_screen(t_sdl *Graph, t_board board[MEM_SIZE], t_data *data)
 
 	i = 0;
 	while (i < MEM_SIZE)
-		write_byte(i++, board, Graph);
+		write_byte(i++, board, Graph, data);
 	rack = Graph->rack;
 	texture = Graph->screen.texture;
 	SDL_LockTexture(Graph->screen.texture, NULL, (void **)&pixel, &pitch);

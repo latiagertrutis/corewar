@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 06:40:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/16 08:58:01 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/16 16:05:46 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,38 +54,6 @@ static void				ini_rack(t_sdl *Graph)
 	Graph->square->h = square_dim[1];
 }
 
-static void			ini_pcs(t_sdl *Graph)
-{
-	int			i[3];
-	SDL_Rect	pc;
-	int			*pixel;
-	int			pitch;
-	Uint32		color;
-
-	pc = (SDL_Rect){0, 0, Graph->square->w - 2, Graph->square->h - 2};
-	i[0] = 0;
-	while (i[0] < MAX_PLAYERS * 2)
-	{
-		color = ft_MapRGBA(Graph->rack->format, i[0], 1);
-		if (!(Graph->pc[i[0]] = SDL_CreateTexture(Graph->screen.Renderer,
-				372645892, SDL_TEXTUREACCESS_STREAMING, Graph->square->w - 2,
-				Graph->square->h - 2)))
-			ft_SDL_error("SDL_CreateTexture", MODE_SDL);
-		SDL_SetTextureBlendMode(Graph->pc[i[0]], SDL_BLENDMODE_BLEND);
-		SDL_LockTexture(Graph->pc[i[0]], &pc, (void **)&pixel, &pitch);
-		i[1] = 0;
-		while (i[1] < pc.h)
-		{
-			i[2] = 0;
-			while (i[2] < pc.w)
-				pixel[i[1] * pitch / 4 + i[2]++] = color;
-			i[1]++;
-		}
-		SDL_UnlockTexture(Graph->pc[i[0]]);
-		i[0]++;
-	}
-}
-
 void				ft_ini_interface(t_sdl *Graph)
 {
 	if (!(Graph->big_square = (SDL_Rect *)malloc(sizeof(SDL_Rect))))
@@ -106,9 +74,9 @@ void				ft_ini_interface(t_sdl *Graph)
 			Graph->big_square->h)))
 		ft_SDL_error("SDL_CreateTexture", MODE_SDL);
 	if (!(Graph->pc = (SDL_Texture **)malloc(sizeof(SDL_Texture *) *
-			MAX_PLAYERS * 2)))
+			MAX_PLAYERS * 4)))
 		ft_error("Error malloc ft_ini_interface\n");
-	ini_pcs(Graph);
+	ft_ini_pcs(Graph);
 	SDL_SetTextureBlendMode(Graph->screen.texture, SDL_BLENDMODE_BLEND);
 	SDL_SetTextureAlphaMod(Graph->screen.texture, 100);
 }

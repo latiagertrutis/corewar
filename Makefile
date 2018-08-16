@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/08/16 08:58:17 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/08/16 15:59:26 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -76,7 +76,8 @@ GRAPH = ft_ini_graphics.c \
 		ft_put_general_info.c \
 		ft_put_player_info.c \
 		writer.c \
-		colors.c
+		colors.c \
+		ft_ini_pcs.c
 
 SRCS_DIR = srcs/
 

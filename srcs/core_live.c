@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/11 21:50:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/13 14:22:33 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/16 11:01:22 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static void search_nb(t_player *players, int nb_players, int live_nb, int nb_cyc
 	while (i < nb_players)
 	{
 		//DEBUGGER
-		ft_putstr("numero de jugador: ");
-		ft_putnbr(players[i].player_nb);
-		ft_putchar(' ');
-		ft_putstr("take number");
-		ft_putnbr(live_nb);
-		ft_putchar('\n');
+		/* ft_putstr("numero de jugador: "); */
+		/* ft_putnbr(players[i].player_nb); */
+		/* ft_putchar(' '); */
+		/* ft_putstr("take number"); */
+		/* ft_putnbr(live_nb); */
+		/* ft_putchar('\n'); */
 		if (players[i].player_nb == live_nb)
 		{
 			players[i].live_counter++;
@@ -55,17 +55,17 @@ void				core_live(t_pc *pc, t_arena *arena, t_data *data)
 
 
 	// DEBUGGER
-	ft_putstr("pc id: ");
-	ft_putnbr((int)pc->id);
-	ft_putchar('\n');
+	/* ft_putstr("pc id: "); */
+	/* ft_putnbr((int)pc->id); */
+	/* ft_putchar('\n'); */
 
-	ft_putstr("pc pos: ");
-	ft_putnbr((int)pc->pc);
-	ft_putchar('\n');
+	/* ft_putstr("pc pos: "); */
+	/* ft_putnbr((int)pc->pc); */
+	/* ft_putchar('\n'); */
 
-	ft_putstr("pc reg: ");
-	ft_putnbr((int)pc->pc);
-	ft_putchar('\n');
+	/* ft_putstr("pc reg: "); */
+	/* ft_putnbr((int)pc->pc); */
+	/* ft_putchar('\n'); */
 
 	pos = pc->pc;
 	live_nb = take_live_nb((arena->board) + pos + 1);

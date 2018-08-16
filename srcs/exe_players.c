@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/14 08:16:42 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/16 12:02:01 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void 				exe_players(t_data *data)
 						data->mods->pause = data->mods->pause ? 0 : 1;
 					else if (event.key.keysym.sym == SDLK_RIGHT)
 						data->mods->step = 1;
+					else if (event.key.keysym.sym == SDLK_i)
+						data->mods->info = data->mods->info ? 0 : 1;
 				}
 //				else if (event.type == SDL_KEYUP)
 //					if (event.key.keysym.sym == SDLK_RIGHT)

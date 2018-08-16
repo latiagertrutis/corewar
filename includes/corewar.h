@@ -43,12 +43,16 @@ typedef struct		s_arg
 #define NONE_COLOR 89, 89, 75, SDL_ALPHA_OPAQUE
 #define PLAYER_ONE_COLORA 51, 255, 51, SDL_ALPHA_OPAQUE
 #define PLAYER_ONE_COLORB 153, 255, 153, SDL_ALPHA_OPAQUE
+#define PLAYER_ONE_COLORC 0, 153, 0, SDL_ALPHA_OPAQUE
 #define PLAYER_TWO_COLORA 255, 204, 0, SDL_ALPHA_OPAQUE
 #define PLAYER_TWO_COLORB 255, 229, 127, SDL_ALPHA_OPAQUE
+#define PLAYER_TWO_COLORC 127, 102, 0, SDL_ALPHA_OPAQUE
 #define PLAYER_THREE_COLORA 255, 242, 207, SDL_ALPHA_OPAQUE
 #define PLAYER_THREE_COLORB 255, 248, 230, SDL_ALPHA_OPAQUE
+#define PLAYER_THREE_COLORC 168, 154, 117, SDL_ALPHA_OPAQUE
 #define PLAYER_FOUR_COLORA 252, 102, 92, SDL_ALPHA_OPAQUE
 #define PLAYER_FOUR_COLORB 253, 178, 173, SDL_ALPHA_OPAQUE
+#define PLAYER_FOUR_COLORC 176, 4, 0, SDL_ALPHA_OPAQUE
 #define BACK_COLOR 0, 0, 0, SDL_ALPHA_OPAQUE
 #define FIELD_COLOR 61, 61, 51, SDL_ALPHA_OPAQUE
 
@@ -152,6 +156,7 @@ typedef struct		s_mods
 	unsigned int	step : 1;
 	unsigned int	visual : 1;
 	unsigned int	fullscreen : 1;
+	unsigned int	info : 1;
 }					t_mods;
 
 typedef struct		s_data
@@ -265,5 +270,7 @@ void		ft_put_general_info(t_sdl *Graph);
 void		ft_put_player_info(t_sdl *Graph, SDL_Surface *info_marc, t_data *data, int i);
 SDL_Color	ft_SDL_color(int i);
 Uint32		ft_MapRGBA(SDL_PixelFormat *format, int i, int alpha);
+void		ft_ini_pcs(t_sdl *Graph);
+
 
 #endif

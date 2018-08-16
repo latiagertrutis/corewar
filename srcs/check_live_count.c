@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/12 18:32:40 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/13 13:58:29 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/16 11:05:53 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ static void	reset_player(t_player *players, unsigned int nb_players)
 {
 	while (nb_players)
 	{	
-		ft_putstr("live counter ");
-		ft_putstr(players[nb_players - 1].name);
-		ft_putstr(": ");
-		ft_putnbr(players[nb_players - 1].live_counter);
-		ft_putchar(' ');
-		ft_putnbr(players[nb_players - 1].last_live);
-		ft_putchar('\n');
+		/* ft_putstr("live counter "); */
+		/* ft_putstr(players[nb_players - 1].name); */
+		/* ft_putstr(": "); */
+		/* ft_putnbr(players[nb_players - 1].live_counter); */
+		/* ft_putchar(' '); */
+		/* ft_putnbr(players[nb_players - 1].last_live); */
+		/* ft_putchar('\n'); */
 		players[--nb_players].live_counter = 0;
 	}
-		exit(1);
+//		exit(1);
 
 }
 
