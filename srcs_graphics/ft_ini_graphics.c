@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 05:20:16 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/27 00:09:23 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/08/13 08:55:35 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "corewar.h"
@@ -25,11 +25,16 @@ static t_sdl	*ini_graph(void)
 
 void ft_ini_graphics(t_sdl **Graph, t_mods *mods, t_data *data)
 {
+	int imgflags;
+
 	*Graph = ini_graph();
 	if (SDL_Init(SDL_INIT_EVERYTHING))
 		ft_SDL_error("SDL_Init", MODE_SDL);
 	if (TTF_Init())	
 		ft_SDL_error("SDL_Init", MODE_TTF);
+	imgflags = IMG_INIT_JPG;
+	if (!(IMG_Init(imgflags) & imgflags))
+		ft_SDL_error("IMG_Init", MODE_IMG);
 	if (!((*Graph)->screen.window = SDL_CreateWindow((*Graph)->screen.name,
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, (*Graph)->screen.w,
 			(*Graph)->screen.h, SDL_WINDOW_RESIZABLE)))

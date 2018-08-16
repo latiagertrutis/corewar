@@ -4,6 +4,7 @@
 #define SDL_MAIN_HANDLED
 #include "../SDL2_files/SDL2_srcs/include/SDL.h"
 #include "../SDL2_files/SDL2_TTF_srcs/SDL_ttf.h"
+#include "../SDL2_files/SDL2_image_srcs/SDL_image.h"
 #include "../libft/includes/libft.h"
 #include "op.h"
 #include <fcntl.h>
@@ -25,6 +26,7 @@ typedef struct		s_arg
 
 #define MODE_SDL 1
 #define MODE_TTF 0
+#define MODE_IMG -1
 #define FIELD_FONT 0
 #define TMP_FONT 1
 #define GENERAL_NBR_FONT 2
