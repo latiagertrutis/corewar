@@ -18,7 +18,18 @@
 static void	reset_player(t_player *players, unsigned int nb_players)
 {
 	while (nb_players)
+	{	
+		ft_putstr("live counter ");
+		ft_putstr(players[nb_players - 1].name);
+		ft_putstr(": ");
+		ft_putnbr(players[nb_players - 1].live_counter);
+		ft_putchar(' ');
+		ft_putnbr(players[nb_players - 1].last_live);
+		ft_putchar('\n');
 		players[--nb_players].live_counter = 0;
+	}
+		exit(1);
+
 }
 
 void 	check_live_count(t_data *data)

@@ -16,21 +16,15 @@
 void			fill_r1(t_data *data)
 {
 	unsigned int 	i;
-	unsigned int 	j;
 	t_player		*player;
 	unsigned int	n_players;
 
 	i = 0;
 	player = data->players;
 	n_players = data->n_players;
-	while(i < n_players)
+	while (i < data->nb_pc)
 	{
-		j = 0;
-		while (j < data->nb_pc)
-		{
-			ft_memcpy(data->pc[j].reg[0], &(player[i].player_nb), sizeof(int));
-			j++;
-		}
+		ft_memcpy(data->pc[i].reg[0], &(player[i].player_nb), sizeof(int));
 		i++;
 	}
 }

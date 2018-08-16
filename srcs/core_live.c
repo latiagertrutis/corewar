@@ -19,10 +19,18 @@ static void search_nb(t_player *players, int nb_players, int live_nb, int nb_cyc
 	i = 0;
 	while (i < nb_players)
 	{
+		//DEBUGGER
+		ft_putstr("numero de jugador: ");
+		ft_putnbr(players[i].player_nb);
+		ft_putchar(' ');
+		ft_putstr("take number");
+		ft_putnbr(live_nb);
+		ft_putchar('\n');
 		if (players[i].player_nb == live_nb)
 		{
 			players[i].live_counter++;
 			players[i].last_live = nb_cycles;
+			//SE PUEDEN REPETIR LOS NUMEROS DE JUGADORES??
 			return ;
 		}
 		i++;
@@ -45,8 +53,23 @@ void				core_live(t_pc *pc, t_arena *arena, t_data *data)
 	unsigned short	pos;
 	int 	live_nb;
 
+
+	// DEBUGGER
+	ft_putstr("pc id: ");
+	ft_putnbr((int)pc->id);
+	ft_putchar('\n');
+
+	ft_putstr("pc pos: ");
+	ft_putnbr((int)pc->pc);
+	ft_putchar('\n');
+
+	ft_putstr("pc reg: ");
+	ft_putnbr((int)pc->pc);
+	ft_putchar('\n');
+
 	pos = pc->pc;
 	live_nb = take_live_nb((arena->board) + pos + 1);
+
 	// if (live_nb == (*((int *)(pc->reg[0]))))
 		// player->live_counter++;
 	search_nb(data->players, data->n_players, live_nb, data->nb_cycles);
