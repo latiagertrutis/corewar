@@ -153,6 +153,7 @@ typedef struct		s_mods
 {
 	unsigned int	running : 1;
 	unsigned int	pause : 1;
+	SDL_Surface		*pause_surf[2];
 	unsigned int	step : 1;
 	unsigned int	visual : 1;
 	unsigned int	fullscreen : 1;
@@ -271,6 +272,6 @@ void		ft_put_player_info(t_sdl *Graph, SDL_Surface *info_marc, t_data *data, int
 SDL_Color	ft_SDL_color(int i);
 Uint32		ft_MapRGBA(SDL_PixelFormat *format, int i, int alpha);
 void		ft_ini_pcs(t_sdl *Graph);
-
+void		ft_ini_images(t_data *data, t_sdl *Graph);
 
 #endif

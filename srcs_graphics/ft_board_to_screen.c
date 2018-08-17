@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 04:10:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/16 15:40:58 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/17 11:31:20 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ static void			write_byte(int pos, t_board board[MEM_SIZE], t_sdl *Graph, t_data 
 	SDL_BlitSurface(tmp, NULL, Graph->rack,
 		&(SDL_Rect){Graph->square->x + 1, Graph->square->y,
 		tmp->w, tmp->h});
-	board[pos].new = board[pos].new ? board[pos].new - 1 : 0;
+	if (!data->mods->pause)
+		board[pos].new = board[pos].new ? board[pos].new - 1 : 0;
 	SDL_FreeSurface(tmp);
 }
 
