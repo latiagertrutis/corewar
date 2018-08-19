@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 10:50:58 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/17 12:51:47 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/17 13:23:48 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ static SDL_Surface		*prepare_hall(t_sdl *Graph)
 	if (SDL_RWclose(rwop))
 		ft_SDL_error("SDL_RWclose", MODE_SDL);
 	ft_printf("La zona mide %i x %i y la imagen %i x %i\n", Graph->square_info->w, Graph->big_square->h, hall->w, hall->h);
-	new_hall = SDL_CreateRGBSurfaceWithFormat(0, Graph->square_info->w - Graph->player_nbr->w * 21,
-			Graph->big_square->h, 32, 372645892);
+	new_hall = SDL_CreateRGBSurfaceWithFormat(0, Graph->square_info->w - Graph->player_nbr->w * 21, Graph->big_square->h, 32, 372645892);
 	SDL_BlitScaled(hall, NULL, new_hall, NULL);
 	SDL_FreeSurface(hall);
 	return (new_hall);
@@ -41,7 +40,7 @@ static void	prepare_pauses(SDL_Surface *dst[2], t_sdl *Graph, char *image, int p
 		ft_SDL_error("IMG_LoadJPH_RW", MODE_IMG);
 	if (SDL_RWclose(rwop))
 		ft_SDL_error("SDL_RWclose", MODE_SDL);
-	new_pause = SDL_CreateRGBSurfaceWithFormat(0, Graph->square_info->w - Graph->player_nbr->w * 21 - 22, 70, 32, 372645892);
+	new_pause = SDL_CreateRGBSurfaceWithFormat(0, Graph->square_info->w - Graph->player_nbr->w * 21 - 70, 40, 32, 372645892);
 	SDL_BlitScaled(pause, NULL, new_pause, NULL);
 	SDL_FreeSurface(pause);
 	dst[pos] = new_pause;
@@ -57,7 +56,7 @@ void	ft_ini_images(t_data *data, t_sdl *Graph)
 	hall = prepare_hall(Graph);
 	prepare_pauses(data->mods->pause_surf, Graph, "./images/pause_black.jpeg", 0);
 	prepare_pauses(data->mods->pause_surf, Graph, "./images/pause_red.jpeg", 1);
-	SDL_BlitSurface(data->mods->pause_surf[0], NULL, hall, &(SDL_Rect){12, 100, data->mods->pause_surf[0]->w, data->mods->pause_surf[0]->w});
+	SDL_BlitSurface(data->mods->pause_surf[0], NULL, hall, &(SDL_Rect){(hall->w - data->mods->pause_surf[0]->w) / 2, 100, data->mods->pause_surf[0]->w, data->mods->pause_surf[0]->w});
 	SDL_LockTexture(Graph->info_text, &(SDL_Rect){Graph->square_info->w - hall->w, 0, hall->w, Graph->big_square->h}, (void **)&pixel, &pitch);
 	SDL_LockSurface(hall);
 	i = -1;

@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/11 21:50:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/16 11:01:22 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/18 17:40:13 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void search_nb(t_player *players, int nb_players, int live_nb, int nb_cyc
 		{
 			players[i].live_counter++;
 			players[i].last_live = nb_cycles;
+			players[i].live_call = 0x1;
 			//SE PUEDEN REPETIR LOS NUMEROS DE JUGADORES??
 			return ;
 		}

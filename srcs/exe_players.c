@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/17 12:53:01 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/08/17 13:20:40 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,14 @@ static int			pause_button(t_data *data, t_sdl *Graph, unsigned int pause)
 	int			i;
 	char		*pixel;
 	int			pitch;
+	int			hall_dim;
 
+	hall_dim = Graph->square_info->w - Graph->player_nbr->w * 21;
 	if (pause)
 		button = data->mods->pause_surf[0];
 	else
 		button = data->mods->pause_surf[1];
-	SDL_LockTexture(Graph->info_text, &(SDL_Rect){Graph->square_info->w - button->w - 10, 100, button->w, button->h}, (void **)&pixel, &pitch);
+	SDL_LockTexture(Graph->info_text, &(SDL_Rect){Graph->square_info->w - hall_dim + (hall_dim - button->w) / 2, 100, button->w, button->h}, (void **)&pixel, &pitch);
 	SDL_LockSurface(button);
 	i = -1;
 	while (++i < button->h)

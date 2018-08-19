@@ -122,6 +122,7 @@ typedef struct 		s_pc
 
 typedef struct 		s_player
 {
+	unsigned int	live_call : 1;
 	unsigned int  	last_live; //new
 	unsigned int 	live_counter;
 	char			*content;
