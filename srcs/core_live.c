@@ -6,15 +6,15 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/11 21:50:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/18 17:40:13 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/07 13:11:24 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void search_nb(t_player *players, int nb_players, int live_nb, int nb_cycles)
+static void search_nb(t_player *players, const unsigned int nb_players, const int32_t live_nb, const unsigned int nb_cycles)
 {
-	int i;
+	unsigned int i;
 
 	i = 0;
 	while (i < nb_players)
@@ -38,7 +38,7 @@ static void search_nb(t_player *players, int nb_players, int live_nb, int nb_cyc
 	}
 }
 
-static int 			take_live_nb(t_board *board)
+static int32_t 			take_live_nb(t_board *board)
 {
 	char rtn[4];
 
@@ -52,7 +52,7 @@ static int 			take_live_nb(t_board *board)
 void				core_live(t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned short	pos;
-	int 	live_nb;
+	int32_t 		live_nb;
 
 
 	// DEBUGGER
@@ -75,5 +75,5 @@ void				core_live(t_pc *pc, t_arena *arena, t_data *data)
 		// player->live_counter++;
 	search_nb(data->players, data->n_players, live_nb, data->nb_cycles);
 	pc->live++;
-	pc->pc = (pc->pc + 1 + DIR_SIZE) % MEM_SIZE;//live + dir
+	pc->pc = (pc->pc + 1 + 4) % MEM_SIZE;//live + 4
 }
