@@ -13,7 +13,10 @@
 
 #define HEADER_SIZE 4 + PROG_NAME_LENGTH + 1 + 4 + 4
 #define PC_BUFF 20
-#define MAX_ARG_LEN 4
+
+# define MAX(A, B) ((A > B) ? A : B)
+
+# define MAX_ARG_LEN MAX(IND_SIZE, MAX(REG_SIZE, DIR_SIZE))
 
 # if IND_SIZE == 1
 #  define IND_CAST int8_t
