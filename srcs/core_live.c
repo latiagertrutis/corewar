@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/11 21:50:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/09/07 13:11:24 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/08 20:22:18 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ static void search_nb(t_player *players, const unsigned int nb_players, const in
 	}
 }
 
-static int32_t 			take_live_nb(t_board *board)
+static int32_t 			take_live_nb(t_board *board, const size_t pos)
 {
 	char rtn[4];
 
-	rtn[0] = board[0].mem;
-	rtn[1] = board[1].mem;
-	rtn[2] = board[2].mem;
-	rtn[3] = board[3].mem;
+	rtn[0] = board[pos % MEM_SIZE].mem;
+	rtn[1] = board[(pos + 1) % MEM_SIZE].mem;
+	rtn[2] = board[(pos + 2) % MEM_SIZE].mem;
+	rtn[3] = board[(pos + 3) % MEM_SIZE].mem;
 	return((*(int *)rtn));
 }
 
@@ -69,7 +69,7 @@ void				core_live(t_pc *pc, t_arena *arena, t_data *data)
 	/* ft_putchar('\n'); */
 
 	pos = pc->pc;
-	live_nb = take_live_nb((arena->board) + pos + 1);
+	live_nb = take_live_nb(arena->board, pos + 1);
 
 	// if (live_nb == (*((int *)(pc->reg[0]))))
 		// player->live_counter++;
