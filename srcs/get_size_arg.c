@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 17:03:16 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/28 16:42:06 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/08 22:16:12 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ unsigned char	get_size_arg(const unsigned char ocp, const unsigned char n_arg, c
 	if (type == REG_CODE)
 		return (1);
 	if (type == DIR_CODE)
-		return (dir_size ? 4 : 2);
+		return (dir_size ? DIR_SIZE : IND_SIZE);
 	if (type == IND_CODE)
-		return (2);
+		return (IND_SIZE);
 	else
 		return (0);
 }
