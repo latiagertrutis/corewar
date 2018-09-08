@@ -3,6 +3,8 @@
 
 cosa:
 	ld %2, r4
-	st r4, 200
-	ld -5, r4
-	st r4, 300
+	ld -1, r3
+	add r4, r3, r5
+	sub r3, r4, r6
+	st r5, 200
+	st r6, 300
