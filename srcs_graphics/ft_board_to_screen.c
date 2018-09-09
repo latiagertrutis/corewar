@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 04:10:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/17 11:31:20 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/09 19:04:28 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void			write_byte(int pos, t_board board[MEM_SIZE], t_sdl *Graph, t_data 
 	else
 	{
 		if (board[pos].id - 1 >= 0)
-			surf_byte = Graph->hexa_bytes[9][board[pos].id - 1];
+			surf_byte = Graph->hexa_bytes[9][take_color_byte(board[pos], data)];
 		else
 			surf_byte = Graph->hexa_bytes[9][4];
 	}

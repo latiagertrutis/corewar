@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 20:48:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/13 13:22:07 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/09 18:12:31 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ int main(int ac, char **av)
 //	SDL_RenderPresent(data.arena->Graph->screen.Renderer);
 
 //	ft_quit_graphics(data.arena->Graph);
-	exe_players(&data);
+	if (data.mods->visual)
+		exe_players_interf(&data);
+	else
+		exe_players(&data);
 	if (data.mods->visual)
 		ft_quit_graphics(data.arena->Graph);
 	free(data.arena);

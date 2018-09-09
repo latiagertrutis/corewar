@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 16:39:44 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/08/18 18:01:17 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/09 18:01:15 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,12 @@ void	ft_update_info(t_sdl *Graph, t_data *data, int cicle_pre_die)
 
 	update_cicles(Graph, data->nb_cycles, *Graph->info.cicles_gen);
 	if (!cicle_pre_die)
+	{
+		update_ctd_pcs_plyrs(Graph, 0,
+			*Graph->info.cicle_to_die, GENERAL_NBR_FONT);
 		update_ctd_pcs_plyrs(Graph, data->cycle_to_die,
 			*Graph->info.cicle_to_die, GENERAL_NBR_FONT);
+	}
 	if (nbr_pcs != data->nb_pc)
 	{
 		update_ctd_pcs_plyrs(Graph, data->nb_pc_active, *Graph->info.processos,
@@ -117,12 +121,12 @@ void	ft_update_info(t_sdl *Graph, t_data *data, int cicle_pre_die)
 	i = 0;
 	while (i < data->n_players)
 	{
+		Graph->font[PLAYER_NBR_FONT].color = ft_SDL_color(i);
 		if (!cicle_pre_die)
-				update_ctd_pcs_plyrs(Graph, 0, Graph->info.cicles_play[i],
+			update_ctd_pcs_plyrs(Graph, 0, Graph->info.cicles_play[i],
 					PLAYER_NBR_FONT);
 		if (data->players[i].live_call)
 		{
-			Graph->font[PLAYER_NBR_FONT].color = ft_SDL_color(i);
 			update_ctd_pcs_plyrs(Graph, data->players[i].live_counter,
 					Graph->info.cicles_play[i], PLAYER_NBR_FONT);
 			update_ctd_pcs_plyrs(Graph, data->players[i].last_live,

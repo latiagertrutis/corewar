@@ -47,8 +47,8 @@ typedef struct		s_arg
 #define PLAYER_TWO_COLORA 255, 204, 0, SDL_ALPHA_OPAQUE
 #define PLAYER_TWO_COLORB 255, 229, 127, SDL_ALPHA_OPAQUE
 #define PLAYER_TWO_COLORC 127, 102, 0, SDL_ALPHA_OPAQUE
-#define PLAYER_THREE_COLORA 255, 242, 207, SDL_ALPHA_OPAQUE
-#define PLAYER_THREE_COLORB 255, 248, 230, SDL_ALPHA_OPAQUE
+#define PLAYER_THREE_COLORB 255, 242, 207, SDL_ALPHA_OPAQUE
+#define PLAYER_THREE_COLORA 217, 204, 169, SDL_ALPHA_OPAQUE
 #define PLAYER_THREE_COLORC 168, 154, 117, SDL_ALPHA_OPAQUE
 #define PLAYER_FOUR_COLORA 252, 102, 92, SDL_ALPHA_OPAQUE
 #define PLAYER_FOUR_COLORB 253, 178, 173, SDL_ALPHA_OPAQUE
@@ -212,6 +212,7 @@ unsigned int		get_prog_size(int fd);
 char 				*read_alloc_size(int fd, int size);
 void				print_board(t_data *data, t_board *board);
 void 				exe_players(t_data *data);
+void 				exe_players_interf(t_data *data);
 void 				check_live_count(t_data *data);
 void				fill_r1(t_data *data);
 unsigned char		*get_mem_board(t_board *board, const unsigned int size);

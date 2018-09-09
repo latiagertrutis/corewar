@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/10 18:05:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/17 13:20:40 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/09 18:10:41 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ void 				exe_players(t_data *data)
 {
 	unsigned int k;
 	unsigned int t;
-	SDL_Event	event;
+//	SDL_Event	event;
 
 	data->i = 0;
 
 	fill_r1(data);
 //	print_board(data, data->arena->board);
-	while(data->cycle_to_die > 0 && data->mods->running)
+	while(data->cycle_to_die > 0)
 	{
 //		data->mods->pause = 1;
 		// write(1, "\x1b[H\x1b[2J", 7);
@@ -84,34 +84,34 @@ void 				exe_players(t_data *data)
 //		if (data->cycle_to_die <= 0)
 //			data->mods->running = 0;
 		t = 0;
-		while (t < data->cycle_to_die && data->mods->running)
+		while (t < data->cycle_to_die)
 		{
-			data->mods->step = 0;
+//			data->mods->step = 0;
 			// if (data->cycle_to_die <= 0)
 			// 	break;
 			// usleep(10);
-			while (SDL_PollEvent(&event) && data->mods->visual)
-			{
-				if (event.type == SDL_QUIT)
-					data->mods->running = 0;
-				else if (event.type == SDL_KEYDOWN)
-				{
-					if (event.key.keysym.sym == SDLK_ESCAPE)
-						data->mods->running = SDL_FALSE;
-					else if (event.key.keysym.sym == SDLK_SPACE)
-						data->mods->pause = pause_button(data, data->arena->Graph, data->mods->pause);
-					else if (event.key.keysym.sym == SDLK_RIGHT)
-						data->mods->step = 1;
-					else if (event.key.keysym.sym == SDLK_i)
-						data->mods->info = data->mods->info ? 0 : 1;
-				}
-//				else if (event.type == SDL_KEYUP)
-//					if (event.key.keysym.sym == SDLK_RIGHT)
-//						data->mods->step = 0;
-			}
+/* 			while (SDL_PollEvent(&event) && data->mods->visual) */
+/* 			{ */
+/* 				if (event.type == SDL_QUIT) */
+/* 					data->mods->running = 0; */
+/* 				else if (event.type == SDL_KEYDOWN) */
+/* 				{ */
+/* 					if (event.key.keysym.sym == SDLK_ESCAPE) */
+/* 						data->mods->running = SDL_FALSE; */
+/* 					else if (event.key.keysym.sym == SDLK_SPACE) */
+/* 						data->mods->pause = pause_button(data, data->arena->Graph, data->mods->pause); */
+/* 					else if (event.key.keysym.sym == SDLK_RIGHT) */
+/* 						data->mods->step = 1; */
+/* 					else if (event.key.keysym.sym == SDLK_i) */
+/* 						data->mods->info = data->mods->info ? 0 : 1; */
+/* 				} */
+/* //				else if (event.type == SDL_KEYUP) */
+/* //					if (event.key.keysym.sym == SDLK_RIGHT) */
+/* //						data->mods->step = 0; */
+/* 			} */
 			// usleep(100);
-			if (!data->mods->pause || data->mods->step)
-			{
+//			if (!data->mods->pause || data->mods->step)
+//			{
 //				j = 0;
 //				while(j < data->n_players)
 //				{
@@ -129,13 +129,13 @@ void 				exe_players(t_data *data)
 //				}
 				t++;
 				data->nb_cycles++;
-			}
-			if (data->mods->visual)
-			{
-				ft_board_to_screen(data->arena->Graph, data->arena->board, data);
-				ft_update_info(data->arena->Graph, data, t - 1);
-				ft_set_back_to_front(data->arena->Graph, data);
-			}
+//			}
+//			if (data->mods->visual)
+//			{
+//				ft_board_to_screen(data->arena->Graph, data->arena->board, data);
+//				ft_update_info(data->arena->Graph, data, t - 1);
+//				ft_set_back_to_front(data->arena->Graph, data);
+//			}
 //				 if (data->nb_cycles == 801)
 //					 data->mods->pause = 0x1;
 				// 	exit(1);

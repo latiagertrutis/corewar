@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 11:09:42 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/16 15:38:56 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/09 19:03:35 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void		generate_noinfo_squares(t_sdl *Graph)
 	SDL_Color	c;
 
 	i = 0;
-	while (i < 5)
+	while (i < 9)
 	{
 		c = ft_SDL_color(i);
 		rack_square = SDL_CreateRGBSurfaceWithFormat(0, Graph->square->w,
