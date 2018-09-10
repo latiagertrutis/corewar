@@ -6,25 +6,27 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 20:48:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/09/09 18:12:31 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/10 17:08:13 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include <stdio.h> //printf !!
 
-static t_mods		*ini_mods(int flags)
+static void		ini_mods(int flags, t_mods *mods)
 {
-	t_mods *mods;
-	
-	if (!(mods = (t_mods *)ft_memalloc(sizeof(t_mods))))
-		ft_error("Error malloc ini_mods\n");
+//	if (!(mods = (t_mods *)ft_memalloc(sizeof(t_mods))))
+//		ft_error("Error malloc ini_mods\n");
 	mods->running = 0x1;
 	if (ft_check_flags(flags, 'f'))
 		mods->fullscreen = 0x1;
 	if (ft_check_flags(flags, 'v'))
 		mods->visual = 0x1;
-	return (mods);
+	if (ft_check_flags(flags, 'd'))
+	{
+		mods->dump = 0x1;
+		mods->info = 0x1;
+	}
 }
 
 int main(int ac, char **av)
@@ -45,7 +47,7 @@ int main(int ac, char **av)
 	data.flags = ft_set_flags(ac, av, &data);
 
 
-	data.mods = ini_mods(data.flags);
+	ini_mods(data.flags, data.mods);
 
 	if (!init_corewar(&data, ac, av))
 		ft_error("malloc failed");
@@ -65,6 +67,8 @@ int main(int ac, char **av)
 //	ft_quit_graphics(data.arena->Graph);
 	if (data.mods->visual)
 		exe_players_interf(&data);
+	else if (data.mods->dump)
+		exe_players_dump(&data);
 	else
 		exe_players(&data);
 	if (data.mods->visual)

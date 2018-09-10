@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 06:40:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/16 16:05:46 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/10 15:20:08 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void				ini_rack(t_sdl *Graph)
 	Graph->square->h = square_dim[1];
 }
 
-void				ft_ini_interface(t_sdl *Graph)
+void				ft_ini_interface(t_sdl *Graph, t_data *data)
 {
 	if (!(Graph->big_square = (SDL_Rect *)malloc(sizeof(SDL_Rect))))
 		ft_error("Error malloc ft_ini_interface\n");
@@ -77,6 +77,9 @@ void				ft_ini_interface(t_sdl *Graph)
 			MAX_PLAYERS * 4)))
 		ft_error("Error malloc ft_ini_interface\n");
 	ft_ini_pcs(Graph);
-	SDL_SetTextureBlendMode(Graph->screen.texture, SDL_BLENDMODE_BLEND);
-	SDL_SetTextureAlphaMod(Graph->screen.texture, 100);
+	if (!data->mods->dump)
+	{
+		SDL_SetTextureBlendMode(Graph->screen.texture, SDL_BLENDMODE_BLEND);
+		SDL_SetTextureAlphaMod(Graph->screen.texture, 100);
+	}
 }

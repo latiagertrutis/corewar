@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 16:39:44 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/09 18:01:15 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/10 17:17:07 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,9 @@ void	ft_update_info(t_sdl *Graph, t_data *data, int cicle_pre_die)
 	static unsigned int	nbr_pcs = 0;
 	int					i;
 
-	update_cicles(Graph, data->nb_cycles, *Graph->info.cicles_gen);
-	if (!cicle_pre_die)
+//	update_cicles(Graph, data->nb_cycles, *Graph->info.cicles_gen);
+	update_ctd_pcs_plyrs(Graph, data->nb_cycles, *Graph->info.cicles_gen, GENERAL_NBR_FONT);
+	if (!cicle_pre_die || data->mods->dump)
 	{
 		update_ctd_pcs_plyrs(Graph, 0,
 			*Graph->info.cicle_to_die, GENERAL_NBR_FONT);

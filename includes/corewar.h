@@ -159,12 +159,14 @@ typedef struct		s_mods
 	unsigned int	visual : 1;
 	unsigned int	fullscreen : 1;
 	unsigned int	info : 1;
+	unsigned int	dump : 1;
+	unsigned int 	dump_cuant;
 }					t_mods;
 
 typedef struct		s_data
 {
 	//anadir variable para saber cuando se alcanza el cycle to die
-	unsigned int 	dump;
+	unsigned int	dump;
 	unsigned int 	max_checks;
 	unsigned int	cycle_to_die;
 	unsigned int	n_players;
@@ -213,6 +215,7 @@ char 				*read_alloc_size(int fd, int size);
 void				print_board(t_data *data, t_board *board);
 void 				exe_players(t_data *data);
 void 				exe_players_interf(t_data *data);
+void 				exe_players_dump(t_data *data);
 void 				check_live_count(t_data *data);
 void				fill_r1(t_data *data);
 unsigned char		*get_mem_board(t_board *board, const unsigned int size);
@@ -259,7 +262,7 @@ void				core_aff(t_pc *pc, t_arena *arena, t_data *data);
 void		ft_ini_graphics(t_sdl **Graph, t_mods *mods, t_data *data);
 void		ft_quit_graphics(t_sdl *Graph);
 void		ft_SDL_error(char *str, int mode);
-void		ft_ini_interface(t_sdl *Graph);
+void		ft_ini_interface(t_sdl *Graph, t_data *data);
 void		ft_ini_font(t_sdl *Graph);
 void		ft_board_to_screen(t_sdl *Graph, t_board board[MEM_SIZE], t_data *data);
 void		ft_pcs_to_rack(t_sdl *Graph, t_data *data, int alpha_mod);

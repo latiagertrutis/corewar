@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/01 00:34:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/18 17:40:40 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/10 15:03:56 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static int init_arena(t_data *data)
 {
 	if (!(data->arena = (t_arena *)ft_memalloc(sizeof(t_arena))))
 		return (0);
-	if (data->mods->visual)
+	if (data->mods->visual || data->mods->dump)
 		ft_ini_graphics(&(data->arena->Graph), data->mods, data);
 	return (1);
 

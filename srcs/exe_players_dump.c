@@ -1,15 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exe_player_interf.c                                :+:      :+:    :+:   */
+/*   exe_players_dump.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/09 18:07:14 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/10 17:05:48 by jagarcia         ###   ########.fr       */
+/*   Created: 2018/09/10 16:36:20 by jagarcia          #+#    #+#             */
+/*   Updated: 2018/09/10 17:12:56 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "corewar.h"
 
 static void			exe_pc(t_pc *pc, t_arena *arena, t_data *data)
@@ -65,54 +64,48 @@ static int			pause_button(t_data *data, t_sdl *Graph, unsigned int pause)
 	return (pause ? 0 : 0x1);
 }
 
-void 				exe_players_interf(t_data *data)
+void 				exe_players_dump(t_data *data)
 {
 	unsigned int k;
 	unsigned int t;
+	unsigned int running;
 	SDL_Event	event;
 
 	data->i = 0;
-
 	fill_r1(data);
-	while(data->cycle_to_die > 0 && data->mods->running)
+	t = 0;
+	while(data->nb_cycles < data->mods->dump_cuant)
 	{
-		t = 0;
-		while (t < data->cycle_to_die && data->mods->running)
+		k = data->nb_pc;
+		while (k)
 		{
-			data->mods->step = 0;
-			while (SDL_PollEvent(&event))
-			{
-				if (event.type == SDL_QUIT)
-					data->mods->running = 0;
-				else if (event.type == SDL_KEYDOWN)
-				{
-					if (event.key.keysym.sym == SDLK_ESCAPE)
-						data->mods->running = SDL_FALSE;
-					else if (event.key.keysym.sym == SDLK_SPACE)
-						data->mods->pause = pause_button(data, data->arena->Graph, data->mods->pause);
-					else if (event.key.keysym.sym == SDLK_RIGHT)
-						data->mods->step = 1;
-					else if (event.key.keysym.sym == SDLK_i)
-						data->mods->info = data->mods->info ? 0 : 1;
-				}
-			}
-			if (!data->mods->pause || data->mods->step)
-			{
-				k = data->nb_pc;
-				while (k)
-				{
-					if (data->pc[k - 1].active)
-						exe_pc((data->pc) + k - 1, data->arena, data); //TODO ejecutamos el turno cycle to die
-					k--;
-				}
-				t++;
-				data->nb_cycles++;
-			}
-			ft_board_to_screen(data->arena->Graph, data->arena->board, data);
-			ft_update_info(data->arena->Graph, data, t - 1);
-			ft_set_back_to_front(data->arena->Graph, data);
+			if (data->pc[k - 1].active)
+				exe_pc((data->pc) + k - 1, data->arena, data); //TODO ejecutamos el turno cycle to die
+			k--;
 		}
-		check_live_count(data);
+		t++;
+		data->nb_cycles++;
+		if (t == data->cycle_to_die)
+		{
+			check_live_count(data);
+			t = 0;
+		}
 	}
-	check_winner(data->players, data->n_players);
+	ft_board_to_screen(data->arena->Graph, data->arena->board, data);
+	ft_update_info(data->arena->Graph, data, t - 1);
+	ft_set_back_to_front(data->arena->Graph, data);
+	running = 1;
+	while (running)
+	{
+		while (SDL_PollEvent(&event))
+		{
+			if (event.type == SDL_QUIT)
+				running = 0;
+			else if (event.type == SDL_KEYDOWN)
+			{
+				if (event.key.keysym.sym == SDLK_ESCAPE)
+					running = 0;
+			}
+		}
+	}
 }

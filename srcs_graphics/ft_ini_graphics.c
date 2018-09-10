@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 05:20:16 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/16 11:34:10 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/10 15:16:10 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "corewar.h"
@@ -24,11 +24,7 @@ static t_sdl	*ini_graph(void)
 }
 static void	prepare_all(t_data *data, t_sdl **Graph)
 {
-	int		*pixel;
-	int		pitch;
-	int		i;
-
-	ft_ini_interface(*Graph);
+	ft_ini_interface(*Graph, data);
 	ft_ini_font(*Graph);
 	ft_ini_information(data);
 }
