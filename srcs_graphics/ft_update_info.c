@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 16:39:44 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/10 17:17:07 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/11 18:29:50 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,31 +49,6 @@ static void		update_digit(SDL_Rect pos, t_sdl *Graph, char digit[2],
 	SDL_FreeSurface(tmp);
 }
 
-static void		update_cicles(t_sdl *Graph, unsigned int cicles, SDL_Rect pieze)
-{
-	int				pos;
-	SDL_Surface		*tmp;
-	char			*digits;
-
-	digits = "0123456789";
-	if (cicles % 10)
-		update_digit((SDL_Rect){pieze.x + 9 * (pieze.w - 1), pieze.y, pieze.w,
-			pieze.h}, Graph, (char[2]){digits[cicles % 10], 0},
-			GENERAL_NBR_FONT);
-	else if (cicles > 0)
-	{
-		pos = 1;
-		while (cicles > 0)
-		{
-			update_digit((SDL_Rect){pieze.x + (10 - pos) * (pieze.w - 1),
-					pieze.y, pieze.w, pieze.h}, Graph,
-				(char[2]){digits[cicles % 10], 0}, GENERAL_NBR_FONT);
-			cicles /= 10;
-			pos++;
-		}
-	}
-}
-
 static void		update_ctd_pcs_plyrs(t_sdl *Graph, unsigned int info,
 			SDL_Rect pieze, int mode)
 {
@@ -102,9 +77,9 @@ static void		update_ctd_pcs_plyrs(t_sdl *Graph, unsigned int info,
 void	ft_update_info(t_sdl *Graph, t_data *data, int cicle_pre_die)
 {
 	static unsigned int	nbr_pcs = 0;
-	int					i;
+	unsigned int		i;
 
-//	update_cicles(Graph, data->nb_cycles, *Graph->info.cicles_gen);
+//	ft_check_health(data, Graph);
 	update_ctd_pcs_plyrs(Graph, data->nb_cycles, *Graph->info.cicles_gen, GENERAL_NBR_FONT);
 	if (!cicle_pre_die || data->mods->dump)
 	{

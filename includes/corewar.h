@@ -89,6 +89,7 @@ typedef struct s_sdl {
 	SDL_Surface *rack;
 	SDL_Surface *general_nbr;
 	SDL_Surface *player_nbr;
+	SDL_Surface **heart;
 	SDL_Rect *square;
 	SDL_Rect *big_square;
 	SDL_Rect *square_info;
@@ -137,6 +138,14 @@ typedef struct 		s_player
 }					t_player;
 
 //hay que hacer una estructura del PC que contenga minimo 1 pc(pos) 2 carry, wait_cycles
+
+typedef struct pene
+{
+	int x;
+	int y;
+	int w;
+	int h;
+} rectpene;
 
 typedef struct		s_op
 {
@@ -278,5 +287,7 @@ SDL_Color	ft_SDL_color(int i);
 Uint32		ft_MapRGBA(SDL_PixelFormat *format, int i, int alpha);
 void		ft_ini_pcs(t_sdl *Graph);
 void		ft_ini_images(t_data *data, t_sdl *Graph);
+void		ft_ini_sprites(t_data *data, t_sdl *Graph);
+void		ft_check_health(t_data *data, t_sdl *Graph);
 
 #endif

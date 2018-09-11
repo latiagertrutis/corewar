@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 20:48:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/09/10 17:08:13 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/11 18:33:52 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@ int main(int ac, char **av)
 
 	ini_mods(data.flags, data.mods);
 
+	ft_printf("Voy a inicializar todo\n");
 	if (!init_corewar(&data, ac, av))
 		ft_error("malloc failed");
-
+	ft_printf("todo inicializado\n");
 
 	// ft_putnbr(data.n_players);
 	// exit(1);
@@ -65,6 +66,7 @@ int main(int ac, char **av)
 //	SDL_RenderPresent(data.arena->Graph->screen.Renderer);
 
 //	ft_quit_graphics(data.arena->Graph);
+	ft_printf("voy a empezar\n");
 	if (data.mods->visual)
 		exe_players_interf(&data);
 	else if (data.mods->dump)

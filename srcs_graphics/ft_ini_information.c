@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 03:49:02 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/16 08:55:27 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/11 18:59:36 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,12 @@ void	ft_ini_information(t_data *data)
 	SDL_Surface *info_marc;
 	t_sdl		*Graph;
 	int			i;
+	SDL_Rect 	*tmp;
 	
 	Graph = data->arena->Graph;
-	Graph->square_info = (SDL_Rect *)ft_memalloc(sizeof(SDL_Rect));
+	if (!(tmp = (SDL_Rect *)malloc(sizeof(SDL_Rect))))
+		ft_error("ft_memalloc ft_ini_information");
+	Graph->square_info = tmp;
 	Graph->square_info->w = Graph->screen.w * LEFT_BORDER - Graph->screen.w * RIGHT_BORDER;
 	Graph->square_info->h = Graph->big_square->h / 4;
 	Graph->info_text = SDL_CreateTexture(Graph->screen.Renderer, 372645892,
@@ -71,10 +74,12 @@ void	ft_ini_information(t_data *data)
 		Graph->big_square->h);
 //	ini_general(Graph);
 	i = 0;
+	ft_putchar('Y');
 	info_marc = SDL_CreateRGBSurfaceWithFormat(0, Graph->square_info->w,
 			(Graph->big_square->h - Graph->square_info->h) / 4, 32, 372645892);
 //	while(i < MAX_PLAYERS)
 //		ini_player(Graph, i++, info_marc);
+	ft_printf("Voy a iniciar el material\n");
 	ft_ini_material(data, Graph, info_marc);
 	SDL_FreeSurface(info_marc);
 }
