@@ -18,6 +18,16 @@
 
 # define MAX_ARG_LEN MAX(IND_SIZE, MAX(REG_SIZE, DIR_SIZE))
 
+# if MAX_ARG_LEN == 1
+#  define MAX_CAST int8_t
+# elif MAX_ARG_LEN == 2
+# define MAX_CAST int16_t
+# elif MAX_ARG_LEN == 4
+# define MAX_CAST int32_t
+# elif MAX_ARG_LEN == 8
+# define MAX_CAST int64_t
+# endif
+
 # if IND_SIZE == 1
 #  define IND_CAST int8_t
 # elif IND_SIZE == 2
