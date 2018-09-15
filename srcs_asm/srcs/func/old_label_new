@@ -1,0 +1,72 @@
+#include "libasm.h"
+
+static t_label	*add_to_end(t_label *label, t_label *tmp, int id, char *l)
+{
+	tmp->next = ft_newlabel(l, id);
+	label->actual = tmp->next;
+	return (label);
+}
+
+static t_label	*add_to_first(t_label *label, int id, char *l)
+{
+	t_label *tmp;
+
+	tmp = ft_newlabel(l, id);
+	tmp->next = label;
+	tmp->actual = tmp;
+	return (tmp);
+}
+
+static t_label	*add_to_copy(t_label *label, t_label *tmp, int id, char *l)
+{
+	t_label *tmp2;
+
+	tmp2 = tmp;
+	while (tmp2->copy)
+		tmp2 = tmp2->copy;
+	tmp2->copy = ft_newlabel(l, id);
+	label->actual = tmp2->copy;
+	return (label);
+}
+
+static t_label	*add_between(t_label *label, t_label *tmp, int id, char *l)
+{
+	t_label *tmp2;
+
+	tmp2 = tmp->next;
+	tmp->next = ft_newlabel(l, id);
+	tmp = tmp->next;
+	tmp->next = tmp2;
+	label->actual = tmp->next;
+	return (label);
+}
+
+t_label		*ft_add_new_label(t_label *label, int  id, char *l, int i)
+{
+	t_label	*tmp;
+	t_label	*tmp2;
+
+	tmp = label;
+	tmp2 = NULL;
+	id = ft_hash_it(id, l[i], 99);
+	if (label->id == -1 && label->name == NULL)
+	{
+		label->id = id;
+		label->name = &l[i];
+		label->actual = label;
+		return (label);
+	}
+	while (tmp && tmp->id < id)
+	{
+		tmp2 = tmp;
+		tmp = tmp->next;
+	}
+	if (tmp == NULL)
+		return (add_to_end(label, tmp2, id, &l[i]));
+	if (tmp->id == id)
+		return (add_to_copy(label, tmp, id, &l[i]));
+	if (tmp2 == NULL)
+		return (add_to_first(label, id, &l[i]));
+	else
+		return (add_between(label, tmp2, id, &l[i]));
+}
