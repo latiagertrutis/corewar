@@ -2,5 +2,5 @@
 .comment "I'M ALIIIIVE"
 
 cosa:
-	ldi %1, %1, r4
-	st r4, 200
+	ld %0, r2
+	zjmp %511

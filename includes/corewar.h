@@ -27,7 +27,7 @@
 # elif IND_SIZE == 8
 # define IND_CAST int64_t
 # else
-#error Wrong size of indirect expected: 1, 2, 4, 8
+#error Wrong size of indirect, expected: 1, 2, 4, 8
 # endif
 
 # if REG_SIZE == 1
@@ -39,7 +39,7 @@
 # elif REG_SIZE == 8
 # define REG_CAST int64_t
 # else
-#error Wrong size of registre expected: 1, 2, 4, 8
+#error Wrong size of registre, expected: 1, 2, 4, 8
 # endif
 
 typedef struct		s_arg

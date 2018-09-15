@@ -6,13 +6,19 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/09/07 13:44:24 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/15 14:28:48 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 ** Toutes les tailles sont en octets.
 ** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
+*/
+
+/*
+** if the functions are zjmp, ldi, sti, fork, lldi, lfork we have to
+** use for the direct size the size of the indirect, althought is
+** treated like indirect in the VM
 */
 
 #ifndef OP_H

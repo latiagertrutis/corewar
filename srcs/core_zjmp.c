@@ -6,13 +6,13 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 05:25:36 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/09/08 22:00:13 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/15 14:32:54 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static 	short charge_short(t_board *board, unsigned short pc_pos)
+static 	IND_CAST charge_short(t_board *board, unsigned short pc_pos)
 {
 	int 	i;
 	char	param[IND_SIZE];
