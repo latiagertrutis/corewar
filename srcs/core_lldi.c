@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 17:56:52 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/15 23:15:17 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/15 23:32:09 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	core_lldi(t_pc *pc, t_arena *arena, t_data *data)
 				*((REG_CAST *)arg2.arg) = *((IND_CAST *)arg2.arg);
 			while (i < REG_SIZE)
 			{
-				pc->reg[reg_pos][i] = arena->board[ft_mod((pc->pc + i + ((*((int *)(arg1.arg)) + *((int *)(arg2.arg))))), MEM_SIZE)].mem;
+				pc->reg[reg_pos][i] = arena->board[ft_mod((pc->pc + i + ((*((REG_CAST *)(arg1.arg)) + *((REG_CAST *)(arg2.arg))))), MEM_SIZE)].mem;
 				i++;
 			}
 		}
