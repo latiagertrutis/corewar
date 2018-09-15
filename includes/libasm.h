@@ -63,6 +63,7 @@ int     assembler(int fd, char *filename);
 t_header	ft_getname(char *line, int n_line, t_header h);
 int     ft_strcmp_index(char *s1, char *s2);
 int     ft_strcmp_index_jmp(char *s1, char *s2);
+int ft_strcmp_to(char *s1, char *s2);
 t_label	*ft_newlabel(char *name, int id);
 t_line	*ft_newline(t_label *l, int ord_n, char *line, int w);
 t_line          *ft_getorders(char *l, t_label **label, int j, int n_line);
@@ -71,6 +72,7 @@ t_line  *ft_add_new_line(char *l, int cnt, int i, int n_line);
 int             ft_atoi_asm(const char *str, int pos, int *val);
 int     ft_jmp_s_t(char *s, int i);
 int     ft_hash_it(int id, int max);
+int     ft_extract_label_line(t_line *line, t_label *label, int pos);
 
 //FUNC CONV
 int     ft_extract_dir(t_line **line, int i, int n_line, int pos);

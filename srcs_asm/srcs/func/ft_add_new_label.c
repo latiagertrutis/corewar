@@ -30,7 +30,7 @@ static t_label	**add_to_copy(t_label **label, int id, char *l)
 		tmp = tmp->copy;
 	}
 	tmp->copy = ft_newlabel(l, id);
-	label[HASH_SIZE - 1] = label[id];
+	label[HASH_SIZE - 1] = tmp->copy;
 	return (label);
 }
 

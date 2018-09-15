@@ -6,7 +6,7 @@
 #    By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/14 22:43:59 by jpinyot           #+#    #+#              #
-#    Updated: 2018/09/15 20:24:07 by jpinyot          ###   ########.fr        #
+#    Updated: 2018/09/15 22:12:43 by jpinyot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ FUNC = ft_getname.c\
        ft_extract_dir_2.c\
        ft_extract_reg.c\
        ft_extract_ind.c\
+	   ft_extract_label.c\
        ft_extract_ind_label.c\
        ft_atoi_asm.c\
        ft_functions.c\

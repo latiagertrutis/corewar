@@ -16,6 +16,7 @@ static int	ft_jmp_to_next(char *l, int i)
 
 static int	ft_extract_dir_label(t_line **line, int i, int n_line, int pos)
 {
+	write(1, "#!#\n\n\n", 6);
 	char	*l;
 	int	cnt;
 
@@ -24,7 +25,7 @@ static int	ft_extract_dir_label(t_line **line, int i, int n_line, int pos)
 	line[0]->arg_lab[pos] = &l[i];
 	while (l[++i] && (l[i] != ' ' && l[i] != '\t' && l[i] != SEPARATOR_CHAR && l[i] != COMMENT_CHAR))
 		cnt += l[i];
-	line[0]->arg[pos] = cnt;
+	line[0]->arg[pos] = cnt % (HASH_SIZE - 1);
 	return (i);
 }
 

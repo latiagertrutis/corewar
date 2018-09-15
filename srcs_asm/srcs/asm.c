@@ -38,7 +38,8 @@ static t_line	*ft_getpos(t_line *line)
 {
 	line->next->pos = line->pos + line->w;
 	if (line->next->label)
-		line->next->label->pos = line->next->pos + line->next->w;
+//		line->next->label->pos = line->next->pos + line->next->w;
+		line->next->label->pos = line->next->pos;
 	return (line->next);
 }
 
@@ -60,7 +61,6 @@ static t_line	*orders(int fd, int line_n, t_label **label)
 		{
 			line->next = ft_getorders(l, label, j, line_n);
 			line = ft_getpos(line);
-			print_line(line);	//print
 		}
 		line_n++;
 	}
@@ -84,8 +84,18 @@ int	assembler(int fd, char *filename)
 	if ((fd2 = open(filename, O_WRONLY | O_CREAT | O_TRUNC,
 					S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
 		exit (-1);
-	char a = 0xea;
-//	write(fd2, "hola mateo", 15);
-	write(fd2, &a, 1);
+	line = line->next;
+//	ft_putstr(label[line->arg[1]]->name);
+	while (line)
+	{
+		if (line->arg_lab[0])
+			line->arg[0] = ft_extract_label_line(line, label[line->arg[0]], 0);
+		if (line->arg_lab[1])
+			line->arg[1] = ft_extract_label_line(line, label[line->arg[1]], 1);
+		if (line->arg_lab[2])
+			line->arg[2] = ft_extract_label_line(line, label[line->arg[2]], 2);
+			print_line(line);	//print
+		line = line->next;
+	}
 	return (0);
 }
