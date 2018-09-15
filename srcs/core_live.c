@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/11 21:50:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/09/08 20:22:18 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/15 22:10:18 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int32_t 			take_live_nb(t_board *board, const size_t pos)
 	rtn[1] = board[(pos + 1) % MEM_SIZE].mem;
 	rtn[2] = board[(pos + 2) % MEM_SIZE].mem;
 	rtn[3] = board[(pos + 3) % MEM_SIZE].mem;
-	return((*(int *)rtn));
+	return((*(int32_t *)rtn));
 }
 
 void				core_live(t_pc *pc, t_arena *arena, t_data *data)
