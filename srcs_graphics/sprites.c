@@ -6,11 +6,40 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 18:28:52 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/16 02:07:42 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/16 22:28:30 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+static void	prepare_all_sprites(t_sdl *Graph, int dim, SDL_Surface *sprite)
+{
+	int i;
+	int pos;
+	SDL_Rect pos_in_sprite;
+	int	mod_hori;
+
+	i = -1;
+	pos = 1;
+	pos_in_sprite = (SDL_Rect){2, 1, 76, 69};
+	while (++i < 7)
+	{
+		if (!(pos % 2))
+		{
+//			pos_in_sprite = (SDL_Rect){2, 1 + (pos - 1) * (69 + 1), 76, 69};
+			pos_in_sprite.y += 73; //69 + 4
+			pos_in_sprite.x -= 80; // 76 + 4
+		}
+		else
+			pos_in_sprite.x += 80;
+
+//			pos_in_sprite = (SDL_Rect){2 + 76 + 4, 1 + (pos - 1) * (69 + 1), 76, 69};
+		Graph->heart[pos] = SDL_CreateRGBSurfaceWithFormat(0, dim + 7, dim, 32, 372645892);
+		ft_printf("%i posicion %i x %i\n",pos, pos_in_sprite.x, pos_in_sprite.y);
+		SDL_BlitScaled(sprite, &pos_in_sprite, Graph->heart[pos++], NULL);
+		ft_printf("%i posicion %i x %i\n",pos - 1, pos_in_sprite.x, pos_in_sprite.y);
+	}
+}
 
 void	ft_ini_sprites(t_data *data, t_sdl *Graph)
 {
@@ -26,12 +55,8 @@ void	ft_ini_sprites(t_data *data, t_sdl *Graph)
 		ft_SDL_error("SDL_RWFromFile", MODE_SDL);
 	if (!(sprite = IMG_LoadPNG_RW(tmp)))
 		ft_SDL_error("IMG_LoadPNG_RW", MODE_IMG);
-//	if (!(Graph->heart[0] = (SDL_Surface *)ft_memalloc(sizeof(SDL_Surface))))
-//		ft_error("malloc ft_ini_sprites 2");
 	if (!(Graph->heart_pos = (SDL_Rect *)malloc(sizeof(SDL_Rect))))
 		ft_error("malloc ft_ini_sprites 2");
-//	Graph->heart[0] = SDL_CreateRGBSurfaceWithFormat(0, 76, 69, 32, 372645892);
-//	Graph->heart[0] = SDL_CreateRGBSurfaceWithFormat(0, 59, 52, 32, 372645892);
 	i = 1; 
 	disp_space_y = (Graph->info_marc->h - ((Graph->info.cicles_play[0].y + Graph->info.cicles_play[0].h) - (Graph->info_marc->y)));
 	disp_space_x = Graph->player_nbr->w * 20;
@@ -47,43 +72,48 @@ void	ft_ini_sprites(t_data *data, t_sdl *Graph)
 	i--;
 	SDL_FreeSurface(Graph->heart[0]);
 	Graph->heart[0] = SDL_CreateRGBSurfaceWithFormat(0, i + 7, i, 32, 372645892);
-//	SDL_FillRect(Graph->heart[0], NULL, 0xFF00FF00);
 	SDL_BlitScaled(sprite, &(SDL_Rect){2, 1, 76, 69}, Graph->heart[0], NULL);
+//	SDL_BlitScaled(sprite, &(SDL_Rect){2, 1 + 73, 76, 69}, Graph->heart[0], NULL);
 	*Graph->heart_pos = (SDL_Rect){Graph->info.cicles_play[0].x, ((Graph->info_marc->h - ((Graph->info.cicles_play[0].y + Graph->info.cicles_play[0].h) - (Graph->info_marc->y))) - Graph->heart[0]->h) / 2 + Graph->info.cicles_play[0].y + Graph->info.cicles_play[0].h, Graph->heart[0]->w, Graph->heart[0]->h};
-//	if (SDL_BlitSurface(sprite, &(SDL_Rect){0, 0, 79, 72}, Graph->heart[0], NULL) < 0)
-//		ft_SDL_error("SDL_BlitSurface", MODE_SDL);
-//	Graph->heart[0] = sprite;
+	prepare_all_sprites(Graph, i, sprite);
 }
 
-void	ft_check_health(t_data *data, t_sdl *Graph)
+void	ft_reset_health(t_data *data, t_sdl *Graph, int player)
 {
 	int pitch;
 	char *pixel;
 	SDL_Rect heart;
-	int k;
-	int t;
-
-	t = 0;
-	while(t < 4)
-	{
-		k = 0;
-		while (k < 4)
-		{
-//		y_separation = Graph->info.cicles_play[0].y + Graph->info.cicles_play[0].h + Graph->heart[0]->h + (Graph->info_marc->h) * k++;
-//	y_separation = Graph->square_info->h + 10 + (Graph->info_marc->h) * k++;
-//		y_separation = ((Graph->info_marc->h - ((Graph->info.cicles_play[0].y + Graph->info.cicles_play[0].h) - (Graph->info_marc->y))) - Graph->heart[0]->h) / 2 + Graph->info.cicles_play[0].y + Graph->info.cicles_play[0].h;
-			heart = (SDL_Rect){Graph->heart_pos->x + (Graph->heart_pos->w + (Graph->player_nbr->w * 20 - Graph->heart_pos->w * 4) / 3) * t, Graph->heart_pos->y + (Graph->info_marc->h) * k++, Graph->heart[0]->w, Graph->heart[0]->h};
-			int j;
-			SDL_LockTexture(Graph->info_text, &heart, (void **)&pixel, &pitch);
-			SDL_LockSurface(Graph->heart[0]);
-			j = 0;
-			while (++j < Graph->heart[0]->h)
-				memcpy(pixel + j * pitch, Graph->heart[0]->pixels + j * Graph->heart[0]->pitch, Graph->heart[0]->pitch);
-			SDL_UnlockSurface(Graph->heart[0]);
-			SDL_UnlockTexture(Graph->info_text);
-		}
-		t++;
-	}
+	int j;
+	
+	heart = (SDL_Rect){Graph->heart_pos->x, Graph->heart_pos->y + (Graph->info_marc->h) * player, Graph->heart[0]->w, Graph->heart[0]->h};
+	SDL_LockTexture(Graph->info_text, &heart, (void **)&pixel, &pitch);
+	SDL_LockSurface(Graph->heart[0]);
+	j = 0;
+	while (++j < Graph->heart[0]->h)
+		memcpy(pixel + j * pitch, Graph->heart[0]->pixels + j * Graph->heart[0]->pitch, Graph->heart[0]->pitch);
+	SDL_UnlockSurface(Graph->heart[0]);
+	SDL_UnlockTexture(Graph->info_text);
 }
 
-//hacer 4 corazones que ocupen toda la zona que hay entre los numeros de un jugador y el siguiente
+void	ft_check_health(t_data *data, t_sdl *Graph, int player, int cicle_pre_die)
+{
+	int pitch;
+	char *pixel;
+	SDL_Rect heart;
+	int j;
+	static unsigned int pos = 0;
+
+//	if ((cicle_pre_die * 7 / data->cycle_to_die) != pos)
+//	{
+//		ft_printf("ciclo %i de %i posicion %i\n", cicle_pre_die, data->cycle_to_die, cicle_pre_die * 6 / data->cycle_to_die);
+		pos = cicle_pre_die * 6 / data->cycle_to_die;
+		heart = (SDL_Rect){Graph->heart_pos->x, Graph->heart_pos->y + (Graph->info_marc->h) * player, Graph->heart[pos]->w, Graph->heart[pos]->h};
+		SDL_LockTexture(Graph->info_text, &heart, (void **)&pixel, &pitch);
+		SDL_LockSurface(Graph->heart[pos]);
+		j = 0;
+		while (++j < Graph->heart[pos]->h)
+			memcpy(pixel + j * pitch, Graph->heart[pos]->pixels + j * Graph->heart[pos]->pitch, Graph->heart[pos]->pitch);
+		SDL_UnlockSurface(Graph->heart[pos]);
+		SDL_UnlockTexture(Graph->info_text);
+//	}
+}

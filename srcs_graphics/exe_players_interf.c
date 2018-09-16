@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/09 18:07:14 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/13 17:40:24 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/16 18:33:58 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void 				exe_players_interf(t_data *data)
 						data->mods->info = data->mods->info ? 0 : 1;
 				}
 			}
-			if (!data->mods->pause || data->mods->step)
+			if (data->mods->pause || data->mods->step)
 			{
 				k = data->nb_pc;
 				while (k)

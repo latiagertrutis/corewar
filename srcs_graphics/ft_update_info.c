@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 16:39:44 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/15 22:19:29 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/16 22:27:40 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,36 @@ static void		update_ctd_pcs_plyrs(t_sdl *Graph, unsigned int info,
 	}
 }
 
+static void	place_health(t_data *data, t_sdl *Graph, int player, int h)
+{
+	int pitch;
+	char *pixel;
+	SDL_Rect heart;
+	int j;
+	
+	heart = (SDL_Rect){Graph->heart_pos->x, Graph->heart_pos->y + (Graph->info_marc->h) * player, Graph->heart[h]->w, Graph->heart[h]->h};
+	SDL_LockTexture(Graph->info_text, &heart, (void **)&pixel, &pitch);
+	SDL_LockSurface(Graph->heart[h]);
+	j = 0;
+	while (++j < Graph->heart[h]->h)
+		memcpy(pixel + j * pitch, Graph->heart[h]->pixels + j * Graph->heart[h]->pitch, Graph->heart[h]->pitch);
+	SDL_UnlockSurface(Graph->heart[h]);
+	SDL_UnlockTexture(Graph->info_text);
+}
+
 void	ft_update_info(t_sdl *Graph, t_data *data, int cicle_pre_die)
 {
 	static unsigned int	nbr_pcs = 0;
 	unsigned int		i;
 
-	ft_check_health(data, Graph);
+//	if (!cicle_pre_die)
+//		ft_reset_health(data, Graph, 0);
+//	place_health(data, Graph, 0, 2);
+//	else
+		ft_check_health(data, Graph, 0, cicle_pre_die + 1);
+//	ft_reset_health(data, Graph, 1);
+//	ft_reset_health(data, Graph, 2);
+//	ft_reset_health(data, Graph, 3);
 	update_ctd_pcs_plyrs(Graph, data->nb_cycles, *Graph->info.cicles_gen, GENERAL_NBR_FONT);
 	if (!cicle_pre_die || data->mods->dump)
 	{
@@ -88,11 +112,14 @@ void	ft_update_info(t_sdl *Graph, t_data *data, int cicle_pre_die)
 		update_ctd_pcs_plyrs(Graph, data->cycle_to_die,
 			*Graph->info.cicle_to_die, GENERAL_NBR_FONT);
 	}
-	if (nbr_pcs != data->nb_pc)
+	if (nbr_pcs != data->nb_pc_active)
 	{
+		if (nbr_pcs > data->nb_pc_active)
+			update_ctd_pcs_plyrs(Graph, 0,
+				*Graph->info.processos, GENERAL_NBR_FONT);
 		update_ctd_pcs_plyrs(Graph, data->nb_pc_active, *Graph->info.processos,
 			GENERAL_NBR_FONT);
-		nbr_pcs = data->nb_pc;
+		nbr_pcs = data->nb_pc_active;
 	}
 	i = 0;
 	while (i < data->n_players)

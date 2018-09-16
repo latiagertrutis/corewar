@@ -293,6 +293,7 @@ Uint32		ft_MapRGBA(SDL_PixelFormat *format, int i, int alpha);
 void		ft_ini_pcs(t_sdl *Graph);
 void		ft_ini_images(t_data *data, t_sdl *Graph);
 void		ft_ini_sprites(t_data *data, t_sdl *Graph);
-void		ft_check_health(t_data *data, t_sdl *Graph);
+void		ft_reset_health(t_data *data, t_sdl *Graph, int player);
+void		ft_check_health(t_data *data, t_sdl *Graph, int player, int t);
 
 #endif
