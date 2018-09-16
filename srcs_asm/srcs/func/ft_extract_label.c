@@ -6,10 +6,8 @@ int		ft_extract_label_line(t_line *line, t_label *label, int pos)
 {
 	t_label *tmp;
 
-//	ft_putstr(line->arg_lab[pos]);
-//	write(1, "\n", 1);
-//	ft_putstr(label->name);
-//	write(1, "\n", 1);
+	if (label == NULL)
+		ft_error_label(0, 1, line->arg_lab[pos]);
 	tmp = NULL;
 	if (ft_strcmp_to(label->name, line->arg_lab[pos]))
 	{

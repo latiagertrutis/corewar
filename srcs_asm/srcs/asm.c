@@ -64,6 +64,7 @@ static t_line	*orders(int fd, int line_n, t_label **label)
 		}
 		line_n++;
 	}
+	bgn->w = line->w + line->pos;
 //	ft_printlabel(label);
 	return (bgn);
 }
@@ -84,18 +85,7 @@ int	assembler(int fd, char *filename)
 	if ((fd2 = open(filename, O_WRONLY | O_CREAT | O_TRUNC,
 					S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
 		exit (-1);
-	line = line->next;
-//	ft_putstr(label[line->arg[1]]->name);
-	while (line)
-	{
-		if (line->arg_lab[0])
-			line->arg[0] = ft_extract_label_line(line, label[line->arg[0]], 0);
-		if (line->arg_lab[1])
-			line->arg[1] = ft_extract_label_line(line, label[line->arg[1]], 1);
-		if (line->arg_lab[2])
-			line->arg[2] = ft_extract_label_line(line, label[line->arg[2]], 2);
-			print_line(line);	//print
-		line = line->next;
-	}
+	ft_header_to_file(header, fd2, line->w);
+	ft_line_to_file(line, label, fd2);
 	return (0);
 }

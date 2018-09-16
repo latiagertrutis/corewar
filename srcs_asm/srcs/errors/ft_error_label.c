@@ -5,7 +5,7 @@ static void ft_putstr_dot(char *s)
 	int i;
 
 	i = -1;
-	while (s[++i] && s[i] != ':' && s[i] != ' ' && s[i] != 't')
+	while (s[++i] && s[i] != ':' && s[i] != ' ' && s[i] != 't' && s[i] != ',')
 		write (1, &s[i], 1);
 }
 

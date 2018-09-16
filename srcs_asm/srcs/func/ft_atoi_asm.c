@@ -1,8 +1,8 @@
 #include "libasm.h"
 
-int		ft_atoi_asm(const char *str, int pos, int *val)
+MAX_CAST		ft_atoi_asm(const char *str, int pos, int *val)
 {
-	int		n;
+	MAX_CAST	n;
 	size_t	i;
 	size_t	neg;
 

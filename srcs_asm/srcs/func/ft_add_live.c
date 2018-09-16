@@ -27,5 +27,6 @@ t_line	*ft_add_live(char *l, int cnt, int j, int n_line)
 	else
 		intern_error(n_line, 0);
 	ft_check_for_coments(l, i, n_line);
+	line->ocp = 1;
 	return (line);
 }
