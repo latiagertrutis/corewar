@@ -65,6 +65,15 @@ typedef struct s_font
 	SDL_Color	color;
 }				t_font;
 
+typedef	struct s_info
+{
+	SDL_Rect *cicles_gen;
+	SDL_Rect *cicles_play;
+	SDL_Rect *lst_life;
+	SDL_Rect *cicle_to_die;
+	SDL_Rect *processos;
+} t_info;
+
 typedef struct s_sdl {
 	struct {
 		int w;
@@ -78,21 +87,17 @@ typedef struct s_sdl {
 	t_font	font[4];
 	SDL_Texture *info_text;
 	SDL_Texture **pc;
-	struct {
-		SDL_Rect *cicles_gen;
-		SDL_Rect *cicles_play;
-		SDL_Rect *lst_life;
-		SDL_Rect *cicle_to_die;
-		SDL_Rect *processos;
-	} info;
+	t_info info;
 	SDL_Surface ***hexa_bytes;
 	SDL_Surface *rack;
 	SDL_Surface *general_nbr;
 	SDL_Surface *player_nbr;
 	SDL_Surface **heart;
-	SDL_Rect *square;
-	SDL_Rect *big_square;
-	SDL_Rect *square_info;
+	SDL_Rect *heart_pos;
+	SDL_Rect *square;  // rack_cell;
+	SDL_Rect *big_square; // board
+	SDL_Rect *square_info; // general info
+	SDL_Rect *info_marc; // player_info
 } t_sdl;
 
 typedef struct 		s_board

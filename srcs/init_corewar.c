@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/01 00:34:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/09/11 18:35:19 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/15 21:58:08 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,11 @@ static int init_players(t_data *data, int ac, char **av)
 
 static int init_arena(t_data *data)
 {
-	ft_printf("voy a inicializar arena\n");
 	if (!(data->arena = (t_arena *)ft_memalloc(sizeof(t_arena))))
 		return (0);
 	if (data->mods->visual || data->mods->dump)
 		ft_ini_graphics(&(data->arena->Graph), data->mods, data);
-	ft_printf("arena inicializada\n");
 	return (1);
-
 }
 
 int 	init_corewar(t_data *data, int ac, char **av)

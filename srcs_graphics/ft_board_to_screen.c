@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 04:10:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/13 17:49:47 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/15 21:50:31 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,14 @@ static void			write_byte(int pos, t_board board[MEM_SIZE], t_sdl *Graph, t_data 
 		else
 			surf_byte = Graph->hexa_bytes[9][4];
 	}
-	ft_printf("Surf_byte elegido 9 x %i\n", take_color_byte(board[pos], data));
 	if (!(tmp = SDL_ConvertSurfaceFormat(surf_byte, 372645892, 0)))
 		ft_SDL_error("SDL_ConvertSurfaceFormat", MODE_SDL);
-	ft_printf("Format\n");
 	SDL_BlitSurface(tmp, NULL, Graph->rack,
 		&(SDL_Rect){Graph->square->x + 1, Graph->square->y,
 		tmp->w, tmp->h});
-	ft_printf("Copia\n");
 	if (!data->mods->pause)
 		board[pos].new = board[pos].new ? board[pos].new - 1 : 0;
 	SDL_FreeSurface(tmp);
-	ft_printf("Sacabo\n");
 }
 
 void	ft_board_to_screen(t_sdl *Graph, t_board board[MEM_SIZE], t_data *data)

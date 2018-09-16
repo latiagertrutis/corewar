@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 11:09:42 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/09 19:03:35 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/15 21:41:46 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void		generate_hexadecimals(t_sdl *Graph)
 		}
 		k++;
 	}
-	Graph->hexa_bytes[9] = (SDL_Surface **)ft_memalloc(sizeof(SDL_Surface *) * 5);
+	Graph->hexa_bytes[9] = (SDL_Surface **)ft_memalloc(sizeof(SDL_Surface *) * 9);
 	generate_noinfo_squares(Graph);
 }
 

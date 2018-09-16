@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 22:02:57 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/11 19:34:03 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/16 00:54:10 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,15 @@ static void		ini_number(t_sdl *Graph, int mode, SDL_Surface **number,
 
 static void		ini_info_rects(t_sdl *Graph)
 {
-	t_pc *tmp = NULL;
+	SDL_Rect *tmp = NULL;
 	
-	ft_putchar('Q');
-	ft_printf("[%p]", tmp);
-	tmp = (t_pc *)malloc(sizeof(t_pc));
-	ft_putchar('T');
-	Graph->info.cicles_gen = (SDL_Rect *)tmp;
-	ft_putchar('W');
+	tmp = (SDL_Rect *)malloc(sizeof(SDL_Rect));
+	Graph->info.cicles_gen = tmp;
 	*Graph->info.cicles_gen = (SDL_Rect){0, 0, Graph->square_info->w / 20,
 			Graph->square_info->h / 6};
-	ft_putchar('E');
 	Graph->info.cicle_to_die = (SDL_Rect *)malloc(sizeof(SDL_Rect));
-	ft_putchar('R');
 	*Graph->info.cicle_to_die = *Graph->info.cicles_gen;
-	ft_putchar('T');
 	Graph->info.processos = (SDL_Rect *)malloc(sizeof(SDL_Rect));
-	ft_putchar('Y');
 	*Graph->info.processos = *Graph->info.cicles_gen;
 }
 
@@ -60,9 +52,7 @@ void	ft_ini_material(t_data *data, t_sdl *Graph, SDL_Surface *info_marc)
 {
 	unsigned int i;
 
-	ft_putchar('Q');
 	ini_info_rects(Graph);
-	ft_putchar('W');
 	ini_number(Graph, GENERAL_NBR_FONT, &Graph->general_nbr,
 			*Graph->info.cicles_gen);
 	ft_put_general_info(Graph);
