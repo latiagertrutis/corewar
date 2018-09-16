@@ -1,6 +1,6 @@
 #include "libasm.h"
 
-static t_line *label_to_line(t_line *line, t_label **label, int fd)
+static void label_to_line(t_line *line, t_label **label, int fd)
 {
 	int i;
 
@@ -15,12 +15,12 @@ static t_line *label_to_line(t_line *line, t_label **label, int fd)
 			write(fd, &line->arg[i], line->arg_size[i]);
 		}
 	}
-	return (line);
 }
 
 void ft_line_to_file(t_line *bgn, t_label ** label, int fd)
 {
 	t_line *line;
+	t_line *tmp;
 
 	line = bgn->next;
 	while (line)
@@ -30,8 +30,9 @@ void ft_line_to_file(t_line *bgn, t_label ** label, int fd)
 			write(fd, &(line->order_n), 1);
 			if (line->ocp != 1)
 				write(fd, &(line->ocp), 1);
-			line = label_to_line(line, label, fd);
+			label_to_line(line, label, fd);
 		}
 		line = line->next;
 	}
+	ft_delstruct(label, bgn);
 }

@@ -5,14 +5,14 @@ static void ft_putstr_dot(char *s)
 	int i;
 
 	i = -1;
-	while (s[++i] && s[i] != ':' && s[i] != ' ' && s[i] != 't' && s[i] != ',')
+	while (s[++i] && s[i] != LABEL_CHAR && s[i] != ' ' && s[i] != 't' && s[i] != SEPARATOR_CHAR)
 		write (1, &s[i], 1);
 }
 
 static void	label_copy(int l, char *s)
 {
 	ft_putstr("\x1B[91mInvalid label identifier:");
-	ft_putstr(":\n\t\x1B[92mUsage:\x1B[97m");
+	ft_putstr("\n\t\x1B[92mUsage:\x1B[97m");
 	ft_putstr("\n\t-Each label identifier must be unique.");
 	ft_putstr("\n\t-Identifier \"");
 	ft_putstr_dot(s);
@@ -22,12 +22,22 @@ static void	label_copy(int l, char *s)
 static void	label_not_found(int l, char *s)
 {
 	ft_putstr("\x1B[91mInvalid label identifier:");
-	ft_putstr(":\n\t\x1B[92mUsage:\x1B[97m");
+	ft_putstr("\n\t\x1B[92mUsage:\x1B[97m");
 	ft_putstr("\n\t-Label identifier \"");
 	ft_putstr_dot(&s[1]);
 	ft_putstr("\" have not been found.");
 }
 
+static void	label_invalid_char(int l, char *s)
+{
+	ft_putstr("\x1B[91mInvalid label identifier:");
+	ft_putstr("\n\t\x1B[92mUsage:\x1B[97m");
+	ft_putstr("\n\t-Label identifier \"");
+	ft_putstr_dot(&s[1]);
+	ft_putstr("\" have non valid characters.\n\t-Valid characters are: \"");
+	ft_putstr(LABEL_CHARS);
+	ft_putstr("\".");
+}
 
 void ft_error_label(int l, int sel, char *s)
 {
@@ -36,5 +46,7 @@ void ft_error_label(int l, int sel, char *s)
 		label_copy(l, s);
 	if (sel == 1)
 		label_not_found(l, s);
+	if (sel == 2)
+		label_invalid_char(l, s);
 	exit(-1);
 }

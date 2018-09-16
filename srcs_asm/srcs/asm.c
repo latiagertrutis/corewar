@@ -5,40 +5,38 @@
 
 static t_header	name_and_comment(int fd)
 {
-	int		i;
 	int		j;
 	char		*line;
 	t_header	h;
 
-	i = 0;
 	j = 1;
+	h.prog_name = NULL;
+	h.comment = NULL;
 	while (get_next_line(fd, &line) > 0)
 	{
-		if (*line == 0)
-			i--;
-		else
+		if (line[0] != 0)
 			h = ft_getname(line, j, h);
-		if (++i == 2)
+		else
+			ft_strdel(&line);
+		if (h.prog_name && h.comment)
 			break ;
-
 		j++;
 	}
 	h.line_n = j;
 	return (h);
 }
-
+/*
 static void	print_line(t_line *l)
 {
 	ft_putstr(l->line);
 	ft_printf(" -->%i--%i<--\n%i\t%i\t%i\n%i\t%i\t%i\n", l->order_n, l->ocp, l->arg[0], l->arg[1], l->arg[2], l->arg_size[0], l->arg_size[1], l->arg_size[2]);
 	ft_printf("-->pos=%i\t-->w=%i\n\n",l->pos, l->w);
 }
-
+*/
 static t_line	*ft_getpos(t_line *line)
 {
 	line->next->pos = line->pos + line->w;
 	if (line->next->label)
-//		line->next->label->pos = line->next->pos + line->next->w;
 		line->next->label->pos = line->next->pos;
 	return (line->next);
 }
@@ -62,10 +60,11 @@ static t_line	*orders(int fd, int line_n, t_label **label)
 			line->next = ft_getorders(l, label, j, line_n);
 			line = ft_getpos(line);
 		}
+		else
+			ft_strdel(&l);
 		line_n++;
 	}
 	bgn->w = line->w + line->pos;
-//	ft_printlabel(label);
 	return (bgn);
 }
 

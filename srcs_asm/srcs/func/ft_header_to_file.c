@@ -22,4 +22,6 @@ void ft_header_to_file(t_header header, int fd, unsigned int size)
 	write(fd, &size, 4);
 	write(fd, header.comment, header.comment_size);
 	ft_write_empty((COMMENT_LENGTH - header.comment_size) + 4, fd);
+	ft_strdel(&header.name_line);
+	ft_strdel(&header.comment_line);
 }

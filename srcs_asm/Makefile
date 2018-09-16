@@ -6,7 +6,7 @@
 #    By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/14 22:43:59 by jpinyot           #+#    #+#              #
-#    Updated: 2018/09/16 13:59:10 by jpinyot          ###   ########.fr        #
+#    Updated: 2018/09/16 19:36:35 by jpinyot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ FUNC = ft_getname.c\
 	   ft_line_to_file.c\
 	   ft_header_to_file.c\
 	   ft_invert_bytes.c\
+	   ft_delstruct.c\
 
 OBJ_SRC = $(patsubst %.c, $(SRC_DIR)%.o, $(SRC))
 OBJ_ERROR = $(patsubst %.c, $(ERROR_DIR)%.o, $(ERROR))

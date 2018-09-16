@@ -22,8 +22,12 @@ static int	ft_extract_label(t_line **line, int i, int n_line, int pos)
 	cnt = 0;
 	l = line[0]->line;
 	line[0]->arg_lab[pos] = &l[i];
-	while (l[++i] && (l[i] != ' ' && l[i] != '\t' && l[i] != SEPARATOR_CHAR))
+	while (l[++i] && (l[i] != ' ' && l[i] != '\t' && l[i] != SEPARATOR_CHAR && l[i] != COMMENT_CHAR))
+	{
+		if (!((l[i] >= 48 && l[i] <= 57) || l[i] == 95 || (l[i] >= 97 && l[i] <= 122)))
+			ft_error_label(n_line, 2, l);
 		cnt += l[i];
+	}
 	line[0]->arg[pos] = cnt % (HASH_SIZE - 1);
 	return (i);
 }

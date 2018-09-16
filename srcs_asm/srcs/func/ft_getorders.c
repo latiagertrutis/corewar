@@ -35,7 +35,11 @@ t_line		*ft_getorders(char *l, t_label **label, int i, int n_line)
 	if (l[i] == '.')
 		ft_error_getorders(n_line, 0);
 	while (l[++j] && l[j] != LABEL_CHAR && l[j] != DIRECT_CHAR && l[j] != ' ' && l[j] != '\t')
+	{
+		if (!((l[j] >= 48 && l[j] <= 57) || l[j] == 95 || (l[j] >= 97 && l[j] <= 122)))
+			ft_error_label(n_line, 2, &l[i]);
 		cnt += l[j];
+	}
 	if (l[j] && l[j] == LABEL_CHAR)
 	{
 		label = ft_add_new_label(label, cnt, l, i);

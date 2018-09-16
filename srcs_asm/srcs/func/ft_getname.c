@@ -61,5 +61,7 @@ t_header	ft_getname(char *line, int n_line, t_header h)
 		h = ft_header_comment(line, n_line, i + j, h);
 	else if (line[j] != COMMENT_CHAR)
 		ft_error_getname(n_line, 0);
+	else
+		ft_strdel(&line);
 	return (h);
 }
