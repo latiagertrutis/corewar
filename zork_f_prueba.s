@@ -2,4 +2,6 @@
 .comment "I'M ALIIIIVE"
 
 cosa:
-	fork %-2
+	ld %917504, r12
+	add r4, r12, r4
+	st r4, 200

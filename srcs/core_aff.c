@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 16:44:28 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/01 00:06:32 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/16 13:41:00 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,19 @@ static int			verify_ocp(const unsigned char ocp)
 
 static void print_reg(t_pc *pc, unsigned char reg_nb)
 {
-	unsigned int	 i;
-	char			aux_reg[REG_SIZE];
+	/* unsigned int	 i; */
+	REG_CAST	aux_reg;
 
-	i = 0;
-	while (i < REG_SIZE)
-	{
-		aux_reg[REG_SIZE - 1 - i] = pc->reg[reg_nb][i];
-		i++;
-	}
+	/* i = 0; */
+	/* while (i < REG_SIZE) */
+	/* { */
+	/* 	aux_reg[REG_SIZE - 1 - i] = pc->reg[reg_nb][i]; */
+	/* 	i++; */
+	/* } */
+	aux_reg = *((REG_CAST *)pc->reg[reg_nb]);
+	invert_bytes(&aux_reg, REG_SIZE);
 	ft_putstr("Aff: ");
-	ft_putchar(*((unsigned int *)aux_reg));
+	ft_putchar(aux_reg);
 	ft_putchar('\n');
 }
 

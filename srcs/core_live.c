@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/11 21:50:59 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/09/15 22:37:37 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/16 13:26:36 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void search_nb(t_player *players, int nb_players, int live_nb, int nb_cyc
 	}
 }
 
-static int 			take_live_nb(t_board *board)
+static int32_t 			take_live_nb(t_board *board, const size_t pos)
 {
 	char rtn[4];
 
@@ -52,7 +52,7 @@ static int 			take_live_nb(t_board *board)
 void				core_live(t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned short	pos;
-	int 	live_nb;
+	int32_t			live_nb;
 
 
 	// DEBUGGER
@@ -69,11 +69,11 @@ void				core_live(t_pc *pc, t_arena *arena, t_data *data)
 	/* ft_putchar('\n'); */
 
 	pos = pc->pc;
-	live_nb = take_live_nb((arena->board) + pos + 1);
+	live_nb = take_live_nb(arena->board, pos + 1);
 
 	// if (live_nb == (*((int *)(pc->reg[0]))))
 		// player->live_counter++;
 	search_nb(data->players, data->n_players, live_nb, data->nb_cycles);
 	pc->live++;
-	pc->pc = (pc->pc + 1 + DIR_SIZE) % MEM_SIZE;//live + dir
+	pc->pc = (pc->pc + 1 + 4) % MEM_SIZE;//live + 4
 }

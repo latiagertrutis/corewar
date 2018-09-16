@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 05:45:24 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/07 14:43:54 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/16 15:41:52 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void		add_reg(t_pc *pc, const unsigned char reg1, const unsigned char reg2, const unsigned char reg3)
 {
+	REG_CAST aux1;
+	REG_CAST aux2;
 	/* char aux1[REG_SIZE]; */
 	/* char aux2[REG_SIZE]; */
 	/* unsigned char i; */
@@ -29,12 +31,13 @@ static void		add_reg(t_pc *pc, const unsigned char reg1, const unsigned char reg
 //	print_memory(pc->reg[reg1], 4, 4, 1);
 //	ft_printf("SUMA el reg2: %u vale: %d\n", reg2, *((int *)aux2));
 //	print_memory(pc->reg[reg2], 4, 4, 1);
-	invert_bytes(pc->reg[reg1], REG_SIZE);
-	invert_bytes(pc->reg[reg2], REG_SIZE);
-	(*(REG_CAST *)pc->reg[reg3]) = *((REG_CAST *)pc->reg[reg1]) + *((REG_CAST *)pc->reg[reg2]);
-	invert_bytes(pc->reg[reg1], REG_SIZE);
-	invert_bytes(pc->reg[reg2], REG_SIZE);
+	aux1 = *((REG_CAST *)pc->reg[reg1]);
+	aux2 = *((REG_CAST *)pc->reg[reg2]);
+	invert_bytes(&aux1, REG_SIZE);
+	invert_bytes(&aux2, REG_SIZE);
+	(*(REG_CAST *)pc->reg[reg3]) = aux1 + aux2;
 	invert_bytes(pc->reg[reg3], REG_SIZE);
+//	exit(0);
 //	ft_printf("SUMA el reg3: %u vale: %d\n", reg3, *((int *)pc->reg[reg3]));
 	/* invert_bytes(pc->reg[reg3], REG_SIZE); */
 //	print_memory(pc->reg[reg3], 4, 4, 1);
