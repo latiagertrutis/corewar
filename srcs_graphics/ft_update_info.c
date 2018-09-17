@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 16:39:44 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/16 22:27:40 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/17 18:48:43 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ void	ft_update_info(t_sdl *Graph, t_data *data, int cicle_pre_die)
 //		ft_reset_health(data, Graph, 0);
 //	place_health(data, Graph, 0, 2);
 //	else
-		ft_check_health(data, Graph, 0, cicle_pre_die + 1);
 //	ft_reset_health(data, Graph, 1);
 //	ft_reset_health(data, Graph, 2);
 //	ft_reset_health(data, Graph, 3);
@@ -124,6 +123,7 @@ void	ft_update_info(t_sdl *Graph, t_data *data, int cicle_pre_die)
 	i = 0;
 	while (i < data->n_players)
 	{
+		ft_check_health(data, Graph, i, cicle_pre_die + 1);
 		Graph->font[PLAYER_NBR_FONT].color = ft_SDL_color(i);
 		if (!cicle_pre_die)
 			update_ctd_pcs_plyrs(Graph, 0, Graph->info.cicles_play[i],

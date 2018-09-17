@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/01 00:34:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/09/15 21:58:08 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/17 18:40:51 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int init_players(t_data *data, int ac, char **av)
 	{
 		cosa = -(i + 1);
 		invert_bytes(&cosa, 4);
-		data->players[i] = (t_player){0, 0, 0, NULL, NULL, cosa, i, 0, NULL, NULL, 1, NULL}; //coa tiene que ser el siguient numero disponible creo
+		data->players[i] = (t_player){0, 0, 0, 0, NULL, NULL, cosa, i, 0, NULL, NULL, 1, NULL}; //coa tiene que ser el siguient numero disponible creo
 //		if (!(data->players[i].pc = (t_pc *)malloc(sizeof(t_pc) * PC_BUFF)))
 //			ft_error("malloc failed");
 //		data->players[i].pc[0] = (t_pc){0, 0, 0, {{0}}};

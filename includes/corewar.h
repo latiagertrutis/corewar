@@ -131,6 +131,7 @@ typedef struct 		s_player
 	unsigned int	live_call : 1;
 	unsigned int  	last_live; //new
 	unsigned int 	live_counter;
+	unsigned int	loser : 1;
 	char			*content;
 	char 			*name;
 	int				player_nb;
