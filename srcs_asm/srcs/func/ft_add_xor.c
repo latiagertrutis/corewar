@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 12:59:56 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/17 13:01:16 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/17 15:06:13 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	extract_second_par(char *l, t_line **line, int i, int n_line)
 	return (i);
 }
 
-t_line		*ft_add_xor(char *l, int cnt, int j, int n_line)
+t_line		*ft_add_xor(char *l, int j, int n_line)
 {
 	t_line	*line;
 	int		i;

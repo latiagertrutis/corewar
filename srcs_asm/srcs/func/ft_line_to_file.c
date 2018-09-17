@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 13:38:10 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/17 13:39:16 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/17 15:08:10 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static void	label_to_line(t_line *line, t_label **label, int fd)
 void		ft_line_to_file(t_line *bgn, t_label **label, int fd)
 {
 	t_line *line;
-	t_line *tmp;
 
 	line = bgn->next;
 	while (line)

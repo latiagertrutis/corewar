@@ -6,11 +6,13 @@
 #    By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/14 22:43:59 by jpinyot           #+#    #+#              #
-#    Updated: 2018/09/17 13:43:55 by jpinyot          ###   ########.fr        #
+#    Updated: 2018/09/17 15:12:25 by jpinyot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = asm
+
+FLAG = -Wall -Wextra -Werror
 
 SRC_DIR = srcs/
 

@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 12:44:09 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/17 12:44:39 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/17 15:03:37 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	intern_error(int l, int sel)
 	exit(-1);
 }
 
-t_line		*ft_add_aff(char *l, int cnt, int j, int n_line)
+t_line		*ft_add_aff(char *l, int j, int n_line)
 {
 	t_line	*line;
 	int		i;

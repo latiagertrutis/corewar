@@ -6,11 +6,11 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 13:34:20 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/17 13:38:02 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/17 14:56:02 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "libasm.h"
 
 static void	generic_case(void *arr, const size_t size)
 {

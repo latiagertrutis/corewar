@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 13:40:35 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/17 13:43:04 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/17 15:00:00 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	ft_strcmp_index(char *s1, char *s2)
 int	ft_strcmp_index_jmp(char *s1, char *s2)
 {
 	int i;
-	int j;
 
 	i = -1;
 	while (s1[++i] && s2[i])

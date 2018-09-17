@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 13:09:32 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/17 13:10:23 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/17 14:57:15 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static t_header	ft_header_comment(char *l, int n_l, int i, t_header h)
 
 t_header		ft_getname(char *line, int n_line, t_header h)
 {
-	char	*tmp;
 	int		i;
 	int		j;
 

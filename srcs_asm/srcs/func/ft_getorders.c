@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 13:10:29 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/17 13:31:29 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/17 14:59:24 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static t_line	*get_line(char *l, t_label **label, int i, int n_line)
 	cnt = 0;
 	i = ft_jmp_s_t(l, i);
 	j = i - 1;
+	line = NULL;
 	while (l[++j] && l[j] != LABEL_CHAR &&
 			l[j] != DIRECT_CHAR && l[j] != ' ' && l[j] != '\t')
 		cnt += l[j];
@@ -39,7 +40,6 @@ static t_line	*get_line(char *l, t_label **label, int i, int n_line)
 
 t_line			*ft_getorders(char *l, t_label **label, int i, int n_line)
 {
-	t_line	*line;
 	int		cnt;
 	int		j;
 
@@ -63,5 +63,5 @@ t_line			*ft_getorders(char *l, t_label **label, int i, int n_line)
 	else if (l[j] && (l[j] == DIRECT_CHAR || l[j] == ' ' || l[j] == '\t'))
 		return (ft_add_new_line(l, cnt, i, n_line));
 	ft_error_getorders(n_line, 0);
-	return (line);
+	return (NULL);
 }

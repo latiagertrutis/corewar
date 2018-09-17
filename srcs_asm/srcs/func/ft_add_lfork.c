@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 12:49:45 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/17 12:50:06 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/17 15:04:25 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	intern_error(int l, int sel)
 	exit(-1);
 }
 
-t_line		*ft_add_lfork(char *l, int cnt, int j, int n_line)
+t_line		*ft_add_lfork(char *l, int j, int n_line)
 {
 	t_line	*line;
 	int		i;

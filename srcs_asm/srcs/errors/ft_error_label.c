@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 12:35:49 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/17 12:37:06 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/17 15:08:54 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_putstr_dot(char *s)
 		write(1, &s[i], 1);
 }
 
-static void	label_copy(int l, char *s)
+static void	label_copy(char *s)
 {
 	ft_putstr("\x1B[91mInvalid label identifier:");
 	ft_putstr("\n\t\x1B[92mUsage:\x1B[97m");
@@ -32,7 +32,7 @@ static void	label_copy(int l, char *s)
 	ft_putstr("\" is repeated.");
 }
 
-static void	label_not_found(int l, char *s)
+static void	label_not_found(char *s)
 {
 	ft_putstr("\x1B[91mInvalid label identifier:");
 	ft_putstr("\n\t\x1B[92mUsage:\x1B[97m");
@@ -41,7 +41,7 @@ static void	label_not_found(int l, char *s)
 	ft_putstr("\" have not been found.");
 }
 
-static void	label_invalid_char(int l, char *s)
+static void	label_invalid_char(char *s)
 {
 	ft_putstr("\x1B[91mInvalid label identifier:");
 	ft_putstr("\n\t\x1B[92mUsage:\x1B[97m");
@@ -56,10 +56,10 @@ void		ft_error_label(int l, int sel, char *s)
 {
 	l++;
 	if (sel == 0)
-		label_copy(l, s);
+		label_copy(s);
 	if (sel == 1)
-		label_not_found(l, s);
+		label_not_found(s);
 	if (sel == 2)
-		label_invalid_char(l, s);
+		label_invalid_char(s);
 	exit(-1);
 }
