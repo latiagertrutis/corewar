@@ -1,8 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_extract_label.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/17 13:05:46 by jpinyot           #+#    #+#             */
+/*   Updated: 2018/09/17 13:08:13 by jpinyot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libasm.h"
 
-//cambiar cast
-
-int		ft_extract_label_line(t_line *line, t_label *label, int pos)
+MAX_CAST	ft_extract_label_line(t_line *line, t_label *label, int pos)
 {
 	t_label *tmp;
 

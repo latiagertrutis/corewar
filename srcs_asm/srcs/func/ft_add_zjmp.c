@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_add_zjmp.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/17 13:01:28 by jpinyot           #+#    #+#             */
+/*   Updated: 2018/09/17 13:01:42 by jpinyot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libasm.h"
 
 static void	intern_error(int l, int sel)
@@ -13,14 +25,14 @@ static void	intern_error(int l, int sel)
 	exit(-1);
 }
 
-t_line	*ft_add_zjmp(char *l, int cnt, int j, int n_line)
+t_line		*ft_add_zjmp(char *l, int cnt, int j, int n_line)
 {
 	t_line	*line;
-	int i;
+	int		i;
 
 	if ((i = ft_strcmp_index_jmp(&l[j], "zjmp")) == -1 || l[i] == 0)
 		ft_error_order(n_line, 0, "zjmp", "zjmp\t%432");
-	i+= j;
+	i += j;
 	line = ft_newline(NULL, 9, l, 1);
 	if (l[i] == DIRECT_CHAR)
 		i = ft_extract_dir_2(&line, i + 1, n_line, 0);

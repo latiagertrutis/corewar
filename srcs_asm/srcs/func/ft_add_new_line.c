@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_add_new_line.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/17 12:54:13 by jpinyot           #+#    #+#             */
+/*   Updated: 2018/09/17 12:55:06 by jpinyot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libasm.h"
 
-static t_line *ligh_low_quarter(char *l, int cnt, int i, int n_line)
+static t_line	*ligh_low_quarter(char *l, int cnt, int i, int n_line)
 {
 	if (cnt == 301)
 		return (ft_add_aff(l, cnt, i, n_line));
@@ -14,7 +26,7 @@ static t_line *ligh_low_quarter(char *l, int cnt, int i, int n_line)
 	return (NULL);
 }
 
-static t_line *high_half(char *l, int cnt, int i, int n_line)
+static t_line	*high_half(char *l, int cnt, int i, int n_line)
 {
 	if (cnt <= 421)
 	{
@@ -42,7 +54,7 @@ static t_line *high_half(char *l, int cnt, int i, int n_line)
 	return (NULL);
 }
 
-t_line	*ft_add_new_line(char *l, int cnt, int i, int n_line)
+t_line			*ft_add_new_line(char *l, int cnt, int i, int n_line)
 {
 	if (cnt <= 316 && cnt >= 208)
 	{
@@ -60,7 +72,7 @@ t_line	*ft_add_new_line(char *l, int cnt, int i, int n_line)
 		else
 			return (ligh_low_quarter(l, cnt, i, n_line));
 	}
-	else if (cnt >=330 && cnt <= 542)
+	else if (cnt >= 330 && cnt <= 542)
 		return (high_half(l, cnt, i, n_line));
 	ft_error_order(n_line, 2, NULL, NULL);
 	return (NULL);

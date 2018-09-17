@@ -1,12 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_error_label.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/17 12:35:49 by jpinyot           #+#    #+#             */
+/*   Updated: 2018/09/17 12:37:06 by jpinyot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libasm.h"
 
-static void ft_putstr_dot(char *s)
+static void	ft_putstr_dot(char *s)
 {
 	int i;
 
 	i = -1;
-	while (s[++i] && s[i] != LABEL_CHAR && s[i] != ' ' && s[i] != 't' && s[i] != SEPARATOR_CHAR)
-		write (1, &s[i], 1);
+	while (s[++i] && s[i] != LABEL_CHAR && s[i] != ' '
+			&& s[i] != '\t' && s[i] != SEPARATOR_CHAR)
+		write(1, &s[i], 1);
 }
 
 static void	label_copy(int l, char *s)
@@ -39,7 +52,7 @@ static void	label_invalid_char(int l, char *s)
 	ft_putstr("\".");
 }
 
-void ft_error_label(int l, int sel, char *s)
+void		ft_error_label(int l, int sel, char *s)
 {
 	l++;
 	if (sel == 0)

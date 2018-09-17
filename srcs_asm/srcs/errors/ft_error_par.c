@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_error_par.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/17 12:37:49 by jpinyot           #+#    #+#             */
+/*   Updated: 2018/09/17 12:38:11 by jpinyot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libasm.h"
 
 static void	invalid_par(int l, char *s, char *ex)
@@ -15,7 +27,7 @@ static void	invalid_par(int l, char *s, char *ex)
 	ft_putstr(ex);
 }
 
-void ft_error_par(int l, int sel, char *s, char *ex)
+void		ft_error_par(int l, int sel, char *s, char *ex)
 {
 	l++;
 	if (sel == 0)

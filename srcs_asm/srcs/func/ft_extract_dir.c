@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_extract_dir.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/17 13:03:03 by jpinyot           #+#    #+#             */
+/*   Updated: 2018/09/17 13:03:56 by jpinyot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libasm.h"
 
 static int	ft_jmp_to_next(char *l, int i)
@@ -14,18 +26,22 @@ static int	ft_jmp_to_next(char *l, int i)
 	return (i);
 }
 
-static int	ft_extract_dir_label(t_line **line, int i, int n_line, int pos)
+static int	ft_extract_dir_label(t_line **line, int j, int n_line, int pos)
 {
 	char	*l;
-	int	cnt;
+	int		i;
+	int		cnt;
 
 	cnt = 0;
+	i = j;
 	l = line[0]->line;
 	line[0]->arg_lab[pos] = &l[i];
-	while (l[++i] && (l[i] != ' ' && l[i] != '\t' && l[i] != SEPARATOR_CHAR && l[i] != COMMENT_CHAR))
+	while (l[++i] && (l[i] != ' ' && l[i] != '\t' &&
+				l[i] != SEPARATOR_CHAR && l[i] != COMMENT_CHAR))
 	{
-		if (!((l[i] >= 48 && l[i] <= 57) || l[i] == 95 || (l[i] >= 97 && l[i] <= 122)))
-			ft_error_label(n_line, 2, l);
+		if (!((l[i] >= 48 && l[i] <= 57) || l[i] == 95 ||
+					(l[i] >= 97 && l[i] <= 122)))
+			ft_error_label(n_line, 2, &l[j]);
 		cnt += l[i];
 	}
 	line[0]->arg[pos] = cnt % (HASH_SIZE - 1);
@@ -43,7 +59,7 @@ static int	ft_set_ocp(int pos, int ocp)
 	return (ocp);
 }
 
-int	ft_extract_dir(t_line **line, int i, int n_line, int pos)
+int			ft_extract_dir(t_line **line, int i, int n_line, int pos)
 {
 	line[0]->arg_size[pos] = DIR_SIZE;
 	line[0]->ocp = ft_set_ocp(pos, line[0]->ocp);

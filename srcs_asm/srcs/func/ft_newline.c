@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_newline.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/17 13:39:59 by jpinyot           #+#    #+#             */
+/*   Updated: 2018/09/17 13:40:24 by jpinyot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libasm.h"
 
 static t_line	*ft_nullarg(t_line *f)
@@ -13,12 +25,12 @@ static t_line	*ft_nullarg(t_line *f)
 	return (f);
 }
 
-t_line		*ft_newline(t_label *l, int ord_n, char *line, int w)
+t_line			*ft_newline(t_label *l, int ord_n, char *line, int w)
 {
 	t_line	*file;
 
 	if (!(file = (t_line *)malloc(sizeof(t_line))))
-		exit (-1);
+		exit(-1);
 	if (l)
 		file->label = l;
 	else

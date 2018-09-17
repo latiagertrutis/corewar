@@ -6,7 +6,7 @@
 #    By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/14 22:43:59 by jpinyot           #+#    #+#              #
-#    Updated: 2018/09/16 19:36:35 by jpinyot          ###   ########.fr        #
+#    Updated: 2018/09/17 13:43:55 by jpinyot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,6 @@ FUNC = ft_getname.c\
        ft_add_zjmp.c\
        ft_add_lfork.c\
        ft_add_live.c\
-       printlabel.c\
        ft_extract_dir.c\
        ft_extract_dir_2.c\
        ft_extract_reg.c\

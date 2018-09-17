@@ -1,11 +1,20 @@
-#include "libasm.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   asm.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/17 12:41:06 by jpinyot           #+#    #+#             */
+/*   Updated: 2018/09/17 12:42:56 by jpinyot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-/* https://linux.die.net/man/3/open */
-/* open macros */
+#include "libasm.h"
 
 static t_header	name_and_comment(int fd)
 {
-	int		j;
+	int			j;
 	char		*line;
 	t_header	h;
 
@@ -25,14 +34,7 @@ static t_header	name_and_comment(int fd)
 	h.line_n = j;
 	return (h);
 }
-/*
-static void	print_line(t_line *l)
-{
-	ft_putstr(l->line);
-	ft_printf(" -->%i--%i<--\n%i\t%i\t%i\n%i\t%i\t%i\n", l->order_n, l->ocp, l->arg[0], l->arg[1], l->arg[2], l->arg_size[0], l->arg_size[1], l->arg_size[2]);
-	ft_printf("-->pos=%i\t-->w=%i\n\n",l->pos, l->w);
-}
-*/
+
 static t_line	*ft_getpos(t_line *line)
 {
 	line->next->pos = line->pos + line->w;
@@ -43,11 +45,11 @@ static t_line	*ft_getpos(t_line *line)
 
 static t_line	*orders(int fd, int line_n, t_label **label)
 {
-	int		j;
+	int			j;
 	char		*l;
 	t_line		*line;
 	t_line		*bgn;
-	
+
 	line = ft_newline(NULL, -1, NULL, 0);
 	bgn = line;
 	while (get_next_line(fd, &l) > 0)
@@ -68,13 +70,13 @@ static t_line	*orders(int fd, int line_n, t_label **label)
 	return (bgn);
 }
 
-int	assembler(int fd, char *filename)
+int				assembler(int fd, char *filename)
 {
 	t_header	header;
 	t_line		*line;
-	t_label 	*label[HASH_SIZE];
-	int i;
-	int fd2;
+	t_label		*label[HASH_SIZE];
+	int			i;
+	int			fd2;
 
 	i = -1;
 	while (++i < HASH_SIZE)
@@ -83,7 +85,7 @@ int	assembler(int fd, char *filename)
 	line = orders(fd, header.line_n, label);
 	if ((fd2 = open(filename, O_WRONLY | O_CREAT | O_TRUNC,
 					S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
-		exit (-1);
+		exit(-1);
 	ft_header_to_file(header, fd2, line->w);
 	ft_line_to_file(line, label, fd2);
 	return (0);

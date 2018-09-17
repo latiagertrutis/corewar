@@ -1,12 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/17 12:40:31 by jpinyot           #+#    #+#             */
+/*   Updated: 2018/09/17 12:40:42 by jpinyot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libasm.h"
 
 static char	*namedotcor(char *av)
 {
-	char *r;
-	int len;
+	char	*r;
+	int		len;
 
 	len = ft_strlen(av);
-			/*	DELTE IF NEEDED		*/
 	if (av[len - 1] != 's' || av[len - 2] != '.')
 	{
 		ft_invalidargv(1, av);
@@ -21,7 +32,7 @@ static char	*namedotcor(char *av)
 	return (r);
 }
 
-int	main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	int		fd;
 	int		i;
@@ -35,9 +46,9 @@ int	main(int ac, char **av)
 		if ((fd = open(av[i], O_RDONLY)) == -1)
 			return (ft_invalidargv(1, av[1]));
 		if (!(filename = namedotcor(av[i])))
-			exit (-1);
+			exit(-1);
 		if (assembler(fd, filename) == -1)
-			exit (-1);
+			exit(-1);
 		ft_strdel(&filename);
 	}
 	return (0);

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_add_new_label.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/17 12:52:22 by jpinyot           #+#    #+#             */
+/*   Updated: 2018/09/17 12:54:08 by jpinyot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libasm.h"
 
-static int	ft_cmpr_str(char *s1, char *s2)
+static int		ft_cmpr_str(char *s1, char *s2)
 {
 	int i;
 
@@ -13,7 +25,6 @@ static int	ft_cmpr_str(char *s1, char *s2)
 	if (s1[i] == 0 || s2[i] == 0)
 		return (0);
 	return (1);
-
 }
 
 static t_label	**add_to_copy(t_label **label, int id, char *l)
@@ -21,11 +32,11 @@ static t_label	**add_to_copy(t_label **label, int id, char *l)
 	t_label *tmp;
 
 	tmp = label[id];
-	if (ft_cmpr_str(tmp->name,  l))
+	if (ft_cmpr_str(tmp->name, l))
 		ft_error_label(0, 0, l);
 	while (tmp->copy)
 	{
-		if (ft_cmpr_str(tmp->copy->name,  l))
+		if (ft_cmpr_str(tmp->copy->name, l))
 			ft_error_label(0, 0, l);
 		tmp = tmp->copy;
 	}
@@ -34,7 +45,7 @@ static t_label	**add_to_copy(t_label **label, int id, char *l)
 	return (label);
 }
 
-t_label		**ft_add_new_label(t_label **label, int  id, char *l, int i)
+t_label			**ft_add_new_label(t_label **label, int id, char *l, int i)
 {
 	id = ft_hash_it(id, HASH_SIZE - 1);
 	if (label[id] == NULL)

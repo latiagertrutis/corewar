@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_extract_reg.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/17 13:08:24 by jpinyot           #+#    #+#             */
+/*   Updated: 2018/09/17 13:08:44 by jpinyot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libasm.h"
 
 static int	ft_jmp_to_next(char *l, int i)
@@ -25,7 +37,7 @@ static int	ft_set_ocp(int pos, int ocp)
 	return (ocp);
 }
 
-int	ft_extract_reg(t_line **line, int i, int n_line, int pos)
+int			ft_extract_reg(t_line **line, int i, int n_line, int pos)
 {
 	line[0]->arg_size[pos] = REG_ASM_SIZE;
 	line[0]->ocp = ft_set_ocp(pos, line[0]->ocp);

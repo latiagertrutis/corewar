@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_add_sub.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/17 12:59:11 by jpinyot           #+#    #+#             */
+/*   Updated: 2018/09/17 12:59:47 by jpinyot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libasm.h"
 
 static void	intern_error(int l, int sel)
@@ -19,14 +31,14 @@ static void	intern_error(int l, int sel)
 	exit(-1);
 }
 
-t_line	*ft_add_sub(char *l, int cnt, int j, int n_line)
+t_line		*ft_add_sub(char *l, int cnt, int j, int n_line)
 {
 	t_line	*line;
-	int i;
+	int		i;
 
 	if ((i = ft_strcmp_index_jmp(&l[j], "sub")) == -1 || l[i] == 0)
 		ft_error_order(n_line, 0, "sub", "sub\tr2, r11, r3");
-	i+= j;
+	i += j;
 	line = ft_newline(NULL, 5, l, 2);
 	if (l[i] == 'r')
 		i = ft_extract_reg(&line, i + 1, n_line, 0);
@@ -36,7 +48,6 @@ t_line	*ft_add_sub(char *l, int cnt, int j, int n_line)
 		i = ft_extract_reg(&line, i + 1, n_line, 1);
 	else
 		intern_error(n_line, 1);
-
 	if (l[i] == 'r')
 		i = ft_extract_reg(&line, i + 1, n_line, 2);
 	else

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_newlabel.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/17 13:39:23 by jpinyot           #+#    #+#             */
+/*   Updated: 2018/09/17 14:13:50 by jpinyot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libasm.h"
 
 t_label		*ft_newlabel(char *name, int id)
@@ -5,7 +17,7 @@ t_label		*ft_newlabel(char *name, int id)
 	t_label *lab;
 
 	if (!(lab = (t_label *)malloc(sizeof(t_label))))
-		exit (-1);
+		exit(-1);
 	if (name)
 		lab->name = name;
 	else
@@ -13,6 +25,5 @@ t_label		*ft_newlabel(char *name, int id)
 	lab->id = id;
 	lab->pos = -1;
 	lab->copy = NULL;
-	lab->next = NULL;
 	return (lab);
 }

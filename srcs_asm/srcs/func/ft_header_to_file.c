@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_header_to_file.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/17 13:31:39 by jpinyot           #+#    #+#             */
+/*   Updated: 2018/09/17 13:34:05 by jpinyot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libasm.h"
 
-void	ft_write_empty(int i, int fd)
+static void	ft_write_empty(int i, int fd)
 {
 	char a;
 
@@ -10,10 +22,11 @@ void	ft_write_empty(int i, int fd)
 			write(fd, &a, 1);
 }
 
-
-void ft_header_to_file(t_header header, int fd, unsigned int size)
+void		ft_header_to_file(t_header header, int fd, unsigned int size)
 {
-	uint32_t a = COREWAR_EXEC_MAGIC;
+	uint32_t a;
+
+	a = COREWAR_EXEC_MAGIC;
 	ft_invert_bytes(&a, sizeof(uint32_t));
 	write(fd, &a, sizeof(uint32_t));
 	write(fd, header.prog_name, header.name_size);

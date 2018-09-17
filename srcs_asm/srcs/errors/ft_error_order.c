@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_error_order.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/17 12:37:37 by jpinyot           #+#    #+#             */
+/*   Updated: 2018/09/17 12:37:43 by jpinyot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libasm.h"
 
 static void	invalid_inst(int l, char *s, char *ex)
@@ -27,7 +39,6 @@ static void	invalid_inst_line(int l)
 	ft_putstr("sti r1, %32, %12");
 }
 
-
 static void	invalid_comm(int l)
 {
 	ft_putstr("\x1B[91mInvalid comment at line ");
@@ -42,7 +53,7 @@ static void	invalid_comm(int l)
 	ft_putstr("I'm a comment");
 }
 
-void ft_error_order(int l, int sel, char *s, char *ex)
+void		ft_error_order(int l, int sel, char *s, char *ex)
 {
 	l++;
 	if (sel == 0)
