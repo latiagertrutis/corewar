@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 20:48:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/09/11 18:33:52 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/16 17:07:49 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int main(int ac, char **av)
 
 //	ft_quit_graphics(data.arena->Graph);
 	ft_printf("voy a empezar\n");
-	if (data.mods->visual)
+	if (data.mods->visual && !data.mods->dump)
 		exe_players_interf(&data);
 	else if (data.mods->dump)
 		exe_players_dump(&data);

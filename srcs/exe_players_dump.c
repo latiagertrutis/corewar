@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 16:36:20 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/10 17:12:56 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/16 17:07:27 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "corewar.h"
@@ -91,21 +91,46 @@ void 				exe_players_dump(t_data *data)
 			t = 0;
 		}
 	}
-	ft_board_to_screen(data->arena->Graph, data->arena->board, data);
-	ft_update_info(data->arena->Graph, data, t - 1);
-	ft_set_back_to_front(data->arena->Graph, data);
-	running = 1;
-	while (running)
+	ft_printf("Qa paso primo\n");
+	while(data->cycle_to_die > 0 && data->mods->running)
 	{
-		while (SDL_PollEvent(&event))
+		t = 0;
+		while (t < data->cycle_to_die && data->mods->running)
 		{
-			if (event.type == SDL_QUIT)
-				running = 0;
-			else if (event.type == SDL_KEYDOWN)
+			data->mods->step = 0;
+			while (SDL_PollEvent(&event))
 			{
-				if (event.key.keysym.sym == SDLK_ESCAPE)
-					running = 0;
+				if (event.type == SDL_QUIT)
+					data->mods->running = 0;
+				else if (event.type == SDL_KEYDOWN)
+				{
+					if (event.key.keysym.sym == SDLK_ESCAPE)
+						data->mods->running = SDL_FALSE;
+					else if (event.key.keysym.sym == SDLK_SPACE)
+						data->mods->pause = pause_button(data, data->arena->Graph, data->mods->pause);
+					else if (event.key.keysym.sym == SDLK_RIGHT)
+						data->mods->step = 1;
+					else if (event.key.keysym.sym == SDLK_i)
+						data->mods->info = data->mods->info ? 0 : 1;
+				}
 			}
+			if (data->mods->pause || data->mods->step)
+			{
+				k = data->nb_pc;
+				while (k)
+				{
+					if (data->pc[k - 1].active)
+						exe_pc((data->pc) + k - 1, data->arena, data); //TODO ejecutamos el turno cycle to die
+					k--;
+				}
+				t++;
+				data->nb_cycles++;
+			}
+			ft_board_to_screen(data->arena->Graph, data->arena->board, data);
+			ft_update_info(data->arena->Graph, data, t - 1);
+			ft_set_back_to_front(data->arena->Graph, data);
 		}
+		check_live_count(data);
 	}
+	check_winner(data->players, data->n_players);
 }
