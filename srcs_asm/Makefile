@@ -6,7 +6,7 @@
 #    By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/14 22:43:59 by jpinyot           #+#    #+#              #
-#    Updated: 2018/09/17 15:16:16 by jpinyot          ###   ########.fr        #
+#    Updated: 2018/09/18 16:06:28 by jpinyot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ ERROR_DIR = srcs/errors/
 
 FUNC_DIR = srcs/func/
 
+VIS_DIR = srcs/vis/
+
 SRC = main.c\
       asm.c\
 
@@ -29,6 +31,12 @@ ERROR = ft_invalidargv.c\
 	ft_error_order.c\
 	ft_error_par.c\
 	ft_error_label.c\
+
+VIS = ft_print_asm.c\
+	  ft_label_to_pos.c\
+	  ft_print_label.c\
+	  ft_print_order.c\
+	  ft_print_info.c\
 
 FUNC = ft_getname.c\
        ft_getorders.c\
@@ -67,15 +75,16 @@ FUNC = ft_getname.c\
 	   ft_delstruct.c\
 
 OBJ_SRC = $(patsubst %.c, $(SRC_DIR)%.o, $(SRC))
+OBJ_VIS = $(patsubst %.c, $(VIS_DIR)%.o, $(VIS))
 OBJ_ERROR = $(patsubst %.c, $(ERROR_DIR)%.o, $(ERROR))
 OBJ_FUNC = $(patsubst %.c, $(FUNC_DIR)%.o, $(FUNC))
 
-OBJ = $(SRC:.c=.o) $(FUNC:.c=.o) $(ERROR:.c=.o)
+OBJ = $(SRC:.c=.o) $(FUNC:.c=.o) $(ERROR:.c=.o) $(VIS:.c=.o)
 
 all: $(NAME)
 
 
-$(NAME): $(OBJ_SRC) $(OBJ_FUNC) $(OBJ_ERROR)
+$(NAME): $(OBJ_SRC) $(OBJ_FUNC) $(OBJ_ERROR) $(OBJ_VIS)
 	@$(MAKE) -C ../libft
 	@gcc $(FLAGS) -L../libft/ -lft -I../includes $(OBJ) -o $(NAME)
 %.o : %.c

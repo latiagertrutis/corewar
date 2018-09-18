@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 13:39:23 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/17 14:13:50 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/17 19:25:45 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_label		*ft_newlabel(char *name, int id)
 		lab->name = NULL;
 	lab->id = id;
 	lab->pos = -1;
+	lab->color = 0;
 	lab->copy = NULL;
 	return (lab);
 }

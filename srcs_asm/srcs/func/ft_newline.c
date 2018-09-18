@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 13:39:59 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/17 13:40:24 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/17 19:25:33 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ static t_line	*ft_nullarg(t_line *f)
 	f->arg_lab[0] = NULL;
 	f->arg_lab[1] = NULL;
 	f->arg_lab[2] = NULL;
+	f->lab_color[0] = 0;
+	f->lab_color[1] = 0;
+	f->lab_color[2] = 0;
 	f->arg_size[0] = 0;
 	f->arg_size[1] = 0;
 	f->arg_size[2] = 0;

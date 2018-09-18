@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 12:41:06 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/17 12:42:56 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/17 18:22:49 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static t_line	*orders(int fd, int line_n, t_label **label)
 	return (bgn);
 }
 
-int				assembler(int fd, char *filename)
+int				assembler(int fd, char *filename, int sel)
 {
 	t_header	header;
 	t_line		*line;
@@ -83,10 +83,15 @@ int				assembler(int fd, char *filename)
 		label[i] = NULL;
 	header = name_and_comment(fd);
 	line = orders(fd, header.line_n, label);
-	if ((fd2 = open(filename, O_WRONLY | O_CREAT | O_TRUNC,
-					S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
-		exit(-1);
-	ft_header_to_file(header, fd2, line->w);
-	ft_line_to_file(line, label, fd2);
+	if (sel == 0)
+	{
+		if ((fd2 = open(filename, O_WRONLY | O_CREAT | O_TRUNC,
+						S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
+			exit(-1);
+		ft_header_to_file(header, fd2, line->w);
+		ft_line_to_file(line, label, fd2);
+	}
+	else
+		ft_print_asm(header, line, label, line->w);
 	return (0);
 }
