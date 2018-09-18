@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 18:08:37 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/18 16:34:09 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/18 18:57:10 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ static void	ft_print_header(t_header h, int size)
 	ft_putstr("\nComment:      \"");
 	ft_putstr(h.comment);
 	ft_putstr("\n\n");
-
 }
 
-void		ft_print_asm(t_header header, t_line *line, t_label **label, int size)
+void		ft_print_asm(t_header header,
+		t_line *line, t_label **label, int size)
 {
 	t_line	*tmp;
 
-	tmp = line->next;;
+	tmp = line->next;
 	ft_print_header(header, size);
 	line = ft_label_to_pos(line, label);
 	while (tmp)
@@ -43,4 +43,5 @@ void		ft_print_asm(t_header header, t_line *line, t_label **label, int size)
 		write(1, "\n", 1);
 		tmp = tmp->next;
 	}
+	ft_delstruct(label, line);
 }

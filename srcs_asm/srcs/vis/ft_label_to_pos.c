@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 13:38:10 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/18 16:03:47 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/18 18:55:58 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static t_line	*extract_color(t_line *line, t_label *label, int pos, int color)
 	return (line);
 }
 
-static t_line	*ft_extract_label_color(t_line *line, t_label *label, int pos, int color)
+static t_line	*ft_extract_label_color(t_line *line,
+		t_label *label, int pos, int color)
 {
 	t_label *tmp;
 
@@ -46,7 +47,7 @@ static t_line	*ft_extract_label_color(t_line *line, t_label *label, int pos, int
 	return (0);
 }
 
-static int	manage_color(int color)
+static int		manage_color(int color)
 {
 	if (color == 7)
 		color = 8;
@@ -57,7 +58,7 @@ static int	manage_color(int color)
 	return (color);
 }
 
-t_line	*ft_label_to_pos(t_line *bgn, t_label **label)
+t_line			*ft_label_to_pos(t_line *bgn, t_label **label)
 {
 	t_line	*line;
 	int		i;
@@ -72,7 +73,8 @@ t_line	*ft_label_to_pos(t_line *bgn, t_label **label)
 		{
 			if (line->arg_lab[i])
 			{
-				line = ft_extract_label_color(line, label[line->arg[i]], i, color);
+				line = ft_extract_label_color(line,
+						label[line->arg[i]], i, color);
 				color++;
 			}
 		}

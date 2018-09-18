@@ -6,13 +6,13 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:35:56 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/18 16:58:04 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/18 18:59:39 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-static void		ft_put_type_2(int i)
+static void	ft_put_type_2(int i)
 {
 	if (i == 9)
 		ft_printf("\e[48;5;239m\e[38;5;40m%-10s\e[0m", "zjmp");
@@ -32,7 +32,7 @@ static void		ft_put_type_2(int i)
 		ft_printf("\e[48;5;239m\e[38;5;94m%-10s\e[0m", "aff");
 }
 
-static void		ft_put_type_ord(int i)
+static void	ft_put_type_ord(int i)
 {
 	if (i == 1)
 		ft_printf("\e[48;5;239m\e[38;5;6m%-10s\e[0m", "live");
@@ -54,7 +54,7 @@ static void		ft_put_type_ord(int i)
 		ft_put_type_2(i);
 }
 
-static void	ft_put_col(int sel, int pos, t_line* l)
+static void	ft_put_col(int sel, int pos, t_line *l)
 {
 	int i;
 	int max;
@@ -64,7 +64,7 @@ static void	ft_put_col(int sel, int pos, t_line* l)
 	ft_printf("\e[38;5;%im", l->lab_color[pos]);
 	if (sel == 2)
 	{
-		write (1, "%", 1);
+		write(1, "%", 1);
 		max = 18;
 	}
 	while (l->arg_lab[pos][++i] && l->arg_lab[pos][i] != SEPARATOR_CHAR

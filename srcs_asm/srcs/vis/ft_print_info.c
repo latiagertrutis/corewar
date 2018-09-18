@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 16:04:35 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/18 17:40:37 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/18 18:58:15 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,12 @@ static void	ft_print_inv(t_line *l)
 	while (++i < 3)
 	{
 		if (l->arg_size[i])
-		{
-//			ft_invert_bytes(&l->arg[i], l->arg_size[i]);
 			write_good(l->arg[i], l->arg_size[i]);
-		}
 	}
 	write(1, "\n", 1);
 }
 
-
-void	ft_print_info(t_line *l)
+void		ft_print_info(t_line *l)
 {
 	ft_printf("\t\t%-4i", l->order_n);
 	if (l->ocp != 1)
