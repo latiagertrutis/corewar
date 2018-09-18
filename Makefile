@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/09/15 20:31:21 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/09/18 07:47:42 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -81,7 +81,8 @@ GRAPH = ft_ini_graphics.c \
 		exe_players_interf.c \
 		exe_players_dump.c \
 		ft_ini_images.c \
-		sprites.c
+		sprites.c \
+		ft_ini_registers.c
 
 SRCS_DIR = srcs/
 

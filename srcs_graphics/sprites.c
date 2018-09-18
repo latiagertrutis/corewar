@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 18:28:52 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/17 18:48:07 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/18 08:57:52 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	prepare_all_sprites(t_sdl *Graph, int dim, SDL_Surface *sprite)
 	i = -1;
 	pos = 1;
 	pos_in_sprite = (SDL_Rect){2, 1, 76, 69};
-	while (++i < 7)
+	while (++i < 6)
 	{
 		if (!(pos % 2))
 		{
@@ -47,7 +47,7 @@ void	ft_ini_sprites(t_data *data, t_sdl *Graph)
 	int disp_space_x;
 	int i;
 
-	if (!(Graph->heart = (SDL_Surface **)ft_memalloc(sizeof(SDL_Surface *) * 7)))
+	if (!(Graph->heart = (SDL_Surface **)ft_memalloc(sizeof(SDL_Surface *) * 6)))
 		ft_error("malloc ft_ini_sprites");
 	if (!(tmp = SDL_RWFromFile("./heart.png", "rb")))
 		ft_SDL_error("SDL_RWFromFile", MODE_SDL);
@@ -103,14 +103,10 @@ void	ft_check_health(t_data *data, t_sdl *Graph, int player, int cicle_pre_die)
 
 //	if ((cicle_pre_die * 6 / data->cycle_to_die) != pos || !pos)
 //	{
-	if (!data->players[player].loser)
-	{
 		if (!data->players[player].live_counter)
 			pos = cicle_pre_die * 6 / data->cycle_to_die;
 		else
 			pos = 0;
-		if (pos == 6)
-			data->players[player].loser = 0x1;
 		heart = (SDL_Rect){Graph->heart_pos->x, Graph->heart_pos->y + (Graph->info_marc->h) * player, Graph->heart[pos]->w, Graph->heart[pos]->h};
 		SDL_LockTexture(Graph->info_text, &heart, (void **)&pixel, &pitch);
 		SDL_LockSurface(Graph->heart[pos]);
@@ -119,6 +115,5 @@ void	ft_check_health(t_data *data, t_sdl *Graph, int player, int cicle_pre_die)
 			memcpy(pixel + j * pitch, Graph->heart[pos]->pixels + j * Graph->heart[pos]->pitch, Graph->heart[pos]->pitch);
 		SDL_UnlockSurface(Graph->heart[pos]);
 		SDL_UnlockTexture(Graph->info_text);
-	}
 //	}
 }
