@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:35:56 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/18 18:59:39 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/18 19:21:01 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	ft_put_type_ord(int i)
 	if (i == 4)
 		ft_printf("\e[48;5;239m\e[38;5;18m%-10s\e[0m", "add");
 	if (i == 5)
-		ft_printf("\e[48;5;239m\e[38;5;19m%-10s\e[0m", "sub");
+		ft_printf("\e[48;5;239m\e[38;5;138m%-10s\e[0m", "sub");
 	if (i == 6)
 		ft_printf("\e[48;5;239m\e[38;5;111m%-10s\e[0m", "and");
 	if (i == 7)
