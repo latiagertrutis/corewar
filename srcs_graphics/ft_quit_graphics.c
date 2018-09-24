@@ -6,11 +6,11 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 05:27:44 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/24 18:35:55 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/24 22:44:19 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/corewar.h"
+#include "graphics.h"
 
 static void		destroy_hex_array(SDL_Surface ***hex_array)
 {
@@ -38,14 +38,14 @@ static void		destroy_hex_array(SDL_Surface ***hex_array)
 	free(hex_array);
 }
 
-void ft_quit_graphics(t_sdl *Game)
+void ft_quit_graphics(void)
 {
-	destroy_hex_array(Game->hexa_bytes);
-	SDL_FreeSurface(Game->rack);
-	SDL_DestroyTexture(Game->screen.texture);
-	SDL_DestroyRenderer(Game->screen.Renderer);
-	SDL_DestroyWindow(Game->screen.window);
+	destroy_hex_array(g_Graph->hexa_bytes);
+	SDL_FreeSurface(g_Graph->rack);
+	SDL_DestroyTexture(g_Graph->screen.texture);
+	SDL_DestroyRenderer(g_Graph->screen.Renderer);
+	SDL_DestroyWindow(g_Graph->screen.window);
 	TTF_Quit();
 	SDL_Quit();
-	free(Game);
+	free(g_Graph);
 }

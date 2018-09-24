@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/09/24 15:25:43 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/09/23 17:50:43 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,40 +14,23 @@
 
 NAME = prueba
 
-CFLAGS = -g3 #-fsanitize=address #-Wall -Wextra -Werror -g3
-
-SDLFLAGS = `sdl2-config --cflags` `sdl2-config --libs` -lSDL2_ttf -lSDL2_image
+CFLAGS = -pthread  #-g3 #-fsanitize=address #-Wall -Wextra -Werror -g3
 
 CC = gcc
 
 FUNCS =	main.c \
-		big_hexa_2_dec.c \
-		init_corewar.c \
-		print_memory.c \
-		get_content.c \
+		init_player.c \
 		invert_bytes.c \
-		take_champions.c \
-		put_champs_to_arena.c \
-		free_players.c \
-		put_usage.c \
-		get_prog_size.c \
-		read_alloc_size.c \
-		exe_players.c \
-		check_live_count.c \
-		flags.c \
-		get_mem_board.c \
-		fill_r1.c \
-		realloc_pc.c \
-		core_fork.c \
-		core_zjmp.c \
-		core_lfork.c \
-		core_aff.c \
+		read_alloc.c \
+		set_flags.c \
+		take_input.c \
+		check_cycle_to_die.c \
+		ft_mod.c \
 		get_size_arg.c \
 		get_arg.c \
 		get_arg_value.c \
-		ft_mod.c \
-		clean_pc_arr.c \
-		check_winner.c \
+		basic_launch.c \
+		graphic_launch.c \
 		core_live.c \
 		core_ld.c \
 		core_st.c \
@@ -56,32 +39,14 @@ FUNCS =	main.c \
 		core_and.c \
 		core_or.c \
 		core_xor.c \
+		core_zjmp.c \
 		core_ldi.c \
 		core_sti.c \
+		core_fork.c \
 		core_lld.c \
-		core_lldi.c
-
-
-GRAPH = ft_ini_graphics.c \
-		ft_quit_graphics.c \
-		ft_SDL_error.c \
-		ft_ini_interface.c \
-		ft_ini_font.c \
-		ft_board_to_screen.c \
-		ft_pcs_to_rack.c \
-		ft_set_back_to_front.c \
-		ft_ini_information.c \
-		ft_ini_material.c \
-		ft_update_info.c \
-		ft_put_general_info.c \
-		ft_put_player_info.c \
-		writer.c \
-		colors.c \
-		ft_ini_pcs.c \
-		exe_players_interf.c \
-		exe_players_dump.c \
-		ft_ini_images.c \
-		sprites.c
+		core_lldi.c \
+		core_lfork.c \
+		core_aff.c \
 
 SRCS_DIR = srcs/
 
@@ -117,11 +82,6 @@ $(OBJ_DIR)%.o: $(SRCS_DIR)%.c $(INC) $(LIBFT_DIR)$(LIBFT_NAME)
 	@$(CC) $(CFLAGS) -c $< -I $(INC_DIR) -I$(LIBFT_DIR)includes/ -o $@
 	@printf "\033[92m   [OK]\n\033[0m"
 
-$(OBJ_DIR)%.o: $(GRAPH_DIR)%.c $(INC) $(LIBFT_DIR)$(LIBFT_NAME)
-	@mkdir -p $(OBJ_DIR)
-	@printf "\033[92m--->Compiling $(@F)\033[0m"
-	@$(CC) $(CFLAGS) -c $< -I $(INC_DIR) -I$(LIBFT_DIR)includes/ -o $@
-	@printf "\033[92m   [OK]\n\033[0m"
 else
 $(NAME) : |check_lib $(OBJ)
 
@@ -129,11 +89,8 @@ $(OBJ_DIR)%.o : $(SRCS_DIR)%.c $(INC) $(LIBFT_DIR)$(LIBFT_NAME)
 	@printf "\033[92mCreating $(NAME)\033[0m\n"
 	@$(MAKE) MODE=1
 	@printf "\033[92mDone $(NAME) [OK]\n\033[0m"
-$(OBJ_DIR)%.o : $(GRAPH_DIR)%.c $(INC) $(LIBFT_DIR)$(LIBFT_NAME)
-	@printf "\033[92mCreating $(NAME)\033[0m\n"
-	@$(MAKE) MODE=1
-	@printf "\033[92mDone $(NAME) [OK]\n\033[0m"
 endif
+
 check_lib:
 	@$(MAKE) -sC $(LIBFT_DIR)
 

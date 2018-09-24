@@ -5,39 +5,51 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/17 17:17:57 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/27 01:58:52 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/09/20 16:14:50 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/09/20 16:44:23 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int			get_arg_value(t_board *board, t_arg *arg, t_pc *pc)
+static void		get_ind(const t_pc *pc, const IND_CAST ind, t_arg *arg, const unsigned char restriction)
 {
-	unsigned char	aux[MAX_ARG_LEN];
+	int 			inc;
 	unsigned char	i;
 
-	i = 0;
-	if (arg->type == REG_CODE)
+	if (restriction)
+		inc = pc->pc + (ind % IDX_MOD);
+	else
+		inc = pc->pc + ind;
+	if ((inc + REG_SIZE) < MEM_SIZE && inc >= 0)
+		*((REG_CAST *)(arg->arg)) = *((REG_CAST *)(g_mem + inc));
+	else
 	{
-		aux[0] = arg->arg[0];
-		if (aux[0] > 16 || aux[0]<= 0)
-			return (0);
+		i = 0;
 		while (i < REG_SIZE)
 		{
-			arg->arg[i] = pc->reg[aux[0] - 1][i];
+			arg->arg[i] = g_mem[ft_mod(inc + i, MEM_SIZE)];
 			i++;
 		}
 	}
+}
+
+char			get_arg_value(t_arg *arg, const t_pc *pc, const unsigned char restriction)
+{
+	unsigned char	i;
+	IND_CAST		ind;
+
+	if (arg->type == REG_CODE)
+	{
+		if ((i = arg->arg[0] - 1) >= REG_NUMBER)
+			return (0);
+		*((REG_CAST *)(arg->arg)) = *((REG_CAST *)(pc->reg[i]));
+	}
 	else if (arg->type == IND_CODE)
 	{
-		aux[1] = arg->arg[0];
-		aux[0] = arg->arg[1];
-		while (i < REG_SIZE)
-		{
-			arg->arg[i] = board[ft_mod((pc->pc + ((i + *((short *)aux)) % IDX_MOD)), MEM_SIZE)].mem;
-			i++;
-		}
+		ind = *((IND_CAST *)(arg->arg));
+		invert_bytes(&ind, IND_SIZE);
+		get_ind(pc, ind, arg, restriction);
 	}
 	return (1);
 }

@@ -6,11 +6,11 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/09 18:07:14 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/24 16:56:15 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/24 22:07:06 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "graphics.h"
 
 static void			exe_pc(t_pc *pc, t_arena *arena, t_data *data)
 {

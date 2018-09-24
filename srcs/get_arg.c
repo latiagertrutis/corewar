@@ -5,30 +5,42 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/17 17:16:28 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/19 14:04:02 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/09/20 15:28:40 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/09/20 15:55:07 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void		get_arg(const unsigned char ocp, unsigned short pos, t_board *board, t_arg *arg)
+static void	cast_value(const unsigned int pos, const unsigned char prev_siz, t_arg *arg)
 {
-	unsigned int	i;
-	unsigned char	sum;
+	if (arg->len == 1)
+		*((int8_t *)(arg->arg)) = *((int8_t *)(g_mem + pos + 2 + prev_siz));
+	else if (arg->len == 2)
+		*((int16_t *)(arg->arg)) = *((int16_t *)(g_mem + pos + 2 + prev_siz));
+	else if (arg->len == 4)
+		*((int32_t *)(arg->arg)) = *((int32_t *)(g_mem + pos + 2 + prev_siz));
+	else if (arg->len == 8)
+		*((int64_t *)(arg->arg)) = *((int64_t *)(g_mem + pos + 2 + prev_siz));
+}
 
-	i = 0;
-	sum = 0;
+void		get_arg(const unsigned char ocp, const unsigned int pos, const unsigned char prev_siz, t_arg *arg)
+{
+	unsigned char i;
+
 	if (!(arg->len = get_size_arg(ocp, arg->n_arg, arg->dir_size)))
 		return ;
 	arg->type = (ocp & (0xC0 >> (2 * arg->n_arg))) >> (2 * (3 - arg->n_arg));
-	while (i < arg->n_arg)
-		sum += get_size_arg(ocp, i++, arg->dir_size);
-	i = 0;
 	ft_memset(arg->arg, 0, MAX_ARG_LEN);
-	while (i < arg->len && i < MAX_ARG_LEN)
+	if ((pos + 2 + prev_siz + arg->len) < MEM_SIZE)
+		cast_value(pos, prev_siz, arg);
+	else
 	{
-		arg->arg[i] = board[(pos + ((2 + sum + i) % IDX_MOD)) % MEM_SIZE].mem;
-		i++;
+		i = 0;
+		while (i < arg->len)
+		{
+			arg->arg[i] = g_mem[(pos + 2 + prev_siz + i) % MEM_SIZE];
+			i++;
+		}
 	}
 }

@@ -6,11 +6,11 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/16 07:45:58 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/16 16:21:25 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/24 22:07:06 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "graphics.h"
 
 static Uint32 take_RGBA2(int id, SDL_PixelFormat *format)
 {

@@ -3,41 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   core_zjmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/15 05:25:36 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/07/29 19:50:08 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/09/22 14:54:03 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/09/24 15:47:42 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static 	short charge_short(t_board *board, unsigned short pc_pos)
+static IND_CAST	charge_ind(const unsigned int pos)
 {
-	int 	i;
-	char	param[2];
+	uint8_t			num[IND_SIZE];
+	unsigned char	i;
 
-	i = 0;
-	while(i < 2)
+	if ((pos + IND_SIZE) < MEM_SIZE)
+		*((IND_CAST *)(num)) = *((IND_CAST *)(g_mem + pos));
+	else
 	{
-		param[2 - 1 - i] = board[(pc_pos + i) % MEM_SIZE].mem;
-		i++;
+		i = 0;
+		while (i < IND_SIZE)
+		{
+			num[i] = g_mem[(pos + i) % MEM_SIZE];
+			i++;
+		}
 	}
-	// print_memory(param, 2, 2, 1);
-//	exit(1);
-	return (*((short *)param));
+	invert_bytes(num, IND_SIZE);
+	return (*((IND_CAST *)(num)));
 }
 
-void	core_zjmp(t_pc *pc, t_arena *arena, t_data *data)
+void			core_zjmp(t_pc *pc)
 {
-	unsigned short pos;
+	unsigned int pos;
 
-//	 pc->carry = 1;
-	if (pc->carry == 0x1)
+	pos = pc->pc;
+	if (pc->carry)
 	{
-		pos = pc->pc;
-		pc->pc = ft_mod(pc->pc + (charge_short(arena->board, pos + 1) % IDX_MOD), MEM_SIZE);
+		pc->pc = ft_mod(pos + (charge_ind(pos + 1) % IDX_MOD), MEM_SIZE);
+//		ft_printf("zjmp: EL pc ha saltado a %d\n", pc->pc);
 	}
 	else
-		pc->pc = (pc->pc + 1 + 2) % MEM_SIZE;//zjmp + D2
+		pc->pc = (pos + 1 + IND_SIZE);
 }

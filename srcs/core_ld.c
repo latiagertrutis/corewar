@@ -5,79 +5,82 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/13 03:43:25 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/28 17:08:56 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/09/19 14:58:17 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/09/23 16:52:13 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-/*
-** ocp =  11   11   11      00
-**       1arg 2arg 3arg   no susa
-*/
-
-/*
-** POSSIBLE CAST TO GENERIC
-*/
-
-static void		load_direct(t_board *board, const unsigned char reg_pos, t_pc *pc)
+static void	load_direct(const unsigned char reg_pos, t_pc *pc)
 {
 	unsigned char	i;
-	unsigned short	aux_pc;
+	unsigned int	aux_pc;
 
-	i = 0;
-	aux_pc = pc->pc;
-	while (i < REG_SIZE)
-	{//map into register
-		pc->reg[reg_pos][i] = board[(aux_pc + 2 + i) % MEM_SIZE].mem;
-		i++;
+	aux_pc = pc->pc + 2;//jump ld + ocp
+	if ((aux_pc + DIR_SIZE) < MEM_SIZE)
+		*((REG_CAST *)(pc->reg[reg_pos])) = *((DIR_CAST *)(g_mem + aux_pc));
+	else
+	{
+		i = 0;
+		while (i < REG_SIZE && i < DIR_SIZE)
+		{
+			pc->reg[reg_pos][i] = g_mem[(aux_pc + i) % MEM_SIZE];
+			i++;
+		}
 	}
-//	ft_printf("\n****** ld (DIR)*******\nreg_pos: %u\ncont: ", reg_pos);
-//	print_memory(pc->reg[reg_pos], 4, 4, 1);
-//	ft_printf("*******************\n");
-	pc->pc = (aux_pc + 1 + 1 + 1 + DIR_SIZE) % MEM_SIZE;//ld + opc + reg + dir
-	pc->carry = (!*((int *)(pc->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry
+	pc->pc = (aux_pc + 1 + DIR_SIZE) % MEM_SIZE;//ld + ocp + reg + dir
+	pc->carry = (*((REG_CAST *)pc->reg[reg_pos])) ? 0x0 : 0x1;
 }
 
-static void		load_indirect(t_board *board, const unsigned char reg_pos, t_pc *pc)
+static void	load_indirect(const unsigned char reg_pos, t_pc *pc)
 {
-	unsigned char	board_pos[IND_SIZE];//the indirect
+	int8_t			board_pos[IND_SIZE];
 	unsigned char	i;
-	unsigned short	aux_pc;
+	unsigned int	aux_pc;
+	int				inc;
 
-	i = 0;
-	aux_pc = pc->pc;
-	while (i < IND_SIZE)
-	{//changing to big endian
-		board_pos[IND_SIZE - 1 - i] = board[(aux_pc + 2 + i) % MEM_SIZE].mem;
-		i++;
+	aux_pc = pc->pc + 2;
+	if ((aux_pc + IND_SIZE) < MEM_SIZE)
+		*((IND_CAST *)board_pos) = *((IND_CAST *)(g_mem + aux_pc));
+	else
+	{
+		i = 0;
+		while (i < IND_SIZE)
+		{
+			board_pos[i] = g_mem[(aux_pc + i) % MEM_SIZE];
+			i++;
+		}
 	}
-	i = 0;
-	while (i < REG_SIZE)
-	{//acceding to indirect, and passing to register
-		pc->reg[reg_pos][i] = board[ft_mod((i + aux_pc + (*((short *)board_pos) % IDX_MOD)), MEM_SIZE)].mem;
-		i++;
+	invert_bytes(board_pos, IND_SIZE);
+	inc = pc->pc + (*((IND_CAST *)board_pos) % IDX_MOD);
+	if ((inc + DIR_SIZE) < MEM_SIZE && inc >= 0)
+		*((REG_CAST *)pc->reg[reg_pos]) = *((DIR_CAST *)(g_mem + inc));
+	else
+	{
+		i = 0;
+		while (i < REG_SIZE && i < DIR_SIZE)
+		{
+			pc->reg[reg_pos][i] = g_mem[ft_mod(inc + i, MEM_SIZE)];
+			i++;
+		}
 	}
-//	ft_printf("\n****** ld (IND)*******\nInd: %u\nreg_pos: %u\ncont: ", *((short *)board_pos), reg_pos);
-//	print_memory(pc->reg[reg_pos], 4, 4, 1);
-//	ft_printf("*******************\n");
-	pc->pc = (aux_pc + 1 + 1 + 1 + IND_SIZE) % MEM_SIZE;//ld + opc + reg + ind
-	pc->carry = (!*((int *)(pc->reg[reg_pos]))) ? 0x1 : 0x0;//actualizar carry
+	pc->pc = (aux_pc + 1 + IND_SIZE) % MEM_SIZE;//ld + ocp + ind + reg
+	pc->carry = (*((REG_CAST *)pc->reg[reg_pos])) ? 0x0 : 0x1;
 }
 
-void			core_ld(t_pc *pc, t_arena *arena, t_data *data)
+void		core_ld(t_pc *pc)
 {
-	unsigned short 	pos;
+	unsigned int	pos;
 	unsigned char	ocp;
 	unsigned char	reg_pos;
 
 	pos = pc->pc;
-	ocp = arena->board[(pos + 1) % MEM_SIZE].mem;//pc + 1 = ocp, pc + 2 = first arg
-	if (ocp == 0x90 && (reg_pos = arena->board[((pos + 2) + REG_SIZE) % MEM_SIZE].mem - 1) < REG_NUMBER)
-		load_direct(arena->board, reg_pos, pc);
-	else if (ocp == 0xD0 && (reg_pos = arena->board[((pos + 2) + IND_SIZE) % MEM_SIZE].mem - 1) < REG_NUMBER)
-		load_indirect(arena->board, reg_pos, pc);
-	else//if ocp valid but not valid for this instruction jump what it sais
+	ocp = g_mem[(pos + 1) % MEM_SIZE];
+	if ((0xF0 & ocp) == 0x90 && (reg_pos = g_mem[(pos + 2 + DIR_SIZE) % MEM_SIZE] - 1) < REG_NUMBER)
+		load_direct(reg_pos, pc);
+	else if ((0xF0 & ocp) == 0xD0 && (reg_pos = g_mem[(pos + 2 + IND_SIZE) % MEM_SIZE] - 1) < REG_NUMBER)
+		load_indirect(reg_pos, pc);
+	else
 		pc->pc = (pc->pc + 1 + 1 + get_size_arg(ocp, 0, 1) + get_size_arg(ocp, 1, 1)) % MEM_SIZE;//ld + ocp + a1 + a2
 }
