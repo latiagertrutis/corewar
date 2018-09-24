@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 16:39:44 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/18 08:06:12 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/24 16:56:31 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void	ft_update_info(t_sdl *Graph, t_data *data, int cicle_pre_die)
 	i = 0;
 	while (i < data->n_players)
 	{
-		ft_check_health(data, Graph, i, cicle_pre_die + 1);
+		ft_check_health(data, Graph, i, data->nb_cycles);
 		Graph->font[PLAYER_NBR_FONT].color = ft_SDL_color(i);
 		if (!cicle_pre_die)
 			update_ctd_pcs_plyrs(Graph, 0, Graph->info.cicles_play[i],

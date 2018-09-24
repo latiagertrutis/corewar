@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 18:28:52 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/18 08:57:52 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/24 16:56:35 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_ini_sprites(t_data *data, t_sdl *Graph)
 	int disp_space_x;
 	int i;
 
-	if (!(Graph->heart = (SDL_Surface **)ft_memalloc(sizeof(SDL_Surface *) * 6)))
+	if (!(Graph->heart = (SDL_Surface **)ft_memalloc(sizeof(SDL_Surface *) * 7)))
 		ft_error("malloc ft_ini_sprites");
 	if (!(tmp = SDL_RWFromFile("./heart.png", "rb")))
 		ft_SDL_error("SDL_RWFromFile", MODE_SDL);
@@ -74,6 +74,10 @@ void	ft_ini_sprites(t_data *data, t_sdl *Graph)
 //	SDL_BlitScaled(sprite, &(SDL_Rect){2, 1 + 73, 76, 69}, Graph->heart[0], NULL);
 	*Graph->heart_pos = (SDL_Rect){Graph->info.cicles_play[0].x, ((Graph->info_marc->h - ((Graph->info.cicles_play[0].y + Graph->info.cicles_play[0].h) - (Graph->info_marc->y))) - Graph->heart[0]->h) / 2 + Graph->info.cicles_play[0].y + Graph->info.cicles_play[0].h, Graph->heart[0]->w, Graph->heart[0]->h};
 	prepare_all_sprites(Graph, i, sprite);
+	ft_reset_health(data, Graph, 0);
+	ft_reset_health(data, Graph, 1);
+	ft_reset_health(data, Graph, 2);
+	ft_reset_health(data, Graph, 3);
 }
 
 void	ft_reset_health(t_data *data, t_sdl *Graph, int player)
@@ -82,15 +86,22 @@ void	ft_reset_health(t_data *data, t_sdl *Graph, int player)
 	char *pixel;
 	SDL_Rect heart;
 	int j;
-	
-	heart = (SDL_Rect){Graph->heart_pos->x, Graph->heart_pos->y + (Graph->info_marc->h) * player, Graph->heart[0]->w, Graph->heart[0]->h};
-	SDL_LockTexture(Graph->info_text, &heart, (void **)&pixel, &pitch);
-	SDL_LockSurface(Graph->heart[0]);
-	j = 0;
-	while (++j < Graph->heart[0]->h)
-		memcpy(pixel + j * pitch, Graph->heart[0]->pixels + j * Graph->heart[0]->pitch, Graph->heart[0]->pitch);
-	SDL_UnlockSurface(Graph->heart[0]);
-	SDL_UnlockTexture(Graph->info_text);
+	int i;
+	int dist;
+
+	dist = (Graph->player_nbr->w * 20 - Graph->heart_pos->w * 4) / 3 + Graph->heart_pos->w;
+	i = 0;
+	while (i < 4)
+	{
+		heart = (SDL_Rect){Graph->heart_pos->x + dist * i++, Graph->heart_pos->y + (Graph->info_marc->h) * player, Graph->heart[0]->w, Graph->heart[0]->h};
+		SDL_LockTexture(Graph->info_text, &heart, (void **)&pixel, &pitch);
+		SDL_LockSurface(Graph->heart[0]);
+		j = 0;
+		while (++j < Graph->heart[0]->h)
+			memcpy(pixel + j * pitch, Graph->heart[0]->pixels + j * Graph->heart[0]->pitch, Graph->heart[0]->pitch);
+		SDL_UnlockSurface(Graph->heart[0]);
+		SDL_UnlockTexture(Graph->info_text);
+	}
 }
 
 void	ft_check_health(t_data *data, t_sdl *Graph, int player, int cicle_pre_die)
@@ -98,22 +109,40 @@ void	ft_check_health(t_data *data, t_sdl *Graph, int player, int cicle_pre_die)
 	int pitch;
 	char *pixel;
 	SDL_Rect heart;
+	static unsigned int top[4] = {0, 0, 0, 0};
 	int j;
-	unsigned int pos;
+	int i;
+	int pos;
+	int dist;
 
 //	if ((cicle_pre_die * 6 / data->cycle_to_die) != pos || !pos)
 //	{
-		if (!data->players[player].live_counter)
-			pos = cicle_pre_die * 6 / data->cycle_to_die;
-		else
-			pos = 0;
-		heart = (SDL_Rect){Graph->heart_pos->x, Graph->heart_pos->y + (Graph->info_marc->h) * player, Graph->heart[pos]->w, Graph->heart[pos]->h};
-		SDL_LockTexture(Graph->info_text, &heart, (void **)&pixel, &pitch);
-		SDL_LockSurface(Graph->heart[pos]);
-		j = 0;
-		while (++j < Graph->heart[pos]->h)
-			memcpy(pixel + j * pitch, Graph->heart[pos]->pixels + j * Graph->heart[pos]->pitch, Graph->heart[pos]->pitch);
-		SDL_UnlockSurface(Graph->heart[pos]);
-		SDL_UnlockTexture(Graph->info_text);
+	i = 0;
+	if (!top[player])
+		top[player] = data->cycle_to_die;
+	dist = (Graph->player_nbr->w * 20 - Graph->heart_pos->w * 4) / 3 + Graph->heart_pos->w;
+	if (data->players[player].live_counter)
+	{
+		top[player] = data->cycle_to_die;
+		ft_reset_health(data, Graph, player);
+		return ;
+	}
+	while (cicle_pre_die <= top[player] && i < 4)
+	{
+		pos = cicle_pre_die * 7 * 4 / top[player];
+		if ((pos + 1) > i * 7 && (pos + 1) <= (i + 1) * 7)
+		{
+			pos -= i * 7;
+			heart = (SDL_Rect){Graph->heart_pos->x + dist * i, Graph->heart_pos->y + (Graph->info_marc->h) * player, Graph->heart[pos]->w, Graph->heart[pos]->h};
+			SDL_LockTexture(Graph->info_text, &heart, (void **)&pixel, &pitch);
+			SDL_LockSurface(Graph->heart[pos]);
+			j = 0;
+			while (++j < Graph->heart[pos]->h)
+				memcpy(pixel + j * pitch, Graph->heart[pos]->pixels + j * Graph->heart[pos]->pitch, Graph->heart[pos]->pitch);
+			SDL_UnlockSurface(Graph->heart[pos]);
+			SDL_UnlockTexture(Graph->info_text);
+		}
+		i++;
+	}
 //	}
 }

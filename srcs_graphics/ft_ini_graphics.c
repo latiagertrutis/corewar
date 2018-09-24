@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 05:20:16 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/18 08:06:02 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/24 15:25:32 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "corewar.h"
@@ -28,7 +28,6 @@ static void	prepare_all(t_data *data, t_sdl **Graph)
 	ft_ini_font(*Graph);
 	ft_ini_information(data);
 	ft_ini_sprites(data, *Graph);
-	ft_ini_registers(data, *Graph);
 }
 
 void ft_ini_graphics(t_sdl **Graph, t_mods *mods, t_data *data)
