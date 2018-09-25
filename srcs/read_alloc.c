@@ -6,11 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:33:36 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/18 13:39:29 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/25 16:20:39 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "basic_corewar.h"
 
 char	*read_alloc(int fd, const size_t size)
 {

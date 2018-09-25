@@ -6,11 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 19:12:49 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/19 14:12:00 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/25 16:20:48 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "basic_corewar.h"
 
 static char				check_file(const char *str)
 {

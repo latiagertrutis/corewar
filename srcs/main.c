@@ -6,11 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 17:53:30 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/24 16:12:13 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/25 16:39:02 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "basic_corewar.h"
 
 int				g_cycle_to_die;
 unsigned char	g_n_players;
@@ -20,15 +20,13 @@ unsigned int 	g_nb_pc;
 unsigned int 	g_nb_pc_total;
 t_pc 			*g_pc;
 t_player		g_players[MAX_PLAYERS];
-t_graphics		*g_graph_head;
-t_graphics		*g_graph_tail;
 
 static void	select_mode(const unsigned int flags, const t_flag_value f_value)
 {
 	if (!flags)
 		basic_launch();
 	else if (flags & 0x1)
-		graphic_launch();
+		graphic_launch(flags);
 }
 
 static void	init_pc(const t_flag_value f_value)

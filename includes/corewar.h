@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 21:49:08 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/24 22:09:42 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/25 20:08:05 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct 		s_player
 	char			*name;
 	char			*comment;
 	int32_t			player_nb;
+	uint32_t		prog_size;
 	unsigned int  	last_live;
 	unsigned int 	live_counter;
 }					t_player;
@@ -99,6 +100,7 @@ typedef struct 		s_player
 */
 
 extern unsigned char	g_n_players;
+extern t_player			g_players[MAX_PLAYERS];
 
 
 #endif

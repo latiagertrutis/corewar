@@ -6,11 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 17:03:16 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/08 22:16:12 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/25 16:20:40 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "basic_corewar.h"
 
 unsigned char	get_size_arg(const unsigned char ocp, const unsigned char n_arg, const unsigned int dir_size)
 {

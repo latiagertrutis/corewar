@@ -6,11 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 18:58:19 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/24 16:22:43 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/25 16:20:43 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "basic_corewar.h"
 
 static void	init_func(t_op *ops)
 {

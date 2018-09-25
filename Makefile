@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/09/23 17:50:43 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/09/25 20:09:31 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -15,6 +15,8 @@
 NAME = prueba
 
 CFLAGS = -pthread  #-g3 #-fsanitize=address #-Wall -Wextra -Werror -g3
+
+SDLFLAGS = `sdl2-config --cflags` `sdl2-config --libs` -lSDL2_ttf -lSDL2_image
 
 CC = gcc
 
@@ -47,6 +49,29 @@ FUNCS =	main.c \
 		core_lldi.c \
 		core_lfork.c \
 		core_aff.c \
+		graphics_core_sti.c \
+		graphics_core_st.c \
+		graphic_thread.c
+
+GRAPH = ft_ini_graphics.c \
+		ft_quit_graphics.c \
+		ft_SDL_error.c \
+		ft_ini_interface.c \
+		ft_ini_font.c \
+		ft_board_to_screen.c \
+		ft_pcs_to_rack.c \
+		ft_set_back_to_front.c \
+		ft_ini_information.c \
+		ft_ini_material.c \
+		ft_update_info.c \
+		ft_put_general_info.c \
+		ft_put_player_info.c \
+		writer.c \
+		colors.c \
+		ft_ini_pcs.c \
+		ft_ini_images.c \
+		sprites.c \
+		new_frame.c
 
 SRCS_DIR = srcs/
 
@@ -82,6 +107,11 @@ $(OBJ_DIR)%.o: $(SRCS_DIR)%.c $(INC) $(LIBFT_DIR)$(LIBFT_NAME)
 	@$(CC) $(CFLAGS) -c $< -I $(INC_DIR) -I$(LIBFT_DIR)includes/ -o $@
 	@printf "\033[92m   [OK]\n\033[0m"
 
+$(OBJ_DIR)%.o: $(GRAPH_DIR)%.c $(INC) $(LIBFT_DIR)$(LIBFT_NAME)
+	@mkdir -p $(OBJ_DIR)
+	@printf "\033[92m--->Compiling $(@F)\033[0m"
+	@$(CC) $(CFLAGS) -c $< -I $(INC_DIR) -I$(LIBFT_DIR)includes/ -o $@
+	@printf "\033[92m   [OK]\n\033[0m"
 else
 $(NAME) : |check_lib $(OBJ)
 
@@ -89,8 +119,11 @@ $(OBJ_DIR)%.o : $(SRCS_DIR)%.c $(INC) $(LIBFT_DIR)$(LIBFT_NAME)
 	@printf "\033[92mCreating $(NAME)\033[0m\n"
 	@$(MAKE) MODE=1
 	@printf "\033[92mDone $(NAME) [OK]\n\033[0m"
+$(OBJ_DIR)%.o : $(GRAPH_DIR)%.c $(INC) $(LIBFT_DIR)$(LIBFT_NAME)
+	@printf "\033[92mCreating $(NAME)\033[0m\n"
+	@$(MAKE) MODE=1
+	@printf "\033[92mDone $(NAME) [OK]\n\033[0m"
 endif
-
 check_lib:
 	@$(MAKE) -sC $(LIBFT_DIR)
 

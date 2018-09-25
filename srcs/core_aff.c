@@ -6,11 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 17:21:27 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/22 17:38:38 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/25 16:20:43 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "basic_corewar.h"
 
 
 static void	print_reg(const t_pc *pc, const unsigned char reg_pos)

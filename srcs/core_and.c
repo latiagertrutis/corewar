@@ -6,11 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:24:05 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/24 16:47:33 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/25 16:20:43 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "basic_corewar.h"
 
 static char	verify_ocp(const unsigned char ocp)
 {

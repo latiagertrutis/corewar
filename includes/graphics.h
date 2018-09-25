@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 17:03:13 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/24 22:44:44 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/25 20:51:50 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 ******************************DEFINITIONS***************************************
 */
 
+#define	NEW_DUR 20
 #define MODE_SDL 1
 #define MODE_TTF 0
 #define MODE_IMG -1
@@ -134,6 +135,9 @@ typedef struct		s_graphics
 extern t_sdl			*g_Graph;
 extern t_graphics		*g_frame;
 extern t_graphics		*g_graph_tail;
+extern t_graphics		*g_aux;
+extern pthread_mutex_t	g_lock;
+extern unsigned int		g_pause;
 
 /*
 ******************************FUNCTIONS*****************************************
@@ -161,5 +165,6 @@ void			ft_ini_images(void);
 void			ft_ini_sprites(void);
 void			ft_reset_health(int player);
 void			ft_check_health(const int cycle_to_die, int player, int cicle_pre_die);
+void			new_frame(void);
 
 #endif

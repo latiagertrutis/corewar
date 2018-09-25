@@ -6,11 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:07:34 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/23 14:15:06 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/25 16:20:41 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "basic_corewar.h"
 
 static void	sub_reg(t_pc *pc, const unsigned char reg1, const unsigned char reg2, const unsigned char reg3)
 {

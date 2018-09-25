@@ -6,11 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 14:39:30 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/24 16:49:35 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/25 16:20:43 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "basic_corewar.h"
 
 static void	add_reg(t_pc *pc, const unsigned char reg1, const unsigned char reg2, const unsigned char reg3)
 {

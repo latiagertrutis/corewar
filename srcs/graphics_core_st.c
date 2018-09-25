@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core_st.c                                          :+:      :+:    :+:   */
+/*   graphics_core_st.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/19 17:55:27 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/25 16:20:41 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/09/25 20:06:38 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/09/25 20:06:40 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "basic_corewar.h"
+#include "graphics.h"
 
 static void	store_in_ram(const unsigned char reg_pos1, t_pc *pc)
 {
@@ -33,16 +34,12 @@ static void	store_in_ram(const unsigned char reg_pos1, t_pc *pc)
 	}
 	invert_bytes(board_pos, IND_SIZE);
 	inc = pc->pc + (*((IND_CAST *)board_pos) % IDX_MOD);
-	if ((inc + REG_SIZE) < MEM_SIZE && inc >= 0)
-		*((REG_CAST *)(g_mem + inc)) = *((REG_CAST *)(pc->reg[reg_pos1]));
-	else
+	i = 0;
+	while (i < REG_SIZE)
 	{
-		i = 0;
-		while (i < REG_SIZE)
-		{
-			g_mem[ft_mod(inc + i, MEM_SIZE)] = pc->reg[reg_pos1][i];
-			i++;
-		}
+		g_mem[ft_mod(inc + i, MEM_SIZE)] = pc->reg[reg_pos1][i];
+		g_aux->board[ft_mod(inc + i, MEM_SIZE)] = (t_board){pc->reg[reg_pos1][i], NEW_DUR, pc->id + 1};
+		i++;
 	}
 	pc->pc = (aux_pc + 1 + IND_SIZE) % MEM_SIZE;//st + ocp + rg + ind
 }
@@ -53,7 +50,7 @@ static void	store_in_reg(const unsigned char reg_pos1, const unsigned char reg_p
 	pc->pc = (pc->pc + 1 + 1 + 1 + 1); //st + ocp + rg1 + rg2
 }
 
-void		core_st(t_pc *pc)
+void		graphics_core_st(t_pc *pc)
 {
 	unsigned int	pos;
 	unsigned char	ocp;

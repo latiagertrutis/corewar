@@ -6,11 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 18:46:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/23 15:22:33 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/25 16:20:39 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "basic_corewar.h"
 
 int		set_flags(const int ac, const char **av, unsigned int *flags, t_flag_value *f_value)
 {

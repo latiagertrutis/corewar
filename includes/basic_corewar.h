@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 21:48:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/24 22:09:43 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/25 20:08:05 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ extern size_t 			g_nb_cycles;
 extern unsigned int 	g_nb_pc;
 extern unsigned int 	g_nb_pc_total;
 extern t_pc 			*g_pc;
-extern t_player			g_players[MAX_PLAYERS];
 
 /*
 ******************************FUNCTIONS*****************************************
@@ -90,6 +89,7 @@ void			get_arg(const unsigned char ocp, const unsigned int pos, const unsigned c
 char			get_arg_value(t_arg *arg, const t_pc *pc, const unsigned char restriction);
 void			basic_launch(void);
 void			graphic_launch(const unsigned int flags);
+void			*graphic_thread(void *arg);
 void			core_live(t_pc *pc);
 void			core_ld(t_pc *pc);
 void			core_st(t_pc *pc);
@@ -106,5 +106,7 @@ void			core_lld(t_pc *pc);
 void			core_lldi(t_pc *pc);
 void			core_lfork(t_pc *pc);
 void			core_aff(t_pc *pc);
+void			graphics_core_sti(t_pc *pc);
+void			graphics_core_st(t_pc *pc);
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 17:11:06 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/22 17:42:03 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/25 16:20:42 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "basic_corewar.h"
 
 static void	load_direct(const unsigned char reg_pos, t_pc *pc)
 {

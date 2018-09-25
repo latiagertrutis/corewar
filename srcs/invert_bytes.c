@@ -6,11 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:37:56 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/07 14:43:52 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/25 16:20:40 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "basic_corewar.h"
 
 static void generic_case(void *arr, const size_t size)
 {

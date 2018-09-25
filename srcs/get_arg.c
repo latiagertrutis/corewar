@@ -6,11 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:28:40 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/20 15:55:07 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/25 16:20:41 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "basic_corewar.h"
 
 static void	cast_value(const unsigned int pos, const unsigned char prev_siz, t_arg *arg)
 {

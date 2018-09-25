@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core_sti.c                                         :+:      :+:    :+:   */
+/*   graphics_core_sti.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/22 16:14:09 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/25 16:20:41 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/09/25 19:28:53 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/09/25 19:30:37 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "basic_corewar.h"
+#include "graphics.h"
 
 static char	verify_ocp(const unsigned char ocp)
 {
@@ -29,21 +30,17 @@ static void	store_indirect(const unsigned char reg_pos, const t_arg arg2, const 
 
 	pos = pc->pc;
 	inc = (pos + ((*((REG_CAST *)(arg2.arg)) + *((REG_CAST *)(arg3.arg))) % IDX_MOD));
-	if (inc < MEM_SIZE && inc >= 0)
-		*((REG_CAST *)(g_mem + inc)) = *((REG_CAST *)(pc->reg[reg_pos]));
-	else
+	i = 0;
+	while (i < REG_SIZE)
 	{
-		i = 0;
-		while (i < REG_SIZE)
-		{
-			g_mem[ft_mod(inc + i, MEM_SIZE)] = pc->reg[reg_pos][i];
-			i++;
-		}
+		g_mem[ft_mod(inc + i, MEM_SIZE)] = pc->reg[reg_pos][i];
+		g_aux->board[ft_mod(inc + i, MEM_SIZE)] = (t_board){pc->reg[reg_pos][i], NEW_DUR, pc->id + 1};
+		i++;
 	}
 //	ft_printf("sti: ha puesto %d en %d", *((REG_CAST *)pc->reg[reg_pos]), inc);
 }
 
-void		core_sti(t_pc *pc)
+void		graphics_core_sti(t_pc *pc)
 {
 	unsigned char 	ocp;
 	t_arg			arg2;

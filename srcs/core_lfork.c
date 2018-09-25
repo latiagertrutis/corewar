@@ -6,11 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 17:20:10 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/22 17:20:45 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/25 16:20:42 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "basic_corewar.h"
 
 static IND_CAST	charge_ind(const unsigned int pos)
 {

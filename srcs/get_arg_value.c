@@ -6,11 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 16:14:50 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/20 16:44:23 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/25 16:20:40 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "basic_corewar.h"
 
 static void		get_ind(const t_pc *pc, const IND_CAST ind, t_arg *arg, const unsigned char restriction)
 {

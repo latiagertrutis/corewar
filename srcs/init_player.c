@@ -6,11 +6,11 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 19:48:58 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/19 14:16:04 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/25 16:38:59 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "basic_corewar.h"
 
 static void		check_magic(const int fd)
 {
@@ -43,7 +43,6 @@ static void		load_prog(const int fd, const unsigned int player_nb, const uint32_
 void			init_player(const char *str, const t_flag_value *f_value)
 {
 	unsigned int	player_nb;
-	uint32_t		prog_size;
 	int				fd;
 
 	player_nb = 0;
@@ -55,9 +54,9 @@ void			init_player(const char *str, const t_flag_value *f_value)
 		ft_error("error opening the file");
 	check_magic(fd);
 	g_players[player_nb].name = read_alloc(fd, PROG_NAME_LENGTH + 4);
-	prog_size = get_prog_size(fd);
+	g_players[player_nb].prog_size = get_prog_size(fd);
 	g_players[player_nb].comment = read_alloc(fd, COMMENT_LENGTH + 4);
-	load_prog(fd, player_nb, prog_size);
+	load_prog(fd, player_nb, g_players[player_nb].prog_size);
 	close(fd);
 	if (f_value->player_nb[player_nb])
 		g_players[player_nb].player_nb = f_value->player_nb[player_nb];
