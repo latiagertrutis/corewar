@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 13:40:35 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/17 15:00:00 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/25 18:35:14 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ int	ft_strcmp_to(char *s1, char *line)
 	while (s1[++i] && s2[i])
 		if (s1[i] != s2[i])
 			break ;
-	if ((s1[i] == LABEL_CHAR || s1[i] == ' ' || s1[i] == '\t') &&
-			(s2[i] == SEPARATOR_CHAR || s2[i] == ' ' || s2[i] == '\t'
-			|| s2[i] == 0))
+	if ((s1[i] == LABEL_CHAR || s1[i] == ' ' || s1[i] == '\t' ||
+				s1[i] == COMMENT_CHAR || s1[i] == END_LINE_CHAR) &&
+			(s2[i] == SEPARATOR_CHAR || s2[i] == ' ' || s2[i] == '\t' ||
+			s2[i] == 0 || s2[i] == COMMENT_CHAR || s2[i] == END_LINE_CHAR))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 12:41:06 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/17 18:22:49 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/25 18:29:10 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static t_line	*orders(int fd, int line_n, t_label **label)
 		j = 0;
 		while (l[j] && (l[j] == ' ' || l[j] == '\t'))
 			j++;
-		if (l[j] != 0 && l[j] != COMMENT_CHAR)
+		if (l[j] != 0 && l[j] != COMMENT_CHAR && l[j] != END_LINE_CHAR)
 		{
 			line->next = ft_getorders(l, label, j, line_n);
 			line = ft_getpos(line);
@@ -90,6 +90,7 @@ int				assembler(int fd, char *filename, int sel)
 			exit(-1);
 		ft_header_to_file(header, fd2, line->w);
 		ft_line_to_file(line, label, fd2);
+		close(fd2);
 	}
 	else
 		ft_print_asm(header, line, label, line->w);

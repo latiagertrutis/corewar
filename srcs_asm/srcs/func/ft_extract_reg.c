@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 13:08:24 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/18 18:53:22 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/25 18:30:05 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ static int	ft_jmp_to_next(char *l, int i)
 {
 	while (l[i] && (l[i] == ' ' || l[i] == '\t'))
 		i++;
-	if (l[i] != SEPARATOR_CHAR && l[i] != 0 && l[i] != COMMENT_CHAR)
+	if (l[i] != SEPARATOR_CHAR && l[i] != 0 &&
+			l[i] != COMMENT_CHAR && l[i] != END_LINE_CHAR)
 		return (-1);
-	if (l[i] == 0 || l[i] == COMMENT_CHAR)
+	if (l[i] == 0 || l[i] == COMMENT_CHAR || l[i] == END_LINE_CHAR)
 		return (i);
 	i++;
 	while (l[i] && (l[i] == ' ' || l[i] == '\t'))

@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 13:04:01 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/18 18:49:09 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/25 17:58:02 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ static int	ft_jmp_to_next(char *l, int i)
 {
 	while (l[i] && (l[i] == ' ' || l[i] == '\t'))
 		i++;
-	if (l[i] != SEPARATOR_CHAR && l[i] != 0 && l[i] != COMMENT_CHAR)
+	if (l[i] != SEPARATOR_CHAR && l[i] != 0 &&
+			l[i] != COMMENT_CHAR && l[i] != END_LINE_CHAR)
 		return (-1);
-	if (l[i] == 0 || l[i] == COMMENT_CHAR)
+	if (l[i] == 0 || l[i] == COMMENT_CHAR || l[i] == END_LINE_CHAR)
 		return (i);
 	i++;
 	while (l[i] && (l[i] == ' ' || l[i] == '\t'))
@@ -36,8 +37,8 @@ static int	ft_extract_dir_label(t_line **line, int j, int n_line, int pos)
 	i = j;
 	l = line[0]->line;
 	line[0]->arg_lab[pos] = &l[i];
-	while (l[++i] && (l[i] != ' ' && l[i] != '\t' &&
-				l[i] != SEPARATOR_CHAR && l[i] != COMMENT_CHAR))
+	while (l[++i] && (l[i] != ' ' && l[i] != '\t' && l[i] != SEPARATOR_CHAR
+				&& l[i] != COMMENT_CHAR && l[i] != END_LINE_CHAR))
 	{
 		if (!((l[i] >= 48 && l[i] <= 57) || l[i] == 95 ||
 					(l[i] >= 97 && l[i] <= 122)))

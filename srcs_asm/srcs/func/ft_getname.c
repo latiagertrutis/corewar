@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 13:09:32 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/17 14:57:15 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/25 17:33:58 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,35 @@ static char		*ft_strtabspace(char *s, int j)
 	return (&s[i + 1]);
 }
 
+static int		ft_check_for_comm(char *s)
+{
+	int i;
+	int	ret;
+
+	i = 0;
+	while (s[i] && s[i] != '\"')
+		i++;
+	if (s[i] == 0)
+		return (-1);
+	i++;
+	ret = i;
+	while (s[i] && (s[i] == ' ' || s[i] == '\t'))
+		i++;
+	if (s[i] == 0 || s[i] == COMMENT_CHAR || s[i] == END_LINE_CHAR)
+		return (ret);
+	return (-1);
+}
+
 static t_header	ft_header_name(char *l, int n_l, int i, t_header h)
 {
 	char	*tmp;
 	int		j;
+	int		end;
 
 	if (!(tmp = ft_strtabspace(l, i)))
 		ft_error_getname(n_l, 1);
-	if ((j = ft_strlen(tmp)) > (PROG_NAME_LENGTH + 1))
+	if ((j = ft_check_for_comm(tmp)) > (PROG_NAME_LENGTH + 1) || j < 0)
 		ft_error_getname(n_l, 2);
-	if (tmp[j - 1] != '"')
-		ft_error_getname(n_l, 1);
 	h.prog_name = tmp;
 	h.name_size = j - 1;
 	h.name_line = l;
@@ -48,10 +66,8 @@ static t_header	ft_header_comment(char *l, int n_l, int i, t_header h)
 
 	if (!(tmp = ft_strtabspace(l, i)))
 		ft_error_getname(n_l, -1);
-	if ((j = ft_strlen(tmp)) > (COMMENT_LENGTH + 1))
-		ft_error_getname(n_l, -2);
-	if (tmp[j - 1] != '"')
-		ft_error_getname(n_l, -1);
+	if ((j = ft_check_for_comm(tmp)) > (PROG_NAME_LENGTH + 1) || j < 0)
+		ft_error_getname(n_l, 2);
 	h.comment = tmp;
 	h.comment_size = j - 1;
 	h.comment_line = l;
@@ -70,7 +86,7 @@ t_header		ft_getname(char *line, int n_line, t_header h)
 		h = ft_header_name(line, n_line, i + j, h);
 	else if ((i = ft_strcmp_index(&line[j], COMMENT_CMD_STRING)) != -1)
 		h = ft_header_comment(line, n_line, i + j, h);
-	else if (line[j] != COMMENT_CHAR)
+	else if (line[j] != COMMENT_CHAR && line[j] != END_LINE_CHAR)
 		ft_error_getname(n_line, 0);
 	else
 		ft_strdel(&line);
