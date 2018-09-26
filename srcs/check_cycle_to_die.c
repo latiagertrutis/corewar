@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 19:47:56 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/26 17:11:10 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/26 19:11:14 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ static char	check_head(size_t *live_count)
 		g_nb_pc--;
 	}
 	if (!g_pc)
+	{
+		ft_printf("yeee");
 		return(0);
+	}
 	*live_count += g_pc->live;
 	g_pc->live = 0;
 	return (1);
@@ -64,6 +67,7 @@ void		check_cycle_to_die(void)
 	size_t				live_count;
 	static unsigned int checks = 0;
 
+	live_count = 0;
 	if (!check_head(&live_count))
 		return ;
 	check_body(&live_count);
