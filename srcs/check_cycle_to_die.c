@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 19:47:56 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/26 19:52:06 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/26 21:03:51 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	check_body(size_t *live_count)
 		}
 		else
 		{
-			ft_printf("EEl pc %u ha muerto.(CTD %d)\n", current_pc->pc_num + 1, g_cycle_to_die);
+//			ft_printf("El pc %u ha muerto.(CTD %d)\n", current_pc->pc_num, g_cycle_to_die);
 			next_pc = current_pc->next;
 			previous_pc->next = next_pc;
 			free(current_pc);

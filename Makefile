@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/09/25 20:09:31 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/09/26 17:23:39 by jagarcia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -71,7 +71,8 @@ GRAPH = ft_ini_graphics.c \
 		ft_ini_pcs.c \
 		ft_ini_images.c \
 		sprites.c \
-		new_frame.c
+		new_frame.c \
+		ft_surf_to_text.c
 
 SRCS_DIR = srcs/
 
