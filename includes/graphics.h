@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 17:03:13 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/26 15:42:44 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/26 17:23:16 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,5 +168,7 @@ void			ft_ini_sprites(void);
 void			ft_reset_health(int player);
 void			ft_check_health(const int cycle_to_die, int player, int cicle_pre_die);
 void			new_frame(void);
+void			ft_surf_to_text(SDL_Texture *dst, SDL_Surface *src, SDL_Rect *dst_rect);
+
 
 #endif

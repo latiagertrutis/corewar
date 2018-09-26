@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 18:28:52 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/24 22:07:04 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/26 17:17:19 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,9 @@ void	ft_ini_sprites(void)
 //	SDL_BlitScaled(sprite, &(SDL_Rect){2, 1 + 73, 76, 69}, g_Graph->heart[0], NULL);
 	*g_Graph->heart_pos = (SDL_Rect){g_Graph->info.cicles_play[0].x, ((g_Graph->info_marc->h - ((g_Graph->info.cicles_play[0].y + g_Graph->info.cicles_play[0].h) - (g_Graph->info_marc->y))) - g_Graph->heart[0]->h) / 2 + g_Graph->info.cicles_play[0].y + g_Graph->info.cicles_play[0].h, g_Graph->heart[0]->w, g_Graph->heart[0]->h};
 	prepare_all_sprites(i, sprite);
-	ft_reset_health(0);
-	ft_reset_health(1);
-	ft_reset_health(2);
-	ft_reset_health(3);
+	i = 0;
+	while (i < g_n_players)
+		ft_reset_health(i++);
 }
 
 void	ft_reset_health(int player)
@@ -114,8 +113,6 @@ void	ft_check_health(const int cycle_to_die, int player, int cicle_pre_die)
 	int pos;
 	int dist;
 
-//	if ((cicle_pre_die * 6 / data->cycle_to_die) != pos || !pos)
-//	{
 	i = 0;
 	if (!top[player])
 		top[player] = cycle_to_die;
@@ -143,5 +140,4 @@ void	ft_check_health(const int cycle_to_die, int player, int cicle_pre_die)
 		}
 		i++;
 	}
-//	}
 }

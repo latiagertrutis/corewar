@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 19:47:56 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/25 16:20:43 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/26 17:11:10 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	check_head(size_t *live_count)
 
 	while (g_pc && !g_pc->live)
 	{
-		ft_printf("El pc %u ha muerto.(CTD %d)\n", aux_pc->pc_num, g_cycle_to_die);
+//		ft_printf("El pc %u ha muerto.(CTD %d)\n", aux_pc->pc_num, g_cycle_to_die);
 		aux_pc = g_pc->next;
 		free(g_pc);
 		g_pc = aux_pc;
@@ -49,7 +49,7 @@ static void	check_body(size_t *live_count)
 		}
 		else
 		{
-			ft_printf("El pc %u ha muerto.(CTD %d)\n", current_pc->pc_num, g_cycle_to_die);
+//			ft_printf("El pc %u ha muerto.(CTD %d)\n", current_pc->pc_num, g_cycle_to_die);
 			next_pc = current_pc->next;
 			previous_pc->next = next_pc;
 			free(current_pc);
