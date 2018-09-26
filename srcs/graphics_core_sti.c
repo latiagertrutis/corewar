@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 19:28:53 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/25 19:30:37 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/26 20:20:40 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	store_indirect(const unsigned char reg_pos, const t_arg arg2, const 
 	while (i < REG_SIZE)
 	{
 		g_mem[ft_mod(inc + i, MEM_SIZE)] = pc->reg[reg_pos][i];
-		g_aux->board[ft_mod(inc + i, MEM_SIZE)] = (t_board){pc->reg[reg_pos][i], NEW_DUR, pc->id + 1};
+		g_board[ft_mod(inc + i, MEM_SIZE)] = (t_board){pc->reg[reg_pos][i], NEW_DUR, pc->id + 1};
 		i++;
 	}
 //	ft_printf("sti: ha puesto %d en %d", *((REG_CAST *)pc->reg[reg_pos]), inc);

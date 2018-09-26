@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 17:03:13 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/26 15:42:44 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/26 20:35:54 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 ******************************DEFINITIONS***************************************
 */
 
-#define	NEW_DUR 20
+#define	NEW_DUR 69
 #define MODE_SDL 1
 #define MODE_TTF 0
 #define MODE_IMG -1
@@ -132,6 +132,7 @@ typedef struct		s_graphics
 ******************************GLOBAL********************************************
 */
 
+extern t_board			g_board[MEM_SIZE];
 extern t_sdl			*g_Graph;
 extern t_graphics		*g_frame;
 extern t_graphics		*g_graph_tail;
@@ -167,6 +168,6 @@ void			ft_ini_images(void);
 void			ft_ini_sprites(void);
 void			ft_reset_health(int player);
 void			ft_check_health(const int cycle_to_die, int player, int cicle_pre_die);
-void			new_frame(void);
+void			new_frame(const int j);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 17:47:26 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/26 18:08:24 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/26 20:54:28 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static void	init_func(t_op *ops)
 	ops[11] = (t_op){core_fork, 800};
 	ops[12] = (t_op){core_lld, 10};
 	ops[13] = (t_op){core_lldi, 50};
-	ops[14] = (t_op){core_lfork, 100};
+	ops[14] = (t_op){core_lfork, 1000};
 	ops[15] = (t_op){core_aff, 2};
 }
-static void	init_board(t_board *board)
+static void	init_board()
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -41,15 +41,15 @@ static void	init_board(t_board *board)
 
 	i = 0;
 	id = 0;
-	ft_memset(board, 0, sizeof(t_board) * MEM_SIZE);
+	ft_memset(g_board, 0, sizeof(t_board) * MEM_SIZE);
 	j = 0;
 	while (j < MEM_SIZE)
 	{
 		i = 0;
 		while (i < g_players[id].prog_size)
 		{
-			board[j].mem = g_mem[j];
-			board[j].id = id + 1;
+			g_board[j].mem = g_mem[j];
+			g_board[j].id = id + 1;
 			i++;
 			j++;
 		}
@@ -81,7 +81,7 @@ static void	exe_pc(t_op *ops)
 			aux_pc->wait_cycles--;
 		}
 		else
-			aux_pc->pc++;
+			aux_pc->pc = (aux_pc->pc + 1) % MEM_SIZE;
 		aux_pc = aux_pc->next;
 	}
 	g_nb_cycles++;
@@ -94,36 +94,11 @@ static void	init_graph(void)
 
 	if (!(g_aux = (t_graphics *)malloc(sizeof(t_graphics))))
 		ft_error("malloc failed in init_graph");
-	init_board(g_aux->board);
+	init_board();
+	ft_memcpy(g_aux->board, g_board, sizeof(t_board) * MEM_SIZE);
 	ft_memcpy(g_aux->players, g_players, sizeof(t_player) * g_n_players);
 	g_aux->cycle_to_die = g_cycle_to_die;
 	g_aux->cycle_pre_die = 0;
-	g_aux->cycle = g_nb_cycles;
-	g_aux->nb_pc = g_nb_pc;
-	if (!(g_aux->pcs = (unsigned int *)malloc(sizeof(unsigned int) * g_nb_pc)))
-		ft_error("malloc failed in unit_graph");
-	i = 0;
-	aux_pc = g_pc;
-	while (i < g_nb_pc)
-	{
-		g_aux->pcs[i] = (((unsigned int)aux_pc->id) << 24) | aux_pc->pc;
-		i++;
-	}
-	g_aux->prog_end = 0x0;
-	g_aux->next = NULL;
-	g_graph_tail = g_aux;
-	g_frame = g_aux;
-	g_aux = NULL;
-}
-
-static void	fill_frame(int j)
-{
-	unsigned int i;
-	t_pc			*aux_pc;
-
-	ft_memcpy(g_aux->players, g_players, sizeof(t_player) * g_n_players);
-	g_aux->cycle_to_die = g_cycle_to_die;
-	g_aux->cycle_pre_die = j;
 	g_aux->cycle = g_nb_cycles;
 	g_aux->nb_pc = g_nb_pc;
 	if (!(g_aux->pcs = (unsigned int *)malloc(sizeof(unsigned int) * g_nb_pc)))
@@ -136,6 +111,11 @@ static void	fill_frame(int j)
 		aux_pc = aux_pc->next;
 		i++;
 	}
+	g_aux->prog_end = 0x0;
+	g_aux->next = NULL;
+	g_graph_tail = g_aux;
+	g_frame = g_aux;
+	g_aux = NULL;
 }
 
 static void	add_frame(void)
@@ -172,15 +152,13 @@ void		*graphic_thread(void *arg)
 
 	init_func(ops);
 	init_graph();
-	new_frame();
 	while (g_pc)
 	{
 		i = 0;
 		while (i < g_cycle_to_die)
 		{
-			new_frame();
 			exe_pc(ops);
-			fill_frame(i);
+			new_frame(i);
 			add_frame();
 			i++;
 		}

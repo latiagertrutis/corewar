@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 17:53:30 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/25 16:39:02 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/26 19:29:39 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	init_pc(const t_flag_value f_value)
 		*((REG_CAST *)g_pc->reg[0]) = f_value.player_nb[i];
 	else
 		*((REG_CAST *)g_pc->reg[0]) = -1;
+	invert_bytes(g_pc->reg, REG_SIZE);
 	while (i < g_n_players)
 	{
 		if(!(aux = (t_pc *)malloc(sizeof(t_pc))))
@@ -51,6 +52,7 @@ static void	init_pc(const t_flag_value f_value)
 			*((REG_CAST *)aux->reg[0]) = f_value.player_nb[i];
 		else
 			*((REG_CAST *)aux->reg[0]) = -(i + 1);
+		invert_bytes(aux->reg, REG_SIZE);
 		g_pc = aux;
 		i++;
 	}
@@ -66,7 +68,7 @@ int			main(int ac, char **av)
 	g_cycle_to_die = CYCLE_TO_DIE;
 	ft_memset(g_mem, 0, MEM_SIZE);
 	g_nb_cycles = 0;
-	ft_memset(g_players, 0, MAX_PLAYERS);
+	ft_memset(g_players, 0, MAX_PLAYERS * sizeof(t_player));
 	take_input(ac, (const char **)av, &flags, &f_value);
 	g_nb_pc = g_n_players;
 	g_nb_pc_total = g_n_players;

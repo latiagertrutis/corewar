@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 20:06:38 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/25 20:06:40 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/26 20:18:28 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	store_in_ram(const unsigned char reg_pos1, t_pc *pc)
 	while (i < REG_SIZE)
 	{
 		g_mem[ft_mod(inc + i, MEM_SIZE)] = pc->reg[reg_pos1][i];
-		g_aux->board[ft_mod(inc + i, MEM_SIZE)] = (t_board){pc->reg[reg_pos1][i], NEW_DUR, pc->id + 1};
+		g_board[ft_mod(inc + i, MEM_SIZE)] = (t_board){pc->reg[reg_pos1][i], NEW_DUR, pc->id + 1};
 		i++;
 	}
 	pc->pc = (aux_pc + 1 + IND_SIZE) % MEM_SIZE;//st + ocp + rg + ind

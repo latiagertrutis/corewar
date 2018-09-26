@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 18:58:19 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/26 18:08:28 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/26 20:54:55 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	exe_pc(t_op *ops)
 			aux_pc->wait_cycles--;
 		}
 		else
-			aux_pc->pc++;
+			aux_pc->pc = (aux_pc->pc + 1) % MEM_SIZE;
 		aux_pc = aux_pc->next;
 	}
 	g_nb_cycles++;

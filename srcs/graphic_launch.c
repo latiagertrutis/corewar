@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/23 15:17:54 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/26 15:54:00 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/26 20:27:53 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ pthread_mutex_t	g_lock;
 unsigned int	g_pause;
 unsigned int	g_hexl;
 unsigned int	g_step;
+t_board			g_board[MEM_SIZE];
 
 static void	move_frame(void)
 {
 	t_graphics *aux;
 
-	aux = g_frame;
 	pthread_mutex_lock(&g_lock);
+	aux = g_frame;
 	g_frame = g_frame->next;
 	free(aux->pcs);
 	free(aux);
@@ -71,6 +72,7 @@ void		graphic_launch(const unsigned int flags)
 	g_step = 0;
 	if ((pthread_create(&thread, NULL, graphic_thread, (void *)NULL)))
 		ft_error("thread can not be created");
+	sleep(1);
 	ft_ini_graphics(flags);
 	while (running)
 	{
