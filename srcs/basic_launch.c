@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 18:58:19 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/25 16:20:43 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/26 16:20:29 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	exe_pc(t_op *ops)
 		wc = aux_pc->wait_cycles;
 		if (wc == 0 && (op = g_mem[aux_pc->pc] - 1) < NB_INSTRUCTIONS)
 		{
-			aux_pc->wait_cycles = ops[op].cycles_wait;
+			aux_pc->wait_cycles = ops[op].cycles_wait - 1;
 			aux_pc->op = op;
 		}
 		else if (wc > 1)
@@ -58,6 +58,7 @@ static void	exe_pc(t_op *ops)
 			aux_pc->pc++;
 		aux_pc = aux_pc->next;
 	}
+	g_nb_cycles++;
 }
 
 void		basic_launch(void)

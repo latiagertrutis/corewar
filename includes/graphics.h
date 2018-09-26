@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 17:03:13 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/25 20:51:50 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/26 15:42:44 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,8 @@ extern t_graphics		*g_graph_tail;
 extern t_graphics		*g_aux;
 extern pthread_mutex_t	g_lock;
 extern unsigned int		g_pause;
+extern unsigned int		g_hexl;
+extern unsigned int		g_step;
 
 /*
 ******************************FUNCTIONS*****************************************

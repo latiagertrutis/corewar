@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 04:10:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/24 22:07:06 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/26 15:42:27 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void			write_byte(int pos, const t_board *board, const unsigned int flags
 	g_Graph->square->x = (g_Graph->square->w - 1) * (pos % g_Graph->cuant_squares[0]);
 	g_Graph->square->y = (g_Graph->square->h - 1) * (pos / g_Graph->cuant_squares[1]);
 	surf_byte = NULL;
-	if (0x4 & flags)
+	if (g_hexl)
 		surf_byte = g_Graph->hexa_bytes[take_color_byte(board[pos])]
 			[take_hexa_byte(board[pos].mem, hexa_byte)];
 	else
