@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 02:59:04 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/04 18:18:13 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/08 23:07:03 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int			verify_ocp(const unsigned char ocp)
 {
-	if ((0xC & ocp) == 0xC || (0xC0 & ocp) == 0x80 || (0xC0 & ocp) == 0xC0 || (0xC0 & ocp) == 0x0 || (0x30 & ocp) == 0x0 || (0xC & ocp) == 0x0)
+	if ((0x30 & ocp) == 0x30 || (0xC & ocp) == 0xC || (0xC0 & ocp) == 0x80 || (0xC0 & ocp) == 0xC0 || (0xC0 & ocp) == 0x0 || (0x30 & ocp) == 0x0 || (0xC & ocp) == 0x0)
 		return (0);
 	return (1);
 
@@ -39,15 +39,15 @@ void			core_sti(t_pc *pc, t_arena *arena, t_data *data)
 		get_arg(ocp, pc->pc, arena->board, &arg3);
 		if 	(get_arg_value(arena->board, &arg2, pc) && get_arg_value(arena->board, &arg3, pc))
 		{
-			invert_bytes(arg2.arg, arg2.type == DIR_CODE ? 2 : 4);
-			invert_bytes(arg3.arg, arg3.type == DIR_CODE ? 2 : 4);
+			invert_bytes(arg2.arg, arg2.type == DIR_CODE ? IND_SIZE : REG_SIZE);
+			invert_bytes(arg3.arg, arg3.type == DIR_CODE ? IND_SIZE : REG_SIZE);
 			if (arg2.type == DIR_CODE)
-				*((int *)arg2.arg) = *((short *)arg2.arg);
+				*((REG_CAST *)arg2.arg) = *((IND_CAST *)arg2.arg);
 			if (arg3.type == DIR_CODE)
-				*((int *)arg3.arg) = *((short *)arg3.arg);
+				*((REG_CAST *)arg3.arg) = *((IND_CAST *)arg3.arg);
 			while (i < REG_SIZE)
 			{//con idx mod es el resto puesto que es un rango y puede optar a valores negativos en cambio MEM_SIZE precisa de ser un modulo puesto que la memoria es circular y en ningun caso puede ser negativo
-				arena->board[ft_mod((pc->pc + i + ((*((int *)(arg2.arg)) + *((int *)(arg3.arg))) % IDX_MOD)), MEM_SIZE)] =
+				arena->board[ft_mod((pc->pc + i + ((*((REG_CAST *)(arg2.arg)) + *((REG_CAST *)(arg3.arg))) % IDX_MOD)), MEM_SIZE)] =
 					(t_board){pc->reg[reg_pos][i], pc->id + 1, NEW_COLOR_CYCLES};
 				i++;
 			}

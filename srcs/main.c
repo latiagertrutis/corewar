@@ -32,7 +32,6 @@ static void		ini_mods(int flags, t_mods *mods)
 int main(int ac, char **av)
 {
 	t_data		data;
-
 //	data = (t_data){0, CYCLE_TO_DIE, ac - 1, NULL, NULL, {"\033[0m", "\033[38;5;1m", "\033[38;5;2m",
 //	   		"\033[38;5;3m", "\033[38;5;4m"}, {{0, 0, {0}, 0, 0, 0, 0, 0}}, 0, {0}};
 //	if (ac < 2 || ac > 5)

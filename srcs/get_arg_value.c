@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 17:17:57 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/27 01:58:52 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/08 21:27:16 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,22 @@ int			get_arg_value(t_board *board, t_arg *arg, t_pc *pc)
 		aux[0] = arg->arg[0];
 		if (aux[0] > 16 || aux[0]<= 0)
 			return (0);
-		while (i < REG_SIZE)
-		{
-			arg->arg[i] = pc->reg[aux[0] - 1][i];
-			i++;
-		}
+		*((REG_CAST *)arg->arg) = *((REG_CAST *)pc->reg[aux[0] - 1]);
+		/* while (i < REG_SIZE) */
+		/* { */
+		/* 	arg->arg[i] = pc->reg[aux[0] - 1][i]; */
+		/* 	i++; */
+		/* } */
 	}
 	else if (arg->type == IND_CODE)
 	{
-		aux[1] = arg->arg[0];
-		aux[0] = arg->arg[1];
+		/* aux[1] = arg->arg[0]; */
+		/* aux[0] = arg->arg[1]; */
+		*((IND_CAST *)aux) = *((IND_CAST *)arg->arg);
+		invert_bytes(aux, IND_SIZE);
 		while (i < REG_SIZE)
 		{
-			arg->arg[i] = board[ft_mod((pc->pc + ((i + *((short *)aux)) % IDX_MOD)), MEM_SIZE)].mem;
+			arg->arg[i] = board[ft_mod((pc->pc + ((i + *((IND_CAST *)aux)) % IDX_MOD)), MEM_SIZE)].mem;
 			i++;
 		}
 	}

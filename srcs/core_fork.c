@@ -6,38 +6,38 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 09:34:50 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/12 16:43:13 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/15 14:38:19 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static 	short charge_short(t_board *board, unsigned short pc_pos)
+static 	IND_CAST charge_short(t_board *board, unsigned short pc_pos)
 {
 	int 	i;
-	char	param[2];
+	char	param[IND_SIZE];
 
 	i = 0;
-	while(i < 2)
+	while(i < IND_SIZE)
 	{
-		param[2 - 1 - i] = board[(pc_pos + i) % MEM_SIZE].mem;
+		param[IND_SIZE - 1 - i] = board[(pc_pos + i) % MEM_SIZE].mem;
 		i++;
 	}
 	// print_memory(param, 2, 2, 1);
 //	exit(1);
-	return (*((short *)param));
+	return (*((IND_CAST *)param));
 }
 
 void		core_fork(t_pc *pc, t_arena *arena, t_data *data)
 {
 	unsigned short 	pc_i;
 	unsigned short	pos;
-	short			new_i;
+	IND_CAST		new_i;
 
 	pos = pc->pc;
 	new_i = charge_short(arena->board, pos + 1);
 	// if (!(player->nb_pc % 20))
-	if (!(data->nb_pc % 20))
+	if (!(data->nb_pc % PC_BUFF))
 	{
 		// pc_i = (pc - player->pc);
 		pc_i = (pc - data->pc);
@@ -62,7 +62,7 @@ void		core_fork(t_pc *pc, t_arena *arena, t_data *data)
 		// ft_memcpy(player->pc[player->nb_pc].reg[j], pc->reg[j], REG_SIZE);
 		ft_memcpy(data->pc[data->nb_pc].reg[j], pc->reg[j], REG_SIZE);
 	}
-	pc->pc = (pc->pc + 3) % MEM_SIZE;
+	pc->pc = (pc->pc + 1 + IND_SIZE) % MEM_SIZE;
 	// player->nb_pc++;
 	data->nb_pc++;
 	data->nb_pc_active++;

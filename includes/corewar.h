@@ -13,7 +13,44 @@
 
 #define HEADER_SIZE 4 + PROG_NAME_LENGTH + 1 + 4 + 4
 #define PC_BUFF 20
-#define MAX_ARG_LEN 4
+
+# define MAX(A, B) ((A > B) ? A : B)
+
+# define MAX_ARG_LEN MAX(IND_SIZE, MAX(REG_SIZE, DIR_SIZE))
+
+# if MAX_ARG_LEN == 1
+#  define MAX_CAST int8_t
+# elif MAX_ARG_LEN == 2
+# define MAX_CAST int16_t
+# elif MAX_ARG_LEN == 4
+# define MAX_CAST int32_t
+# elif MAX_ARG_LEN == 8
+# define MAX_CAST int64_t
+# endif
+
+# if IND_SIZE == 1
+#  define IND_CAST int8_t
+# elif IND_SIZE == 2
+# define IND_CAST int16_t
+# elif IND_SIZE == 4
+# define IND_CAST int32_t
+# elif IND_SIZE == 8
+# define IND_CAST int64_t
+# else
+#error Wrong size of indirect, expected: 1, 2, 4, 8
+# endif
+
+# if REG_SIZE == 1
+#  define REG_CAST int8_t
+# elif REG_SIZE == 2
+# define REG_CAST int16_t
+# elif REG_SIZE == 4
+# define REG_CAST int32_t
+# elif REG_SIZE == 8
+# define REG_CAST int64_t
+# else
+#error Wrong size of registre, expected: 1, 2, 4, 8
+# endif
 
 typedef struct		s_arg
 {

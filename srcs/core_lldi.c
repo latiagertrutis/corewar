@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 17:56:52 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/08/12 18:38:02 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/15 23:15:17 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,22 @@ static int		get_arg_value_2(t_board *board, t_arg *arg, t_pc *pc)
 		aux[0] = arg->arg[0];
 		if (aux[0] > 16 || aux[0]<= 0)
 			return (0);
-		while (i < REG_SIZE)
-		{
-			arg->arg[i] = pc->reg[aux[0] - 1][i];
-			i++;
-		}
+		*((REG_CAST *)arg->arg) = *((REG_CAST *)pc->reg[aux[0] - 1]);
+		/* while (i < REG_SIZE) */
+		/* { */
+		/* 	arg->arg[i] = pc->reg[aux[0] - 1][i]; */
+		/* 	i++; */
+		/* } */
 	}
 	else if (arg->type == IND_CODE)
 	{
-		aux[1] = arg->arg[0];
-		aux[0] = arg->arg[1];
+		/* aux[1] = arg->arg[0]; */
+		/* aux[0] = arg->arg[1]; */
+		*((IND_CAST *)aux) = *((IND_CAST *)arg->arg);
+		invert_bytes(aux, IND_SIZE);
 		while (i < REG_SIZE)
 		{
-			arg->arg[i] = board[ft_mod((pc->pc + ((i + *((short *)aux)))), MEM_SIZE)].mem;
+			arg->arg[i] = board[ft_mod((pc->pc + ((i + *((IND_CAST *)aux)))), MEM_SIZE)].mem;
 			i++;
 		}
 	}
@@ -44,7 +47,7 @@ static int		get_arg_value_2(t_board *board, t_arg *arg, t_pc *pc)
 
 static int			verify_ocp(const unsigned char ocp)
 {
-	if ((0x30 & ocp) == 0x30 || (0xC & ocp) == 0x8 || (0xC & ocp) == 0xC || (0xC0 & ocp) == 0x0 || (0x30 & ocp) == 0x0 || (0xC & ocp) == 0x0)
+	if ((0xC0 & ocp) == 0xC0 || (0x30 & ocp) == 0x30 || (0xC & ocp) == 0x8 || (0xC & ocp) == 0xC || (0xC0 & ocp) == 0x0 || (0x30 & ocp) == 0x0 || (0xC & ocp) == 0x0)
 		return (0);
 	return (1);
 }
@@ -62,18 +65,18 @@ void	core_lldi(t_pc *pc, t_arena *arena, t_data *data)
 	if (verify_ocp(ocp))
 	{
 		arg1 = (t_arg){0, 0, 0, 0x0, {0}};
-		arg2 = (t_arg){1, 0, 0, 0x0, {0}};
+ 		arg2 = (t_arg){1, 0, 0, 0x0, {0}};
 		get_arg(ocp, pc->pc, arena->board, &arg1);
 		get_arg(ocp, pc->pc, arena->board, &arg2);
 		reg_pos = arena->board[(pc->pc + ((2 + arg1.len + arg2.len))) % MEM_SIZE].mem - 1;
 		if (get_arg_value_2(arena->board, &arg1, pc) && get_arg_value_2(arena->board, &arg2, pc))
 		{
-			invert_bytes(arg1.arg, arg1.type == DIR_CODE ? 2 : 4);//apnar pa registro
-			invert_bytes(arg2.arg, arg2.type == DIR_CODE ? 2 : 4);
+			invert_bytes(arg1.arg, arg1.type == DIR_CODE ? IND_SIZE : REG_SIZE);//apnar pa registro
+			invert_bytes(arg2.arg, arg2.type == DIR_CODE ? IND_SIZE : REG_SIZE);
 			if (arg1.type == DIR_CODE)
-				*((int *)arg1.arg) = *((short *)arg1.arg);
+				*((REG_CAST *)arg1.arg) = *((IND_CAST *)arg1.arg);
 			if (arg2.type == DIR_CODE)
-				*((int *)arg2.arg) = *((short *)arg2.arg);
+				*((REG_CAST *)arg2.arg) = *((IND_CAST *)arg2.arg);
 			while (i < REG_SIZE)
 			{
 				pc->reg[reg_pos][i] = arena->board[ft_mod((pc->pc + i + ((*((int *)(arg1.arg)) + *((int *)(arg2.arg))))), MEM_SIZE)].mem;

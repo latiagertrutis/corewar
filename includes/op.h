@@ -15,6 +15,12 @@
 ** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
 */
 
+/*
+** if the functions are zjmp, ldi, sti, fork, lldi, lfork we have to
+** use for the direct size the size of the indirect, althought is
+** treated like indirect in the VM
+*/
+
 #ifndef OP_H
 #define OP_H
 #define IND_SIZE				2

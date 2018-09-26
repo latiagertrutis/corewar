@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 07:09:33 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/08/01 00:08:43 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/08 21:37:56 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,20 @@ static int			verify_ocp(const unsigned char ocp)
 
 static void			apply_and(t_arg *arg1, t_arg *arg2, t_pc *pc, const unsigned char reg_pos)
 {
-	unsigned int i;
+	*((REG_CAST *)(pc->reg[reg_pos])) = *((REG_CAST *)(arg1->arg)) & *((REG_CAST *)(arg2->arg));
+	/* unsigned int i; */
 
-	if (MAX_ARG_LEN == 4)
-		*((int32_t *)(pc->reg[reg_pos])) = *((int32_t *)(arg1->arg)) & *((int32_t *)(arg2->arg));
-	else
-	{
-		i = 0;
-		while (i < MAX_ARG_LEN)
-		{
-			pc->reg[reg_pos][i] = arg1->arg[i] & arg2->arg[i];
-			i++;
-		}
-	}
+	/* if (MAX_ARG_LEN == 4) */
+	/* 	*((int32_t *)(pc->reg[reg_pos])) = *((int32_t *)(arg1->arg)) & *((int32_t *)(arg2->arg)); */
+	/* else */
+	/* { */
+	/* 	i = 0; */
+	/* 	while (i < MAX_ARG_LEN) */
+	/* 	{ */
+	/* 		pc->reg[reg_pos][i] = arg1->arg[i] & arg2->arg[i]; */
+	/* 		i++; */
+	/* 	} */
+	/* } */
 }
 
 void				core_and(t_pc *pc, t_arena *arena, t_data *data)

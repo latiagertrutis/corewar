@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 23:23:06 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/08/04 18:18:25 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/07 13:48:17 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void store_in_ram(t_board *board, unsigned char reg_pos, t_pc *pc)
 	i = 0;
 	while (i < REG_SIZE)
 	{
-		board[ft_mod((i + aux_pc + (*((short *)board_pos) % IDX_MOD)), MEM_SIZE)] = (t_board){pc->reg[reg_pos][i], pc->id + 1, NEW_COLOR_CYCLES};
+		board[ft_mod((i + aux_pc + (*((IND_CAST *)board_pos) % IDX_MOD)), MEM_SIZE)] = (t_board){pc->reg[reg_pos][i], pc->id + 1, NEW_COLOR_CYCLES};
 		i++;
 	}
 //	ft_printf("\n****** st (IND)*******\nInd: %u\nreg_pos: %u\ncont: ", *((short *)board_pos), reg_pos);

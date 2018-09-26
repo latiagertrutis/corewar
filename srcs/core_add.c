@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 05:45:24 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/28 17:02:06 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/07 14:43:54 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,29 @@
 
 static void		add_reg(t_pc *pc, const unsigned char reg1, const unsigned char reg2, const unsigned char reg3)
 {
-	char aux1[REG_SIZE];
-	char aux2[REG_SIZE];
-	unsigned char i;
+	/* char aux1[REG_SIZE]; */
+	/* char aux2[REG_SIZE]; */
+	/* unsigned char i; */
 
-	i = 0;
-	while (i < REG_SIZE)
-	{
-		aux1[REG_SIZE - 1 - i] = pc->reg[reg1][i];
-		aux2[REG_SIZE - 1 - i] = pc->reg[reg2][i];
-		i++;
-	}
+	/* i = 0; */
+	/* while (i < REG_SIZE) */
+	/* { */
+	/* 	aux1[REG_SIZE - 1 - i] = pc->reg[reg1][i]; */
+	/* 	aux2[REG_SIZE - 1 - i] = pc->reg[reg2][i]; */
+	/* 	i++; */
+	/* } */
 //	ft_printf("SUMA el reg1: %u vale: %d\n", reg1, *((int *)aux1));
 //	print_memory(pc->reg[reg1], 4, 4, 1);
 //	ft_printf("SUMA el reg2: %u vale: %d\n", reg2, *((int *)aux2));
 //	print_memory(pc->reg[reg2], 4, 4, 1);
-	(*(int32_t *)pc->reg[reg3]) = *((int32_t *)aux1) + *((int32_t *)aux2);
-//	ft_printf("SUMA el reg3: %u vale: %d\n", reg3, *((int *)pc->reg[reg3]));
+	invert_bytes(pc->reg[reg1], REG_SIZE);
+	invert_bytes(pc->reg[reg2], REG_SIZE);
+	(*(REG_CAST *)pc->reg[reg3]) = *((REG_CAST *)pc->reg[reg1]) + *((REG_CAST *)pc->reg[reg2]);
+	invert_bytes(pc->reg[reg1], REG_SIZE);
+	invert_bytes(pc->reg[reg2], REG_SIZE);
 	invert_bytes(pc->reg[reg3], REG_SIZE);
+//	ft_printf("SUMA el reg3: %u vale: %d\n", reg3, *((int *)pc->reg[reg3]));
+	/* invert_bytes(pc->reg[reg3], REG_SIZE); */
 //	print_memory(pc->reg[reg3], 4, 4, 1);
 	pc->pc = (pc->pc + 1 + 1 + 1 + 1 + 1) % MEM_SIZE;//ld + opc + reg1 + reg2 + reg3
 	pc->carry = (!*((int *)(pc->reg[reg3]))) ? 0x1 : 0x0;//actualizar carry

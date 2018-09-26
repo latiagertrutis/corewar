@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 03:43:25 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/07/28 17:08:56 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/07 13:43:33 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void		load_indirect(t_board *board, const unsigned char reg_pos, t_pc *pc
 	i = 0;
 	while (i < REG_SIZE)
 	{//acceding to indirect, and passing to register
-		pc->reg[reg_pos][i] = board[ft_mod((i + aux_pc + (*((short *)board_pos) % IDX_MOD)), MEM_SIZE)].mem;
+		pc->reg[reg_pos][i] = board[ft_mod((i + aux_pc + (*((IND_CAST *)board_pos) % IDX_MOD)), MEM_SIZE)].mem;
 		i++;
 	}
 //	ft_printf("\n****** ld (IND)*******\nInd: %u\nreg_pos: %u\ncont: ", *((short *)board_pos), reg_pos);
