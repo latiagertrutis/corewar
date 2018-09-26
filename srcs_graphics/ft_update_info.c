@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 16:39:44 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/08/18 18:01:17 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/24 16:56:31 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,31 +49,6 @@ static void		update_digit(SDL_Rect pos, t_sdl *Graph, char digit[2],
 	SDL_FreeSurface(tmp);
 }
 
-static void		update_cicles(t_sdl *Graph, unsigned int cicles, SDL_Rect pieze)
-{
-	int				pos;
-	SDL_Surface		*tmp;
-	char			*digits;
-
-	digits = "0123456789";
-	if (cicles % 10)
-		update_digit((SDL_Rect){pieze.x + 9 * (pieze.w - 1), pieze.y, pieze.w,
-			pieze.h}, Graph, (char[2]){digits[cicles % 10], 0},
-			GENERAL_NBR_FONT);
-	else if (cicles > 0)
-	{
-		pos = 1;
-		while (cicles > 0)
-		{
-			update_digit((SDL_Rect){pieze.x + (10 - pos) * (pieze.w - 1),
-					pieze.y, pieze.w, pieze.h}, Graph,
-				(char[2]){digits[cicles % 10], 0}, GENERAL_NBR_FONT);
-			cicles /= 10;
-			pos++;
-		}
-	}
-}
-
 static void		update_ctd_pcs_plyrs(t_sdl *Graph, unsigned int info,
 			SDL_Rect pieze, int mode)
 {
@@ -99,30 +74,62 @@ static void		update_ctd_pcs_plyrs(t_sdl *Graph, unsigned int info,
 	}
 }
 
+static void	place_health(t_data *data, t_sdl *Graph, int player, int h)
+{
+	int pitch;
+	char *pixel;
+	SDL_Rect heart;
+	int j;
+	
+	heart = (SDL_Rect){Graph->heart_pos->x, Graph->heart_pos->y + (Graph->info_marc->h) * player, Graph->heart[h]->w, Graph->heart[h]->h};
+	SDL_LockTexture(Graph->info_text, &heart, (void **)&pixel, &pitch);
+	SDL_LockSurface(Graph->heart[h]);
+	j = 0;
+	while (++j < Graph->heart[h]->h)
+		memcpy(pixel + j * pitch, Graph->heart[h]->pixels + j * Graph->heart[h]->pitch, Graph->heart[h]->pitch);
+	SDL_UnlockSurface(Graph->heart[h]);
+	SDL_UnlockTexture(Graph->info_text);
+}
+
 void	ft_update_info(t_sdl *Graph, t_data *data, int cicle_pre_die)
 {
 	static unsigned int	nbr_pcs = 0;
-	int					i;
+	unsigned int		i;
 
-	update_cicles(Graph, data->nb_cycles, *Graph->info.cicles_gen);
-	if (!cicle_pre_die)
+//	if (!cicle_pre_die)
+//		ft_reset_health(data, Graph, 0);
+//	place_health(data, Graph, 0, 2);
+//	else
+//	ft_reset_health(data, Graph, 1);
+//	ft_reset_health(data, Graph, 2);
+//	ft_reset_health(data, Graph, 3);
+	update_ctd_pcs_plyrs(Graph, data->nb_cycles, *Graph->info.cicles_gen, GENERAL_NBR_FONT);
+	if (!cicle_pre_die || data->mods->dump)
+	{
+		update_ctd_pcs_plyrs(Graph, 0,
+			*Graph->info.cicle_to_die, GENERAL_NBR_FONT);
 		update_ctd_pcs_plyrs(Graph, data->cycle_to_die,
 			*Graph->info.cicle_to_die, GENERAL_NBR_FONT);
-	if (nbr_pcs != data->nb_pc)
+	}
+	if (nbr_pcs != data->nb_pc_active)
 	{
+		if (nbr_pcs > data->nb_pc_active)
+			update_ctd_pcs_plyrs(Graph, 0,
+				*Graph->info.processos, GENERAL_NBR_FONT);
 		update_ctd_pcs_plyrs(Graph, data->nb_pc_active, *Graph->info.processos,
 			GENERAL_NBR_FONT);
-		nbr_pcs = data->nb_pc;
+		nbr_pcs = data->nb_pc_active;
 	}
 	i = 0;
 	while (i < data->n_players)
 	{
+		ft_check_health(data, Graph, i, data->nb_cycles);
+		Graph->font[PLAYER_NBR_FONT].color = ft_SDL_color(i);
 		if (!cicle_pre_die)
-				update_ctd_pcs_plyrs(Graph, 0, Graph->info.cicles_play[i],
+			update_ctd_pcs_plyrs(Graph, 0, Graph->info.cicles_play[i],
 					PLAYER_NBR_FONT);
 		if (data->players[i].live_call)
 		{
-			Graph->font[PLAYER_NBR_FONT].color = ft_SDL_color(i);
 			update_ctd_pcs_plyrs(Graph, data->players[i].live_counter,
 					Graph->info.cicles_play[i], PLAYER_NBR_FONT);
 			update_ctd_pcs_plyrs(Graph, data->players[i].last_live,

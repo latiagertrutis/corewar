@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/01 10:18:26 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/16 08:56:31 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/15 22:41:41 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int		prepare_string(int pos[2], t_sdl *Graph, char *str, int mode)
 	tmp_surf = ft_write_string(Graph, str, pos, mode);
 	tmp = tmp_surf->h;
 	SDL_FreeSurface(tmp_surf);
-		return (tmp);
+	return (tmp);
 }
 
 void		ft_put_player_info(t_sdl *Graph, SDL_Surface *info_marc,

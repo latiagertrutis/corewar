@@ -84,8 +84,8 @@ typedef struct		s_arg
 #define PLAYER_TWO_COLORA 255, 204, 0, SDL_ALPHA_OPAQUE
 #define PLAYER_TWO_COLORB 255, 229, 127, SDL_ALPHA_OPAQUE
 #define PLAYER_TWO_COLORC 127, 102, 0, SDL_ALPHA_OPAQUE
-#define PLAYER_THREE_COLORA 255, 242, 207, SDL_ALPHA_OPAQUE
-#define PLAYER_THREE_COLORB 255, 248, 230, SDL_ALPHA_OPAQUE
+#define PLAYER_THREE_COLORB 255, 242, 207, SDL_ALPHA_OPAQUE
+#define PLAYER_THREE_COLORA 217, 204, 169, SDL_ALPHA_OPAQUE
 #define PLAYER_THREE_COLORC 168, 154, 117, SDL_ALPHA_OPAQUE
 #define PLAYER_FOUR_COLORA 252, 102, 92, SDL_ALPHA_OPAQUE
 #define PLAYER_FOUR_COLORB 253, 178, 173, SDL_ALPHA_OPAQUE
@@ -102,6 +102,15 @@ typedef struct s_font
 	SDL_Color	color;
 }				t_font;
 
+typedef	struct s_info
+{
+	SDL_Rect *cicles_gen;
+	SDL_Rect *cicles_play;
+	SDL_Rect *lst_life;
+	SDL_Rect *cicle_to_die;
+	SDL_Rect *processos;
+} t_info;
+
 typedef struct s_sdl {
 	struct {
 		int w;
@@ -115,20 +124,17 @@ typedef struct s_sdl {
 	t_font	font[4];
 	SDL_Texture *info_text;
 	SDL_Texture **pc;
-	struct {
-		SDL_Rect *cicles_gen;
-		SDL_Rect *cicles_play;
-		SDL_Rect *lst_life;
-		SDL_Rect *cicle_to_die;
-		SDL_Rect *processos;
-	} info;
+	t_info info;
 	SDL_Surface ***hexa_bytes;
 	SDL_Surface *rack;
 	SDL_Surface *general_nbr;
 	SDL_Surface *player_nbr;
-	SDL_Rect *square;
-	SDL_Rect *big_square;
-	SDL_Rect *square_info;
+	SDL_Surface **heart;
+	SDL_Rect *heart_pos;
+	SDL_Rect *square;  // rack_cell;
+	SDL_Rect *big_square; // board
+	SDL_Rect *square_info; // general info
+	SDL_Rect *info_marc; // player_info
 } t_sdl;
 
 typedef struct 		s_board
@@ -162,6 +168,7 @@ typedef struct 		s_player
 	unsigned int	live_call : 1;
 	unsigned int  	last_live; //new
 	unsigned int 	live_counter;
+	unsigned int	loser : 1;
 	char			*content;
 	char 			*name;
 	int				player_nb;
@@ -174,6 +181,14 @@ typedef struct 		s_player
 }					t_player;
 
 //hay que hacer una estructura del PC que contenga minimo 1 pc(pos) 2 carry, wait_cycles
+
+typedef struct pene
+{
+	int x;
+	int y;
+	int w;
+	int h;
+} rectpene;
 
 typedef struct		s_op
 {
@@ -196,12 +211,14 @@ typedef struct		s_mods
 	unsigned int	visual : 1;
 	unsigned int	fullscreen : 1;
 	unsigned int	info : 1;
+	unsigned int	dump : 1;
+	unsigned int 	dump_cuant;
 }					t_mods;
 
 typedef struct		s_data
 {
 	//anadir variable para saber cuando se alcanza el cycle to die
-	unsigned int 	dump;
+	unsigned int	dump;
 	unsigned int 	max_checks;
 	unsigned int	cycle_to_die;
 	unsigned int	n_players;
@@ -249,6 +266,8 @@ unsigned int		get_prog_size(int fd);
 char 				*read_alloc_size(int fd, int size);
 void				print_board(t_data *data, t_board *board);
 void 				exe_players(t_data *data);
+void 				exe_players_interf(t_data *data);
+void 				exe_players_dump(t_data *data);
 void 				check_live_count(t_data *data);
 void				fill_r1(t_data *data);
 unsigned char		*get_mem_board(t_board *board, const unsigned int size);
@@ -295,7 +314,7 @@ void				core_aff(t_pc *pc, t_arena *arena, t_data *data);
 void		ft_ini_graphics(t_sdl **Graph, t_mods *mods, t_data *data);
 void		ft_quit_graphics(t_sdl *Graph);
 void		ft_SDL_error(char *str, int mode);
-void		ft_ini_interface(t_sdl *Graph);
+void		ft_ini_interface(t_sdl *Graph, t_data *data);
 void		ft_ini_font(t_sdl *Graph);
 void		ft_board_to_screen(t_sdl *Graph, t_board board[MEM_SIZE], t_data *data);
 void		ft_pcs_to_rack(t_sdl *Graph, t_data *data, int alpha_mod);
@@ -311,5 +330,7 @@ SDL_Color	ft_SDL_color(int i);
 Uint32		ft_MapRGBA(SDL_PixelFormat *format, int i, int alpha);
 void		ft_ini_pcs(t_sdl *Graph);
 void		ft_ini_images(t_data *data, t_sdl *Graph);
-
+void		ft_ini_sprites(t_data *data, t_sdl *Graph);
+void		ft_reset_health(t_data *data, t_sdl *Graph, int player);
+void		ft_check_health(t_data *data, t_sdl *Graph, int player, int t);
 #endif

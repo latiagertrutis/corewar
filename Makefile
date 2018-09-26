@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/08/17 11:12:36 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/09/24 15:25:43 by jagarcia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,7 +14,7 @@
 
 NAME = prueba
 
-CFLAGS = #-fsanitize=address #-Wall -Wextra -Werror -g3
+CFLAGS = -g3 #-fsanitize=address #-Wall -Wextra -Werror -g3
 
 SDLFLAGS = `sdl2-config --cflags` `sdl2-config --libs` -lSDL2_ttf -lSDL2_image
 
@@ -78,7 +78,10 @@ GRAPH = ft_ini_graphics.c \
 		writer.c \
 		colors.c \
 		ft_ini_pcs.c \
-		ft_ini_images.c
+		exe_players_interf.c \
+		exe_players_dump.c \
+		ft_ini_images.c \
+		sprites.c
 
 SRCS_DIR = srcs/
 

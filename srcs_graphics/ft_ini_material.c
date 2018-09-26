@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 22:02:57 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/17 11:14:41 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/16 00:54:10 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ static void		ini_number(t_sdl *Graph, int mode, SDL_Surface **number,
 
 static void		ini_info_rects(t_sdl *Graph)
 {
-	Graph->info.cicles_gen = (SDL_Rect *)malloc(sizeof(SDL_Rect));
+	SDL_Rect *tmp = NULL;
+	
+	tmp = (SDL_Rect *)malloc(sizeof(SDL_Rect));
+	Graph->info.cicles_gen = tmp;
 	*Graph->info.cicles_gen = (SDL_Rect){0, 0, Graph->square_info->w / 20,
 			Graph->square_info->h / 6};
 	Graph->info.cicle_to_die = (SDL_Rect *)malloc(sizeof(SDL_Rect));
@@ -47,7 +50,7 @@ static void		ini_info_rects(t_sdl *Graph)
 
 void	ft_ini_material(t_data *data, t_sdl *Graph, SDL_Surface *info_marc)
 {
-	int i;
+	unsigned int i;
 
 	ini_info_rects(Graph);
 	ini_number(Graph, GENERAL_NBR_FONT, &Graph->general_nbr,

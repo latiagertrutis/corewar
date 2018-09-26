@@ -6,7 +6,7 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/01 00:34:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/18 17:40:40 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/17 18:40:51 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int init_players(t_data *data, int ac, char **av)
 	{
 		cosa = -(i + 1);
 		invert_bytes(&cosa, 4);
-		data->players[i] = (t_player){0, 0, 0, NULL, NULL, cosa, i, 0, NULL, NULL, 1, NULL}; //coa tiene que ser el siguient numero disponible creo
+		data->players[i] = (t_player){0, 0, 0, 0, NULL, NULL, cosa, i, 0, NULL, NULL, 1, NULL}; //coa tiene que ser el siguient numero disponible creo
 //		if (!(data->players[i].pc = (t_pc *)malloc(sizeof(t_pc) * PC_BUFF)))
 //			ft_error("malloc failed");
 //		data->players[i].pc[0] = (t_pc){0, 0, 0, {{0}}};
@@ -90,10 +90,9 @@ static int init_arena(t_data *data)
 {
 	if (!(data->arena = (t_arena *)ft_memalloc(sizeof(t_arena))))
 		return (0);
-	if (data->mods->visual)
+	if (data->mods->visual || data->mods->dump)
 		ft_ini_graphics(&(data->arena->Graph), data->mods, data);
 	return (1);
-
 }
 
 int 	init_corewar(t_data *data, int ac, char **av)
@@ -101,7 +100,8 @@ int 	init_corewar(t_data *data, int ac, char **av)
 	if (!init_players(data, ac, av))
 		return (0);
 	if (!init_arena(data))
-		return (0);	init_op(data);
+		return (0);
+	init_op(data);
 	init_func(data);
 	return (1);
 }

@@ -6,25 +6,27 @@
 /*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/26 20:48:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/09/07 13:38:58 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/16 17:07:49 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include <stdio.h> //printf !!
 
-static t_mods		*ini_mods(int flags)
+static void		ini_mods(int flags, t_mods *mods)
 {
-	t_mods *mods;
-	
-	if (!(mods = (t_mods *)ft_memalloc(sizeof(t_mods))))
-		ft_error("Error malloc ini_mods\n");
+//	if (!(mods = (t_mods *)ft_memalloc(sizeof(t_mods))))
+//		ft_error("Error malloc ini_mods\n");
 	mods->running = 0x1;
 	if (ft_check_flags(flags, 'f'))
 		mods->fullscreen = 0x1;
 	if (ft_check_flags(flags, 'v'))
 		mods->visual = 0x1;
-	return (mods);
+	if (ft_check_flags(flags, 'd'))
+	{
+		mods->dump = 0x1;
+		mods->info = 0x1;
+	}
 }
 
 int main(int ac, char **av)
@@ -44,11 +46,12 @@ int main(int ac, char **av)
 	data.flags = ft_set_flags(ac, av, &data);
 
 
-	data.mods = ini_mods(data.flags);
+	ini_mods(data.flags, data.mods);
 
+	ft_printf("Voy a inicializar todo\n");
 	if (!init_corewar(&data, ac, av))
 		ft_error("malloc failed");
-
+	ft_printf("todo inicializado\n");
 
 	// ft_putnbr(data.n_players);
 	// exit(1);
@@ -62,7 +65,13 @@ int main(int ac, char **av)
 //	SDL_RenderPresent(data.arena->Graph->screen.Renderer);
 
 //	ft_quit_graphics(data.arena->Graph);
-	exe_players(&data);
+	ft_printf("voy a empezar\n");
+	if (data.mods->visual && !data.mods->dump)
+		exe_players_interf(&data);
+	else if (data.mods->dump)
+		exe_players_dump(&data);
+	else
+		exe_players(&data);
 	if (data.mods->visual)
 		ft_quit_graphics(data.arena->Graph);
 	free(data.arena);

@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 05:20:16 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/16 11:34:10 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/24 15:25:32 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "corewar.h"
@@ -24,13 +24,10 @@ static t_sdl	*ini_graph(void)
 }
 static void	prepare_all(t_data *data, t_sdl **Graph)
 {
-	int		*pixel;
-	int		pitch;
-	int		i;
-
-	ft_ini_interface(*Graph);
+	ft_ini_interface(*Graph, data);
 	ft_ini_font(*Graph);
 	ft_ini_information(data);
+	ft_ini_sprites(data, *Graph);
 }
 
 void ft_ini_graphics(t_sdl **Graph, t_mods *mods, t_data *data)
@@ -57,7 +54,6 @@ void ft_ini_graphics(t_sdl **Graph, t_mods *mods, t_data *data)
 	if (!((*Graph)->screen.Renderer = SDL_CreateRenderer((*Graph)->screen.window,
 			-1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)))
 		ft_SDL_error("SDL_CreateRenderer", MODE_SDL);
-	ft_printf("La ventana es %i x %i\n", (*Graph)->screen.w, (*Graph)->screen.h);
 	if (SDL_SetRenderDrawColor((*Graph)->screen.Renderer, 0, 0, 0, 0))
 		ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
 	prepare_all(data, Graph);
