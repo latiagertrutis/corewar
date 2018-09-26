@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 17:47:26 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/26 16:14:51 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/26 18:08:24 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,7 @@ static void	exe_pc(t_op *ops)
 	unsigned char	op;
 	unsigned int	wc;
 
-	char			bool;
-
 	aux_pc = g_pc;
-	bool = 0;
 	while (aux_pc)
 	{
 		wc = aux_pc->wait_cycles;
