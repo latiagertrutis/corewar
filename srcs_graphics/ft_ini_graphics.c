@@ -6,12 +6,13 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 05:20:16 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/24 22:07:05 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/27 17:57:41 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "graphics.h"
 
-static void		ini_graph(void)
+static void				ini_graph(void)
 {
 	if (!(g_Graph = (t_sdl *)ft_memalloc(sizeof(t_sdl))))
 		ft_error("Error malloc ft_ini_graphics\n");
@@ -19,7 +20,8 @@ static void		ini_graph(void)
 	g_Graph->screen.h = SCREEN_H;
 	g_Graph->screen.name = SCREEN_NAME;
 }
-static void	prepare_all(void)
+
+static void				prepare_all(void)
 {
 	ft_ini_interface();
 	ft_ini_font();
@@ -28,14 +30,14 @@ static void	prepare_all(void)
 	ft_ini_sprites();
 }
 
-void ft_ini_graphics(const unsigned int flags)
+void					ft_ini_graphics(const unsigned int flags)
 {
 	int imgflags;
 
 	ini_graph();
 	if (SDL_Init(SDL_INIT_EVERYTHING))
 		ft_SDL_error("SDL_Init", MODE_SDL);
-	if (TTF_Init())	
+	if (TTF_Init())
 		ft_SDL_error("SDL_Init", MODE_TTF);
 	imgflags = IMG_INIT_JPG;
 	if (!(IMG_Init(imgflags) & imgflags))
