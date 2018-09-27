@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/09/26 17:23:39 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/09/27 20:26:25 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -33,6 +33,7 @@ FUNCS =	main.c \
 		get_arg_value.c \
 		basic_launch.c \
 		graphic_launch.c \
+		instruction_launch.c \
 		core_live.c \
 		core_ld.c \
 		core_st.c \
@@ -51,7 +52,15 @@ FUNCS =	main.c \
 		core_aff.c \
 		graphics_core_sti.c \
 		graphics_core_st.c \
-		graphic_thread.c
+		graphic_thread.c \
+		instruc_core_live.c \
+		instruc_core_ld.c \
+		instruc_core_st.c \
+		instruc_core_add.c \
+		instruc_core_sub.c \
+		instruc_core_and.c \
+		instruc_core_or.c \
+		instruc_core_xor.c \
 
 GRAPH = ft_ini_graphics.c \
 		ft_quit_graphics.c \

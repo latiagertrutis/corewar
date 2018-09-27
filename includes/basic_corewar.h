@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 21:48:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/26 15:40:46 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/27 20:26:06 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 /*
 ** 1st bit: interface
 ** 2st bit: fullscreen
+** 3st vit: intrucctions
 */
 typedef struct		s_flag_value
 {
@@ -88,6 +89,7 @@ void			get_arg(const unsigned char ocp, const unsigned int pos, const unsigned c
 char			get_arg_value(t_arg *arg, const t_pc *pc, const unsigned char restriction);
 void			basic_launch(void);
 void			graphic_launch(const unsigned int flags);
+void			instruction_launch(void);
 void			*graphic_thread(void *arg);
 void			core_live(t_pc *pc);
 void			core_ld(t_pc *pc);
@@ -105,7 +107,26 @@ void			core_lld(t_pc *pc);
 void			core_lldi(t_pc *pc);
 void			core_lfork(t_pc *pc);
 void			core_aff(t_pc *pc);
+
+
+/*
+******************************GRAPH_FUNCTIONS*****************************************
+*/
+
 void			graphics_core_sti(t_pc *pc);
 void			graphics_core_st(t_pc *pc);
+
+/*
+******************************INSTRUC_FUNCTIONS*****************************************
+*/
+
+void			instruc_core_live(t_pc *pc);
+void			instruc_core_ld(t_pc *pc);
+void			instruc_core_st(t_pc *pc);
+void			instruc_core_add(t_pc *pc);
+void			instruc_core_sub(t_pc *pc);
+void			instruc_core_and(t_pc *pc);
+void			instruc_core_or(t_pc *pc);
+void			instruc_core_xor(t_pc *pc);
 
 #endif
