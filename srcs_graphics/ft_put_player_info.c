@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/01 10:18:26 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/24 22:07:04 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/28 18:11:16 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int		prepare_string(int pos[2], char *str, int mode)
 	return (tmp);
 }
 
-void		ft_put_player_info(SDL_Surface *info_marc, int i)
+void			ft_put_player_info(SDL_Surface *info_marc, int i)
 {
 	int				tmp;
 	int				y_pos;
@@ -33,7 +33,7 @@ void		ft_put_player_info(SDL_Surface *info_marc, int i)
 	g_Graph->font[TMP_FONT].color = ft_SDL_color(i);
 	g_Graph->font[PLAYER_NBR_FONT].color = g_Graph->font[TMP_FONT].color;
 	y_pos = g_Graph->square_info->h + 10 + info_marc->h * i;
-	y_pos += prepare_string((int[2]){tmp,y_pos}, g_players[i].name, 0) + 20;
+	y_pos += prepare_string((int[2]){tmp, y_pos}, g_players[i].name, 0) + 20;
 	tmp2 = prepare_string((int[2]){tmp + (g_Graph->player_nbr->w * 10 - 9)
 			/ 2, y_pos }, "Number of Lifes", 1);
 	ft_write_number_fields(&g_Graph->font[PLAYER_NBR_FONT],

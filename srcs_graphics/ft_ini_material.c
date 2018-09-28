@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 22:02:57 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/24 22:07:05 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/28 18:08:59 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ static void		ini_number(int mode, SDL_Surface **number, SDL_Rect square_info)
 {
 	*number = SDL_CreateRGBSurfaceWithFormat(0, square_info.w, square_info.h,
 			32, g_Graph->rack->format->format);
-	SDL_FillRect(*number, NULL, SDL_MapRGBA(g_Graph->rack->format, 255, 255, 255,
-			255));
-	SDL_FillRect(*number, &(SDL_Rect){1, 1, (*number)->w - 2, (*number)->h - 2},
-			SDL_MapRGBA((*number)->format, 0, 0, 0, 255));
+	if (SDL_FillRect(*number, NULL, SDL_MapRGBA(g_Graph->rack->format,
+		255, 255, 255, 255)))
+		ft_SDL_error("SDL_FillRect", MODE_SDL);
+	if (SDL_FillRect(*number, &(SDL_Rect){1, 1, (*number)->w - 2,
+		(*number)->h - 2}, SDL_MapRGBA((*number)->format, 0, 0, 0, 255)))
+		ft_SDL_error("SDL_FillRect", MODE_SDL);
 	while (g_Graph->font[mode].w + 10 < (*number)->w && g_Graph->font[mode].h +
 			10 < (*number)->h)
 	{
@@ -28,15 +30,16 @@ static void		ini_number(int mode, SDL_Surface **number, SDL_Rect square_info)
 		if (!(g_Graph->font[mode].font = TTF_OpenFont("./whitrabt.ttf",
 				++g_Graph->font[mode].font_size)))
 			ft_SDL_error("TTF_OpenFont", MODE_TTF);
-		TTF_SizeUTF8(g_Graph->font[mode].font, "0", &g_Graph->font[mode].w,
-				&g_Graph->font[mode].h);
+		if (TTF_SizeUTF8(g_Graph->font[mode].font, "0", &g_Graph->font[mode].w,
+			&g_Graph->font[mode].h))
+			ft_SDL_error("TTF_SizeUTF8", MODE_SDL);
 	}
 }
 
 static void		ini_info_rects(void)
 {
-	SDL_Rect *tmp = NULL;
-	
+	SDL_Rect *tmp;
+
 	tmp = (SDL_Rect *)malloc(sizeof(SDL_Rect));
 	g_Graph->info.cicles_gen = tmp;
 	*g_Graph->info.cicles_gen = (SDL_Rect){0, 0, g_Graph->square_info->w / 20,
@@ -47,17 +50,20 @@ static void		ini_info_rects(void)
 	*g_Graph->info.processos = *g_Graph->info.cicles_gen;
 }
 
-void	ft_ini_material(SDL_Surface *info_marc)
+void			ft_ini_material(SDL_Surface *info_marc)
 {
 	unsigned int i;
 
 	ini_info_rects();
-	ini_number(GENERAL_NBR_FONT, &g_Graph->general_nbr, *(g_Graph->info.cicles_gen));
+	ini_number(GENERAL_NBR_FONT, &g_Graph->general_nbr,
+		*(g_Graph->info.cicles_gen));
 	ft_put_general_info();
-	g_Graph->info.cicles_play = (SDL_Rect *)malloc(sizeof(SDL_Rect) *
-			g_n_players);
-	g_Graph->info.lst_life = (SDL_Rect *)malloc(sizeof(SDL_Rect) *
-			g_n_players);
+	if (!(g_Graph->info.cicles_play = (SDL_Rect *)malloc(sizeof(SDL_Rect) *
+		g_n_players)))
+		ft_error("malloc ft_ini_material");
+	if (!(g_Graph->info.lst_life = (SDL_Rect *)malloc(sizeof(SDL_Rect) *
+		g_n_players)))
+		ft_error("malloc 2 ft_ini_material");
 	ini_number(PLAYER_NBR_FONT, &g_Graph->player_nbr,
 			(SDL_Rect){0, 0, info_marc->w / 30, info_marc->h / 6});
 	i = 0;

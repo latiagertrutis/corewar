@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 06:40:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/27 20:12:48 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/28 17:00:27 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,11 @@ void						ft_ini_interface(void)
 			372645892, SDL_TEXTUREACCESS_STREAMING, g_Graph->big_square->w,
 			g_Graph->big_square->h)))
 		ft_SDL_error("SDL_CreateTexture", MODE_SDL);
-	if (!(g_Graph->pc = (SDL_Texture **)malloc(sizeof(SDL_Texture *) *
-			i * 4)))
+	if (!(g_Graph->pc = (SDL_Texture **)malloc(sizeof(SDL_Texture *) * i * 4)))
 		ft_error("Error malloc ft_ini_interface\n");
 	ft_ini_pcs();
-	SDL_SetTextureBlendMode(g_Graph->screen.texture, SDL_BLENDMODE_BLEND);
-	SDL_SetTextureAlphaMod(g_Graph->screen.texture, 100);
+	if (SDL_SetTextureBlendMode(g_Graph->screen.texture, SDL_BLENDMODE_BLEND))
+		ft_SDL_error("SDL_SetTextureBlendMode", MODE_SDL);
+	if (SDL_SetTextureAlphaMod(g_Graph->screen.texture, 100))
+		ft_SDL_error("SDL_SetTextureAlphaMod", MODE_SDL);
 }
