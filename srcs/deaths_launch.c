@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instruction_launch.c                               :+:      :+:    :+:   */
+/*   deaths_launch.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/27 19:27:14 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/28 21:38:34 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/09/28 19:39:55 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/09/28 21:39:56 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 static void	init_func(t_op *ops)
 {
-	ops[0] = (t_op){instruc_core_live, 10};
-	ops[1] = (t_op){instruc_core_ld, 5};
-	ops[2] = (t_op){instruc_core_st, 5};
-	ops[3] = (t_op){instruc_core_add, 10};
-	ops[4] = (t_op){instruc_core_sub, 10};
-	ops[5] = (t_op){instruc_core_and, 6};
-	ops[6] = (t_op){instruc_core_or, 6};
-	ops[7] = (t_op){instruc_core_xor, 6};
-	ops[8] = (t_op){instruc_core_zjmp, 20};
-	ops[9] = (t_op){instruc_core_ldi, 25};
-	ops[10] = (t_op){instruc_core_sti, 25};
-	ops[11] = (t_op){instruc_core_fork, 800};
+	ops[0] = (t_op){core_live, 10};
+	ops[1] = (t_op){core_ld, 5};
+	ops[2] = (t_op){core_st, 5};
+	ops[3] = (t_op){core_add, 10};
+	ops[4] = (t_op){core_sub, 10};
+	ops[5] = (t_op){core_and, 6};
+	ops[6] = (t_op){core_or, 6};
+	ops[7] = (t_op){core_xor, 6};
+	ops[8] = (t_op){core_zjmp, 20};
+	ops[9] = (t_op){core_ldi, 25};
+	ops[10] = (t_op){core_sti, 25};
+	ops[11] = (t_op){core_fork, 800};
 	ops[12] = (t_op){core_lld, 10};
 	ops[13] = (t_op){core_lldi, 50};
-	ops[14] = (t_op){instruc_core_lfork, 1000};
+	ops[14] = (t_op){core_lfork, 1000};
 	ops[15] = (t_op){core_aff, 2};
 }
 
@@ -61,9 +61,9 @@ static void	exe_pc(t_op *ops)
 	g_nb_cycles++;
 }
 
-void		instruction_launch(void)
+void		deaths_launch(void)
 {
-	int 			i;
+	int 	i;
 	t_op			ops[NB_INSTRUCTIONS];
 
 	init_func(ops);
@@ -77,6 +77,6 @@ void		instruction_launch(void)
 			if (i >= g_cycle_to_die)
 				break ;
 		}
-		check_cycle_to_die();
+		check_cycle_to_die_deaths();
 	}
 }

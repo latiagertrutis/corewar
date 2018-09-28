@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_cycle_to_die.c                               :+:      :+:    :+:   */
+/*   check_cycle_to_die_deaths.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/18 19:47:56 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/28 19:43:01 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/09/28 19:42:38 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/09/28 20:48:45 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static char	check_head(size_t *live_count)
 
 	while (g_pc && !g_pc->live)
 	{
+		ft_printf("El pc %u ha muerto.(CTD %d) pos %d\n", g_pc->pc_num + 1, g_cycle_to_die, g_pc->pc);
 		aux_pc = g_pc->next;
 		free(g_pc);
 		g_pc = aux_pc;
@@ -49,6 +50,7 @@ static void	check_body(size_t *live_count)
 		}
 		else
 		{
+			ft_printf("El pc %u ha muerto.(CTD %d) pos %d\n", current_pc->pc_num + 1, g_cycle_to_die, current_pc->pc);
 			next_pc = current_pc->next;
 			previous_pc->next = next_pc;
 			free(current_pc);
@@ -58,7 +60,7 @@ static void	check_body(size_t *live_count)
 	}
 }
 
-void		check_cycle_to_die(void)
+void		check_cycle_to_die_deaths(void)
 {
 	size_t				live_count;
 	static unsigned int checks = 0;

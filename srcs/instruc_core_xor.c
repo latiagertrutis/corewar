@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 20:24:25 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/28 17:34:43 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/28 19:23:49 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,15 @@ static char	verify_ocp(const unsigned char ocp)
 
 static void	apply_xor(const t_arg arg1, const t_arg arg2, const t_pc *pc, const unsigned char reg_pos)
 {
-	*((REG_CAST *)(pc->reg[reg_pos])) = *((REG_CAST *)(arg1.arg)) ^ *((REG_CAST *)(arg2.arg));
-	ft_printf("P%5d | xor %d %d r%d\n", pc->pc_num + 1, *((REG_CAST *)(arg1.arg)), *((REG_CAST *)(arg2.arg)), reg_pos + 1);
+	REG_CAST	value1;
+	REG_CAST	value2;
+
+	value1 = *((REG_CAST *)(arg1.arg));
+	value2 = *((REG_CAST *)(arg2.arg));
+	*((REG_CAST *)(pc->reg[reg_pos])) = value1 ^ value2;
+	invert_bytes(&value1, REG_SIZE);
+	invert_bytes(&value2, REG_SIZE);
+	ft_printf("P%5d | xor %d %d r%d\n", pc->pc_num + 1, value1, value2, reg_pos + 1);
 }
 
 void		instruc_core_xor(t_pc *pc)

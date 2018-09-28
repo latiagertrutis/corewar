@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 21:48:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/28 17:20:17 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/28 19:43:53 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ char			*read_alloc(int fd, const size_t size);
 void			invert_bytes(void *arr, const size_t size);
 void			take_input(const int ac, const char **av, unsigned int *flags, t_flag_value *f_value);
 void			check_cycle_to_die(void);
+void			check_cycle_to_die_deaths(void);
 int				ft_mod(const int nb, const unsigned int mod);
 unsigned char	get_size_arg(const unsigned char ocp, const unsigned char n_arg, const unsigned int dir_size);
 void			get_arg(const unsigned char ocp, const unsigned int pos, const unsigned char prev_siz, t_arg *arg);
@@ -90,6 +91,7 @@ char			get_arg_value(t_arg *arg, const t_pc *pc, const unsigned char restriction
 void			basic_launch(void);
 void			graphic_launch(const unsigned int flags);
 void			instruction_launch(void);
+void			deaths_launch(void);
 void			*graphic_thread(void *arg);
 void			core_live(t_pc *pc);
 void			core_ld(t_pc *pc);
@@ -132,5 +134,6 @@ void			instruc_core_zjmp(t_pc *pc);
 void			instruc_core_ldi(t_pc *pc);
 void			instruc_core_sti(t_pc *pc);
 void			instruc_core_fork(t_pc *pc);
+void			instruc_core_lfork(t_pc *pc);
 
 #endif

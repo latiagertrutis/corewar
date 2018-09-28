@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 14:54:03 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/25 16:20:41 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/28 18:42:47 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,5 @@ void			core_zjmp(t_pc *pc)
 //		ft_printf("zjmp: EL pc ha saltado a %d\n", pc->pc);
 	}
 	else
-		pc->pc = (pos + 1 + IND_SIZE);
+		pc->pc = (pos + 1 + IND_SIZE) % MEM_SIZE;
 }

@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/09/28 17:20:28 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/09/28 19:44:08 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -27,6 +27,7 @@ FUNCS =	main.c \
 		set_flags.c \
 		take_input.c \
 		check_cycle_to_die.c \
+		check_cycle_to_die_deaths.c \
 		ft_mod.c \
 		get_size_arg.c \
 		get_arg.c \
@@ -34,6 +35,7 @@ FUNCS =	main.c \
 		basic_launch.c \
 		graphic_launch.c \
 		instruction_launch.c \
+		deaths_launch.c \
 		core_live.c \
 		core_ld.c \
 		core_st.c \
@@ -64,7 +66,8 @@ FUNCS =	main.c \
 		instruc_core_zjmp.c \
 		instruc_core_ldi.c \
 		instruc_core_sti.c \
-		instruc_core_fork.c
+		instruc_core_fork.c \
+		instruc_core_lfork.c
 
 GRAPH = ft_ini_graphics.c \
 		ft_quit_graphics.c \

@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 19:48:58 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/26 19:25:23 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/28 18:59:17 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,5 @@ void			init_player(const char *str, const t_flag_value *f_value)
 		g_players[player_nb].player_nb = f_value->player_nb[player_nb];
 	else
 		g_players[player_nb].player_nb = -(player_nb + 1);
-	invert_bytes(&(g_players[player_nb].player_nb), sizeof(int32_t));
+//	invert_bytes(&(g_players[player_nb].player_nb), sizeof(int32_t));
 }

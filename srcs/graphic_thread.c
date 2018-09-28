@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 17:47:26 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/26 20:54:28 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/28 21:41:14 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,12 +155,14 @@ void		*graphic_thread(void *arg)
 	while (g_pc)
 	{
 		i = 0;
-		while (i < g_cycle_to_die)
+		while (1)
 		{
 			exe_pc(ops);
 			new_frame(i);
 			add_frame();
 			i++;
+			if (i >= g_cycle_to_die)
+				break ;
 		}
 		check_cycle_to_die();
 	}

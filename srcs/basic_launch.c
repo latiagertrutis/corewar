@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 18:58:19 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/26 20:54:55 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/28 21:39:14 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,12 @@ void		basic_launch(void)
 	while (g_pc)
 	{
 		i = 0;
-		while (i < g_cycle_to_die)
+		while (1)
 		{
 			exe_pc(ops);
 			i++;
+			if (i >= g_cycle_to_die)
+				break ;
 		}
 		check_cycle_to_die();
 	}

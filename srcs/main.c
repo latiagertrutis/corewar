@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 17:53:30 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/27 19:27:50 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/28 19:39:37 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void	select_mode(const unsigned int flags, const t_flag_value f_value)
 		graphic_launch(flags);
 	if (flags & 0x4)
 		instruction_launch();
+	if (flags & 0x8)
+		deaths_launch();
 }
 
 static void	init_pc(const t_flag_value f_value)
@@ -60,6 +62,35 @@ static void	init_pc(const t_flag_value f_value)
 	}
 }
 
+static void	present_players (void)
+{
+	unsigned char i;
+
+	ft_printf("Introducing contestants...\n");
+	i = 0;
+	while (i < g_n_players)
+	{
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i + 1, g_players[i].prog_size,g_players[i].name, g_players[i].comment);
+		i++;
+	}
+}
+
+static void	show_winner(void)
+{
+	unsigned char i;
+	unsigned char pos;
+
+	i = 0;
+	pos = 0;
+	while (i < g_n_players)
+	{
+		if (g_players[pos].last_live < g_players[i].last_live)
+			pos = i;
+		i++;
+	}
+	ft_printf("Contestant %d, \"%s\", has won !\n", pos + 1, g_players[pos].name);
+}
+
 int			main(int ac, char **av)
 {
 	unsigned int flags;
@@ -76,10 +107,8 @@ int			main(int ac, char **av)
 	g_nb_pc_total = g_n_players;
 	g_pc = NULL;
 	init_pc(f_value);
+	present_players();
 	select_mode(flags, f_value);
-
-	int fd = open("map", O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-	write(fd, g_mem, MEM_SIZE);
-	close(fd);
+	show_winner();
 	return (0);
 }

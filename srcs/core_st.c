@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 17:55:27 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/25 16:20:41 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/28 18:41:16 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	store_in_ram(const unsigned char reg_pos1, t_pc *pc)
 static void	store_in_reg(const unsigned char reg_pos1, const unsigned char reg_pos2, t_pc *pc)
 {
 	*((REG_CAST *)pc->reg[reg_pos2]) = *((REG_CAST *)pc->reg[reg_pos1]);
-	pc->pc = (pc->pc + 1 + 1 + 1 + 1); //st + ocp + rg1 + rg2
+	pc->pc = (pc->pc + 1 + 1 + 1 + 1) % MEM_SIZE; //st + ocp + rg1 + rg2
 }
 
 void		core_st(t_pc *pc)
