@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 20:23:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/27 20:23:39 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/28 17:34:44 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	verify_ocp(const unsigned char ocp)
 static void	apply_or(const t_arg arg1, const t_arg arg2, const t_pc *pc, const unsigned char reg_pos)
 {
 	*((REG_CAST *)(pc->reg[reg_pos])) = *((REG_CAST *)(arg1.arg)) | *((REG_CAST *)(arg2.arg));
-	ft_printf("P    %d | or %d %d r%d\n", pc->pc_num + 1, *((REG_CAST *)(arg1.arg)), *((REG_CAST *)(arg2.arg)), reg_pos + 1);
+	ft_printf("P%5d | or %d %d r%d\n", pc->pc_num + 1, *((REG_CAST *)(arg1.arg)), *((REG_CAST *)(arg2.arg)), reg_pos + 1);
 }
 
 void		instruc_core_or(t_pc *pc)

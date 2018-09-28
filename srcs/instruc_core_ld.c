@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 19:45:09 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/27 19:54:58 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/28 17:34:45 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	load_direct(const unsigned char reg_pos, t_pc *pc)
 	}
 	print_num = *((REG_CAST *)(pc->reg[reg_pos]));
 	invert_bytes(&print_num, REG_SIZE);
-	ft_printf("P    %d | ld %d r%d\n", pc->pc_num + 1, print_num, reg_pos + 1);
+	ft_printf("P%5d | ld %d r%d\n", pc->pc_num + 1, print_num, reg_pos + 1);
 	pc->pc = (aux_pc + 1 + DIR_SIZE) % MEM_SIZE;//ld + ocp + reg + dir
 	pc->carry = (*((REG_CAST *)pc->reg[reg_pos])) ? 0x0 : 0x1;
 }
@@ -69,7 +69,7 @@ static void	load_indirect(const unsigned char reg_pos, t_pc *pc)
 			i++;
 		}
 	}
-	ft_printf("P    %d | ld %d r%d\n", pc->pc_num + 1, *((IND_CAST *)(board_pos)), reg_pos + 1);
+	ft_printf("P%5d | ld %d r%d\n", pc->pc_num + 1, *((IND_CAST *)(board_pos)), reg_pos + 1);
 	pc->pc = (aux_pc + 1 + IND_SIZE) % MEM_SIZE;//ld + ocp + ind + reg
 	pc->carry = (*((REG_CAST *)pc->reg[reg_pos])) ? 0x0 : 0x1;
 }

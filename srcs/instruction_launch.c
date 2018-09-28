@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 19:27:14 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/27 20:26:57 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/28 17:20:48 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static void	init_func(t_op *ops)
 	ops[5] = (t_op){instruc_core_and, 6};
 	ops[6] = (t_op){instruc_core_or, 6};
 	ops[7] = (t_op){instruc_core_xor, 6};
-	ops[8] = (t_op){core_zjmp, 20};
-	ops[9] = (t_op){core_ldi, 25};
-	ops[10] = (t_op){core_sti, 25};
-	ops[11] = (t_op){core_fork, 800};
+	ops[8] = (t_op){instruc_core_zjmp, 20};
+	ops[9] = (t_op){instruc_core_ldi, 25};
+	ops[10] = (t_op){instruc_core_sti, 25};
+	ops[11] = (t_op){instruc_core_fork, 800};
 	ops[12] = (t_op){core_lld, 10};
 	ops[13] = (t_op){core_lldi, 50};
 	ops[14] = (t_op){core_lfork, 1000};

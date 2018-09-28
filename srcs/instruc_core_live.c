@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 19:12:16 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/27 19:17:35 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/28 17:30:44 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void			instruc_core_live(t_pc *pc)
 		}
 		i++;
 	}
-	ft_printf("P    %d | live %d\n", pc->pc_num + 1, live_nb);
+	ft_printf("P%5d | live %d\n", pc->pc_num + 1, live_nb);
 	pc->live++;
 	pc->pc = (pos + 1 + 4) % MEM_SIZE;
 //	ft_printf("live: y ahora el pc esta en %d\n", pc->pc);

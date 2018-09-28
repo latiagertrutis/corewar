@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/09/27 20:26:25 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/09/28 17:20:28 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -61,6 +61,10 @@ FUNCS =	main.c \
 		instruc_core_and.c \
 		instruc_core_or.c \
 		instruc_core_xor.c \
+		instruc_core_zjmp.c \
+		instruc_core_ldi.c \
+		instruc_core_sti.c \
+		instruc_core_fork.c
 
 GRAPH = ft_ini_graphics.c \
 		ft_quit_graphics.c \
