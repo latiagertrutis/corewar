@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 18:42:52 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/24 22:07:04 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/28 18:23:32 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,24 @@ SDL_Surface			*ft_write_string(char *str, int pos[2], int name)
 {
 	SDL_Surface *str_surf;
 	SDL_Surface *tmp;
-	char		*pixel;
-	int			pitch;
-	int			i;
 
-	tmp = TTF_RenderUTF8_Blended(g_Graph->font[TMP_FONT].font, str, g_Graph->font[TMP_FONT].color);
-	str_surf = SDL_CreateRGBSurfaceWithFormat(0, tmp->w, tmp->h, 32, g_Graph->rack->format->format);
-	SDL_BlitSurface(tmp, NULL, str_surf, NULL);
+	if (!(tmp = TTF_RenderUTF8_Blended(g_Graph->font[TMP_FONT].font, str,
+		g_Graph->font[TMP_FONT].color)))
+		ft_SDL_error("TTF_RenderUTF8_Blended", MODE_TTF);
+	if (!(str_surf = SDL_CreateRGBSurfaceWithFormat(0, tmp->w, tmp->h, 32,
+		g_Graph->rack->format->format)))
+		ft_SDL_error("SDL_CreateRGBSurfaceWithFormat", MODE_SDL);
+	if (SDL_BlitSurface(tmp, NULL, str_surf, NULL))
+		ft_SDL_error("SDL_BlitSurface", MODE_SDL);
 	SDL_FreeSurface(tmp);
-	SDL_LockTexture(g_Graph->info_text, &(SDL_Rect){ft_abs(pos[0] - str_surf->w / 2 * name), pos[1], str_surf->w, str_surf->h}, (void **)&pixel, &pitch);
-	SDL_LockSurface(str_surf);
-	i = -1;
-	while (++i < str_surf->h)
-		memcpy(pixel + i * pitch, str_surf->pixels + i * str_surf->pitch, str_surf->pitch);
-	SDL_UnlockSurface(str_surf);
-	SDL_UnlockTexture(g_Graph->info_text);
+	ft_surf_to_text(g_Graph->info_text, str_surf,
+		&(SDL_Rect){ft_abs(pos[0] - str_surf->w / 2 * name), pos[1],
+		str_surf->w, str_surf->h});
 	return (str_surf);
 }
 
-int				ft_write_number_fields(t_font *font, int pos[2], SDL_Surface *number)
+int				ft_write_number_fields(t_font *font, int pos[2],
+		SDL_Surface *number)
 {
 	int		i;
 	int		j;

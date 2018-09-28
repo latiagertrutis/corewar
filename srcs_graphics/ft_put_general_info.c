@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/01 10:20:06 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/24 22:07:04 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/28 18:10:43 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ static int		prepare_string(int pos[2], char *str, int mode)
 	tmp_surf = ft_write_string(str, pos, mode);
 	tmp = tmp_surf->h;
 	SDL_FreeSurface(tmp_surf);
-		return (tmp);
+	return (tmp);
 }
 
-void		ft_put_general_info(void)
+void			ft_put_general_info(void)
 {
 	int			tmp;
 	int			x_pos;
@@ -47,8 +47,8 @@ void		ft_put_general_info(void)
 	tmp = 15;
 	tmp += prepare_string((int[2]){x_pos + (g_Graph->general_nbr->w * 10 - 9)
 			/ 2, tmp}, "Number of Cycles", 1);
-	*g_Graph->info.cicles_gen = (SDL_Rect){x_pos, tmp, g_Graph->info.cicles_gen->w,
-		g_Graph->info.cicles_gen->h};
+	*g_Graph->info.cicles_gen = (SDL_Rect){x_pos, tmp,
+			g_Graph->info.cicles_gen->w, g_Graph->info.cicles_gen->h};
 	tmp += ft_write_number_fields(&g_Graph->font[GENERAL_NBR_FONT],
 			(int[2]){x_pos, tmp}, g_Graph->general_nbr) + 10;
 	tmp += prepare_string((int[2]){x_pos + (g_Graph->general_nbr->w * 10 - 9)
@@ -59,8 +59,8 @@ void		ft_put_general_info(void)
 			(int[2]){x_pos, tmp}, g_Graph->general_nbr) + 10;
 	tmp += prepare_string((int[2]){x_pos + (g_Graph->general_nbr->w * 10 - 9)
 			/ 2, tmp}, "Number of Processos", 1);
-	*g_Graph->info.processos = (SDL_Rect){x_pos, tmp, g_Graph->info.cicles_gen->w,
-			g_Graph->info.cicles_gen->h};
+	*g_Graph->info.processos = (SDL_Rect){x_pos, tmp,
+			g_Graph->info.cicles_gen->w, g_Graph->info.cicles_gen->h};
 	tmp += ft_write_number_fields(&g_Graph->font[GENERAL_NBR_FONT],
 			(int[2]){x_pos, tmp}, g_Graph->general_nbr);
 }

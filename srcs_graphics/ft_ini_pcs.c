@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/16 15:57:43 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/24 22:07:05 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/28 17:05:01 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void			paint_pc(int *pixel, int pitch, SDL_Rect pc, Uint32 color)
 	}
 }
 
-void			ft_ini_pcs(void)
+void				ft_ini_pcs(void)
 {
 	int			i;
 	SDL_Rect	pc;
@@ -44,8 +44,10 @@ void			ft_ini_pcs(void)
 				372645892, SDL_TEXTUREACCESS_STREAMING, g_Graph->square->w - 2,
 				g_Graph->square->h - 2)))
 			ft_SDL_error("SDL_CreateTexture", MODE_SDL);
-		SDL_SetTextureBlendMode(g_Graph->pc[i], SDL_BLENDMODE_BLEND);
-		SDL_LockTexture(g_Graph->pc[i], &pc, (void **)&pixel, &pitch);
+		if (SDL_SetTextureBlendMode(g_Graph->pc[i], SDL_BLENDMODE_BLEND))
+			ft_SDL_error("SDL_SetTextureBlendMode", MODE_SDL);
+		if (SDL_LockTexture(g_Graph->pc[i], &pc, (void **)&pixel, &pitch))
+			ft_SDL_error("SDL_LockTexture", MODE_SDL);
 		paint_pc(pixel, pitch, pc, color);
 		SDL_UnlockTexture(g_Graph->pc[i]);
 	}
