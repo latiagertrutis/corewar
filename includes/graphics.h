@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 17:03:13 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/26 21:02:48 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/29 23:59:53 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,8 +165,8 @@ SDL_Color		ft_SDL_color(int i);
 Uint32			ft_MapRGBA(SDL_PixelFormat *format, int i, int alpha);
 void			ft_ini_pcs(void);
 void			ft_ini_images(void);
-void			ft_ini_sprites(void);
-void			ft_reset_health(int player);
+void			ft_ini_sprites(SDL_Rect *cicles_play, SDL_Rect *info_marc, SDL_Surface *player_nbr);
+void			ft_reset_health(int player, SDL_Rect *heart_pos, SDL_Rect *info_marc, SDL_Surface *ini_heart);
 void			ft_check_health(const int cycle_to_die, int player, int cicle_pre_die);
 void			new_frame(const int j);
 void			ft_surf_to_text(SDL_Texture *dst, SDL_Surface *src, SDL_Rect *dst_rect);
