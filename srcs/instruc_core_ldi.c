@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 16:58:36 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/28 17:36:54 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/29 13:27:34 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	load_indirect(const t_arg arg1, const t_arg arg2, const unsigned cha
 			i++;
 		}
 	}
-	ft_printf("P%5d | ldi %d %d r%d\n       | -> load from %d + %d = %d (with pc and mod %d)\n",
+	ft_printf("P %4d | ldi %d %d r%d\n       | -> load from %d + %d = %d (with pc and mod %d)\n",
 	          pc->pc_num + 1, value1, value2, reg_pos + 1, value1, value2, value1 + value2, inc);
 }
 

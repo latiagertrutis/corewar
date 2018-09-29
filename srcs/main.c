@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 17:53:30 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/28 19:39:37 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/29 14:26:51 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	present_players (void)
 
 	ft_printf("Introducing contestants...\n");
 	i = 0;
-	while (i < g_n_players)
+	while (i < g_n_players && i < MAX_PLAYERS)
 	{
 		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i + 1, g_players[i].prog_size,g_players[i].name, g_players[i].comment);
 		i++;
@@ -82,7 +82,7 @@ static void	show_winner(void)
 
 	i = 0;
 	pos = 0;
-	while (i < g_n_players)
+	while (i < g_n_players && i < MAX_PLAYERS)
 	{
 		if (g_players[pos].last_live < g_players[i].last_live)
 			pos = i;

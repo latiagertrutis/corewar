@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/09/28 19:44:08 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/09/29 13:48:02 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -24,6 +24,7 @@ FUNCS =	main.c \
 		init_player.c \
 		invert_bytes.c \
 		read_alloc.c \
+		invert_bytes_ret.c \
 		set_flags.c \
 		take_input.c \
 		check_cycle_to_die.c \

@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 21:48:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/28 19:43:53 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/29 13:49:59 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int				set_flags(const int ac, const char **av, unsigned int *flags, t_flag_valu
 void			init_player(const char *str, const t_flag_value *f_value);
 char			*read_alloc(int fd, const size_t size);
 void			invert_bytes(void *arr, const size_t size);
+long			invert_bytes_ret(const long arr, const size_t size);
 void			take_input(const int ac, const char **av, unsigned int *flags, t_flag_value *f_value);
 void			check_cycle_to_die(void);
 void			check_cycle_to_die_deaths(void);
