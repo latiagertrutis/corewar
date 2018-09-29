@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 19:57:10 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/28 18:42:02 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/29 13:52:50 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ static void	store_in_ram(const unsigned char reg_pos1, t_pc *pc)
 			i++;
 		}
 	}
-	ft_printf("P%5d | st r%d %d\n", pc->pc_num + 1, reg_pos1 + 1, *((IND_CAST *)board_pos));
+	ft_printf("P %4d | st r%d %d\n", pc->pc_num + 1, reg_pos1 + 1, *((IND_CAST *)board_pos));
 	pc->pc = (aux_pc + 1 + IND_SIZE) % MEM_SIZE;//st + ocp + rg + ind
 }
 
 static void	store_in_reg(const unsigned char reg_pos1, const unsigned char reg_pos2, t_pc *pc)
 {
 	*((REG_CAST *)pc->reg[reg_pos2]) = *((REG_CAST *)pc->reg[reg_pos1]);
-	ft_printf("P%5d | st r%d r%d\n", pc->pc_num + 1, reg_pos1 + 1, reg_pos2 + 1);
+	ft_printf("P %4d | st r%d %d\n", pc->pc_num + 1, reg_pos1 + 1, reg_pos2 + 1);
 	pc->pc = (pc->pc + 1 + 1 + 1 + 1) % MEM_SIZE; //st + ocp + rg1 + rg2
 }
 

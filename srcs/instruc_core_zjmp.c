@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 16:46:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/28 19:35:27 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/29 13:27:30 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void			instruc_core_zjmp(t_pc *pc)
 	if (pc->carry)
 	{
 		pc->pc = ft_mod(pos + (jump_pos % IDX_MOD), MEM_SIZE);
-		ft_printf("P%5d | zjmp %d OK\n", pc->pc_num + 1, jump_pos);
+		ft_printf("P %4d | zjmp %d OK\n", pc->pc_num + 1, jump_pos);
 	}
 	else
 	{
 		pc->pc = (pos + 1 + IND_SIZE) % MEM_SIZE;
-		ft_printf("P%5d | zjmp %d FAILED\n", pc->pc_num + 1, jump_pos);
+		ft_printf("P %4d | zjmp %d FAILED\n", pc->pc_num + 1, jump_pos);
 	}
 }

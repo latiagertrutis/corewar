@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 20:10:40 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/28 17:34:46 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/29 13:27:36 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	add_reg(t_pc *pc, const unsigned char reg1, const unsigned char reg2
 	invert_bytes(&aux2, REG_SIZE);
 	(*(REG_CAST *)pc->reg[reg3]) = aux1 + aux2;
 	invert_bytes(pc->reg[reg3], REG_SIZE);
-	ft_printf("P%5d | add r%d r%d r%d\n", pc->pc_num + 1, reg1 + 1, reg2 + 1, reg3 + 1);
+	ft_printf("P %4d | add r%d r%d r%d\n", pc->pc_num + 1, reg1 + 1, reg2 + 1, reg3 + 1);
 	pc->pc = (pc->pc + 1 + 1 + 1 + 1 + 1) % MEM_SIZE;//ld + opc + reg1 + reg2 + reg3
 	pc->carry = (*((REG_CAST *)(pc->reg[reg3]))) ? 0x0 : 0x1;//actualizar carry
 }

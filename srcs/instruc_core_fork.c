@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 17:17:20 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/28 21:27:55 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/29 13:27:35 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void			instruc_core_fork(t_pc *pc)
 		*((REG_CAST *)(new_pc->reg[i])) = *((REG_CAST *)(pc->reg[i]));
 		i++;
 	}
-	ft_printf("P%5d | fork %d (%d)\n", pc->pc_num + 1, indirect, new_i);
+	ft_printf("P %4d | fork %d (%d)\n", pc->pc_num + 1, indirect, new_i);
 	g_pc = new_pc;
 	g_nb_pc++;
 	g_nb_pc_total++;

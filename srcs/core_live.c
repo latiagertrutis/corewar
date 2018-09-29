@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/19 13:53:33 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/26 19:27:46 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/29 20:42:32 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void			core_live(t_pc *pc)
 		if (g_players[i].player_nb == live_nb)
 		{
 			g_players[i].live_counter++;
-			g_players[i].last_live = g_cycle_to_die;
+			g_players[i].last_live = g_nb_cycles;
 			break ;
 		}
 		i++;
