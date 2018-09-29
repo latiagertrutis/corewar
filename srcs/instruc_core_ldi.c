@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 16:58:36 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/29 13:27:34 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/29 20:34:16 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	load_indirect(const t_arg arg1, const t_arg arg2, const unsigned cha
 	value1 = *((REG_CAST *)(arg1.arg));
 	value2 = *((REG_CAST *)(arg2.arg));
 	inc = (pos + ((value1 + value2) % IDX_MOD));
-	if (inc < MEM_SIZE && inc >= 0)
+	if ((inc + REG_SIZE) < MEM_SIZE && inc >= 0)
 		*((REG_CAST *)(pc->reg[reg_pos])) = *((REG_CAST *)(g_mem + inc));
 	else
 	{

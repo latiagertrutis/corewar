@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 20:23:02 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/29 13:27:33 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/29 21:02:31 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	apply_or(const t_arg arg1, const t_arg arg2, const t_pc *pc, const u
 	*((REG_CAST *)(pc->reg[reg_pos])) = value1 | value2;
 	invert_bytes(&value1, REG_SIZE);
 	invert_bytes(&value2, REG_SIZE);
-	ft_printf("P %4d | xor %d %d r%d\n", pc->pc_num + 1, value1, value2, reg_pos + 1);
+	ft_printf("P %4d | or %d %d r%d\n", pc->pc_num + 1, value1, value2, reg_pos + 1);
 }
 
 void		instruc_core_or(t_pc *pc)

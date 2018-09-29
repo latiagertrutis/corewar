@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 17:53:30 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/29 14:26:51 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/29 20:43:47 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void	show_winner(void)
 	pos = 0;
 	while (i < g_n_players && i < MAX_PLAYERS)
 	{
-		if (g_players[pos].last_live < g_players[i].last_live)
+		if (g_players[pos].last_live <= g_players[i].last_live)
 			pos = i;
 		i++;
 	}

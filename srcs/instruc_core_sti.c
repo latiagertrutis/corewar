@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/28 17:08:35 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/29 13:27:32 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/29 20:39:31 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	store_indirect(const unsigned char reg_pos, const t_arg arg2, const 
 	value2 = *((REG_CAST *)(arg2.arg));
 	value3 = *((REG_CAST *)(arg3.arg));
 	inc = (pos + ((value2 + value3) % IDX_MOD));
-	if (inc < MEM_SIZE && inc >= 0)
+	if ((inc + REG_SIZE) < MEM_SIZE && inc >= 0)
 		*((REG_CAST *)(g_mem + inc)) = *((REG_CAST *)(pc->reg[reg_pos]));
 	else
 	{
