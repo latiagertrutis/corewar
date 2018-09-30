@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 14:14:30 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/18 18:35:40 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/25 16:25:15 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # define HASH_SIZE 100
 # define REG_ASM_SIZE 1
+# define END_LINE_CHAR ';'
 
 typedef struct	s_header
 {
