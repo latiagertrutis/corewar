@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 12:41:06 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/25 18:29:10 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/30 23:07:38 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 static t_header	name_and_comment(int fd)
 {
 	int			j;
+	int			i;
 	char		*line;
 	t_header	h;
 
 	j = 1;
+	i = 0;
 	h.prog_name = NULL;
 	h.comment = NULL;
-	while (get_next_line(fd, &line) > 0)
+	while ((i = get_next_line(fd, &line) > 0) > 0)
 	{
 		if (line[0] != 0)
 			h = ft_getname(line, j, h);
@@ -31,6 +33,8 @@ static t_header	name_and_comment(int fd)
 			break ;
 		j++;
 	}
+	if (i < 1)
+		ft_error_getname(j, 0);
 	h.line_n = j;
 	return (h);
 }
@@ -52,7 +56,7 @@ static t_line	*orders(int fd, int line_n, t_label **label)
 
 	line = ft_newline(NULL, -1, NULL, 0);
 	bgn = line;
-	while (get_next_line(fd, &l) > 0)
+	while ((get_next_line(fd, &l) > 0) > 0)
 	{
 		j = 0;
 		while (l[j] && (l[j] == ' ' || l[j] == '\t'))
@@ -83,7 +87,7 @@ int				assembler(int fd, char *filename, int sel)
 		label[i] = NULL;
 	header = name_and_comment(fd);
 	line = orders(fd, header.line_n, label);
-	if (sel == 0)
+	if (sel == 1)
 	{
 		if ((fd2 = open(filename, O_WRONLY | O_CREAT | O_TRUNC,
 						S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)

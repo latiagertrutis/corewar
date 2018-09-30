@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 19:28:53 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/18 18:58:35 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/09/30 21:53:58 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	ft_print_color(t_label *label)
 		write(1, &label->name[i], 1);
 	write(1, "\e[37m", 5);
 	if (label->color == 0)
-		ft_putstr(" (no call)");
+		ft_putstr(" \e[38;5;239m(no call)\e[0m");
 }
 
 int			ft_print_label(t_line *line)
