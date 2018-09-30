@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/09/30 19:22:40 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/09/30 21:50:04 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -68,6 +68,7 @@ FUNCS =	main.c \
 		instruc_core_ldi.c \
 		instruc_core_sti.c \
 		instruc_core_fork.c \
+		instruc_core_lldi.c \
 		instruc_core_lfork.c
 
 GRAPH = ft_ini_graphics.c \

@@ -1,22 +1,41 @@
 make;
 
-while getopts "fd" opt;
+while getopts "fda" opt;
 do
 	case $opt in
 		f)
 			read -e -p "Enter files: " dir
-			printf "\033[1;32mEvaluating %s\033[0m\n" $(basename $dir);
+			printf "\033[1;32mEvaluating %s\033[0m\n" "$dir";
 			./prueba $dir -i > our.txt;
-#			ex=$?; if [[ $ex != 0 ]]; then exit $ex; fi
+			#			ex=$?; if [[ $ex != 0 ]]; then exit $ex; fi
 			./corewar $dir -v 4 > real.txt;
-#			ex=$?; if [[ $ex != 0 ]]; then exit $ex; fi
+			#			ex=$?; if [[ $ex != 0 ]]; then exit $ex; fi
 			diff our.txt real.txt > diff.txt;
 			if [ -s diff.txt ]
 			then
-				printf "\033[31mDiferences of:\n%s\nStored in diff.txt\033[0m\n" $(basename $dir);
+				printf "\033[31mDiferences of:\n%s\nStored in diff.txt\033[0m\n" "$dir";
 			else
 				printf "\033[32mOK\033[0m\n"
 			fi
+			;;
+		a)
+			read -e -p "Directory to evaluate (Default /resources/sources/): " dir
+			dir=${dir:-resources/sources}
+			for f1 in $dir/*;
+			do
+				printf "\033[32mEvaluating %s\033[0m\n" $f1;
+				./asm_prueba  $f1
+				cat $(basename $f1) > $(echo $(basename $f1) | sed 's/\(.*\.\)s/\1cor/g')
+				./asm  $f1
+				diff our.txt real.txt > diff.txt;
+				if [ -s diff.txt ]
+				then
+					printf "\033[31mDiferences of:\n%s %s %s %s\nStored in diff.txt\033[0m\n"  $f1 $f2 $f3 $f4;
+					exit 2
+				else
+					printf "\033[32mOK\033[0m\n"
+				fi
+			done
 			;;
 		d)
 			read -e -p "Directory to evaluate (Default /resources/bin/): " dir

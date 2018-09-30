@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 17:53:30 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/30 19:09:52 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/30 23:19:25 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int			main(int ac, char **av)
 	unsigned int flags;
 	t_flag_value f_value;
 
-	g_winner = 0;
 	g_lives = 0;
 	flags = 0;
 	f_value  = (t_flag_value){0, {0}};
@@ -99,6 +98,7 @@ int			main(int ac, char **av)
 	g_nb_cycles = 0;
 	ft_memset(g_players, 0, MAX_PLAYERS * sizeof(t_player));
 	take_input(ac, (const char **)av, &flags, &f_value);
+	g_winner = g_n_players - 1;
 	g_nb_pc = g_n_players;
 	g_nb_pc_total = g_n_players;
 	g_pc = NULL;

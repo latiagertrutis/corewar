@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 21:48:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/30 19:01:53 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/30 21:49:32 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ void			instruc_core_zjmp(t_pc *pc);
 void			instruc_core_ldi(t_pc *pc);
 void			instruc_core_sti(t_pc *pc);
 void			instruc_core_fork(t_pc *pc);
+void			instruc_core_lldi(t_pc *pc);
 void			instruc_core_lfork(t_pc *pc);
 
 #endif
