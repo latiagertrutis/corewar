@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 18:28:52 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/30 00:04:00 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/30 21:53:39 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static void			prepare_all_sprites(int dim, SDL_Surface *sprite,
 			pos_in_sprite.x += 80;
 		if (!(ini_heart[pos] = SDL_CreateRGBSurfaceWithFormat(0, dim + 7,
 			dim, 32, 372645892)))
-			ft_SDL_error("SDL_CreateRGBSurfaceWithFormat", MODE_SDL);
+			ft_sdl_error("SDL_CreateRGBSurfaceWithFormat", MODE_SDL);
 		if (SDL_BlitScaled(sprite, &pos_in_sprite, ini_heart[pos++], NULL))
-			ft_SDL_error("SDL_BlitScaled", MODE_SDL);
+			ft_sdl_error("SDL_BlitScaled", MODE_SDL);
 	}
 	i = -1;
 	while (++i < g_n_players)
@@ -56,12 +56,12 @@ static int			calc_sprite_size(SDL_Surface **ini_heart, int disp_space[2],
 			SDL_FreeSurface(ini_heart[0]);
 		if (!(ini_heart[0] = SDL_CreateRGBSurfaceWithFormat(0, i + 7, i,
 			32, 372645892)))
-			ft_SDL_error("SDL_CreateRGBSurfaceWithFormat", MODE_SDL);
+			ft_sdl_error("SDL_CreateRGBSurfaceWithFormat", MODE_SDL);
 		if (SDL_FillRect(ini_heart[0], NULL, 0xFF00FF00))
-			ft_SDL_error("SDL_FillRect", MODE_SDL);
+			ft_sdl_error("SDL_FillRect", MODE_SDL);
 		if (SDL_BlitScaled(sprite, &(SDL_Rect){2, 1, 76, 69},
 			ini_heart[0], NULL))
-			ft_SDL_error("SDL_BlitScaled", MODE_SDL);
+			ft_sdl_error("SDL_BlitScaled", MODE_SDL);
 		i++;
 	}
 	return (i - 1);
@@ -73,11 +73,11 @@ static SDL_Surface	*open_sprite(void)
 	SDL_RWops	*tmp;
 
 	if (!(tmp = SDL_RWFromFile("./heart.png", "rb")))
-		ft_SDL_error("SDL_RWFromFile", MODE_SDL);
+		ft_sdl_error("SDL_RWFromFile", MODE_SDL);
 	if (!(sprite = IMG_LoadPNG_RW(tmp)))
-		ft_SDL_error("IMG_LoadPNG_RW", MODE_IMG);
+		ft_sdl_error("IMG_LoadPNG_RW", MODE_IMG);
 	if (SDL_RWclose(tmp))
-		ft_SDL_error("SDL_RWclose", MODE_SDL);
+		ft_sdl_error("SDL_RWclose", MODE_SDL);
 	return (sprite);
 }
 
@@ -99,10 +99,10 @@ void				ft_ini_sprites(SDL_Rect *cicles_play,
 	SDL_FreeSurface(ini_heart[0]);
 	if (!(ini_heart[0] = SDL_CreateRGBSurfaceWithFormat(0, sprite_size + 7,
 		sprite_size, 32, 372645892)))
-		ft_SDL_error("SDL_CreateRGBSurfaceWithFormat", MODE_SDL);
+		ft_sdl_error("SDL_CreateRGBSurfaceWithFormat", MODE_SDL);
 	if (SDL_BlitScaled(sprite, &(SDL_Rect){2, 1, 76, 69},
 		ini_heart[0], NULL))
-		ft_SDL_error("SDL_BlitScaled", MODE_SDL);
+		ft_sdl_error("SDL_BlitScaled", MODE_SDL);
 	*g_Graph->heart_pos = (SDL_Rect){cicles_play[0].x, ((info_marc->h -
 			((cicles_play[0].y + cicles_play[0].h) - (info_marc->y))) -
 			ini_heart[0]->h) / 2 + cicles_play[0].y + cicles_play[0].h,

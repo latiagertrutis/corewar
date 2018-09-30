@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 17:03:13 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/29 23:59:53 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/30 21:55:17 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ extern unsigned int		g_step;
 
 void 			ft_ini_graphics(const unsigned int flags);
 void			ft_quit_graphics(void);
-void			ft_SDL_error(char *str, int mode);
+void			ft_sdl_error(char *str, int mode);
 void			ft_ini_interface(void);
 void			ft_ini_font(void);
 void			ft_board_to_screen(const t_board *board, const unsigned int flags);
@@ -161,13 +161,13 @@ int				ft_write_number_fields(t_font *font, int pos[2], SDL_Surface *number);
 void			ft_update_info(const t_player *players, const int cicle_pre_die);
 void			ft_put_general_info(void);
 void			ft_put_player_info(SDL_Surface *info_marc, int i);
-SDL_Color		ft_SDL_color(int i);
-Uint32			ft_MapRGBA(SDL_PixelFormat *format, int i, int alpha);
+SDL_Color		ft_sdl_color(int i);
+Uint32			ft_maprgba(SDL_PixelFormat *format, int i, int alpha);
 void			ft_ini_pcs(void);
 void			ft_ini_images(void);
 void			ft_ini_sprites(SDL_Rect *cicles_play, SDL_Rect *info_marc, SDL_Surface *player_nbr);
 void			ft_reset_health(int player, SDL_Rect *heart_pos, SDL_Rect *info_marc, SDL_Surface *ini_heart);
-void			ft_check_health(const int cycle_to_die, int player, int cicle_pre_die);
+void			ft_check_health(const int cycle_to_die, int player, int cicle_pre_die, const t_player *players);
 void			new_frame(const int j);
 void			ft_surf_to_text(SDL_Texture *dst, SDL_Surface *src, SDL_Rect *dst_rect);
 

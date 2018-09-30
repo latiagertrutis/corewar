@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 05:27:44 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/26 18:26:17 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/30 22:19:53 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void		destroy_hex_array(SDL_Surface ***hex_array)
 	int i;
 	int j;
 	int k;
-	
+
 	k = 0;
 	while (k < 9)
 	{
@@ -70,10 +70,10 @@ static void		destroy_surfaces(void)
 	free(g_Graph->heart);
 }
 
-void ft_quit_graphics(void)
+void			ft_quit_graphics(void)
 {
 	int i;
-	
+
 	destroy_rects(g_Graph->info);
 	destroy_surfaces();
 	SDL_DestroyTexture(g_Graph->screen.texture);

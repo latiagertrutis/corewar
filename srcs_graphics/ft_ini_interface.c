@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 06:40:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/28 17:00:27 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/30 21:53:39 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void						ft_ini_interface(void)
 	prepare_big_square();
 	if (!(g_Graph->rack = SDL_CreateRGBSurfaceWithFormat(0,
 			g_Graph->big_square->w, g_Graph->big_square->h, 32, 372645892)))
-		ft_SDL_error("SDL_CreateRGBSurface", MODE_SDL);
+		ft_sdl_error("SDL_CreateRGBSurface", MODE_SDL);
 	if (MEM_SIZE <= 4096)
 		ini_rack();
 	else
@@ -88,12 +88,12 @@ void						ft_ini_interface(void)
 	if (!(g_Graph->screen.texture = SDL_CreateTexture(g_Graph->screen.Renderer,
 			372645892, SDL_TEXTUREACCESS_STREAMING, g_Graph->big_square->w,
 			g_Graph->big_square->h)))
-		ft_SDL_error("SDL_CreateTexture", MODE_SDL);
+		ft_sdl_error("SDL_CreateTexture", MODE_SDL);
 	if (!(g_Graph->pc = (SDL_Texture **)malloc(sizeof(SDL_Texture *) * i * 4)))
 		ft_error("Error malloc ft_ini_interface\n");
 	ft_ini_pcs();
 	if (SDL_SetTextureBlendMode(g_Graph->screen.texture, SDL_BLENDMODE_BLEND))
-		ft_SDL_error("SDL_SetTextureBlendMode", MODE_SDL);
+		ft_sdl_error("SDL_SetTextureBlendMode", MODE_SDL);
 	if (SDL_SetTextureAlphaMod(g_Graph->screen.texture, 100))
-		ft_SDL_error("SDL_SetTextureAlphaMod", MODE_SDL);
+		ft_sdl_error("SDL_SetTextureAlphaMod", MODE_SDL);
 }

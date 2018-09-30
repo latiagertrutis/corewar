@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 23:02:41 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/29 23:25:11 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/30 21:29:52 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void		place_heart(int dist, int cicle_pre_die, int top[4], int player)
 }
 
 void			ft_check_health(const int cycle_to_die, int player,
-		int cicle_pre_die)
+			int cicle_pre_die, const t_player *players)
 {
 	static int	top[4] = {0, 0, 0, 0};
 	int			dist;
@@ -44,7 +44,7 @@ void			ft_check_health(const int cycle_to_die, int player,
 		top[player] = cycle_to_die;
 	dist = (g_Graph->player_nbr->w * 20 - g_Graph->heart_pos->w * 4) /
 		3 + g_Graph->heart_pos->w;
-	if (g_players[player].live_counter)
+	if (players[player].live_counter)
 	{
 		top[player] = cycle_to_die;
 		ft_reset_health(player, g_Graph->heart_pos, g_Graph->info_marc,

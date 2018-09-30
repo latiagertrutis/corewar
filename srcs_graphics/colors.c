@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                         :+:      :+:    :+:     */
+/*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/16 07:45:58 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/24 22:07:06 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/09/30 21:47:26 by jagarcia          #+#    #+#             */
+/*   Updated: 2018/09/30 21:47:27 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-static Uint32 take_RGBA2(int id, SDL_PixelFormat *format)
+static Uint32	take_rgba2(int id, SDL_PixelFormat *format)
 {
 	if (id == 8)
 		return (SDL_MapRGBA(format, PLAYER_ONE_COLORC / 2));
@@ -32,7 +32,7 @@ static Uint32 take_RGBA2(int id, SDL_PixelFormat *format)
 		return (SDL_MapRGBA(format, PLAYER_FOUR_COLORC / 2 + 20));
 }
 
-static Uint32	take_RGBA(int id, SDL_PixelFormat *format)
+static Uint32	take_rgba(int id, SDL_PixelFormat *format)
 {
 	if (!id)
 		return (SDL_MapRGBA(format, PLAYER_ONE_COLORA / 2));
@@ -51,10 +51,10 @@ static Uint32	take_RGBA(int id, SDL_PixelFormat *format)
 	else if (id == 7)
 		return (SDL_MapRGBA(format, PLAYER_FOUR_COLORA / 2 + 20));
 	else
-		return (take_RGBA2(id, format));
+		return (take_rgba2(id, format));
 }
 
-static Uint32	take_RGB(int i, SDL_PixelFormat *format)
+static Uint32	take_rgb(int i, SDL_PixelFormat *format)
 {
 	if (!i)
 		return (SDL_MapRGBA(format, PLAYER_ONE_COLORA));
@@ -68,10 +68,9 @@ static Uint32	take_RGB(int i, SDL_PixelFormat *format)
 		return (SDL_MapRGBA(format, FIELD_COLOR));
 	else
 		return (SDL_MapRGBA(format, BACK_COLOR));
-
 }
 
-SDL_Color	ft_SDL_color(int i)
+SDL_Color		ft_sdl_color(int i)
 {
 	if (i == 0)
 		return ((SDL_Color){PLAYER_ONE_COLORA});
@@ -93,10 +92,10 @@ SDL_Color	ft_SDL_color(int i)
 		return ((SDL_Color){PLAYER_FOUR_COLORB});
 }
 
-Uint32		ft_MapRGBA(SDL_PixelFormat *format, int i, int alpha)
+Uint32			ft_maprgba(SDL_PixelFormat *format, int i, int alpha)
 {
 	if (!alpha)
-		return (take_RGB(i, format));
+		return (take_rgb(i, format));
 	else
-		return (take_RGBA(i, format));
+		return (take_rgba(i, format));
 }
