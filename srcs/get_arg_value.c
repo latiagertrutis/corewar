@@ -5,42 +5,51 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/17 17:17:57 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/08 21:27:16 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/09/20 16:14:50 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/09/25 16:20:40 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "basic_corewar.h"
 
-int			get_arg_value(t_board *board, t_arg *arg, t_pc *pc)
+static void		get_ind(const t_pc *pc, const IND_CAST ind, t_arg *arg, const unsigned char restriction)
 {
-	unsigned char	aux[MAX_ARG_LEN];
+	int 			inc;
 	unsigned char	i;
 
-	i = 0;
+	if (restriction)
+		inc = pc->pc + (ind % IDX_MOD);
+	else
+		inc = pc->pc + ind;
+	if ((inc + REG_SIZE) < MEM_SIZE && inc >= 0)
+		*((REG_CAST *)(arg->arg)) = *((REG_CAST *)(g_mem + inc));
+	else
+	{
+		i = 0;
+		while (i < REG_SIZE)
+		{
+			arg->arg[i] = g_mem[ft_mod(inc + i, MEM_SIZE)];
+			i++;
+		}
+	}
+}
+
+char			get_arg_value(t_arg *arg, const t_pc *pc, const unsigned char restriction)
+{
+	unsigned char	i;
+	IND_CAST		ind;
+
 	if (arg->type == REG_CODE)
 	{
-		aux[0] = arg->arg[0];
-		if (aux[0] > 16 || aux[0]<= 0)
+		if ((i = arg->arg[0] - 1) >= REG_NUMBER)
 			return (0);
-		*((REG_CAST *)arg->arg) = *((REG_CAST *)pc->reg[aux[0] - 1]);
-		/* while (i < REG_SIZE) */
-		/* { */
-		/* 	arg->arg[i] = pc->reg[aux[0] - 1][i]; */
-		/* 	i++; */
-		/* } */
+		*((REG_CAST *)(arg->arg)) = *((REG_CAST *)(pc->reg[i]));
 	}
 	else if (arg->type == IND_CODE)
 	{
-		/* aux[1] = arg->arg[0]; */
-		/* aux[0] = arg->arg[1]; */
-		*((IND_CAST *)aux) = *((IND_CAST *)arg->arg);
-		invert_bytes(aux, IND_SIZE);
-		while (i < REG_SIZE)
-		{
-			arg->arg[i] = board[ft_mod((pc->pc + ((i + *((IND_CAST *)aux)) % IDX_MOD)), MEM_SIZE)].mem;
-			i++;
-		}
+		ind = *((IND_CAST *)(arg->arg));
+		invert_bytes(&ind, IND_SIZE);
+		get_ind(pc, ind, arg, restriction);
 	}
 	return (1);
 }

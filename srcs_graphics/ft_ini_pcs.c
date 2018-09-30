@@ -6,11 +6,11 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/16 15:57:43 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/16 16:11:44 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/28 17:05:01 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "graphics.h"
 
 static void			paint_pc(int *pixel, int pitch, SDL_Rect pc, Uint32 color)
 {
@@ -27,7 +27,7 @@ static void			paint_pc(int *pixel, int pitch, SDL_Rect pc, Uint32 color)
 	}
 }
 
-void			ft_ini_pcs(t_sdl *Graph)
+void				ft_ini_pcs(void)
 {
 	int			i;
 	SDL_Rect	pc;
@@ -35,18 +35,20 @@ void			ft_ini_pcs(t_sdl *Graph)
 	int			pitch;
 	Uint32		color;
 
-	pc = (SDL_Rect){0, 0, Graph->square->w - 2, Graph->square->h - 2};
+	pc = (SDL_Rect){0, 0, g_Graph->square->w - 2, g_Graph->square->h - 2};
 	i = -1;
 	while (++i < MAX_PLAYERS * 4)
 	{
-		color = ft_MapRGBA(Graph->rack->format, i, 1);
-		if (!(Graph->pc[i] = SDL_CreateTexture(Graph->screen.Renderer,
-				372645892, SDL_TEXTUREACCESS_STREAMING, Graph->square->w - 2,
-				Graph->square->h - 2)))
+		color = ft_MapRGBA(g_Graph->rack->format, i, 1);
+		if (!(g_Graph->pc[i] = SDL_CreateTexture(g_Graph->screen.Renderer,
+				372645892, SDL_TEXTUREACCESS_STREAMING, g_Graph->square->w - 2,
+				g_Graph->square->h - 2)))
 			ft_SDL_error("SDL_CreateTexture", MODE_SDL);
-		SDL_SetTextureBlendMode(Graph->pc[i], SDL_BLENDMODE_BLEND);
-		SDL_LockTexture(Graph->pc[i], &pc, (void **)&pixel, &pitch);
+		if (SDL_SetTextureBlendMode(g_Graph->pc[i], SDL_BLENDMODE_BLEND))
+			ft_SDL_error("SDL_SetTextureBlendMode", MODE_SDL);
+		if (SDL_LockTexture(g_Graph->pc[i], &pc, (void **)&pixel, &pitch))
+			ft_SDL_error("SDL_LockTexture", MODE_SDL);
 		paint_pc(pixel, pitch, pc, color);
-		SDL_UnlockTexture(Graph->pc[i]);
+		SDL_UnlockTexture(g_Graph->pc[i]);
 	}
 }

@@ -6,62 +6,66 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 10:50:58 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/17 13:23:48 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/29 20:45:19 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "graphics.h"
 
-static SDL_Surface		*prepare_hall(t_sdl *Graph)
+static SDL_Surface	*prepare_hall(void)
 {
 	SDL_Surface *hall;
 	SDL_Surface	*new_hall;
 	SDL_RWops	*rwop;
 
-	rwop = SDL_RWFromFile("./images/solo_hall.jpeg", "rb");
+	if (!(rwop = SDL_RWFromFile("./images/solo_hall.jpeg", "rb")))
+		ft_SDL_error("SDL_RWFromFile", MODE_SDL);
 	if (!(hall = IMG_LoadJPG_RW(rwop)))
 		ft_SDL_error("IMG_LoadJPH_RW", MODE_IMG);
 	if (SDL_RWclose(rwop))
 		ft_SDL_error("SDL_RWclose", MODE_SDL);
-	ft_printf("La zona mide %i x %i y la imagen %i x %i\n", Graph->square_info->w, Graph->big_square->h, hall->w, hall->h);
-	new_hall = SDL_CreateRGBSurfaceWithFormat(0, Graph->square_info->w - Graph->player_nbr->w * 21, Graph->big_square->h, 32, 372645892);
-	SDL_BlitScaled(hall, NULL, new_hall, NULL);
+	if (!(new_hall = SDL_CreateRGBSurfaceWithFormat(0, g_Graph->square_info->w
+		- g_Graph->player_nbr->w * 21, g_Graph->big_square->h, 32, 372645892)))
+		ft_SDL_error("SDL_CreateRGBSurfaceWithFormat", MODE_SDL);
+	if (SDL_BlitScaled(hall, NULL, new_hall, NULL))
+		ft_SDL_error("SDL_BlitScaled", MODE_SDL);
 	SDL_FreeSurface(hall);
 	return (new_hall);
 }
-static void	prepare_pauses(SDL_Surface *dst[2], t_sdl *Graph, char *image, int pos)
+
+static void			prepare_pauses(SDL_Surface *dst[2], char *image, int pos)
 {
 	SDL_Surface *pause;
 	SDL_Surface	*new_pause;
 	SDL_RWops	*rwop;
 
-	rwop = SDL_RWFromFile(image, "rb");
+	if (!(rwop = SDL_RWFromFile(image, "rb")))
+		ft_SDL_error("SDL_RWFromFile", MODE_SDL);
 	if (!(pause = IMG_LoadJPG_RW(rwop)))
 		ft_SDL_error("IMG_LoadJPH_RW", MODE_IMG);
 	if (SDL_RWclose(rwop))
 		ft_SDL_error("SDL_RWclose", MODE_SDL);
-	new_pause = SDL_CreateRGBSurfaceWithFormat(0, Graph->square_info->w - Graph->player_nbr->w * 21 - 70, 40, 32, 372645892);
-	SDL_BlitScaled(pause, NULL, new_pause, NULL);
+	if (!(new_pause = SDL_CreateRGBSurfaceWithFormat(0, g_Graph->square_info->w
+		- g_Graph->player_nbr->w * 21 - 70, 40, 32, 372645892)))
+		ft_SDL_error("SDL_CreateRGBSurfaceWithFormat", MODE_SDL);
+	if (SDL_BlitScaled(pause, NULL, new_pause, NULL))
+		ft_SDL_error("SDL_BlitScaled", MODE_SDL);
 	SDL_FreeSurface(pause);
 	dst[pos] = new_pause;
 }
 
-void	ft_ini_images(t_data *data, t_sdl *Graph)
+void				ft_ini_images(void)
 {
 	SDL_Surface *hall;
-	int			i;
-	char		*pixel;
-	int			pitch;
 
-	hall = prepare_hall(Graph);
-	prepare_pauses(data->mods->pause_surf, Graph, "./images/pause_black.jpeg", 0);
-	prepare_pauses(data->mods->pause_surf, Graph, "./images/pause_red.jpeg", 1);
-	SDL_BlitSurface(data->mods->pause_surf[0], NULL, hall, &(SDL_Rect){(hall->w - data->mods->pause_surf[0]->w) / 2, 100, data->mods->pause_surf[0]->w, data->mods->pause_surf[0]->w});
-	SDL_LockTexture(Graph->info_text, &(SDL_Rect){Graph->square_info->w - hall->w, 0, hall->w, Graph->big_square->h}, (void **)&pixel, &pitch);
-	SDL_LockSurface(hall);
-	i = -1;
-	while (++i < Graph->big_square->h)
-		memcpy(pixel + i * pitch, hall->pixels + i * hall->pitch, hall->pitch);
-	SDL_UnlockSurface(hall);
-	SDL_UnlockTexture(Graph->info_text);
+	hall = prepare_hall();
+	prepare_pauses(g_Graph->pause, "./images/pause_black.jpeg", 0);
+	prepare_pauses(g_Graph->pause, "./images/pause_red.jpeg", 1);
+	if (SDL_BlitSurface(g_Graph->pause[0], NULL, hall, &(SDL_Rect){(hall->w
+		- g_Graph->pause[0]->w) / 2, 100, g_Graph->pause[0]->w,
+		g_Graph->pause[0]->w}))
+		ft_SDL_error("SDL_BlitSurface", MODE_SDL);
+	ft_surf_to_text(g_Graph->info_text, hall,
+		&(SDL_Rect){g_Graph->square_info->w - hall->w, 0,
+		hall->w, g_Graph->big_square->h});
 }

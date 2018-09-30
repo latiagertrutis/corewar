@@ -3,54 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   core_aff.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/17 16:44:28 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/08/01 00:06:32 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/09/22 17:21:27 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/09/25 16:20:43 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "basic_corewar.h"
 
-static int			verify_ocp(const unsigned char ocp)
+
+static void	print_reg(const t_pc *pc, const unsigned char reg_pos)
 {
-	if ((0xC0 & ocp) == 0x80 || (0xC0 & ocp) == 0xC0 || (0xC0 & ocp) == 0x0)
-		return (0);
-	return (1);
-}
+	REG_CAST	aux_reg;
 
-static void print_reg(t_pc *pc, unsigned char reg_nb)
-{
-	unsigned int	 i;
-	char			aux_reg[REG_SIZE];
-
-	i = 0;
-	while (i < REG_SIZE)
-	{
-		aux_reg[REG_SIZE - 1 - i] = pc->reg[reg_nb][i];
-		i++;
-	}
+	aux_reg = *((REG_CAST *)pc->reg[reg_pos]);
+	invert_bytes(&aux_reg, REG_SIZE);
 	ft_putstr("Aff: ");
-	ft_putchar(*((unsigned int *)aux_reg));
+	ft_putchar(aux_reg);
 	ft_putchar('\n');
 }
 
-void		core_aff(t_pc *pc, t_arena *arena, t_data *data)
+void		core_aff(t_pc *pc)
 {
 	unsigned char	ocp;
-	unsigned char	reg_nb;
+	unsigned int	pos;
+	unsigned char	reg_pos;
 
-	// ft_printf("JOPUTA");
-//	exit(1);
-	ocp = arena->board[(pc->pc + 1) % MEM_SIZE].mem;//en pc + 1 esta ocp y en pc + 2 esta el primer argum
-	if (verify_ocp(ocp))
+	pos = pc->pc;
+	ocp = g_mem[(pos + 1) % MEM_SIZE];
+	if ((0xC0 & ocp) == 0x40 && (reg_pos = g_mem[(pos + 1) % MEM_SIZE] - 1) < REG_NUMBER)
 	{
-		if ((reg_nb = arena->board[(pc->pc + 2) % MEM_SIZE].mem - 1) < REG_NUMBER && reg_nb >= 0)
-			print_reg(pc, reg_nb);
-		pc->pc = ((pc->pc + 1 + 1 + 1) % MEM_SIZE);//aff + ocp + rg
+		print_reg(pc, reg_pos);
+		pc->pc = (pos + 1 + 1 + 1) % MEM_SIZE;
 	}
 	else
 		pc->pc = ((pc->pc + 1 + 1 + get_size_arg(ocp, 0, 1)) % MEM_SIZE);//aff + ocp + rg
 }
-
-

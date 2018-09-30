@@ -6,23 +6,23 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 18:19:40 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/14 07:49:16 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/24 22:39:50 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "graphics.h"
 
-void			ft_set_back_to_front(t_sdl *Graph, t_data *data)
+void			ft_set_back_to_front(const unsigned int flags)
 {
 	SDL_Renderer *Renderer;
 
-	Renderer = Graph->screen.Renderer;
-	SDL_RenderCopy(Renderer, Graph->screen.texture, NULL, Graph->big_square);
-	ft_pcs_to_rack(Graph, data, 0);
-	SDL_RenderCopy(Graph->screen.Renderer, Graph->info_text, NULL, &(SDL_Rect){Graph->screen.w * RIGHT_BORDER + Graph->big_square->w + 20, Graph->screen.h * UPPER_BORDER, Graph->square_info->w, Graph->big_square->h});
+	Renderer = g_Graph->screen.Renderer;
+	SDL_RenderCopy(Renderer, g_Graph->screen.texture, NULL, g_Graph->big_square);
+	ft_pcs_to_rack(g_frame->nb_pc, g_frame->pcs, flags, 0);
+	SDL_RenderCopy(g_Graph->screen.Renderer, g_Graph->info_text, NULL, &(SDL_Rect){g_Graph->screen.w * RIGHT_BORDER + g_Graph->big_square->w + 20, g_Graph->screen.h * UPPER_BORDER, g_Graph->square_info->w, g_Graph->big_square->h});
 	SDL_RenderPresent(Renderer);
-	ft_pcs_to_rack(Graph, data, 1);	
-	if (SDL_SetRenderDrawColor(Graph->screen.Renderer, 0, 0, 0, 0))
+	ft_pcs_to_rack(g_frame->nb_pc, g_frame->pcs, flags, 1);
+	if (SDL_SetRenderDrawColor(g_Graph->screen.Renderer, 0, 0, 0, 0))
 		ft_SDL_error("SDL_SetRenderDrawColor", MODE_SDL);
 //	SDL_RenderClear(Renderer);
 }

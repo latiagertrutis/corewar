@@ -3,80 +3,108 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/26 20:48:34 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/09/16 17:07:49 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/09/17 17:53:30 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/09/30 19:09:52 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
-#include <stdio.h> //printf !!
+#include "basic_corewar.h"
 
-static void		ini_mods(int flags, t_mods *mods)
+unsigned char	g_winner;
+size_t			g_lives;
+int				g_cycle_to_die;
+unsigned char	g_n_players;
+unsigned char	g_mem[MEM_SIZE];
+size_t 			g_nb_cycles;
+unsigned int 	g_nb_pc;
+unsigned int 	g_nb_pc_total;
+t_pc 			*g_pc;
+t_player		g_players[MAX_PLAYERS];
+
+static void	select_mode(const unsigned int flags, const t_flag_value f_value)
 {
-//	if (!(mods = (t_mods *)ft_memalloc(sizeof(t_mods))))
-//		ft_error("Error malloc ini_mods\n");
-	mods->running = 0x1;
-	if (ft_check_flags(flags, 'f'))
-		mods->fullscreen = 0x1;
-	if (ft_check_flags(flags, 'v'))
-		mods->visual = 0x1;
-	if (ft_check_flags(flags, 'd'))
+	if (!flags)
+		basic_launch();
+	if (flags & 0x1)
+		graphic_launch(flags);
+	if (flags & 0x4)
+		instruction_launch();
+	if (flags & 0x8)
+		deaths_launch();
+}
+
+static void	init_pc(const t_flag_value f_value)
+{
+	unsigned char 	i;
+	t_pc 			*aux;
+
+	i = 1;
+	if (!(g_pc = (t_pc *)malloc(sizeof(t_pc))))
+		ft_error("malloc failled in init_pc\n");
+	*g_pc = (t_pc){0x0, 0, 0, {{0}}, 0, 0, 0, 0, NULL};
+	if (f_value.player_nb[0])
+		*((REG_CAST *)g_pc->reg[0]) = f_value.player_nb[i];
+	else
+		*((REG_CAST *)g_pc->reg[0]) = -1;
+	invert_bytes(g_pc->reg, REG_SIZE);
+	while (i < g_n_players)
 	{
-		mods->dump = 0x1;
-		mods->info = 0x1;
+		if(!(aux = (t_pc *)malloc(sizeof(t_pc))))
+			ft_error("malloc failled in init_pc\n");
+		*aux = (t_pc){0x0, i * (MEM_SIZE / g_n_players), 0, {{0}}, i, 0, 0, i, g_pc};
+		if (f_value.player_nb[i])
+			*((REG_CAST *)aux->reg[0]) = f_value.player_nb[i];
+		else
+			*((REG_CAST *)aux->reg[0]) = -(i + 1);
+		invert_bytes(aux->reg, REG_SIZE);
+		g_pc = aux;
+		i++;
 	}
 }
 
-int main(int ac, char **av)
+static void	present_players (void)
 {
-	t_data		data;
-//	data = (t_data){0, CYCLE_TO_DIE, ac - 1, NULL, NULL, {"\033[0m", "\033[38;5;1m", "\033[38;5;2m",
-//	   		"\033[38;5;3m", "\033[38;5;4m"}, {{0, 0, {0}, 0, 0, 0, 0, 0}}, 0, {0}};
-//	if (ac < 2 || ac > 5)
-//		put_usage();
-	data = (t_data){0, 0, CYCLE_TO_DIE, 0, NULL, NULL, {"\033[0m", "\033[38;5;1m", "\033[38;5;2m",
-		"\033[38;5;3m", "\033[38;5;4m"}, {{0, 0, {0}, 0, 0, 0, 0, 0}},
-	                0, 0, 0, NULL, {0}, 0, 0, 0, 0, NULL}; //new anadido nb_pc y *pc al final
-	if (!(data.pc = (t_pc *)ft_memalloc(sizeof(t_pc) * PC_BUFF)))
-		ft_error("malloc failed");
-//	data.pc[0] = (t_pc){0, 0, 0, {{0}}, 0};
+	unsigned char i;
 
-	data.flags = ft_set_flags(ac, av, &data);
-
-
-	ini_mods(data.flags, data.mods);
-
-	ft_printf("Voy a inicializar todo\n");
-	if (!init_corewar(&data, ac, av))
-		ft_error("malloc failed");
-	ft_printf("todo inicializado\n");
-
-	// ft_putnbr(data.n_players);
-	// exit(1);
-
-	put_champs_to_arena(&data);
-
-//	ft_ini_interface(data.arena->Graph);
-//	ft_ini_font(data.arena->Graph);
-//	SDL_GetRendererInfo(data.arena->Graph->screen.Renderer, &info);
-//	ft_printf("Name = %s\nflags = %x\nnum texture formats = %x\ntexture formats[0]] = \t%b\nsizeof SDL_Surface %i\n", info.name, info.flags, info.num_texture_formats, info.texture_formats[0], sizeof(SDL_Surface));
-//	SDL_RenderPresent(data.arena->Graph->screen.Renderer);
-
-//	ft_quit_graphics(data.arena->Graph);
-	ft_printf("voy a empezar\n");
-	if (data.mods->visual && !data.mods->dump)
-		exe_players_interf(&data);
-	else if (data.mods->dump)
-		exe_players_dump(&data);
-	else
-		exe_players(&data);
-	if (data.mods->visual)
-		ft_quit_graphics(data.arena->Graph);
-	free(data.arena);
-	free_players(data.players, data.n_players);
-	return (0);
+	ft_printf("Introducing contestants...\n");
+	i = 0;
+	while (i < g_n_players && i < MAX_PLAYERS)
+	{
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n", i + 1, g_players[i].prog_size,g_players[i].name, g_players[i].comment);
+		i++;
+	}
 }
 
-//4 Empezar con las intrucciones: Mateo pares, Mikel impares
+static void	show_winner(void)
+{
+	if (g_winner < g_n_players && g_winner < MAX_PLAYERS)
+		ft_printf("Contestant %d, \"%s\", has won !\n", g_winner + 1, g_players[g_winner].name);
+	else
+		ft_error("Error in show_winner\n");
+}
+
+int			main(int ac, char **av)
+{
+	unsigned int flags;
+	t_flag_value f_value;
+
+	g_winner = 0;
+	g_lives = 0;
+	flags = 0;
+	f_value  = (t_flag_value){0, {0}};
+	g_cycle_to_die = CYCLE_TO_DIE;
+	ft_memset(g_mem, 0, MEM_SIZE);
+	g_nb_cycles = 0;
+	ft_memset(g_players, 0, MAX_PLAYERS * sizeof(t_player));
+	take_input(ac, (const char **)av, &flags, &f_value);
+	g_nb_pc = g_n_players;
+	g_nb_pc_total = g_n_players;
+	g_pc = NULL;
+	init_pc(f_value);
+	present_players();
+	select_mode(flags, f_value);
+	show_winner();
+	return (0);
+}

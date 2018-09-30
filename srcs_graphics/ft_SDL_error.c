@@ -6,11 +6,11 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 05:14:24 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/13 08:56:33 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/24 22:07:06 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "graphics.h"
 
 void	ft_SDL_error(char *str, int mode)
 {

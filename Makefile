@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/09/24 15:25:43 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/09/30 19:22:40 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,40 +14,29 @@
 
 NAME = prueba
 
-CFLAGS = -g3 #-fsanitize=address #-Wall -Wextra -Werror -g3
+CFLAGS = -pthread  #-g3 #-fsanitize=address #-Wall -Wextra -Werror -g3
 
 SDLFLAGS = `sdl2-config --cflags` `sdl2-config --libs` -lSDL2_ttf -lSDL2_image
 
 CC = gcc
 
 FUNCS =	main.c \
-		big_hexa_2_dec.c \
-		init_corewar.c \
-		print_memory.c \
-		get_content.c \
+		init_player.c \
 		invert_bytes.c \
-		take_champions.c \
-		put_champs_to_arena.c \
-		free_players.c \
-		put_usage.c \
-		get_prog_size.c \
-		read_alloc_size.c \
-		exe_players.c \
-		check_live_count.c \
-		flags.c \
-		get_mem_board.c \
-		fill_r1.c \
-		realloc_pc.c \
-		core_fork.c \
-		core_zjmp.c \
-		core_lfork.c \
-		core_aff.c \
+		read_alloc.c \
+		invert_bytes_ret.c \
+		set_flags.c \
+		take_input.c \
+		check_cycle_to_die.c \
+		check_cycle_to_die_deaths.c \
+		ft_mod.c \
 		get_size_arg.c \
 		get_arg.c \
 		get_arg_value.c \
-		ft_mod.c \
-		clean_pc_arr.c \
-		check_winner.c \
+		basic_launch.c \
+		graphic_launch.c \
+		instruction_launch.c \
+		deaths_launch.c \
 		core_live.c \
 		core_ld.c \
 		core_st.c \
@@ -56,11 +45,30 @@ FUNCS =	main.c \
 		core_and.c \
 		core_or.c \
 		core_xor.c \
+		core_zjmp.c \
 		core_ldi.c \
 		core_sti.c \
+		core_fork.c \
 		core_lld.c \
-		core_lldi.c
-
+		core_lldi.c \
+		core_lfork.c \
+		core_aff.c \
+		graphics_core_sti.c \
+		graphics_core_st.c \
+		graphic_thread.c \
+		instruc_core_live.c \
+		instruc_core_ld.c \
+		instruc_core_st.c \
+		instruc_core_add.c \
+		instruc_core_sub.c \
+		instruc_core_and.c \
+		instruc_core_or.c \
+		instruc_core_xor.c \
+		instruc_core_zjmp.c \
+		instruc_core_ldi.c \
+		instruc_core_sti.c \
+		instruc_core_fork.c \
+		instruc_core_lfork.c
 
 GRAPH = ft_ini_graphics.c \
 		ft_quit_graphics.c \
@@ -78,10 +86,12 @@ GRAPH = ft_ini_graphics.c \
 		writer.c \
 		colors.c \
 		ft_ini_pcs.c \
-		exe_players_interf.c \
-		exe_players_dump.c \
 		ft_ini_images.c \
-		sprites.c
+		ft_ini_sprites.c \
+		new_frame.c \
+		ft_surf_to_text.c \
+		ft_reset_health.c \
+		ft_check_health.c
 
 SRCS_DIR = srcs/
 
