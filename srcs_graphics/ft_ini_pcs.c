@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/16 15:57:43 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/28 17:05:01 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/30 21:55:08 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ void				ft_ini_pcs(void)
 	i = -1;
 	while (++i < MAX_PLAYERS * 4)
 	{
-		color = ft_MapRGBA(g_Graph->rack->format, i, 1);
+		color = ft_maprgba(g_Graph->rack->format, i, 1);
 		if (!(g_Graph->pc[i] = SDL_CreateTexture(g_Graph->screen.Renderer,
 				372645892, SDL_TEXTUREACCESS_STREAMING, g_Graph->square->w - 2,
 				g_Graph->square->h - 2)))
-			ft_SDL_error("SDL_CreateTexture", MODE_SDL);
+			ft_sdl_error("SDL_CreateTexture", MODE_SDL);
 		if (SDL_SetTextureBlendMode(g_Graph->pc[i], SDL_BLENDMODE_BLEND))
-			ft_SDL_error("SDL_SetTextureBlendMode", MODE_SDL);
+			ft_sdl_error("SDL_SetTextureBlendMode", MODE_SDL);
 		if (SDL_LockTexture(g_Graph->pc[i], &pc, (void **)&pixel, &pitch))
-			ft_SDL_error("SDL_LockTexture", MODE_SDL);
+			ft_sdl_error("SDL_LockTexture", MODE_SDL);
 		paint_pc(pixel, pitch, pc, color);
 		SDL_UnlockTexture(g_Graph->pc[i]);
 	}

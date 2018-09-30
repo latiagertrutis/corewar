@@ -6,13 +6,13 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 16:39:44 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/26 17:26:54 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/30 22:10:10 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-static void		update_digit(SDL_Rect pos, t_sdl *g_Graph, char digit[2],
+static void		update_digit(SDL_Rect pos, char digit[2],
 		int mode)
 {
 	SDL_Surface	*tmp;
@@ -43,8 +43,8 @@ static void		update_number(unsigned int info, SDL_Rect pieze, int mode)
 	while (info > 0)
 	{
 		update_digit((SDL_Rect){pieze.x + (10 - pos) * (pieze.w - 1),
-				pieze.y, pieze.w, pieze.h}, g_Graph,
-			(char[2]){digits[info % 10], 0}, mode);
+				pieze.y, pieze.w, pieze.h}, (char[2]){digits[info % 10], 0},
+				mode);
 		if (!(info /= 10))
 			return ;
 		pos++;
@@ -52,19 +52,43 @@ static void		update_number(unsigned int info, SDL_Rect pieze, int mode)
 	while (pos < 10)
 	{
 		update_digit((SDL_Rect){pieze.x + (10 - pos) * (pieze.w - 1),
-				pieze.y, pieze.w, pieze.h}, g_Graph, "0\0", mode);
+				pieze.y, pieze.w, pieze.h}, "0\0", mode);
 		pos++;
 	}
 }
 
-void	ft_update_info(const t_player *players, const int cicle_pre_die)
+static void		update_players(const int cicle_pre_die, const t_player *players,
+		unsigned int lives[MAX_PLAYERS])
+{
+	unsigned int		i;
+
+	i = 0;
+	while (i < g_n_players)
+	{
+		ft_check_health(g_frame->cycle_to_die, i, cicle_pre_die, players);
+		g_Graph->font[PLAYER_NBR_FONT].color = ft_sdl_color(i);
+		if (!cicle_pre_die)
+			update_number(0, g_Graph->info.cicles_play[i],
+					PLAYER_NBR_FONT);
+		if (players[i].live_counter != lives[i])
+		{
+			update_number(players[i].live_counter,
+					g_Graph->info.cicles_play[i], PLAYER_NBR_FONT);
+			update_number(players[i].last_live,
+				g_Graph->info.lst_life[i], PLAYER_NBR_FONT);
+			lives[i] = players[i].live_counter;
+		}
+		i++;
+	}
+}
+
+void			ft_update_info(const t_player *players, const int cicle_pre_die)
 {
 	static unsigned int	nbr_pcs = 0;
 	static unsigned int lives[MAX_PLAYERS] = {0};
-	unsigned int		i;
 
 	update_number(g_frame->cycle, *g_Graph->info.cicles_gen, GENERAL_NBR_FONT);
-	if (!cicle_pre_die)// || data->mods->dump)
+	if (!cicle_pre_die)
 	{
 		update_number(0,
 			*g_Graph->info.cicle_to_die, GENERAL_NBR_FONT);
@@ -80,22 +104,5 @@ void	ft_update_info(const t_player *players, const int cicle_pre_die)
 			GENERAL_NBR_FONT);
 		nbr_pcs = g_frame->nb_pc;
 	}
-	i = 0;
-	while (i < g_n_players)
-	{
-		ft_check_health(g_frame->cycle_to_die, i, cicle_pre_die);
-		g_Graph->font[PLAYER_NBR_FONT].color = ft_SDL_color(i);
-		if (!cicle_pre_die)
-			update_number(0, g_Graph->info.cicles_play[i],
-					PLAYER_NBR_FONT);
-		if (players[i].live_counter != lives[i])
-		{
-			update_number(players[i].live_counter,
-					g_Graph->info.cicles_play[i], PLAYER_NBR_FONT);
-			update_number(players[i].last_live,
-				g_Graph->info.lst_life[i], PLAYER_NBR_FONT);
-			lives[i] = players[i].live_counter;
-		}
-		i++;
-	}
+	update_players(cicle_pre_die, players, lives);
 }

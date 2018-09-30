@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 11:09:42 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/28 17:50:02 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/30 21:56:13 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static void				insert_hexa_surf(char pair[3], int index[3])
 
 	rack_square = SDL_CreateRGBSurfaceWithFormat(0, g_Graph->square->w,
 		g_Graph->square->h, 32, g_Graph->rack->format->format);
-	SDL_FillRect(rack_square, NULL, ft_MapRGBA(rack_square->format, 4, 0));
+	SDL_FillRect(rack_square, NULL, ft_maprgba(rack_square->format, 4, 0));
 	SDL_FillRect(rack_square, &(SDL_Rect){1, 1, rack_square->w - 2,
-		rack_square->h - 2}, ft_MapRGBA(rack_square->format, 5, 0));
+		rack_square->h - 2}, ft_maprgba(rack_square->format, 5, 0));
 	tmp = TTF_RenderUTF8_Blended(g_Graph->font[0].font, pair,
-		ft_SDL_color(index[2]));
+		ft_sdl_color(index[2]));
 	SDL_BlitSurface(tmp, NULL, rack_square,
 		&(SDL_Rect){(rack_square->w - tmp->w) / 2,
 		(rack_square->h - tmp->h) / 2,
@@ -44,10 +44,10 @@ static void				generate_noinfo_squares(void)
 		ft_error("ft_memalloc generate_hexadecimals");
 	while (i < 9)
 	{
-		c = ft_SDL_color(i);
+		c = ft_sdl_color(i);
 		rack_square = SDL_CreateRGBSurfaceWithFormat(0, g_Graph->square->w,
 			g_Graph->square->h, 32, g_Graph->rack->format->format);
-		SDL_FillRect(rack_square, NULL, ft_MapRGBA(rack_square->format, 4, 0));
+		SDL_FillRect(rack_square, NULL, ft_maprgba(rack_square->format, 4, 0));
 		SDL_FillRect(rack_square, &(SDL_Rect){1, 1, rack_square->w - 2,
 			rack_square->h - 2}, SDL_MapRGBA(rack_square->format,
 			c.r, c.g, c.b, c.a));
@@ -92,10 +92,10 @@ void					ft_ini_font(void)
 			TTF_CloseFont(g_Graph->font[0].font);
 		if (!(g_Graph->font[0].font =
 				TTF_OpenFont("./whitrabt.ttf", g_Graph->font[0].font_size++)))
-			ft_SDL_error("TTF_OpenFont", MODE_TTF);
+			ft_sdl_error("TTF_OpenFont", MODE_TTF);
 		if (TTF_SizeUTF8(g_Graph->font[0].font, "FF", &g_Graph->font[0].w,
 			&g_Graph->font[0].h))
-			ft_SDL_error("TTF_SizeUTF8", MODE_TTF);
+			ft_sdl_error("TTF_SizeUTF8", MODE_TTF);
 	}
 	if (!(g_Graph->hexa_bytes =
 		(SDL_Surface ***)malloc(sizeof(SDL_Surface **) * 10)))

@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/09/30 19:22:40 by mrodrigu         ###   ########.fr        #
+#    Updated: 2018/09/30 21:59:02 by jagarcia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -72,7 +72,7 @@ FUNCS =	main.c \
 
 GRAPH = ft_ini_graphics.c \
 		ft_quit_graphics.c \
-		ft_SDL_error.c \
+		ft_sdl_error.c \
 		ft_ini_interface.c \
 		ft_ini_font.c \
 		ft_board_to_screen.c \

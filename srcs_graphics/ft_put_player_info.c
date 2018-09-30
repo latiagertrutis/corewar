@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/01 10:18:26 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/28 18:11:16 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/30 21:56:13 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void			ft_put_player_info(SDL_Surface *info_marc, int i)
 	int				tmp2;
 
 	tmp = 10;
-	g_Graph->font[TMP_FONT].color = ft_SDL_color(i);
+	g_Graph->font[TMP_FONT].color = ft_sdl_color(i);
 	g_Graph->font[PLAYER_NBR_FONT].color = g_Graph->font[TMP_FONT].color;
 	y_pos = g_Graph->square_info->h + 10 + info_marc->h * i;
 	y_pos += prepare_string((int[2]){tmp, y_pos}, g_players[i].name, 0) + 20;

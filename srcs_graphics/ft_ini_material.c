@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 22:02:57 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/28 18:08:59 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/30 21:53:39 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static void		ini_number(int mode, SDL_Surface **number, SDL_Rect square_info)
 			32, g_Graph->rack->format->format);
 	if (SDL_FillRect(*number, NULL, SDL_MapRGBA(g_Graph->rack->format,
 		255, 255, 255, 255)))
-		ft_SDL_error("SDL_FillRect", MODE_SDL);
+		ft_sdl_error("SDL_FillRect", MODE_SDL);
 	if (SDL_FillRect(*number, &(SDL_Rect){1, 1, (*number)->w - 2,
 		(*number)->h - 2}, SDL_MapRGBA((*number)->format, 0, 0, 0, 255)))
-		ft_SDL_error("SDL_FillRect", MODE_SDL);
+		ft_sdl_error("SDL_FillRect", MODE_SDL);
 	while (g_Graph->font[mode].w + 10 < (*number)->w && g_Graph->font[mode].h +
 			10 < (*number)->h)
 	{
@@ -29,10 +29,10 @@ static void		ini_number(int mode, SDL_Surface **number, SDL_Rect square_info)
 			TTF_CloseFont(g_Graph->font[mode].font);
 		if (!(g_Graph->font[mode].font = TTF_OpenFont("./whitrabt.ttf",
 				++g_Graph->font[mode].font_size)))
-			ft_SDL_error("TTF_OpenFont", MODE_TTF);
+			ft_sdl_error("TTF_OpenFont", MODE_TTF);
 		if (TTF_SizeUTF8(g_Graph->font[mode].font, "0", &g_Graph->font[mode].w,
 			&g_Graph->font[mode].h))
-			ft_SDL_error("TTF_SizeUTF8", MODE_SDL);
+			ft_sdl_error("TTF_SizeUTF8", MODE_SDL);
 	}
 }
 
