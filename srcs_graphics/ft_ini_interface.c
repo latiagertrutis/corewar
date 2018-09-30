@@ -6,77 +6,94 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 06:40:13 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/16 16:05:46 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/30 21:53:39 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "graphics.h"
 
-static void		ini_big_rack(t_sdl *Graph)
+static void					ini_big_rack(void)
 {
 	int square_dim[2];
 
-	Graph->cuant_squares[0] = 64;
-	Graph->cuant_squares[1] = (MEM_SIZE / 64 + (MEM_SIZE % 64 ? 1 : 0));
+	g_Graph->cuant_squares[0] = 64;
+	g_Graph->cuant_squares[1] = (MEM_SIZE / 64 + (MEM_SIZE % 64 ? 1 : 0));
 	square_dim[0] = 0;
 	square_dim[1] = 0;
-	while (square_dim[0] * Graph->cuant_squares[0] <= Graph->screen.w -
-			(Graph->screen.w * LEFT_BORDER) - (Graph->screen.w * RIGHT_BORDER))
+	while (square_dim[0] * g_Graph->cuant_squares[0] <= g_Graph->screen.w -
+			(g_Graph->screen.w * LEFT_BORDER) -
+			(g_Graph->screen.w * RIGHT_BORDER))
 		square_dim[0]++;
-	while (square_dim[1] * Graph->cuant_squares[1] <= Graph->screen.h -
-			(Graph->screen.h * UPPER_BORDER) - (Graph->screen.h * BOTTOM_BORDER))
+	while (square_dim[1] * g_Graph->cuant_squares[1] <= g_Graph->screen.h -
+			(g_Graph->screen.h * UPPER_BORDER) -
+			(g_Graph->screen.h * BOTTOM_BORDER))
 		square_dim[1]++;
-	Graph->square = &(SDL_Rect){Graph->screen.w * RIGHT_BORDER + 1,
-			Graph->screen.h * UPPER_BORDER + 1, square_dim[0],
+	g_Graph->square = &(SDL_Rect){g_Graph->screen.w * RIGHT_BORDER + 1,
+			g_Graph->screen.h * UPPER_BORDER + 1, square_dim[0],
 			square_dim[1]};
 }
 
-static void				ini_rack(t_sdl *Graph)
+static void					ini_rack(void)
 {
 	int			square_dim[2];
 
-	
 	square_dim[0] = 0;
 	square_dim[1] = 0;
-	Graph->cuant_squares[0] = 64;
-	Graph->cuant_squares[1] = 64;
-	while (square_dim[0] * 64 <= Graph->screen.w - (Graph->screen.w *
-			LEFT_BORDER) - (Graph->screen.w * RIGHT_BORDER))
+	g_Graph->cuant_squares[0] = 64;
+	g_Graph->cuant_squares[1] = 64;
+	while (square_dim[0] * 64 <= g_Graph->screen.w - (g_Graph->screen.w *
+			LEFT_BORDER) - (g_Graph->screen.w * RIGHT_BORDER))
 		square_dim[0]++;
-	while (square_dim[1] * 64 <= Graph->screen.h - (Graph->screen.h *
-			UPPER_BORDER) - (Graph->screen.h * BOTTOM_BORDER))
+	while (square_dim[1] * 64 <= g_Graph->screen.h - (g_Graph->screen.h *
+			UPPER_BORDER) - (g_Graph->screen.h * BOTTOM_BORDER))
 		square_dim[1]++;
-	if (!(Graph->square = (SDL_Rect *)malloc(sizeof(SDL_Rect))))
-				ft_error("Error malloc ini_rack\n");
-	Graph->square->x = 0;
-	Graph->square->y = 0;
-	Graph->square->w = square_dim[0];
-	Graph->square->h = square_dim[1];
+	if (!(g_Graph->square = (SDL_Rect *)malloc(sizeof(SDL_Rect))))
+		ft_error("Error malloc ini_rack\n");
+	g_Graph->square->x = 0;
+	g_Graph->square->y = 0;
+	g_Graph->square->w = square_dim[0];
+	g_Graph->square->h = square_dim[1];
 }
 
-void				ft_ini_interface(t_sdl *Graph)
+/*
+**Para dump hay que hacer que el textur blend y el alpha mod no se activen
+**cuando se use el modo dump
+*/
+
+static void					prepare_big_square(void)
 {
-	if (!(Graph->big_square = (SDL_Rect *)malloc(sizeof(SDL_Rect))))
+	if (!(g_Graph->big_square = (SDL_Rect *)malloc(sizeof(SDL_Rect))))
 		ft_error("Error malloc ft_ini_interface\n");
-	Graph->big_square->x = Graph->screen.w * RIGHT_BORDER;
-	Graph->big_square->y = Graph->screen.h * UPPER_BORDER;
-	Graph->big_square->w = Graph->screen.w * (1 - RIGHT_BORDER - LEFT_BORDER);
-	Graph->big_square->h = Graph->screen.h * (1 - UPPER_BORDER - BOTTOM_BORDER);
-	if (!(Graph->rack = SDL_CreateRGBSurfaceWithFormat(0, Graph->big_square->w,
-			Graph->big_square->h, 32, 372645892)))
-		ft_SDL_error("SDL_CreateRGBSurface", MODE_SDL);
+	g_Graph->big_square->x = g_Graph->screen.w * RIGHT_BORDER;
+	g_Graph->big_square->y = g_Graph->screen.h * UPPER_BORDER;
+	g_Graph->big_square->w = g_Graph->screen.w *
+			(1 - RIGHT_BORDER - LEFT_BORDER);
+	g_Graph->big_square->h = g_Graph->screen.h *
+			(1 - UPPER_BORDER - BOTTOM_BORDER);
+}
+
+void						ft_ini_interface(void)
+{
+	int i;
+
+	i = MAX_PLAYERS;
+	prepare_big_square();
+	if (!(g_Graph->rack = SDL_CreateRGBSurfaceWithFormat(0,
+			g_Graph->big_square->w, g_Graph->big_square->h, 32, 372645892)))
+		ft_sdl_error("SDL_CreateRGBSurface", MODE_SDL);
 	if (MEM_SIZE <= 4096)
-		ini_rack(Graph);
+		ini_rack();
 	else
-		ini_big_rack(Graph);
-	if (!(Graph->screen.texture = SDL_CreateTexture(Graph->screen.Renderer,
-			372645892, SDL_TEXTUREACCESS_STREAMING, Graph->big_square->w,
-			Graph->big_square->h)))
-		ft_SDL_error("SDL_CreateTexture", MODE_SDL);
-	if (!(Graph->pc = (SDL_Texture **)malloc(sizeof(SDL_Texture *) *
-			MAX_PLAYERS * 4)))
+		ini_big_rack();
+	if (!(g_Graph->screen.texture = SDL_CreateTexture(g_Graph->screen.Renderer,
+			372645892, SDL_TEXTUREACCESS_STREAMING, g_Graph->big_square->w,
+			g_Graph->big_square->h)))
+		ft_sdl_error("SDL_CreateTexture", MODE_SDL);
+	if (!(g_Graph->pc = (SDL_Texture **)malloc(sizeof(SDL_Texture *) * i * 4)))
 		ft_error("Error malloc ft_ini_interface\n");
-	ft_ini_pcs(Graph);
-	SDL_SetTextureBlendMode(Graph->screen.texture, SDL_BLENDMODE_BLEND);
-	SDL_SetTextureAlphaMod(Graph->screen.texture, 100);
+	ft_ini_pcs();
+	if (SDL_SetTextureBlendMode(g_Graph->screen.texture, SDL_BLENDMODE_BLEND))
+		ft_sdl_error("SDL_SetTextureBlendMode", MODE_SDL);
+	if (SDL_SetTextureAlphaMod(g_Graph->screen.texture, 100))
+		ft_sdl_error("SDL_SetTextureAlphaMod", MODE_SDL);
 }

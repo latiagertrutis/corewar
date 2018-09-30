@@ -6,11 +6,11 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/19 14:15:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/07/23 22:49:08 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/09/24 22:07:06 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "graphics.h"
 
 void		ft_draw_rack(t_data *data)
 {

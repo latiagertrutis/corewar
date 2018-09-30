@@ -6,11 +6,11 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 04:10:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/08/17 11:31:20 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/09/30 21:53:40 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "graphics.h"
 
 static int			take_hexa_byte(unsigned char byte, char hexa_byte[3])
 {
@@ -23,7 +23,7 @@ static int			take_hexa_byte(unsigned char byte, char hexa_byte[3])
 	return (byte);
 }
 
-static int			take_color_byte(t_board byte, t_data *data)
+static int			take_color_byte(t_board byte)
 {
 	if (!byte.new)
 	{
@@ -51,36 +51,34 @@ static int			take_color_byte(t_board byte, t_data *data)
 	}
 }
 
-static void			write_byte(int pos, t_board board[MEM_SIZE], t_sdl *Graph, t_data *data)
+static void			write_byte(int pos, const t_board *board, const unsigned int flags)
 {
 	char		hexa_byte[3];
 	SDL_Surface *surf_byte;
 	SDL_Surface *tmp;
 
-	Graph->square->x = (Graph->square->w - 1) * (pos % Graph->cuant_squares[0]);
-	Graph->square->y = (Graph->square->h - 1) * (pos / Graph->cuant_squares[1]);
+	g_Graph->square->x = (g_Graph->square->w - 1) * (pos % g_Graph->cuant_squares[0]);
+	g_Graph->square->y = (g_Graph->square->h - 1) * (pos / g_Graph->cuant_squares[1]);
 	surf_byte = NULL;
-	if (data->mods->info)
-		surf_byte = Graph->hexa_bytes[take_color_byte(board[pos], data)]
+	if (g_hexl)
+		surf_byte = g_Graph->hexa_bytes[take_color_byte(board[pos])]
 			[take_hexa_byte(board[pos].mem, hexa_byte)];
 	else
 	{
 		if (board[pos].id - 1 >= 0)
-			surf_byte = Graph->hexa_bytes[9][board[pos].id - 1];
+			surf_byte = g_Graph->hexa_bytes[9][take_color_byte(board[pos])];
 		else
-			surf_byte = Graph->hexa_bytes[9][4];
+			surf_byte = g_Graph->hexa_bytes[9][4];
 	}
 	if (!(tmp = SDL_ConvertSurfaceFormat(surf_byte, 372645892, 0)))
-		ft_SDL_error("SDL_ConvertSurfaceFormat", MODE_SDL);
-	SDL_BlitSurface(tmp, NULL, Graph->rack,
-		&(SDL_Rect){Graph->square->x + 1, Graph->square->y,
+		ft_sdl_error("SDL_ConvertSurfaceFormat", MODE_SDL);
+	SDL_BlitSurface(tmp, NULL, g_Graph->rack,
+		&(SDL_Rect){g_Graph->square->x + 1, g_Graph->square->y,
 		tmp->w, tmp->h});
-	if (!data->mods->pause)
-		board[pos].new = board[pos].new ? board[pos].new - 1 : 0;
 	SDL_FreeSurface(tmp);
 }
 
-void	ft_board_to_screen(t_sdl *Graph, t_board board[MEM_SIZE], t_data *data)
+void	ft_board_to_screen(const t_board *board, const unsigned int flags)
 {
 	int			i;
 	char		*pixel;
@@ -90,15 +88,15 @@ void	ft_board_to_screen(t_sdl *Graph, t_board board[MEM_SIZE], t_data *data)
 
 	i = 0;
 	while (i < MEM_SIZE)
-		write_byte(i++, board, Graph, data);
-	rack = Graph->rack;
-	texture = Graph->screen.texture;
-	SDL_LockTexture(Graph->screen.texture, NULL, (void **)&pixel, &pitch);
+		write_byte(i++, board, flags);
+	rack = g_Graph->rack;
+	texture = g_Graph->screen.texture;
+	SDL_LockTexture(g_Graph->screen.texture, NULL, (void **)&pixel, &pitch);
 	SDL_LockSurface(rack);
 	i = -1;
 	while (++i < rack->h)
 		memcpy(pixel + i * pitch, rack->pixels + i * rack->pitch,
 			rack->pitch);
 	SDL_UnlockSurface(rack);
-	SDL_UnlockTexture(Graph->screen.texture);
+	SDL_UnlockTexture(g_Graph->screen.texture);
 }

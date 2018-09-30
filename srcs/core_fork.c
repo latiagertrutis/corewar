@@ -3,67 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   core_fork.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mzabalza <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/15 09:34:50 by mzabalza          #+#    #+#             */
-/*   Updated: 2018/09/15 14:38:19 by mrodrigu         ###   ########.fr       */
+/*   Created: 2018/09/22 16:45:47 by mrodrigu          #+#    #+#             */
+/*   Updated: 2018/09/28 21:22:31 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "basic_corewar.h"
 
-static 	IND_CAST charge_short(t_board *board, unsigned short pc_pos)
+static IND_CAST	charge_ind(const unsigned int pos)
 {
-	int 	i;
-	char	param[IND_SIZE];
+	unsigned char	i;
+	uint8_t			num[IND_SIZE];
 
-	i = 0;
-	while(i < IND_SIZE)
+	if ((pos + IND_SIZE) < MEM_SIZE)
+		*((IND_CAST *)(num)) = *((IND_CAST *)(g_mem + pos));
+	else
 	{
-		param[IND_SIZE - 1 - i] = board[(pc_pos + i) % MEM_SIZE].mem;
-		i++;
+		i = 0;
+		while (i < IND_SIZE)
+		{
+			num[i] = g_mem[(pos + i) % MEM_SIZE];
+			i++;
+		}
 	}
-	// print_memory(param, 2, 2, 1);
-//	exit(1);
-	return (*((IND_CAST *)param));
+	invert_bytes(num, IND_SIZE);
+	return (*((IND_CAST *)(num)));
 }
 
-void		core_fork(t_pc *pc, t_arena *arena, t_data *data)
+void			core_fork(t_pc *pc)
 {
-	unsigned short 	pc_i;
-	unsigned short	pos;
+	unsigned int	pos;
 	IND_CAST		new_i;
+	t_pc			*new_pc;
+	unsigned char	i;
 
+	i = 0;
 	pos = pc->pc;
-	new_i = charge_short(arena->board, pos + 1);
-	// if (!(player->nb_pc % 20))
-	if (!(data->nb_pc % PC_BUFF))
+	new_i = ft_mod(pos + (charge_ind(pos + 1) % IDX_MOD), MEM_SIZE);
+	if (!(new_pc = (t_pc *)malloc(sizeof(t_pc))))
+		ft_error("malloc failed in core_fork.");
+	*new_pc = (t_pc){pc->carry, new_i, 0, {{0}}, pc->id, 0, pc->live, g_nb_pc_total, g_pc};
+	while (i < REG_NUMBER)
 	{
-		// pc_i = (pc - player->pc);
-		pc_i = (pc - data->pc);
-		// player->pc = realloc_pc(player, player->pc, player->nb_pc);
-		// player->pc = realloc_pc(data->pc, data->nb_pc);
-		if (data->nb_pc_active < data->nb_pc && pc)
-		{
-			clean_pc_arr(data->pc, data->nb_pc);
-			data->nb_pc = data->nb_pc_active;
-		}
-		else
-			data->pc = realloc_pc(data->pc, data->nb_pc);
-
-		pc = data->pc + pc_i; //pc * esta apuntando al ultimo pc creado
+		*((REG_CAST *)(new_pc->reg[i])) = *((REG_CAST *)(pc->reg[i]));
+		i++;
 	}
-	// player->pc[player->nb_pc] = (t_pc){pc->carry, ft_mod((pos + (new_i % IDX_MOD)), MEM_SIZE), 0, {{0}}};
-	data->pc[data->nb_pc] = (t_pc){pc->carry, ft_mod((pos + (new_i % IDX_MOD)), MEM_SIZE), 0, {{0}}, pc->id, 0, 0x1, 0x0};
-	// ft_printf("pc1 es: %d\npc2 es: %d\nnb_pc es: %d\n", pc->pc, player->pc[player->nb_pc].pc, player->nb_pc);
-//	exit(1);
-	for (int j = 0; j < REG_NUMBER; j++) //PODEMOS USAR FOR ???????
-	{
-		// ft_memcpy(player->pc[player->nb_pc].reg[j], pc->reg[j], REG_SIZE);
-		ft_memcpy(data->pc[data->nb_pc].reg[j], pc->reg[j], REG_SIZE);
-	}
-	pc->pc = (pc->pc + 1 + IND_SIZE) % MEM_SIZE;
-	// player->nb_pc++;
-	data->nb_pc++;
-	data->nb_pc_active++;
+	g_pc = new_pc;
+	g_nb_pc++;
+	g_nb_pc_total++;
+	pc->pc = (pos + 1 + IND_SIZE) % MEM_SIZE;
 }
