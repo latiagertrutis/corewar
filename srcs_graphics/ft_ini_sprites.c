@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 18:28:52 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/30 21:53:39 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/01 19:50:27 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void			prepare_all_sprites(int dim, SDL_Surface *sprite,
 	}
 	i = -1;
 	while (++i < g_n_players)
-		ft_reset_health(i, g_Graph->heart_pos, info_marc, ini_heart[0]);
+		ft_reset_health(i, g_graph->heart_pos, info_marc, ini_heart[0]);
 }
 
 static int			calc_sprite_size(SDL_Surface **ini_heart, int disp_space[2],
@@ -90,7 +90,7 @@ void				ft_ini_sprites(SDL_Rect *cicles_play,
 
 	if (!(ini_heart = (SDL_Surface **)ft_memalloc(sizeof(SDL_Surface *) * 7)))
 		ft_error("malloc ft_ini_sprites");
-	if (!(g_Graph->heart_pos = (SDL_Rect *)malloc(sizeof(SDL_Rect))))
+	if (!(g_graph->heart_pos = (SDL_Rect *)malloc(sizeof(SDL_Rect))))
 		ft_error("malloc ft_ini_sprites 2");
 	sprite = open_sprite();
 	sprite_size = calc_sprite_size(ini_heart, (int[2]){player_nbr->w * 20,
@@ -103,10 +103,10 @@ void				ft_ini_sprites(SDL_Rect *cicles_play,
 	if (SDL_BlitScaled(sprite, &(SDL_Rect){2, 1, 76, 69},
 		ini_heart[0], NULL))
 		ft_sdl_error("SDL_BlitScaled", MODE_SDL);
-	*g_Graph->heart_pos = (SDL_Rect){cicles_play[0].x, ((info_marc->h -
+	*g_graph->heart_pos = (SDL_Rect){cicles_play[0].x, ((info_marc->h -
 			((cicles_play[0].y + cicles_play[0].h) - (info_marc->y))) -
 			ini_heart[0]->h) / 2 + cicles_play[0].y + cicles_play[0].h,
 			ini_heart[0]->w, ini_heart[0]->h};
 	prepare_all_sprites(sprite_size, sprite, ini_heart, info_marc);
-	g_Graph->heart = ini_heart;
+	g_graph->heart = ini_heart;
 }

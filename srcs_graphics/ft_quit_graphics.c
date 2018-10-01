@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 05:27:44 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/30 22:19:53 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/01 19:50:26 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ static void		destroy_rects(t_info info)
 	free(info.lst_life);
 	free(info.cicle_to_die);
 	free(info.processos);
-	free(g_Graph->heart_pos);
-	free(g_Graph->square);
-	free(g_Graph->big_square);
-	free(g_Graph->square_info);
-	free(g_Graph->info_marc);
+	free(g_graph->heart_pos);
+	free(g_graph->square);
+	free(g_graph->big_square);
+	free(g_graph->square_info);
+	free(g_graph->info_marc);
 }
 
 static void		destroy_surfaces(void)
@@ -59,35 +59,35 @@ static void		destroy_surfaces(void)
 	int i;
 
 	i = 0;
-	destroy_hex_array(g_Graph->hexa_bytes);
-	SDL_FreeSurface(g_Graph->rack);
-	SDL_FreeSurface(g_Graph->general_nbr);
-	SDL_FreeSurface(g_Graph->player_nbr);
-	SDL_FreeSurface(g_Graph->pause[0]);
-	SDL_FreeSurface(g_Graph->pause[1]);
+	destroy_hex_array(g_graph->hexa_bytes);
+	SDL_FreeSurface(g_graph->rack);
+	SDL_FreeSurface(g_graph->general_nbr);
+	SDL_FreeSurface(g_graph->player_nbr);
+	SDL_FreeSurface(g_graph->pause[0]);
+	SDL_FreeSurface(g_graph->pause[1]);
 	while (i < 7)
-		SDL_FreeSurface(g_Graph->heart[i++]);
-	free(g_Graph->heart);
+		SDL_FreeSurface(g_graph->heart[i++]);
+	free(g_graph->heart);
 }
 
 void			ft_quit_graphics(void)
 {
 	int i;
 
-	destroy_rects(g_Graph->info);
+	destroy_rects(g_graph->info);
 	destroy_surfaces();
-	SDL_DestroyTexture(g_Graph->screen.texture);
-	SDL_DestroyTexture(g_Graph->info_text);
+	SDL_DestroyTexture(g_graph->screen.texture);
+	SDL_DestroyTexture(g_graph->info_text);
 	i = 0;
 	while (i < MAX_PLAYERS * 4)
-		SDL_DestroyTexture(g_Graph->pc[i++]);
-	free(g_Graph->pc);
-	SDL_DestroyRenderer(g_Graph->screen.Renderer);
-	SDL_DestroyWindow(g_Graph->screen.window);
+		SDL_DestroyTexture(g_graph->pc[i++]);
+	free(g_graph->pc);
+	SDL_DestroyRenderer(g_graph->screen.Renderer);
+	SDL_DestroyWindow(g_graph->screen.window);
 	i = 0;
 	while (i < 4)
-		TTF_CloseFont(g_Graph->font[i++].font);
+		TTF_CloseFont(g_graph->font[i++].font);
 	TTF_Quit();
 	SDL_Quit();
-	free(g_Graph);
+	free(g_graph);
 }
