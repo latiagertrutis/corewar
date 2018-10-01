@@ -1,19 +1,53 @@
 make;
 
-while getopts "fda" opt;
+mkdir outputs
+while getopts "fdar" opt;
 do
 	case $opt in
+		r)
+			read -e -p "Directory to evaluate (Default /resources/bin/): " dir
+			dir=${dir:-resources/bin}
+			declare -a arr=("")
+			for i in "$dir"/*;
+			do
+				arr+=($i)
+			done
+			len=$((${#arr[@]} - 1))
+			for i in {1..1000};
+			do
+				f1=${arr[$(jot -r 1 0 len)]}
+				f2=${arr[$(jot -r 1 0 len)]}
+				f3=${arr[$(jot -r 1 0 len)]}
+				f4=${arr[$(jot -r 1 0 len)]}
+				if [[ ( -z $f1 && -z $f2 && -z $f3 && -z $f4 ) ]]
+				then
+
+					continue
+				fi
+				printf "\033[32mEvaluating %s %s %s %s\033[0m\n" $f1 $f2 $f3 $f4;
+				./prueba  $f1 $f2 $f3 $f4 -i > outputs/our.txt;
+				./corewar  $f1 $f2 $f3 $f4 -v 4 > outputs/real.txt;
+				diff outputs/our.txt outputs/real.txt > outputs/diff.txt;
+				if [ -s outputs/diff.txt ]
+				then
+					printf "\033[31mDiferences of:\n%s %s %s %s\nStored in outputs/diff.txt\033[0m\n"  $f1 $f2 $f3 $f4;
+					exit 2
+				else
+					printf "\033[32mOK\033[0m\n"
+				fi
+			done
+			;;
 		f)
 			read -e -p "Enter files: " dir
 			printf "\033[1;32mEvaluating %s\033[0m\n" "$dir";
-			./prueba $dir -i > our.txt;
+			./prueba $dir -i > outputs/our.txt;
 			#			ex=$?; if [[ $ex != 0 ]]; then exit $ex; fi
-			./corewar $dir -v 4 > real.txt;
+			./corewar $dir -v 4 > outputs/real.txt;
 			#			ex=$?; if [[ $ex != 0 ]]; then exit $ex; fi
-			diff our.txt real.txt > diff.txt;
-			if [ -s diff.txt ]
+			diff outputs/our.txt outputs/real.txt > outputs/diff.txt;
+			if [ -s outputs/diff.txt ]
 			then
-				printf "\033[31mDiferences of:\n%s\nStored in diff.txt\033[0m\n" "$dir";
+				printf "\033[31mDiferences of:\n%s\nStored in outputs/diff.txt\033[0m\n" "$dir";
 			else
 				printf "\033[32mOK\033[0m\n"
 			fi
@@ -24,13 +58,22 @@ do
 			for f1 in $dir/*;
 			do
 				printf "\033[32mEvaluating %s\033[0m\n" $f1;
-				./asm_prueba  $f1
-				cat $(basename $f1) > $(echo $(basename $f1) | sed 's/\(.*\.\)s/\1cor/g')
-				./asm  $f1
-				diff our.txt real.txt > diff.txt;
-				if [ -s diff.txt ]
+				printf "Our says:"
+				./srcs_asm/asm $f1
+				printf "\n"
+				our=$(echo $f1 | sed 's/\(.*\.\)s/\1cor/g')
+				cat $our > outputs/our.cor
+				rm -f $our
+				printf "Real says:"
+				./srcs_asm/vm_champs/asm $f1
+				printf "\n"
+				real=$(echo $f1 | sed 's/\(.*\.\)s/\1cor/g')
+				cat $real > outputs/real.cor
+				rm -f $real
+				diff outputs/our.cor outputs/real.cor > outputs/diff.txt;
+				if [ -s outputs/diff.txt ]
 				then
-					printf "\033[31mDiferences of:\n%s %s %s %s\nStored in diff.txt\033[0m\n"  $f1 $f2 $f3 $f4;
+					printf "\033[31mDiferences of:\n%s %s %s %s\nStored in outputs/diff.txt\033[0m\n"  $(basename $f1);
 					exit 2
 				else
 					printf "\033[32mOK\033[0m\n"
@@ -59,12 +102,12 @@ do
 								continue
 							fi
 							printf "\033[32mEvaluating %s %s %s %s\033[0m\n" $f1 $f2 $f3 $f4;
-							./prueba  $f1 $f2 $f3 $f4 -i > our.txt;
-							./corewar  $f1 $f2 $f3 $f4 -v 4 > real.txt;
-							diff our.txt real.txt > diff.txt;
-							if [ -s diff.txt ]
+							./prueba  $f1 $f2 $f3 $f4 -i > outputs/our.txt;
+							./corewar  $f1 $f2 $f3 $f4 -v 4 > outputs/real.txt;
+							diff outputs/our.txt outputs/real.txt > outputs/diff.txt;
+							if [ -s outputs/diff.txt ]
 							then
-								printf "\033[31mDiferences of:\n%s %s %s %s\nStored in diff.txt\033[0m\n"  $f1 $f2 $f3 $f4;
+								printf "\033[31mDiferences of:\n%s %s %s %s\nStored in outputs/diff.txt\033[0m\n"  $f1 $f2 $f3 $f4;
 								exit 2
 							else
 								printf "\033[32mOK\033[0m\n"

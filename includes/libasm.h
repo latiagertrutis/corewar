@@ -6,12 +6,13 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 14:14:30 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/18 18:35:40 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/10/01 13:29:50 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBASM_H
 # define LIBASM_H
+# define END_LINE_CHAR ';'
 # include "../libft/includes/libft.h"
 # include "corewar.h"
 # include "op.h"
