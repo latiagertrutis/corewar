@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 17:03:13 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/30 21:55:17 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/01 19:50:40 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ typedef struct		s_graphics
 */
 
 extern t_board			g_board[MEM_SIZE];
-extern t_sdl			*g_Graph;
+extern t_sdl			*g_graph;
 extern t_graphics		*g_frame;
 extern t_graphics		*g_graph_tail;
 extern t_graphics		*g_aux;
@@ -151,7 +151,7 @@ void			ft_quit_graphics(void);
 void			ft_sdl_error(char *str, int mode);
 void			ft_ini_interface(void);
 void			ft_ini_font(void);
-void			ft_board_to_screen(const t_board *board, const unsigned int flags);
+void			ft_board_to_screen(const t_board *board);
 void			ft_pcs_to_rack(const unsigned int nb_pc, const unsigned int *pcs, const unsigned int flags, int stela);
 void			ft_set_back_to_front(const unsigned int flags);
 void			ft_ini_information(void);

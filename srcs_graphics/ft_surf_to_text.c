@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 17:18:47 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/09/30 22:13:12 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/01 19:25:32 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_surf_to_text(SDL_Texture *dst, SDL_Surface *src, SDL_Rect *dst_rect)
 		ft_sdl_error("SDL_LockSurface", MODE_SDL);
 	j = 0;
 	while (++j < src->h)
-		memcpy(pixel + j * pitch, src->pixels + j * src->pitch, src->pitch);
+		ft_memcpy(pixel + j * pitch, src->pixels + j * src->pitch, src->pitch);
 	SDL_UnlockSurface(src);
 	SDL_UnlockTexture(dst);
 }
