@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 18:46:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/28 18:12:42 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/01 19:02:17 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static unsigned char	take_player_nb(const char *str, t_flag_value *f_value)
 	if (ft_issdigit((char *)str))
 		num = ft_atoi(str);
 	else
-		ft_error("number player is not only numbers");
+		ft_error("Error: number player is not only numbers\n");
 	i = 0;
 	while (i < MAX_PLAYERS && f_value->player_nb[i])
 		i++;
@@ -49,7 +49,7 @@ int						set_flags(const int ac, const char **av, unsigned int *flags, t_flag_va
 		else if (ac > 1 && av[0][i] == 'n')//number
 			ret = take_player_nb(av[1], f_value);
 		else
-			ft_error("invalid flag.\n");
+			ft_error("Error: invalid flag.\n");
 		i++;
 	}
 	return (ret);

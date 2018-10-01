@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 13:33:36 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/25 16:20:39 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/01 19:01:53 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ char	*read_alloc(int fd, const size_t size)
 	char *str;
 
 	if (!(str = (char *)malloc(sizeof(char) * size)))
-		ft_error("malloc failed in read_alloc.");
+		ft_error("Error: malloc failed in read_alloc.\n");
 	if ((read(fd, str, size)) < 0)
-		ft_error("read failed in read_alloc.");
+		ft_error("Error: read failed in read_alloc.\n");
 	return (str);
 }

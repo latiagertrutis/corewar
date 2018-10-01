@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/23 15:17:54 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/28 19:30:04 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/01 18:55:40 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void		graphic_launch(const unsigned int flags)
 	g_hexl = 1;
 	g_step = 0;
 	if ((pthread_create(&thread, NULL, graphic_thread, (void *)NULL)))
-		ft_error("thread can not be created");
+		ft_error("Error: thread can not be created\n");
 	sleep(1);
 	ft_ini_graphics(flags);
 	while (running)

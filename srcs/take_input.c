@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 19:12:49 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/30 17:10:05 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/01 19:02:43 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static uint32_t			count_players(const int ac, const char **av, unsigned int *fla
 			ft_error("Corewar: \033[38;5;208mInvalid input.\033[0m\n");
 	}
 	if ((rtn & 0xFF) > MAX_PLAYERS)
-		ft_error("Too much players");
+		ft_error("Error: Too much players\n");
 	return(rtn);
 }
 void					take_input(const int ac, const char **av, unsigned int *flags, t_flag_value *f_value)

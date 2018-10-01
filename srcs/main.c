@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 17:53:30 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/30 23:19:25 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/01 19:01:33 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	init_pc(const t_flag_value f_value)
 
 	i = 1;
 	if (!(g_pc = (t_pc *)malloc(sizeof(t_pc))))
-		ft_error("malloc failled in init_pc\n");
+		ft_error("Error: malloc failled in init_pc\n");
 	*g_pc = (t_pc){0x0, 0, 0, {{0}}, 0, 0, 0, 0, NULL};
 	if (f_value.player_nb[0])
 		*((REG_CAST *)g_pc->reg[0]) = f_value.player_nb[i];
@@ -52,7 +52,7 @@ static void	init_pc(const t_flag_value f_value)
 	while (i < g_n_players)
 	{
 		if(!(aux = (t_pc *)malloc(sizeof(t_pc))))
-			ft_error("malloc failled in init_pc\n");
+			ft_error("Error: malloc failled in init_pc\n");
 		*aux = (t_pc){0x0, i * (MEM_SIZE / g_n_players), 0, {{0}}, i, 0, 0, i, g_pc};
 		if (f_value.player_nb[i])
 			*((REG_CAST *)aux->reg[0]) = f_value.player_nb[i];
@@ -82,7 +82,7 @@ static void	show_winner(void)
 	if (g_winner < g_n_players && g_winner < MAX_PLAYERS)
 		ft_printf("Contestant %d, \"%s\", has won !\n", g_winner + 1, g_players[g_winner].name);
 	else
-		ft_error("Error in show_winner\n");
+		ft_error("Error: Error in show_winner\n");
 }
 
 int			main(int ac, char **av)

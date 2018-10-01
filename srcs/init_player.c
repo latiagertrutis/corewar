@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 19:48:58 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/29 22:21:58 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/01 19:00:18 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static void		check_magic(const int fd)
 	uint32_t magic;
 
 	if (read(fd, &magic, sizeof(uint32_t)) < 0)
-		ft_error("read failed in check_magic");
+		ft_error("Error: read failed in check_magic\n");
 	if (magic != 0xF383EA00)
-		ft_error("Magic number incorrect");
+		ft_error("Error: magic number incorrect\n");
 }
 
 static uint32_t	get_prog_size(const int fd)
@@ -27,7 +27,7 @@ static uint32_t	get_prog_size(const int fd)
 	uint32_t size;
 
 	if ((read(fd, &size, sizeof(uint32_t))) < 0)
-		ft_error("read failed in get_prog_size");
+		ft_error("Error: read failed in get_prog_size\n");
 	invert_bytes(&size, sizeof(uint32_t));
 	if (size > CHAMP_MAX_SIZE)
 		ft_error("Error: player too big\n");
@@ -37,7 +37,7 @@ static uint32_t	get_prog_size(const int fd)
 static void		load_prog(const int fd, const unsigned int player_nb, const uint32_t prog_size)
 {
 	if((read(fd, g_mem + (player_nb * (MEM_SIZE / g_n_players)), prog_size)) < 0)
-		ft_error("read failed in load_prog");
+		ft_error("Error: read failed in load_prog\n");
 }
 
 void			init_player(const char *str, const t_flag_value *f_value)
@@ -49,9 +49,9 @@ void			init_player(const char *str, const t_flag_value *f_value)
 	while (g_players[player_nb].name && player_nb < MAX_PLAYERS)
 		player_nb++;
 	if (player_nb == MAX_PLAYERS)
-		ft_error("Too much players.");
+		ft_error("Error: too much players.\n");
 	if ((fd = open(str, O_RDONLY)) < 0)
-		ft_error("error opening the file");
+		ft_error("Error: opening the file\n");
 	check_magic(fd);
 	g_players[player_nb].name = read_alloc(fd, PROG_NAME_LENGTH + 4);
 	g_players[player_nb].prog_size = get_prog_size(fd);
