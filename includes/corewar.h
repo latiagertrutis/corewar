@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 21:49:08 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/09/25 20:08:05 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/02 15:38:15 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@
 */
 
 # define MAX(A, B) ((A > B) ? A : B)
-
 # define MAX_ARG_LEN MAX(IND_SIZE, MAX(REG_SIZE, DIR_SIZE))
-
 # define NB_INSTRUCTIONS 16
+# define MAGIC_LEN 4
 
 # if IDX_MOD < 100
 #  error IDX_MOD too small

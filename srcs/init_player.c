@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 19:48:58 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/01 19:00:18 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/02 15:59:02 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,63 @@
 
 static void		check_magic(const int fd)
 {
-	uint32_t magic;
+	uint32_t	magic;
+	int			rd;
 
-	if (read(fd, &magic, sizeof(uint32_t)) < 0)
+	if ((rd = read(fd, &magic, sizeof(uint32_t))) < 0)
+	{
+		close(fd);
 		ft_error("Error: read failed in check_magic\n");
+	}
+	if (rd != MAGIC_LEN)
+	{
+		close(fd);
+		ft_error("Error: file is smaller than magic number lenght\n");
+	}
 	if (magic != 0xF383EA00)
+	{
+		close(fd);
 		ft_error("Error: magic number incorrect\n");
+	}
 }
 
 static uint32_t	get_prog_size(const int fd)
 {
-	uint32_t size;
+	uint32_t	size;
+	int			rd;
 
-	if ((read(fd, &size, sizeof(uint32_t))) < 0)
+	if ((rd = read(fd, &size, sizeof(uint32_t))) < 0)
+	{
+		close(fd);
 		ft_error("Error: read failed in get_prog_size\n");
+	}
+	if ((unsigned long)rd != sizeof(uint32_t))
+	{
+		close(fd);
+		ft_error("Error: file does not meet the standards\n");
+	}
 	invert_bytes(&size, sizeof(uint32_t));
 	if (size > CHAMP_MAX_SIZE)
+	{
+		close(fd);
 		ft_error("Error: player too big\n");
+	}
 	return (size);
 }
 
 static void		load_prog(const int fd, const unsigned int player_nb, const uint32_t prog_size)
 {
-	if((read(fd, g_mem + (player_nb * (MEM_SIZE / g_n_players)), prog_size)) < 0)
+	int		rd;
+	if((rd = read(fd, g_mem + (player_nb * (MEM_SIZE / g_n_players)), prog_size)) < 0)
+	{
+		close(fd);
 		ft_error("Error: read failed in load_prog\n");
+	}
+	if ((uint32_t)rd > prog_size)
+	{
+		close(fd);
+		ft_error("Error: program size and real program size does not match\n");
+	}
 }
 
 void			init_player(const char *str, const t_flag_value *f_value)
