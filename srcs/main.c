@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 17:53:30 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/03 21:41:38 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/03 22:18:06 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,11 @@ int			main(int ac, char **av)
 	unsigned int flags;
 	t_flag_value f_value;
 
+	if (ac < 2)
+	{
+		print_usage();
+		return (0);
+	}
 	g_lives = 0;
 	flags = 0;
 	f_value  = (t_flag_value){0, {0}};
