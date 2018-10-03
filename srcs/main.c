@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 17:53:30 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/01 19:01:33 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/03 21:41:38 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	init_pc(const t_flag_value f_value)
 		ft_error("Error: malloc failled in init_pc\n");
 	*g_pc = (t_pc){0x0, 0, 0, {{0}}, 0, 0, 0, 0, NULL};
 	if (f_value.player_nb[0])
-		*((REG_CAST *)g_pc->reg[0]) = f_value.player_nb[i];
+		*((REG_CAST *)g_pc->reg[0]) = f_value.player_nb[0];
 	else
 		*((REG_CAST *)g_pc->reg[0]) = -1;
 	invert_bytes(g_pc->reg, REG_SIZE);
