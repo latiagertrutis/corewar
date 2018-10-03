@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/30 21:39:29 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/01 15:54:19 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/03 15:13:31 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ static void	load_indirect(const t_arg arg1, const t_arg arg2, const unsigned cha
 			i++;
 		}
 	}
-	if (value1 < 0)
-	value1 = ft_mod(value1, MEM_SIZE);
-	if (value2 < 0)
-	value2 = ft_mod(value2, MEM_SIZE);
-	inc = value1 + value2 + pos;
+//	if (value1 < 0)
+//	value1 = ft_mod(value1, MEM_SIZE);
+//	if (value2 < 0)
+//	value2 = ft_mod(value2, MEM_SIZE);
+//	inc = value1 + value2 + pos;
 	ft_printf("P %4d | lldi %d %d r%d\n       | -> load from %d + %d = %d (with pc %d)\n",
 	          pc->pc_num + 1, value1, value2, reg_pos + 1, value1, value2, value1 + value2, inc);
 }
