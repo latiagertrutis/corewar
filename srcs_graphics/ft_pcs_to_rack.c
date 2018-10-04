@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 07:37:31 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/01 19:50:26 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/03 19:26:17 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_pcs_to_rack(const unsigned int nb_pc,
 	while (++j < nb_pc)
 	{
 		pc_rect.x = g_graph->screen.w * RIGHT_BORDER + (g_graph->square->w - 1)
-			* ((pcs[j] & 0xFFFFFF) % g_graph->cuant_squares[0]) + 2;
+			* ((pcs[j] & 0xFFFFFF) % g_graph->cuant_squares[0]) + 1;
 		pc_rect.y = g_graph->screen.h * UPPER_BORDER + (g_graph->square->h - 1)
 			* ((pcs[j] & 0xFFFFFF) / g_graph->cuant_squares[1]) + 1;
 		SDL_RenderCopy(g_graph->screen.Renderer,

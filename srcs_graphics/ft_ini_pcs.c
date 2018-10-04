@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/16 15:57:43 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/01 19:50:27 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/04 03:44:47 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,14 @@ void				ft_ini_pcs(void)
 	int			pitch;
 	Uint32		color;
 
+	i = MAX_PLAYERS;
+	if (!(g_graph->pc = (SDL_Texture **)malloc(sizeof(SDL_Texture *) * i * 4)))
+		ft_error("Error malloc ft_ini_interface\n");
 	pc = (SDL_Rect){0, 0, g_graph->square->w - 2, g_graph->square->h - 2};
 	i = -1;
 	while (++i < MAX_PLAYERS * 4)
 	{
-		color = ft_maprgba(g_graph->rack->format, i, 1);
+		color = ft_maprgba(g_graph->general_nbr->format, i, 1);
 		if (!(g_graph->pc[i] = SDL_CreateTexture(g_graph->screen.Renderer,
 				372645892, SDL_TEXTUREACCESS_STREAMING, g_graph->square->w - 2,
 				g_graph->square->h - 2)))

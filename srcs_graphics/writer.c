@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 18:42:52 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/01 19:50:31 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/04 03:43:47 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ SDL_Surface			*ft_write_string(char *str, int pos[2], int name)
 		g_graph->font[TMP_FONT].color)))
 		ft_sdl_error("TTF_RenderUTF8_Blended", MODE_TTF);
 	if (!(str_surf = SDL_CreateRGBSurfaceWithFormat(0, tmp->w, tmp->h, 32,
-		g_graph->rack->format->format)))
+		372645892)))
 		ft_sdl_error("SDL_CreateRGBSurfaceWithFormat", MODE_SDL);
 	if (SDL_BlitSurface(tmp, NULL, str_surf, NULL))
 		ft_sdl_error("SDL_BlitSurface", MODE_SDL);

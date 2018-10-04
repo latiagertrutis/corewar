@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/23 15:17:54 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/01 20:29:59 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/04 05:29:22 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_graphics		*g_frame;
 t_graphics		*g_graph_tail;
 t_graphics		*g_aux;
 pthread_mutex_t	g_lock;
+int				g_cycle_cuant;
 unsigned int	g_pause;
 unsigned int	g_hexl;
 unsigned int	g_step;
@@ -25,14 +26,19 @@ t_board			g_board[MEM_SIZE];
 
 static void			move_frame(void)
 {
-	t_graphics *aux;
+	t_graphics	*aux;
+	int			i;
 
-	pthread_mutex_lock(&g_lock);
-	aux = g_frame;
-	g_frame = g_frame->next;
-	free(aux->pcs);
-	free(aux);
-	pthread_mutex_unlock(&g_lock);
+	i = -1;
+	while (++i < g_cycle_cuant)
+	{
+		pthread_mutex_lock(&g_lock);
+		aux = g_frame;
+		g_frame = g_frame->next;
+		free(aux->pcs);
+		free(aux);
+		pthread_mutex_unlock(&g_lock);
+	}
 }
 
 static int			pause_button(unsigned int pause)
@@ -69,6 +75,19 @@ static void			events_bucle(int *running)
 				g_step = 1;
 			else if (event.key.keysym.sym == SDLK_i)
 				g_hexl = g_hexl ? 0 : 1;
+			else if (event.key.keysym.sym == SDLK_KP_PLUS)
+				g_cycle_cuant++;
+			else if (event.key.keysym.sym == SDLK_KP_MINUS)
+				g_cycle_cuant = (g_cycle_cuant == 1) ? 1 : g_cycle_cuant - 1;
+		}
+		else if (event.type == SDL_MOUSEBUTTONDOWN)
+		{
+			if (event.button.button == SDL_BUTTON_LEFT)
+			{
+				if (SDL_PointInRect(&(SDL_Point){event.button.x, event.button.y},
+					g_graph->pause_pos))
+					g_pause = pause_button(g_pause);
+			}
 		}
 	}
 }
@@ -103,9 +122,10 @@ void				graphic_launch(const unsigned int flags)
 
 	running = 1;
 	pthread_mutex_init(&g_lock, NULL);
-	g_pause = 0;
+	g_pause = 1;
 	g_hexl = 1;
 	g_step = 0;
+	g_cycle_cuant = 1;
 	if ((pthread_create(&thread, NULL, graphic_thread, (void *)NULL)))
 		ft_error("thread can not be created");
 	ft_ini_graphics(flags);

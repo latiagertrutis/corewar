@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 22:02:57 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/01 19:50:27 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/04 03:42:30 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 static void		ini_number(int mode, SDL_Surface **number, SDL_Rect square_info)
 {
-	*number = SDL_CreateRGBSurfaceWithFormat(0, square_info.w, square_info.h,
-			32, g_graph->rack->format->format);
-	if (SDL_FillRect(*number, NULL, SDL_MapRGBA(g_graph->rack->format,
+	if (!(*number = SDL_CreateRGBSurfaceWithFormat(0, square_info.w,
+		square_info.h, 32, 372645892)))
+		ft_sdl_error("SDL_CreateRGBSurfaceWithFormat", MODE_SDL);
+	if (SDL_FillRect(*number, NULL, SDL_MapRGBA((*number)->format,
 		255, 255, 255, 255)))
 		ft_sdl_error("SDL_FillRect", MODE_SDL);
 	if (SDL_FillRect(*number, &(SDL_Rect){1, 1, (*number)->w - 2,

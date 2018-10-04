@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 05:20:16 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/01 19:50:28 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/04 03:39:11 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void				prepare_all(void)
 	ft_ini_interface();
 	ft_ini_font();
 	ft_ini_information();
+	ft_ini_pcs();
 	ft_ini_images();
 	ft_ini_sprites(g_graph->info.cicles_play, g_graph->info_marc,
 		g_graph->player_nbr);

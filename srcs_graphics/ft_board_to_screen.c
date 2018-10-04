@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 04:10:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/01 19:50:28 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/04 03:13:28 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,12 @@ static void			write_byte(int pos, const t_board *board,
 		int cuant_squares[2])
 {
 	char		hexa_byte[3];
-	SDL_Surface *surf_byte;
-	SDL_Surface *tmp;
+	SDL_Texture *surf_byte;
 
-	g_graph->square->x = (g_graph->square->w - 1) * (pos % cuant_squares[0]);
-	g_graph->square->y = (g_graph->square->h - 1) * (pos / cuant_squares[1]);
+	g_graph->square->x = g_graph->big_square->x + (g_graph->square->w - 1)
+		* (pos % cuant_squares[0]);
+	g_graph->square->y = g_graph->big_square->y + (g_graph->square->h - 1)
+		* (pos / cuant_squares[1]);
 	surf_byte = NULL;
 	if (g_hexl)
 		surf_byte = g_graph->hexa_bytes[take_color_byte(board[pos])]
@@ -71,33 +72,14 @@ static void			write_byte(int pos, const t_board *board,
 		else
 			surf_byte = g_graph->hexa_bytes[9][4];
 	}
-	if (!(tmp = SDL_ConvertSurfaceFormat(surf_byte, 372645892, 0)))
-		ft_sdl_error("SDL_ConvertSurfaceFormat", MODE_SDL);
-	SDL_BlitSurface(tmp, NULL, g_graph->rack,
-		&(SDL_Rect){g_graph->square->x + 1, g_graph->square->y,
-		tmp->w, tmp->h});
-	SDL_FreeSurface(tmp);
+	SDL_RenderCopy(g_graph->screen.Renderer, surf_byte, NULL, g_graph->square);
 }
 
 void				ft_board_to_screen(const t_board *board)
 {
 	int			i;
-	char		*pixel;
-	int			pitch;
-	SDL_Surface	*rack;
-	SDL_Texture	*texture;
 
 	i = 0;
 	while (i < MEM_SIZE)
 		write_byte(i++, board, g_graph->cuant_squares);
-	rack = g_graph->rack;
-	texture = g_graph->screen.texture;
-	SDL_LockTexture(g_graph->screen.texture, NULL, (void **)&pixel, &pitch);
-	SDL_LockSurface(rack);
-	i = -1;
-	while (++i < rack->h)
-		ft_memcpy(pixel + i * pitch, rack->pixels + i * rack->pitch,
-			rack->pitch);
-	SDL_UnlockSurface(rack);
-	SDL_UnlockTexture(g_graph->screen.texture);
 }

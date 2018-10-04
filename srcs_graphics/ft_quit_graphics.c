@@ -6,13 +6,13 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 05:27:44 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/01 19:50:26 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/04 03:26:24 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-static void		destroy_hex_array(SDL_Surface ***hex_array)
+static void		destroy_hex_array(SDL_Texture ***hex_array)
 {
 	int i;
 	int j;
@@ -27,13 +27,13 @@ static void		destroy_hex_array(SDL_Surface ***hex_array)
 			j = 0;
 			while (j < 16)
 			{
-				SDL_FreeSurface(hex_array[k][i * 16 + j]);
+				SDL_DestroyTexture(hex_array[k][i * 16 + j]);
 				j++;
 			}
 			i++;
 		}
 		free(hex_array[k]);
-		SDL_FreeSurface(hex_array[9][k]);
+		SDL_DestroyTexture(hex_array[9][k]);
 		k++;
 	}
 	free(hex_array[9]);
@@ -60,7 +60,6 @@ static void		destroy_surfaces(void)
 
 	i = 0;
 	destroy_hex_array(g_graph->hexa_bytes);
-	SDL_FreeSurface(g_graph->rack);
 	SDL_FreeSurface(g_graph->general_nbr);
 	SDL_FreeSurface(g_graph->player_nbr);
 	SDL_FreeSurface(g_graph->pause[0]);
@@ -76,7 +75,6 @@ void			ft_quit_graphics(void)
 
 	destroy_rects(g_graph->info);
 	destroy_surfaces();
-	SDL_DestroyTexture(g_graph->screen.texture);
 	SDL_DestroyTexture(g_graph->info_text);
 	i = 0;
 	while (i < MAX_PLAYERS * 4)

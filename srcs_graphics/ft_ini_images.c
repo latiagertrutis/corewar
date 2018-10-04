@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 10:50:58 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/01 19:50:27 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/04 05:11:37 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void			prepare_pauses(SDL_Surface *dst[2], char *image, int pos)
 	SDL_Surface *pause;
 	SDL_Surface	*new_pause;
 	SDL_RWops	*rwop;
+	int			hall_dim;
 
 	if (!(rwop = SDL_RWFromFile(image, "rb")))
 		ft_sdl_error("SDL_RWFromFile", MODE_SDL);
@@ -50,6 +51,13 @@ static void			prepare_pauses(SDL_Surface *dst[2], char *image, int pos)
 		ft_sdl_error("SDL_CreateRGBSurfaceWithFormat", MODE_SDL);
 	if (SDL_BlitScaled(pause, NULL, new_pause, NULL))
 		ft_sdl_error("SDL_BlitScaled", MODE_SDL);
+	if (!(g_graph->pause_pos = (SDL_Rect *)malloc(sizeof(SDL_Rect))))
+		ft_error("malloc prepare_pauses");
+	hall_dim = g_graph->square_info->w - g_graph->player_nbr->w * 21;
+	*g_graph->pause_pos = (SDL_Rect){g_graph->screen.w * RIGHT_BORDER +
+		g_graph->big_square->w + 20 + g_graph->square_info->w - hall_dim +
+		(hall_dim - new_pause->w) / 2,  g_graph->screen.h * UPPER_BORDER +
+		100, new_pause->w, new_pause->h};
 	SDL_FreeSurface(pause);
 	dst[pos] = new_pause;
 }

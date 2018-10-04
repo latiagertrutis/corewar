@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 17:03:13 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/01 19:50:40 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/04 05:30:15 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,19 +88,19 @@ typedef struct s_sdl {
 		const char *name;
 		SDL_Window *window;
 		SDL_Renderer *Renderer;
-		SDL_Texture *texture;
 	} screen;
 	int			cuant_squares[2];
 	t_font	font[4];
 	SDL_Texture *info_text;
+	SDL_Texture *marc_board;
 	SDL_Texture **pc;
 	t_info info;
-	SDL_Surface ***hexa_bytes;
-	SDL_Surface *rack;
+	SDL_Texture ***hexa_bytes;
 	SDL_Surface *general_nbr;
 	SDL_Surface *player_nbr;
 	SDL_Surface **heart;
 	SDL_Surface *pause[2];
+	SDL_Rect *pause_pos;
 	SDL_Rect *heart_pos;
 	SDL_Rect *square;  // rack_cell;
 	SDL_Rect *big_square; // board
@@ -138,6 +138,7 @@ extern t_graphics		*g_frame;
 extern t_graphics		*g_graph_tail;
 extern t_graphics		*g_aux;
 extern pthread_mutex_t	g_lock;
+extern int				g_cycle_cuant;
 extern unsigned int		g_pause;
 extern unsigned int		g_hexl;
 extern unsigned int		g_step;
