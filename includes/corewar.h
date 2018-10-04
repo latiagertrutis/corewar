@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 21:49:08 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/02 15:38:15 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/04 17:53:30 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct 		s_player
 ******************************GLOBAL********************************************
 */
 
+extern unsigned char	g_winner;
 extern unsigned char	g_n_players;
 extern t_player			g_players[MAX_PLAYERS];
 

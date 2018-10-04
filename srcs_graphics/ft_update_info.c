@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 16:39:44 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/01 19:50:25 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/04 20:04:36 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,6 @@ static void		update_players(const int cicle_pre_die, const t_player *players,
 	{
 		ft_check_health(g_frame->cycle_to_die, i, cicle_pre_die, players);
 		g_graph->font[PLAYER_NBR_FONT].color = ft_sdl_color(i);
-		if (!cicle_pre_die)
-			update_number(0, g_graph->info.cicles_play[i],
-					PLAYER_NBR_FONT);
 		if (players[i].live_counter != lives[i])
 		{
 			update_number(players[i].live_counter,
@@ -85,16 +82,13 @@ static void		update_players(const int cicle_pre_die, const t_player *players,
 void			ft_update_info(const t_player *players, const int cicle_pre_die)
 {
 	static unsigned int	nbr_pcs = 0;
-	static unsigned int lives[MAX_PLAYERS] = {0};
+	static unsigned int	lives[MAX_PLAYERS] = {0};
 
 	update_number(g_frame->cycle, *g_graph->info.cicles_gen, GENERAL_NBR_FONT);
-	if (!cicle_pre_die)
-	{
-		update_number(0,
-			*g_graph->info.cicle_to_die, GENERAL_NBR_FONT);
-		update_number(g_frame->cycle_to_die,
-			*g_graph->info.cicle_to_die, GENERAL_NBR_FONT);
-	}
+	update_number(0,
+		*g_graph->info.cicle_to_die, GENERAL_NBR_FONT);
+	update_number(g_frame->cycle_to_die,
+		*g_graph->info.cicle_to_die, GENERAL_NBR_FONT);
 	if (nbr_pcs != g_frame->nb_pc)
 	{
 		if (nbr_pcs > g_frame->nb_pc)

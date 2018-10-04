@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 18:28:52 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/01 19:50:27 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/04 19:45:25 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void				ft_ini_sprites(SDL_Rect *cicles_play,
 		ft_sdl_error("SDL_BlitScaled", MODE_SDL);
 	*g_graph->heart_pos = (SDL_Rect){cicles_play[0].x, ((info_marc->h -
 			((cicles_play[0].y + cicles_play[0].h) - (info_marc->y))) -
-			ini_heart[0]->h) / 2 + cicles_play[0].y + cicles_play[0].h,
+			ini_heart[0]->h) / 2 + cicles_play[0].y + cicles_play[0].h - 2,
 			ini_heart[0]->w, ini_heart[0]->h};
 	prepare_all_sprites(sprite_size, sprite, ini_heart, info_marc);
 	g_graph->heart = ini_heart;

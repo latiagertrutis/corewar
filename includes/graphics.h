@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 17:03:13 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/04 05:30:15 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/04 18:01:03 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,9 @@ typedef struct s_sdl {
 	SDL_Texture *info_text;
 	SDL_Texture *marc_board;
 	SDL_Texture **pc;
-	t_info info;
+	SDL_Texture *end[2];
 	SDL_Texture ***hexa_bytes;
+	t_info info;
 	SDL_Surface *general_nbr;
 	SDL_Surface *player_nbr;
 	SDL_Surface **heart;
@@ -171,5 +172,6 @@ void			ft_reset_health(int player, SDL_Rect *heart_pos, SDL_Rect *info_marc, SDL
 void			ft_check_health(const int cycle_to_die, int player, int cicle_pre_die, const t_player *players);
 void			new_frame(const int j);
 void			ft_surf_to_text(SDL_Texture *dst, SDL_Surface *src, SDL_Rect *dst_rect);
+void			ft_put_end_frame(void);
 
 #endif

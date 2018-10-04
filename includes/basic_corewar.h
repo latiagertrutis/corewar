@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 21:48:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/03 22:10:13 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/04 17:53:24 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ extern size_t 			g_nb_cycles;
 extern unsigned int 	g_nb_pc;
 extern unsigned int 	g_nb_pc_total;
 extern t_pc 			*g_pc;
-extern unsigned char	g_winner;
 
 /*
 ******************************FUNCTIONS*****************************************
