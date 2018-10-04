@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 13:39:59 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/17 19:25:33 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/10/01 14:40:37 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ t_line			*ft_newline(t_label *l, int ord_n, char *line, int w)
 	file->order_n = ord_n;
 	file->w = w;
 	file = ft_nullarg(file);
+	file->next = NULL;
 	return (file);
 }

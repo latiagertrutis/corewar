@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 12:44:09 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/17 15:03:37 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/10/01 15:32:38 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,5 @@ t_line		*ft_add_aff(char *l, int j, int n_line)
 	else
 		intern_error(n_line, 0);
 	ft_check_for_coments(l, i, n_line);
-	line->ocp = 1;
 	return (line);
 }
