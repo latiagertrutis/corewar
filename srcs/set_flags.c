@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 18:46:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/01 19:02:17 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/03 21:37:35 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static unsigned char	take_player_nb(const char *str, t_flag_value *f_value)
 	i = 0;
 	while (i < MAX_PLAYERS && f_value->player_nb[i])
 		i++;
-	f_value->player_nb[i] = num;
+	if (i < MAX_PLAYERS)
+		f_value->player_nb[i] = num;
 	return (2);
 }
 
