@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/23 15:17:54 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/04 18:49:25 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/05 01:22:00 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,29 @@ static int			pause_button(unsigned int pause)
 		button = g_graph->pause[0];
 	else
 		button = g_graph->pause[1];
-	ft_surf_to_text(g_graph->info_text, button,
-		&(SDL_Rect){g_graph->square_info->w - hall_dim + (hall_dim - button->w)
-		/ 2, 100, button->w, button->h});
+	ft_surf_to_text2(g_graph->info_text, button, g_graph->pause_pos);
+//		&(SDL_Rect){g_graph->square_info->w - hall_dim + (hall_dim - button->w)
+//		/ 2, 100, button->w, button->h});
 	return (pause ? 0 : 0x1);
+}
+
+static void			back_forw_buttons(int mode)
+{
+	if (mode == 1)
+	{
+		g_cycle_cuant = (g_cycle_cuant == 1) ? 1 : g_cycle_cuant - 1;
+		ft_surf_to_text(g_graph->info_text, g_graph->plus_minus[1], g_graph->button_pos);
+	}
+	else if (mode == 2)
+	{
+		g_cycle_cuant++;
+		ft_surf_to_text(g_graph->info_text, g_graph->plus_minus[3], &(SDL_Rect){g_graph->button_pos->x + g_graph->button_pos->w, g_graph->button_pos->y, g_graph->button_pos->w, g_graph->button_pos->h});
+	}
+	else if (mode == -1)
+		ft_surf_to_text(g_graph->info_text, g_graph->plus_minus[0], g_graph->button_pos);
+	else if (mode == -2)
+		ft_surf_to_text(g_graph->info_text, g_graph->plus_minus[2], &(SDL_Rect){g_graph->button_pos->x + g_graph->button_pos->w, g_graph->button_pos->y, g_graph->button_pos->w, g_graph->button_pos->h});
+	
 }
 
 static void			events_bucle(int *running)
@@ -85,8 +104,41 @@ static void			events_bucle(int *running)
 			if (event.button.button == SDL_BUTTON_LEFT)
 			{
 				if (SDL_PointInRect(&(SDL_Point){event.button.x, event.button.y},
-					g_graph->pause_pos))
+					&(SDL_Rect){g_graph->pause_pos->x + g_graph->screen.w *
+					RIGHT_BORDER + g_graph->big_square->w + 20, g_graph->pause_pos->y
+					+ g_graph->screen.h * UPPER_BORDER, g_graph->pause_pos->w,
+					g_graph->pause_pos->h}))
 					g_pause = pause_button(g_pause);
+				else if (SDL_PointInRect(&(SDL_Point){event.button.x, event.button.y},
+					&(SDL_Rect){g_graph->button_pos->x + g_graph->screen.w *
+					RIGHT_BORDER + g_graph->big_square->w + 20, g_graph->button_pos->y
+					+ g_graph->screen.h * UPPER_BORDER, g_graph->button_pos->w,
+					g_graph->button_pos->h}))
+					back_forw_buttons(1);
+				else if (SDL_PointInRect(&(SDL_Point){event.button.x, event.button.y},
+					&(SDL_Rect){g_graph->button_pos->x + g_graph->button_pos->w +
+					g_graph->screen.w * RIGHT_BORDER + g_graph->big_square->w + 20,
+					g_graph->button_pos->y + g_graph->screen.h * UPPER_BORDER,
+					g_graph->button_pos->w, g_graph->button_pos->h}))
+					back_forw_buttons(2);
+			}
+		}
+		else if (event.type == SDL_MOUSEBUTTONUP)
+		{
+			if (event.button.button == SDL_BUTTON_LEFT)
+			{
+				if (SDL_PointInRect(&(SDL_Point){event.button.x, event.button.y},
+					&(SDL_Rect){g_graph->button_pos->x + g_graph->screen.w *
+					RIGHT_BORDER + g_graph->big_square->w + 20, g_graph->button_pos->y
+					+ g_graph->screen.h * UPPER_BORDER, g_graph->button_pos->w,
+					g_graph->button_pos->h}))
+					back_forw_buttons(-1);
+				else if (SDL_PointInRect(&(SDL_Point){event.button.x, event.button.y},
+					&(SDL_Rect){g_graph->button_pos->x + g_graph->button_pos->w +
+					g_graph->screen.w * RIGHT_BORDER + g_graph->big_square->w + 20,
+					g_graph->button_pos->y + g_graph->screen.h * UPPER_BORDER,
+					g_graph->button_pos->w, g_graph->button_pos->h}))
+					back_forw_buttons(-2);
 			}
 		}
 	}
