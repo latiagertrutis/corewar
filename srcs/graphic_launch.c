@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/23 15:17:54 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/04 15:29:36 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/04 16:12:05 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void			move_frame(void)
 	int			i;
 
 	i = -1;
-	while (g_frame && ++i < g_cycle_cuant)
+	while (g_frame && !g_frame->prog_end &&++i < g_cycle_cuant)
 	{
 		pthread_mutex_lock(&g_lock);
 		aux = g_frame;
