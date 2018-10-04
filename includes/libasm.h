@@ -6,28 +6,28 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 14:14:30 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/10/01 13:29:50 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/04 15:36:03 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBASM_H
 # define LIBASM_H
-# define END_LINE_CHAR ';'
 # include "../libft/includes/libft.h"
 # include "corewar.h"
 # include "op.h"
 # include <fcntl.h>
 # define HASH_SIZE 100
 # define REG_ASM_SIZE 1
+# define END_LINE_CHAR ';'
 
 typedef struct	s_header
 {
 	char			*prog_name;
 	char			*comment;
 	int				name_size;
+	char			flag_n;
+	char			flag_c;
 	int				comment_size;
-	char			*name_line;
-	char			*comment_line;
 	int				line_n;
 }				t_header;
 
@@ -76,6 +76,8 @@ int				ft_hash_it(int id, int max);
 MAX_CAST		ft_extract_label_line(t_line *line, t_label *label, int pos);
 void			ft_invert_bytes(void *arr, const size_t size);
 void			ft_delstruct(t_label **label, t_line *line);
+char			*ft_strjoin_n(char *s1, char *s2, int sel, char *l);
+t_line			*ft_label_to_num(t_line *line, t_label **label);
 /*
 **PRINT TO FILE FUNC
 */

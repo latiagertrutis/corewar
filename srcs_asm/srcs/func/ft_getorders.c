@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 13:10:29 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/25 16:38:17 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/10/03 15:13:00 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ static t_line	*get_line(char *l, t_label **label, int i, int n_line)
 	i = ft_jmp_s_t(l, i);
 	j = i - 1;
 	line = NULL;
-	while (l[++j] && l[j] != LABEL_CHAR &&
-			l[j] != DIRECT_CHAR && l[j] != ' ' && l[j] != '\t')
+	while (l[++j] && l[j] != LABEL_CHAR && l[j] != DIRECT_CHAR && l[j] != ' '
+			&& l[j] != '\t' && l[j] != COMMENT_CHAR && l[j] != END_LINE_CHAR)
 		cnt += l[j];
 	if (l[j] == DIRECT_CHAR || l[j] == ' ' || l[j] == '\t')
 	{
 		line = ft_add_new_line(l, cnt, i, n_line);
 		line->label = label[HASH_SIZE - 1];
 	}
-	else if (l[j] == 0)
+	else if (l[j] == 0 || l[j] == COMMENT_CHAR || l[j] == END_LINE_CHAR)
 		line = ft_newline(label[HASH_SIZE - 1], 0, l, 0);
 	else
 		ft_error_getorders(n_line, 0);

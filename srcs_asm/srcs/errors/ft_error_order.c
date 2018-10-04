@@ -6,7 +6,7 @@
 /*   By: jpinyot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 12:37:37 by jpinyot           #+#    #+#             */
-/*   Updated: 2018/09/17 12:37:43 by jpinyot          ###   ########.fr       */
+/*   Updated: 2018/10/03 15:09:03 by jpinyot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,13 @@ static void	invalid_comm(int l)
 	ft_putstr("I'm a comment");
 }
 
+static void	no_parameter(int l)
+{
+	ft_putstr("\x1B[91mSyntax error at line ");
+	ft_putnbr(l);
+	ft_putstr(":\n\t\x1B[97m-No orders.");
+}
+
 void		ft_error_order(int l, int sel, char *s, char *ex)
 {
 	l++;
@@ -62,5 +69,7 @@ void		ft_error_order(int l, int sel, char *s, char *ex)
 		invalid_comm(l);
 	if (sel == 2)
 		invalid_inst_line(l);
+	if (sel == 3)
+		no_parameter(l);
 	exit(-1);
 }
