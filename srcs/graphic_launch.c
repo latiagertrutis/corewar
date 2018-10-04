@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/23 15:17:54 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/04 05:29:22 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/04 15:29:36 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void			move_frame(void)
 	int			i;
 
 	i = -1;
-	while (++i < g_cycle_cuant)
+	while (g_frame && ++i < g_cycle_cuant)
 	{
 		pthread_mutex_lock(&g_lock);
 		aux = g_frame;
@@ -103,7 +103,9 @@ static void			graphic_main_bucle(const unsigned int flags)
 		if (g_frame)
 		{
 			if (g_frame->prog_end)
+			{
 				break ;
+			}
 			ft_board_to_screen(g_frame->board);
 			ft_update_info(g_frame->players, g_frame->cycle_pre_die);
 			ft_set_back_to_front(flags);
