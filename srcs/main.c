@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 17:53:30 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/03 22:18:06 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/05 23:41:18 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ static void	select_mode(const unsigned int flags, const t_flag_value f_value)
 {
 	if (!flags)
 		basic_launch();
-	if (flags & 0x1)
+	else if (flags & 0x1)
 		graphic_launch(flags);
-	if (flags & 0x4)
+	else if (flags & 0x4)
 		instruction_launch();
-	if (flags & 0x8)
+	else if (flags & 0x8)
 		deaths_launch();
 }
 
