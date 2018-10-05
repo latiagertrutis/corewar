@@ -6,13 +6,13 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 17:53:11 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/05 19:03:21 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/05 23:30:07 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-void		ft_update_little_screen(void)
+void			ft_update_little_screen(void)
 {
 	SDL_Surface	*tmp;
 	t_font		font;
@@ -37,7 +37,6 @@ void		ft_update_little_screen(void)
 	SDL_FreeSurface(num_surf);
 	free(digit);
 }
-
 
 void			ft_back_forw_buttons(int mode)
 {
@@ -66,7 +65,7 @@ void			ft_back_forw_buttons(int mode)
 	ft_update_little_screen();
 }
 
-int			ft_pause_button(unsigned int pause)
+int				ft_pause_button(unsigned int pause)
 {
 	SDL_Surface *button;
 	int			hall_dim;
@@ -76,6 +75,8 @@ int			ft_pause_button(unsigned int pause)
 		button = g_graph->pause[0];
 	else
 		button = g_graph->pause[1];
-	ft_surf_to_text2(g_graph->info_text, button, g_graph->pause_pos);
+	ft_surf_to_text2(g_graph->info_text, button, &(SDL_Rect)
+		{g_graph->square_info->w - g_graph->pause[0]->w, 0,
+		g_graph->pause[0]->w, g_graph->pause[0]->h});
 	return (pause ? 0 : 0x1);
 }

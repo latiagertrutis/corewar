@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/23 15:17:54 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/05 23:58:29 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/06 00:00:21 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void			graphic_main_bucle(const unsigned int flags)
 			}
 			if ((!g_pause || g_step) && !g_frame->prog_end)
 				move_frame();
-			ft_set_back_to_front(flags);
+			ft_set_back_to_front();
 			g_step = 0;
 		}
 	}

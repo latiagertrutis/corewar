@@ -6,7 +6,7 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/10/05 18:02:12 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/10/05 22:39:49 by jagarcia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -96,7 +96,8 @@ GRAPH = ft_ini_graphics.c \
 		ft_reset_health.c \
 		ft_check_health.c \
 		buttons.c \
-		ft_events.c
+		ft_events.c \
+		ft_blit_and_draw.c
 
 SRCS_DIR = srcs/
 

@@ -6,14 +6,14 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 07:37:31 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/03 19:26:17 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/05 23:52:03 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
 void	ft_pcs_to_rack(const unsigned int nb_pc,
-		const unsigned int *pcs, const unsigned int flags, int stela)
+		const unsigned int *pcs, int stela)
 {
 	unsigned int	j;
 	SDL_Rect		pc_rect;
@@ -26,8 +26,9 @@ void	ft_pcs_to_rack(const unsigned int nb_pc,
 			* ((pcs[j] & 0xFFFFFF) % g_graph->cuant_squares[0]) + 1;
 		pc_rect.y = g_graph->screen.h * UPPER_BORDER + (g_graph->square->h - 1)
 			* ((pcs[j] & 0xFFFFFF) / g_graph->cuant_squares[1]) + 1;
-		SDL_RenderCopy(g_graph->screen.Renderer,
-			g_graph->pc[((pcs[j] & 0xFF000000) >> 24) + 8 - (flags & 0x4) * 8
-			+ MAX_PLAYERS * stela], NULL, &pc_rect);
+		if (SDL_RenderCopy(g_graph->screen.Renderer,
+			g_graph->pc[((pcs[j] & 0xFF000000) >> 24) + 8
+			+ MAX_PLAYERS * stela], NULL, &pc_rect))
+			ft_sdl_error("SDL_RenderCopy", MODE_SDL);
 	}
 }

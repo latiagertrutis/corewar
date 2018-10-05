@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 17:03:13 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/05 18:30:21 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/05 23:59:00 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,10 @@ typedef struct s_sdl {
 	SDL_Rect *button_pos;
 	SDL_Rect *little_screen_pos;
 	SDL_Rect *heart_pos;
-	SDL_Rect *square;  // rack_cell;
-	SDL_Rect *big_square; // board
-	SDL_Rect *square_info; // general info
-	SDL_Rect *info_marc; // player_info
+	SDL_Rect *square;
+	SDL_Rect *big_square;
+	SDL_Rect *square_info;
+	SDL_Rect *info_marc;
 } 				t_sdl;
 
 typedef struct 		s_board
@@ -158,8 +158,8 @@ void			ft_sdl_error(char *str, int mode);
 void			ft_ini_interface(void);
 void			ft_ini_font(void);
 void			ft_board_to_screen(const t_board *board);
-void			ft_pcs_to_rack(const unsigned int nb_pc, const unsigned int *pcs, const unsigned int flags, int stela);
-void			ft_set_back_to_front(const unsigned int flags);
+void			ft_pcs_to_rack(const unsigned int nb_pc, const unsigned int *pcs, int stela);
+void			ft_set_back_to_front(void);
 void			ft_ini_information(void);
 void			ft_ini_material(SDL_Surface *info_marc);
 SDL_Surface		*ft_write_string(char *str, int pos[2], int name);
@@ -182,5 +182,5 @@ void			ft_events(int *running);
 int				ft_pause_button(unsigned int pause);
 void			ft_back_forw_buttons(int mode);
 void			ft_update_little_screen(void);
-
+void			ft_blit_and_draw(SDL_Surface *hall);
 #endif
