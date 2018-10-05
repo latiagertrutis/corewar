@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 19:48:58 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/03 21:39:19 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/05 23:58:23 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void		load_prog(const int fd, const unsigned int player_nb, const uint32_
 		close(fd);
 		ft_error("Error: read failed in load_prog\n");
 	}
-	if ((uint32_t)rd > prog_size)
+	if ((uint32_t)rd != prog_size)
 	{
 		close(fd);
 		ft_error("Error: program size and real program size does not match\n");

@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 17:53:30 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/06 00:17:57 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/06 01:12:39 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ unsigned int 	g_nb_pc_total;
 t_pc 			*g_pc;
 t_player		g_players[MAX_PLAYERS];
 
-static void	select_mode(const unsigned int flags, const t_flag_value f_value)
+static void	select_mode(const unsigned int flags)
 {
 	if (!flags)
 		basic_launch();
-	if (flags & 0x1)
+	else if (flags & 0x1)
 		graphic_launch(flags);
-	if (flags & 0x4)
+	else if (flags & 0x4)
 		instruction_launch();
-	if (flags & 0x8)
+	else if (flags & 0x8)
 		deaths_launch();
 }
 
@@ -109,7 +109,7 @@ int			main(int ac, char **av)
 	g_pc = NULL;
 	init_pc(f_value);
 	present_players();
-	select_mode(flags, f_value);
+	select_mode(flags);
 	show_winner();
 	return (0);
 }

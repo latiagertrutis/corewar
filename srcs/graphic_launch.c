@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/23 15:17:54 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/06 00:36:29 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/06 01:13:14 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void			move_frame(void)
 static void			graphic_main_bucle(void)
 {
 	int			running;
-	
+
 	running = 1;
 	while (running)
 	{
