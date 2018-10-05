@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 22:02:57 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/04 21:26:23 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/05 23:35:33 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ static void		prepare_info_marc(void)
 		(g_graph->square_info->w - g_graph->player_nbr->w * 21),
 		g_graph->big_square->h, 32, 372645892)))
 		ft_sdl_error("SDL_CreateRGBSurfaceWithFormat", MODE_SDL);
-	if (SDL_FillRect(marc_s, NULL, SDL_MapRGBA(marc_s->format, 120, 115, 119, 255)) || SDL_FillRect(marc_s, &(SDL_Rect){3, 3, marc_s->w - 6, marc_s->h - 6}, 0))
+	if (SDL_FillRect(marc_s, NULL, SDL_MapRGBA(marc_s->format, 120, 115, 119,
+		255)) || SDL_FillRect(marc_s, &(SDL_Rect){3, 3, marc_s->w - 6,
+		marc_s->h - 6}, 0))
 		ft_sdl_error("SDL_FillRect", MODE_SDL);
 	ft_surf_to_text(g_graph->info_text, marc_s, NULL);
 	SDL_FreeSurface(marc_s);

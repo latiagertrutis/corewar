@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/01 10:20:06 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/01 19:50:26 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/05 22:06:22 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void			ft_put_general_info(void)
 	tmp += ft_write_number_fields(&g_graph->font[GENERAL_NBR_FONT],
 			(int[2]){x_pos, tmp}, g_graph->general_nbr) + 10;
 	tmp += prepare_string((int[2]){x_pos + (g_graph->general_nbr->w * 10 - 9)
-			/ 2, tmp}, "Number of Processos", 1);
+			/ 2, tmp}, "Number of Processes", 1);
 	*g_graph->info.processos = (SDL_Rect){x_pos, tmp,
 			g_graph->info.cicles_gen->w, g_graph->info.cicles_gen->h};
 	tmp += ft_write_number_fields(&g_graph->font[GENERAL_NBR_FONT],

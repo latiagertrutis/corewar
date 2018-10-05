@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 03:49:02 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/04 19:44:37 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/05 23:32:08 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static void		prepare_board_marc(void)
 		* g_graph->cuant_squares[0] + 6, (g_graph->square->h - 1) *
 		g_graph->cuant_squares[1] + 6, 32, 372645892)))
 		ft_sdl_error("SDL_CreateRGBSurfaceWithFormat", MODE_SDL);
-	if (SDL_FillRect(marc_s, NULL, SDL_MapRGBA(marc_s->format, 120, 115, 119, 255)) || SDL_FillRect(marc_s,
+	if (SDL_FillRect(marc_s, NULL, SDL_MapRGBA(marc_s->format, 120, 115,
+		119, 255)) || SDL_FillRect(marc_s,
 		&(SDL_Rect){3, 3, marc_s->w - 6, marc_s->h - 6}, 0))
 		ft_sdl_error("SDL_FillRect", MODE_SDL);
 	if (!(g_graph->marc_board = SDL_CreateTextureFromSurface(
