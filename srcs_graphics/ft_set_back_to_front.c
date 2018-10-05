@@ -6,16 +6,16 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 18:19:40 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/04 21:31:12 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/05 17:42:34 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graphics.h"
 
-static void	put_end_frame(void)
+static int	put_end_frame(void)
 {
-	int	i;
-	SDL_Rect pos;
+	int			i;
+	SDL_Rect	pos;
 	
 	i = -1;
 
@@ -33,12 +33,16 @@ static void	put_end_frame(void)
 		SDL_SetRenderDrawBlendMode(g_graph->screen.Renderer, SDL_BLENDMODE_NONE);
 		pos.y += pos.h;
 	}
+	return (1);
 }
 
 void			ft_set_back_to_front(const unsigned int flags)
 {
-	SDL_Renderer *renderer;
+	SDL_Renderer	*renderer;
+	static int		end = 0;
 
+	if (end)
+		return ;
 	renderer = g_graph->screen.Renderer;
 	ft_pcs_to_rack(g_frame->nb_pc, g_frame->pcs, flags, 0);
 	SDL_RenderCopy(renderer, g_graph->marc_board, NULL,
@@ -50,8 +54,8 @@ void			ft_set_back_to_front(const unsigned int flags)
 		+ 20, g_graph->screen.h * UPPER_BORDER, g_graph->square_info->w,
 		g_graph->big_square->h});
 	if (g_frame->prog_end)
-		put_end_frame();
-	SDL_RenderPresent(renderer);
+		end = put_end_frame();
+		SDL_RenderPresent(renderer);
 	if (SDL_SetRenderDrawColor(g_graph->screen.Renderer, 0, 0, 0, 255))
 		ft_sdl_error("SDL_SetRenderDrawColor", MODE_SDL);
 	if (!g_frame->prog_end)

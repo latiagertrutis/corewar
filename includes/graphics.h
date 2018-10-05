@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 17:03:13 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/04 23:50:09 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/05 18:30:21 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,5 +178,9 @@ void			new_frame(const int j);
 void			ft_surf_to_text(SDL_Texture *dst, SDL_Surface *src, SDL_Rect *dst_rect);
 void			ft_put_end_frame(void);
 void			ft_surf_to_text2(SDL_Texture *dst, SDL_Surface *src, SDL_Rect *dst_rect);
+void			ft_events(int *running);
+int				ft_pause_button(unsigned int pause);
+void			ft_back_forw_buttons(int mode);
+void			ft_update_little_screen(void);
 
 #endif
