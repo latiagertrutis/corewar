@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 05:27:44 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/04 03:26:24 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/06 01:11:16 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static void		destroy_rects(t_info info)
 	free(g_graph->big_square);
 	free(g_graph->square_info);
 	free(g_graph->info_marc);
+	free(g_graph->button_pos);
+	free(g_graph->little_screen_pos);
 }
 
 static void		destroy_surfaces(void)
@@ -67,6 +69,19 @@ static void		destroy_surfaces(void)
 	while (i < 7)
 		SDL_FreeSurface(g_graph->heart[i++]);
 	free(g_graph->heart);
+	i = 0;
+	while (i < 4)
+		SDL_FreeSurface(g_graph->plus_minus[i++]);
+	SDL_FreeSurface(g_graph->little_screen);
+}
+
+static void		destroy_pcs(void)
+{
+	int i;
+
+	i = 0;
+	while (i < MAX_PLAYERS * 4)
+		SDL_DestroyTexture(g_graph->pc[i++]);
 }
 
 void			ft_quit_graphics(void)
@@ -75,6 +90,7 @@ void			ft_quit_graphics(void)
 
 	destroy_rects(g_graph->info);
 	destroy_surfaces();
+	destroy_pcs();
 	SDL_DestroyTexture(g_graph->info_text);
 	i = 0;
 	while (i < MAX_PLAYERS * 4)

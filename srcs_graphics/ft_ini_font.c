@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/14 11:09:42 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/04 03:43:40 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/06 00:22:30 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void				insert_hexa_surf(char pair[3], int index[3])
 		SDL_CreateTextureFromSurface(g_graph->screen.Renderer, rack_square)))
 		ft_sdl_error("SDL_CreateTextureFromSurface", MODE_SDL);
 	SDL_FreeSurface(tmp);
+	SDL_FreeSurface(rack_square);
 }
 
 static void				generate_noinfo_squares(void)
@@ -63,6 +64,7 @@ static void				generate_noinfo_squares(void)
 			SDL_CreateTextureFromSurface(g_graph->screen.Renderer,
 			rack_square)))
 			ft_sdl_error("SDL_CreateTextureFromSurface", MODE_SDL);
+		SDL_FreeSurface(rack_square);
 	}
 }
 

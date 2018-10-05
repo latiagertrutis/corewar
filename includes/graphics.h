@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 17:03:13 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/05 23:59:00 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/06 00:06:52 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ typedef struct s_sdl {
 	SDL_Surface *pause[2];
 	SDL_Surface *plus_minus[4];
 	SDL_Surface *little_screen;
-	SDL_Rect *pause_pos;
 	SDL_Rect *button_pos;
 	SDL_Rect *little_screen_pos;
 	SDL_Rect *heart_pos;
