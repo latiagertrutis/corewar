@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 16:39:44 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/04 20:04:36 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/05 18:14:49 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,14 @@ static void		update_digit(SDL_Rect pos, char digit[2],
 	else
 		num_surf = g_graph->player_nbr;
 	font = g_graph->font[mode];
-	tmp = TTF_RenderUTF8_Blended(font.font, digit, font.color);
-	SDL_FillRect(num_surf, &(SDL_Rect){1, 1, num_surf->w - 2, num_surf->h - 2},
-		SDL_MapRGBA(num_surf->format, 0, 0, 0, 255));
-	SDL_BlitSurface(tmp, NULL, num_surf, &(SDL_Rect){(num_surf->w - tmp->w) / 2,
-		(num_surf->h - tmp->h) / 2 + 2, tmp->w, tmp->h});
+	if (!(tmp = TTF_RenderUTF8_Blended(font.font, digit, font.color)))
+		ft_sdl_error("TTF_RenderUTF8_Blended", MODE_TTF);
+	if (SDL_FillRect(num_surf, &(SDL_Rect){1, 1, num_surf->w - 2, num_surf->h - 2},
+		SDL_MapRGBA(num_surf->format, 0, 0, 0, 255)))
+		ft_sdl_error("SDL_FillRect", MODE_SDL);
+	if (SDL_BlitSurface(tmp, NULL, num_surf, &(SDL_Rect){(num_surf->w - tmp->w) / 2,
+		(num_surf->h - tmp->h) / 2 + 2, tmp->w, tmp->h}))
+		ft_sdl_error("SDL_BlitSurface", MODE_SDL);
 	ft_surf_to_text(g_graph->info_text, num_surf, &pos);
 	SDL_FreeSurface(tmp);
 }
