@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/17 19:12:49 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/01 19:02:43 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/05 17:21:41 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ static uint32_t			count_players(const int ac, const char **av, unsigned int *fla
 	rtn = 0;
 	while (i < ac && i < 25)
 	{
-		if (av[i][0] == '-')
-			i += set_flags(ac - i, av + i, flags, f_value);
+		if (av[i][0] == '-' && av[i][1] == 'n' && (ac - i) > 1)
+			i += set_flags(0xFF & rtn, av + i, flags, f_value);
+		else if (av[i][0] == '-' && av[i][1] != 'n')
+			i += set_flags(0, av + i, flags, f_value);
 		else if (check_file(av[i]))
 		{
 			rtn = rtn | (0x80000000 >> (i - 1));

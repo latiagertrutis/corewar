@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 21:48:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/04 17:53:24 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/05 17:25:11 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ extern t_pc 			*g_pc;
 */
 
 void			print_usage(void);
-int				set_flags(const int ac, const char **av, unsigned int *flags, t_flag_value *f_value);
+int				set_flags(const unsigned int n_player, const char **av, unsigned int *flags, t_flag_value *f_value);
 void			init_player(const char *str, const t_flag_value *f_value);
 char			*read_alloc(int fd, const size_t size);
 void			invert_bytes(void *arr, const size_t size);
