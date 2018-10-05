@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 17:53:11 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/05 18:30:15 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/05 19:03:21 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,22 @@ void			ft_back_forw_buttons(int mode)
 	if (mode == 1)
 	{
 		g_cycle_cuant = (g_cycle_cuant == 1) ? 1 : g_cycle_cuant - 1;
-		ft_surf_to_text(g_graph->info_text, g_graph->plus_minus[1],
+		ft_surf_to_text2(g_graph->info_text, g_graph->plus_minus[1],
 		g_graph->button_pos);
 	}
 	else if (mode == 2)
 	{
 		g_cycle_cuant++;
-		ft_surf_to_text(g_graph->info_text, g_graph->plus_minus[3],
+		ft_surf_to_text2(g_graph->info_text, g_graph->plus_minus[3],
 			&(SDL_Rect) {g_graph->button_pos->x + g_graph->button_pos->w,
 			g_graph->button_pos->y, g_graph->button_pos->w,
 			g_graph->button_pos->h});
 	}
 	else if (mode == -1)
-		ft_surf_to_text(g_graph->info_text, g_graph->plus_minus[0],
+		ft_surf_to_text2(g_graph->info_text, g_graph->plus_minus[0],
 			g_graph->button_pos);
 	else if (mode == -2)
-		ft_surf_to_text(g_graph->info_text, g_graph->plus_minus[2],
+		ft_surf_to_text2(g_graph->info_text, g_graph->plus_minus[2],
 			&(SDL_Rect){g_graph->button_pos->x + g_graph->button_pos->w,
 			g_graph->button_pos->y, g_graph->button_pos->w,
 			g_graph->button_pos->h});

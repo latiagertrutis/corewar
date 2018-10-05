@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 17:18:47 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/04 22:31:24 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/05 19:00:02 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ void	ft_surf_to_text2(SDL_Texture *dst, SDL_Surface *src, SDL_Rect *dst_rect)
 	i[0] = -1;
 	i[1] = 0;
 	i[2] = 0;
-	while (++i[0] < src->h)
+	while (++(i[0]) < src->h)
 	{
 		i[1] = i[0] * pitch / sizeof(int);
 		while (i[2] < (int)((src->pitch / sizeof(int)) * i[0]))
 		{
 			if (((int *)src->pixels)[i[2]])
 				pixel[i[1]] = ((int *)src->pixels)[i[2]];
-			i[2]++;
-			i[1]++;
+			(i[2])++;
+			(i[1])++;
 		}
 	}
 	SDL_UnlockSurface(src);

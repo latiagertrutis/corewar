@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 10:50:58 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/05 01:18:48 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/05 19:03:43 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,10 +118,10 @@ void				ft_ini_images(void)
 	prepare_pauses(g_graph->pause, "./images/button_off.png", 0);
 	prepare_pauses(g_graph->pause, "./images/button_on.png", 1);
 	prepare_screen();
-	prepare_screen_buttons(g_graph->plus_minus, "./images/backwards.png", 0);
-	prepare_screen_buttons(g_graph->plus_minus, "./images/backwards_push.png", 1);
-	prepare_screen_buttons(g_graph->plus_minus, "./images/forward.png", 2);
-	prepare_screen_buttons(g_graph->plus_minus, "./images/forward_push.png", 3);
+	prepare_screen_buttons(g_graph->plus_minus, "./images/backwards.png", 1);
+	prepare_screen_buttons(g_graph->plus_minus, "./images/backwards_push.png", 0);
+	prepare_screen_buttons(g_graph->plus_minus, "./images/forward.png", 3);
+	prepare_screen_buttons(g_graph->plus_minus, "./images/forward_push.png", 2);
 	if (SDL_BlitSurface(g_graph->pause[1], NULL, hall, &(SDL_Rect){(hall->w
 		- g_graph->pause[0]->w) / 2, 100, g_graph->pause[0]->w,
 		g_graph->pause[0]->w}))
