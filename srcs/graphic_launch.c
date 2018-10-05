@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/23 15:17:54 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/05 18:01:23 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/05 21:06:04 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,12 @@ static void			move_frame(void)
 static void			graphic_main_bucle(const unsigned int flags)
 {
 	int			running;
-
+	int			i;
+	
 	running = 1;
+	i = -1;
+//	while (++i < dump_flag)
+//		move_frame();
 	while (running)
 	{
 		ft_events(&running);

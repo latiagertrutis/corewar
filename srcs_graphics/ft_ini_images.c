@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 10:50:58 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/05 19:03:43 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/05 21:01:09 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ void				ft_ini_images(void)
 	SDL_Surface *hall;
 
 	hall = prepare_hall();
-	prepare_pauses(g_graph->pause, "./images/button_off.png", 0);
-	prepare_pauses(g_graph->pause, "./images/button_on.png", 1);
+	prepare_pauses(g_graph->pause, "./images/hall_on.png", 0);
+	prepare_pauses(g_graph->pause, "./images/hall_off.png", 1);
 	prepare_screen();
 	prepare_screen_buttons(g_graph->plus_minus, "./images/backwards.png", 1);
 	prepare_screen_buttons(g_graph->plus_minus, "./images/backwards_push.png", 0);
