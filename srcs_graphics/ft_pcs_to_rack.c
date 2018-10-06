@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 07:37:31 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/05 23:52:03 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/06 04:05:19 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_pcs_to_rack(const unsigned int nb_pc,
 			* ((pcs[j] & 0xFFFFFF) % g_graph->cuant_squares[0]) + 1;
 		pc_rect.y = g_graph->screen.h * UPPER_BORDER + (g_graph->square->h - 1)
 			* ((pcs[j] & 0xFFFFFF) / g_graph->cuant_squares[1]) + 1;
-		if (SDL_RenderCopy(g_graph->screen.Renderer,
+		if (SDL_RenderCopy(g_graph->screen.renderer,
 			g_graph->pc[((pcs[j] & 0xFF000000) >> 24) + 8
 			+ MAX_PLAYERS * stela], NULL, &pc_rect))
 			ft_sdl_error("SDL_RenderCopy", MODE_SDL);

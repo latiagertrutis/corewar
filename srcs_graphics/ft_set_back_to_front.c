@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/24 18:19:40 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/05 23:56:33 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/06 04:08:42 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ static int			put_end_frame(void)
 	pos = prepare_rect();
 	while (++i < g_n_players)
 	{
-		if (SDL_SetRenderDrawBlendMode(g_graph->screen.Renderer,
+		if (SDL_SetRenderDrawBlendMode(g_graph->screen.renderer,
 				SDL_BLENDMODE_BLEND))
 			ft_sdl_error("SDL_SetRenderDrawBlendMode", MODE_SDL);
-		if (i == g_winner && SDL_RenderCopy(g_graph->screen.Renderer,
+		if (i == g_winner && SDL_RenderCopy(g_graph->screen.renderer,
 			g_graph->end[1], NULL, &pos))
 			ft_sdl_error("SDL_RenderCopy", MODE_SDL);
-		else if (SDL_RenderCopy(g_graph->screen.Renderer, g_graph->end[0],
+		else if (SDL_RenderCopy(g_graph->screen.renderer, g_graph->end[0],
 			NULL, &pos))
 			ft_sdl_error("SDL_RenderCopy", MODE_SDL);
-		if (SDL_SetRenderDrawBlendMode(g_graph->screen.Renderer,
+		if (SDL_SetRenderDrawBlendMode(g_graph->screen.renderer,
 			SDL_BLENDMODE_NONE))
 			ft_sdl_error("SDL_SetRenderDrawBlendMode", MODE_SDL);
 		pos.y += pos.h;
@@ -53,7 +53,7 @@ void				ft_set_back_to_front(void)
 
 	if (end)
 		return ;
-	renderer = g_graph->screen.Renderer;
+	renderer = g_graph->screen.renderer;
 	ft_pcs_to_rack(g_frame->nb_pc, g_frame->pcs, 0);
 	if (SDL_RenderCopy(renderer, g_graph->marc_board, NULL,
 		&(SDL_Rect){g_graph->big_square->x - 3, g_graph->big_square->y - 3,
@@ -68,7 +68,7 @@ void				ft_set_back_to_front(void)
 	if (g_frame->prog_end)
 		end = put_end_frame();
 	SDL_RenderPresent(renderer);
-	if (SDL_SetRenderDrawColor(g_graph->screen.Renderer, 0, 0, 0, 255))
+	if (SDL_SetRenderDrawColor(g_graph->screen.renderer, 0, 0, 0, 255))
 		ft_sdl_error("SDL_SetRenderDrawColor", MODE_SDL);
 	if (!g_frame->prog_end)
 		if (SDL_RenderClear(renderer))

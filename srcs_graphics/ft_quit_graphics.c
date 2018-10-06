@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 05:27:44 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/06 01:11:16 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/06 04:08:17 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void			ft_quit_graphics(void)
 	while (i < MAX_PLAYERS * 4)
 		SDL_DestroyTexture(g_graph->pc[i++]);
 	free(g_graph->pc);
-	SDL_DestroyRenderer(g_graph->screen.Renderer);
+	SDL_DestroyRenderer(g_graph->screen.renderer);
 	SDL_DestroyWindow(g_graph->screen.window);
 	i = 0;
 	while (i < 4)

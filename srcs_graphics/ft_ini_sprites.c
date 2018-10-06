@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 18:28:52 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/06 02:41:59 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/06 03:53:43 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void				ft_ini_sprites(SDL_Rect *cicles_play,
 	SDL_Surface		*sprite;
 	int				sprite_size;
 	SDL_Surface		**ini_heart;
-
 
 	sprite = open_sprite(&ini_heart);
 	sprite_size = calc_sprite_size(ini_heart, (int[2]){player_nbr->w * 20,
