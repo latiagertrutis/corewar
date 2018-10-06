@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/28 18:42:52 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/04 03:43:47 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/06 00:32:02 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ int					ft_write_number_fields(t_font *font, int pos[2],
 		ft_sdl_error("SDL_BlitSurface", MODE_SDL);
 	place_fields(&(SDL_Rect){pos[0], pos[1], number->w * 10, number->h},
 		number);
+	SDL_FreeSurface(tmp);
 	return (number->h);
 }

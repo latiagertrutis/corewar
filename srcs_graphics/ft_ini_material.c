@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 22:02:57 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/05 23:35:33 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/06 00:27:35 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,8 @@ static void		prepare_info_marc(void)
 
 static void		ini_info_rects(void)
 {
-	SDL_Rect *tmp;
-
-	if (!(tmp = (SDL_Rect *)malloc(sizeof(SDL_Rect))))
+	if (!(g_graph->info.cicles_gen = (SDL_Rect *)malloc(sizeof(SDL_Rect))))
 		ft_error("malloc ini_info_rects");
-	g_graph->info.cicles_gen = tmp;
 	*g_graph->info.cicles_gen = (SDL_Rect){0, 0, g_graph->square_info->w / 20,
 			g_graph->square_info->h / 6};
 	g_graph->info.cicle_to_die = (SDL_Rect *)malloc(sizeof(SDL_Rect));

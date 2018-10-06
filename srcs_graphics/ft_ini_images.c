@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/17 10:50:58 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/05 23:34:42 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/06 01:00:59 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,6 @@ static void			prepare_screen_buttons(SDL_Surface *dst[4], char *file,
 		ft_sdl_error("SDL_ConvertSurfaceFormat", MODE_SDL);
 	if (SDL_BlitScaled(tmp, NULL, dst[pos], NULL))
 		ft_sdl_error("SDL_BlitScaled", MODE_SDL);
-	if (!(g_graph->button_pos = (SDL_Rect *)malloc(sizeof(SDL_Rect))))
-		ft_error("malloc prepare_screen_buttons");
-	*g_graph->button_pos = (SDL_Rect){g_graph->little_screen_pos->x,
-		g_graph->little_screen_pos->y + g_graph->little_screen_pos->h,
-		dst[pos]->w, dst[pos]->h};
 	SDL_FreeSurface(tmp);
 	SDL_FreeSurface(button);
 }
@@ -121,7 +116,11 @@ void				ft_ini_images(void)
 		0);
 	prepare_screen_buttons(g_graph->plus_minus, "./images/forward.png", 3);
 	prepare_screen_buttons(g_graph->plus_minus, "./images/forward_push.png", 2);
+	if (!(g_graph->button_pos = (SDL_Rect *)malloc(sizeof(SDL_Rect))))
+		ft_error("malloc prepare_screen_buttons");
+	*g_graph->button_pos = (SDL_Rect){g_graph->little_screen_pos->x,
+		g_graph->little_screen_pos->y + g_graph->little_screen_pos->h,
+		g_graph->plus_minus[0]->w, g_graph->plus_minus[0]->h};
 	ft_blit_and_draw(hall);
 	ft_update_little_screen();
-	SDL_FreeSurface(hall);
 }

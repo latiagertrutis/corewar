@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/25 03:49:02 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/05 23:32:08 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/06 04:05:20 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void		prepare_board_marc(void)
 		&(SDL_Rect){3, 3, marc_s->w - 6, marc_s->h - 6}, 0))
 		ft_sdl_error("SDL_FillRect", MODE_SDL);
 	if (!(g_graph->marc_board = SDL_CreateTextureFromSurface(
-		g_graph->screen.Renderer, marc_s)))
+		g_graph->screen.renderer, marc_s)))
 		ft_sdl_error("SDL_CreateTextureFromSurface", MODE_SDL);
 	SDL_FreeSurface(marc_s);
 }
@@ -47,7 +47,7 @@ static void		prepare_ends(SDL_Surface *info_marc)
 		if (SDL_FillRect(marc, NULL, color[i]))
 			ft_sdl_error("SDL_FillRect", MODE_SDL);
 		if (!(g_graph->end[i] = SDL_CreateTextureFromSurface(
-			g_graph->screen.Renderer, marc)))
+			g_graph->screen.renderer, marc)))
 			ft_sdl_error("SDL_CreateTextureFromSurface", MODE_SDL);
 		if (SDL_SetTextureBlendMode(g_graph->end[0], SDL_BLENDMODE_BLEND))
 			ft_sdl_error("SDL_SetTextureBlendMode", MODE_SDL);
@@ -64,7 +64,7 @@ void			ft_ini_information(void)
 	g_graph->square_info->w = g_graph->screen.w * LEFT_BORDER -
 		g_graph->screen.w * RIGHT_BORDER;
 	g_graph->square_info->h = g_graph->big_square->h / 4;
-	if (!(g_graph->info_text = SDL_CreateTexture(g_graph->screen.Renderer,
+	if (!(g_graph->info_text = SDL_CreateTexture(g_graph->screen.renderer,
 		372645892, SDL_TEXTUREACCESS_STREAMING, g_graph->square_info->w,
 		g_graph->big_square->h)))
 		ft_sdl_error("SDL_CreateTexture", MODE_SDL);

@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 22:37:56 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/05 22:38:59 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/06 00:39:45 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ void	ft_blit_and_draw(SDL_Surface *hall)
 	ft_surf_to_text(g_graph->info_text, hall,
 		&(SDL_Rect){g_graph->square_info->w - hall->w, 0,
 		hall->w, g_graph->big_square->h});
+	SDL_FreeSurface(hall);
 }

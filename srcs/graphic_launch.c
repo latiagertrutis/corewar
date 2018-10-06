@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/23 15:17:54 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/06 00:00:21 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/06 01:13:14 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void			move_frame(void)
 	}
 }
 
-static void			graphic_main_bucle(const unsigned int flags)
+static void			graphic_main_bucle(void)
 {
 	int			running;
 
@@ -79,7 +79,7 @@ void				graphic_launch(const unsigned int flags)
 	if ((pthread_create(&thread, NULL, graphic_thread, (void *)NULL)))
 		ft_error("thread can not be created");
 	ft_ini_graphics(flags);
-	graphic_main_bucle(flags);
+	graphic_main_bucle();
 	ft_quit_graphics();
 	pthread_mutex_destroy(&g_lock);
 	pthread_join(thread, &status);

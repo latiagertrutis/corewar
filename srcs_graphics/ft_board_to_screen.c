@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/15 04:10:37 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/04 05:31:46 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/06 04:05:20 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void			write_byte(int pos, const t_board *board,
 		else
 			surf_byte = g_graph->hexa_bytes[9][4];
 	}
-	SDL_RenderCopy(g_graph->screen.Renderer, surf_byte, NULL, g_graph->square);
+	SDL_RenderCopy(g_graph->screen.renderer, surf_byte, NULL, g_graph->square);
 }
 
 void				ft_board_to_screen(const t_board *board)

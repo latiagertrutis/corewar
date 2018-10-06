@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/13 05:20:16 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/04 03:39:11 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/06 04:07:21 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ void					ft_ini_graphics(const unsigned int flags)
 		ft_sdl_error("SDL_SetWindowFullscreen", MODE_SDL);
 	SDL_GetWindowSize(g_graph->screen.window, &(g_graph->screen.w),
 			&(g_graph->screen.h));
-	if (!(g_graph->screen.Renderer = SDL_CreateRenderer(g_graph->screen.window,
+	if (!(g_graph->screen.renderer = SDL_CreateRenderer(g_graph->screen.window,
 			-1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)))
 		ft_sdl_error("SDL_CreateRenderer", MODE_SDL);
-	if (SDL_SetRenderDrawColor(g_graph->screen.Renderer, 0, 0, 0, 0))
+	if (SDL_SetRenderDrawColor(g_graph->screen.renderer, 0, 0, 0, 0))
 		ft_sdl_error("SDL_SetRenderDrawColor", MODE_SDL);
 	prepare_all();
 }

@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/01 10:20:06 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/05 22:06:22 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/06 00:28:51 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ static void		prepare_font(int nbr_font, SDL_Color color)
 	font = &(g_graph->font[nbr_font]);
 	ref_font = &(g_graph->font[FIELD_FONT]);
 	font->font_size = ref_font->font_size * 2;
-	font->font = TTF_OpenFont("./whitrabt.ttf", font->font_size);
-	TTF_SizeUTF8(font->font, "A", &font->w, &font->h);
+	if (!(font->font = TTF_OpenFont("./whitrabt.ttf", font->font_size)))
+		ft_sdl_error("TTF_OpenFont", MODE_TTF);
+	if (TTF_SizeUTF8(font->font, "A", &font->w, &font->h))
+		ft_sdl_error("TTF_SizeUTF8", MODE_TTF);
 	font->color = color;
 }
 
