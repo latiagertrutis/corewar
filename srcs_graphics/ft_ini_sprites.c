@@ -6,7 +6,7 @@
 /*   By: jagarcia <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/10 18:28:52 by jagarcia          #+#    #+#             */
-/*   Updated: 2018/10/06 01:09:29 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/06 02:41:59 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static SDL_Surface	*open_sprite(SDL_Surface ***ini_heart)
 		ft_error("malloc ft_ini_sprites");
 	if (!(g_graph->heart_pos = (SDL_Rect *)malloc(sizeof(SDL_Rect))))
 		ft_error("malloc ft_ini_sprites 2");
-	if (!(tmp = SDL_RWFromFile("./heart.png", "rb")))
+	if (!(tmp = SDL_RWFromFile("./images/heart.png", "rb")))
 		ft_sdl_error("SDL_RWFromFile", MODE_SDL);
 	if (!(sprite = IMG_LoadPNG_RW(tmp)))
 		ft_sdl_error("IMG_LoadPNG_RW", MODE_IMG);
