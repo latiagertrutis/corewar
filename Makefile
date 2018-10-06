@@ -6,13 +6,13 @@
 #    By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/04 20:25:41 by mrodrigu          #+#    #+#              #
-#    Updated: 2018/10/06 03:50:51 by jagarcia         ###   ########.fr        #
+#    Updated: 2018/10/06 13:25:35 by mrodrigu         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 .PHONY: all clean fclean re check_lib
 
-NAME = corewar
+NAME = our_corewar
 
 ASM_NAME = asm
 
@@ -37,6 +37,8 @@ FUNCS =	main.c \
 		get_arg.c \
 		get_arg_value.c \
 		basic_launch.c \
+		dump_launch.c \
+		dump_memory.c \
 		graphic_launch.c \
 		instruction_launch.c \
 		deaths_launch.c \

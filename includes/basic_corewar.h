@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 21:48:04 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/05 23:56:16 by jagarcia         ###   ########.fr       */
+/*   Updated: 2018/10/06 13:29:02 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@
 /*
 ** 1st bit: interface
 ** 2st bit: fullscreen
-** 3st vit: intrucctions
+** 3st bit: intrucctions
+** 4st bit: deaths
+** 5dt bit: dump
 */
 typedef struct		s_flag_value
 {
@@ -79,7 +81,7 @@ extern t_pc 			*g_pc;
 */
 
 void			print_usage(void);
-int				set_flags(const unsigned int n_player, const char **av, unsigned int *flags, t_flag_value *f_value);
+int				set_flags(const int ac, const char **av, unsigned int *flags, t_flag_value *f_value);
 void			init_player(const char *str, const t_flag_value *f_value);
 char			*read_alloc(int fd, const size_t size);
 void			invert_bytes(void *arr, const size_t size);
@@ -92,6 +94,8 @@ unsigned char	get_size_arg(const unsigned char ocp, const unsigned char n_arg, c
 void			get_arg(const unsigned char ocp, const unsigned int pos, const unsigned char prev_siz, t_arg *arg);
 char			get_arg_value(t_arg *arg, const t_pc *pc, const unsigned char restriction);
 void			basic_launch(void);
+void			dump_launch(const size_t dump_cycle);
+void			dump_memory(void);
 void			graphic_launch(const unsigned int flags);
 void			instruction_launch(void);
 void			deaths_launch(void);
