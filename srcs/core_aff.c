@@ -6,7 +6,7 @@
 /*   By: mrodrigu <mrodrigu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 17:21:27 by mrodrigu          #+#    #+#             */
-/*   Updated: 2018/10/05 15:47:27 by mrodrigu         ###   ########.fr       */
+/*   Updated: 2018/10/06 00:26:50 by mrodrigu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		core_aff(t_pc *pc)
 
 	pos = pc->pc;
 	ocp = g_mem[(pos + 1) % MEM_SIZE];
-	if ((0xC0 & ocp) == 0x40 && (reg_pos = g_mem[(pos + 2) % MEM_SIZE] - 1) < REG_NUMBER)
+	if ((0xC0 & ocp) == 0x40 && (reg_pos = g_mem[(pos + 1) % MEM_SIZE] - 1) < REG_NUMBER)
 	{
 		print_reg(pc, reg_pos);
 		pc->pc = (pos + 1 + 1 + 1) % MEM_SIZE;
