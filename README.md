@@ -22,8 +22,11 @@ make && ./corewar [-dump N -n N][-i -k -v -f] [foo_1.cor ... foo_n.cor]
 sh tester.sh [-a -r -f -d]
 ```
 -a => Test assembler.
+
 -r => Test VM with random inputs.
+
 -f => Test especific input of the VM.
+
 -d => Test all combinations of inputs of the VM in a specific directory (a lot of time).
 
 ## Screenshot
