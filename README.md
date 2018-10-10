@@ -4,7 +4,7 @@ Recode of the miythical programmig game Core War in a VM with SDL2 interface: ht
 
 You will need to have installed sdl2 dependencies as well as sdl2_image and sdl2_ttf.
 
-You can read the subject of the project in: [a link](https://github.com/latiagertrutis/corewar/blob/master/corewar.en.pdf).
+You can read the subject of the project in: [subject](https://github.com/latiagertrutis/corewar/blob/master/corewar.en.pdf).
 
 ## Usage
 
